@@ -10,15 +10,10 @@ import java.util.List;
 public interface InfoDao {
 
     @Select("select * from info ")
-   /* @Results(id = "infoMap",
-            value = {
-                    @Result(id=true,column = "info_id",property = "infoId"),
-                    @Result(column = "info_type",property = "type")
-            }
-    )*/
     public List<Info> findAllInfo();
+
+
     @Insert("insert into info(title,content,info_type,photo,date) values('${title}','${content}','${info_type}','${photo}','${date}')")
-   /* @ResultMap("infoMap")*/
     public boolean addInfo(Info info);
 
     public List<Info> findAllByType(Info info);

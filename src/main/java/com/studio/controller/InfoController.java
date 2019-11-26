@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/info")
@@ -23,9 +24,13 @@ public class InfoController {
     boolean result;
     String msg;
 
-    @RequestMapping("/findAllByTitle")
-    public String findAllByTitle(){
-        return "";
+    @RequestMapping("/findAllInfo")
+    public ModelAndView findAllInfo(){
+        mv = new ModelAndView();
+        List<Info> infos = infoService.findAllInfo();
+        mv.addObject("infos",infos);
+        mv.setViewName("pages/forms/infoManage");
+        return mv;
     }
 
     @RequestMapping("/findById")

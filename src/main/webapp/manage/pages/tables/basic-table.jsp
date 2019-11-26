@@ -8,7 +8,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>首页信息管理</title>
+    <title>用户管理</title>
     <base href="<%=basePath%>">
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
@@ -115,7 +115,7 @@
               <div class="collapse" id="info_manage">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="pages/forms/basic_elements.jsp">信息推送</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="#">信息管理</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../info/findAllInfo.do">信息管理</a></li>
                 </ul>
               </div>
             </li>

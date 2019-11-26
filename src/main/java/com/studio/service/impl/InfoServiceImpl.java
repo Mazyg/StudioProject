@@ -15,7 +15,7 @@ public class InfoServiceImpl implements InfoService {
     private InfoDao infoDao;
 
     @Override
-    public List<Info> findAllByType(Info info) {
+    public List<Info> findAllInfo(Info info) {
         return null;
     }
 
@@ -51,6 +51,6 @@ public class InfoServiceImpl implements InfoService {
 
     @Override
     public List<Info> findAllInfo() {
-        return null;
+        return infoDao.findAllInfo();
     }
 }

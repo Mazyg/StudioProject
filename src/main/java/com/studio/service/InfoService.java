@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface InfoService {
 
-    public List<Info> findAllByType(Info info);
+    public List<Info> findAllInfo(Info info);
     public List<Info> findById(Info info);
     public List<Info> findByTitle(Info info);
     public boolean saveInfo(Info info);
