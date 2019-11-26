@@ -54,13 +54,13 @@ public class InfoController {
     }
 
     @RequestMapping("/addInfo")
-    public ModelAndView addInfo(Info info) throws ParseException {
+    public ModelAndView addInfo(Info info) {
         mv = new ModelAndView();
         Date now = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = ft.format(now);
         info.setDate(time);
-        System.out.println(time);
+        System.out.println(info);
         result =infoService.addInfo(info);
         if (result){
             msg = "添加成功";

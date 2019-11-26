@@ -81,7 +81,7 @@ public class ImageUploadUtil {
                             }
                             // 重命名上传后的文件名 111112323.jpg
                             fileName = UUID.randomUUID().toString().replace("-","") + suffix;
-                            System.out.println("fileName"+fileName);
+                            System.out.println("fileName:"+fileName);
                             // 定义上传路径 .../upload/111112323.jpg
                             File uploadFile = new File(realPathDirectory + "\\" + fileName);
                             System.out.println(uploadFile);
@@ -123,6 +123,14 @@ public class ImageUploadUtil {
             out.flush();
             out.close();
         }
+
+    public static String ImageUrl(HttpServletRequest request, HttpServletResponse response, String DirectoryName)
+            throws IOException {
+        String fileName = upload(request, DirectoryName);
+        // imageContextPath为图片在服务器地址，如upload/123.jpg,非绝对路径
+        String imageContextPath = request.getContextPath() + "/" + DirectoryName + "/" + fileName;
+        return imageContextPath;
+    }
 
 
 }

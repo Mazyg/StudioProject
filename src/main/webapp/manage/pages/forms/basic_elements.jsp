@@ -45,11 +45,29 @@
           alert(message);
         }
       }
-    </script>
-    <script type="text/javascript">
-              $('select').change(function(){
-                $('input').val($('select').val());
-              });
+
+      function change(){
+        $("#type").val($("#info").val()) ;
+      }
+
+      function getImage() {
+        var obj = new FormData();
+        var file = document.getElementById("photo").files[0];
+        obj.append("file", file);
+        $.ajax({
+          url : '../load/getImageUrl.do',
+          type : 'POST',
+          data : obj,
+          contentType : false,
+          processData : false,
+          mimeType : 'multipart/form-data',
+          success : function(data) {
+            $("#url").val(data) ;
+          }
+        })
+
+      }
+
     </script>
   </head>
   <body>
@@ -190,22 +208,22 @@
                       <div class="form-group">
                         <label for="info_category"> 信息类别</label>
                         <div class="col-sm-6" id="info_category">
-                          <select class="form-control" name="type">
+                          <select class="form-control" id="info">
                             <option value="榜样的力量">榜样的力量</option>
                             <option value="热点时事">热点时事</option>
                             <option></option>
                             <option></option>
                           </select>
-                          <input type="hidden" id="hidden" name="hidden" value=""/>
+                          <input type="text"  style="display:none" id="type" name="info_type"/>
                         </div>
                       </div>
                       <div class="form-group">
                         <label>上传封面</label>
                         <input type="file" name="img[]" class="file-upload-default">
                         <div class="input-group col-xs-12">
-                          <input type="text" class="form-control file-upload-info" readonly placeholder="上传封面" name="photo">
+                          <input type="text" class="form-control file-upload-info" readonly placeholder="上传封面" id="url" name="photo" >
                           <span class="input-group-append">
-                            <input type="file" name="photo" id="photo" style="display:none" multiple="multiple">
+                            <input type="file" id="photo" style="display:none" multiple="multiple" onchange="getImage()">
                             <button class="file-upload-browse btn btn-primary" type="button" onclick="selectFile()">上传</button>
                           </span>
                         </div>
@@ -214,7 +232,7 @@
                         <label for="description">内容</label>
                         <textarea id="description"  name="content"></textarea>
                       </div>
-                      <input type="submit" class="btn btn-primary mr-2" value="提交">
+                      <input type="submit" class="btn btn-primary mr-2" value="提交" onclick="change()">
                       <input type="reset" class="btn btn-light" value="重置">
                     </form>
                   </div>
