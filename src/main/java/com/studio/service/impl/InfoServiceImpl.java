@@ -43,4 +43,14 @@ public class InfoServiceImpl implements InfoService {
     public boolean updateInfo(Info info) {
         return false;
     }
+
+    @Override
+    public boolean addInfo(Info info) {
+        return infoDao.addInfo(info);
+    }
+
+    @Override
+    public List<Info> findAllInfo() {
+        return null;
+    }
 }

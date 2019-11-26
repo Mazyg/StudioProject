@@ -12,7 +12,8 @@ public class Info  implements Serializable {
     private String title;
     private String content;
     private String date;
-    private Integer sid;
+    private String info_type;
+    private String photo;
 
     public Integer getInfo_id() {
         return info_id;
@@ -46,12 +47,20 @@ public class Info  implements Serializable {
         this.date = date;
     }
 
-    public Integer getSid() {
-        return sid;
+    public String getInfo_type() {
+        return info_type;
     }
 
-    public void setSid(Integer sid) {
-        this.sid = sid;
+    public void setInfo_type(String info_type) {
+        this.info_type = info_type;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     @Override
@@ -61,7 +70,8 @@ public class Info  implements Serializable {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", date='" + date + '\'' +
-                ", sid=" + sid +
+                ", info_type='" + info_type + '\'' +
+                ", photo='" + photo + '\'' +
                 '}';
     }
 }

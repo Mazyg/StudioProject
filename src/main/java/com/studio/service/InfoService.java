@@ -12,4 +12,8 @@ public interface InfoService {
     public boolean saveInfo(Info info);
     public boolean deleInfo(Info info);
     public boolean updateInfo(Info info);
+
+    public boolean addInfo(Info info);
+
+    public List<Info> findAllInfo();
 }

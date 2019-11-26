@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface UserService {
 
-    public List<User> findAll();
+    public List<User> findAll(String type);
 
-    public List<User> findById(User user);
+    public User findById(Integer id);
 
     public List<User> findByName(User user);
 

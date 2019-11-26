@@ -16,13 +16,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> findAll() {
-        return userDao.findAll();
+    public List<User> findAll(String type) {
+        return userDao.findAll(type);
     }
 
     @Override
-    public List<User> findById(User user) {
-        return userDao.findById(user);
+    public User findById(Integer id) {
+        return userDao.findById(id);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean saveUser(User user) {
-        return false;
+        return userDao.saveUser(user);
     }
 
     @Override

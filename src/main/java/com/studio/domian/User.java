@@ -84,4 +84,6 @@ public class User implements Serializable {
                 ", u_type='" + u_type + '\'' +
                 '}';
     }
+
+
 }
