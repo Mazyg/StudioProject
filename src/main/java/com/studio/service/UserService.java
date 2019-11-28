@@ -8,13 +8,21 @@ public interface UserService {
 
     public List<User> findAll(String type);
 
-    public User findById(Integer id);
+    public User findById(Integer uid);
 
-    public List<User> findByName(User user);
+    public User findById1(String uid);
+
+    public List<User> findByName(String uname);
 
     public boolean deleUser(User user);
 
     public boolean saveUser(User user);
 
-    public boolean updateUser(User user);
+    /*封号*/
+    public boolean updateUser1(String uid);
+
+    /*解封*/
+    public boolean updateUser2(String uid);
+
+    public List<User> findByNameAdmin(String uname);
 }

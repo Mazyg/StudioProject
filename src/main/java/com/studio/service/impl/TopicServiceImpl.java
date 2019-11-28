@@ -15,18 +15,29 @@ public class TopicServiceImpl implements TopicService {
     private TopicDao topicDao;
 
     @Override
-    public boolean saveTopic() {
-        return false;
+    public boolean saveTopic(Topic topic) {
+        return topicDao.saveTopic(topic);
     }
 
     @Override
-    public boolean deleTopic() {
-        return false;
+    public boolean saveTopicA(Topic topic) {
+        return topicDao.saveTopicA(topic);
     }
 
     @Override
-    public List<Topic> findAll() {
-        return null;
+    public boolean deleTopic(String tid) {
+
+        return topicDao.deleTopic(tid);
+    }
+
+    @Override
+    public List<Topic> findAllTopic() {
+        return topicDao.findAllTopic();
+    }
+
+    @Override
+    public List<Topic> findAllByStatus() {
+        return topicDao.findAllByStatus();
     }
 
     @Override
@@ -35,7 +46,27 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<Topic> findByContent(Topic topic) {
-        return null;
+    public List<Topic> findByTitle(String t_title) {
+        return topicDao.findByTitle(t_title);
+    }
+
+    /**
+     * 通过标题查询未审核话题
+     * @param t_title
+     * @return
+     */
+    public List<Topic> findByTitleNot(String t_title){
+        return  topicDao.findByTitleNot(t_title);
+    }
+
+
+    @Override
+    public boolean updateStatus(String tid) {
+        return topicDao.updateStatus(tid);
+    }
+
+    @Override
+    public Topic findTopicById(String tid) {
+        return topicDao.findTopicById(tid);
     }
 }

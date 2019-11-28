@@ -12,6 +12,8 @@ public class Topic implements Serializable {
     private String date;
     private String content;
     private Integer uid;
+    private String t_tatus;
+    private String t_title;
 
 
     public Integer getTid() {
@@ -46,6 +48,22 @@ public class Topic implements Serializable {
         this.uid = uid;
     }
 
+    public String getT_tatus() {
+        return t_tatus;
+    }
+
+    public void setT_tatus(String t_tatus) {
+        this.t_tatus = t_tatus;
+    }
+
+    public String getT_title() {
+        return t_title;
+    }
+
+    public void setT_title(String t_title) {
+        this.t_title = t_title;
+    }
+
     @Override
     public String toString() {
         return "Topic{" +
@@ -53,6 +71,8 @@ public class Topic implements Serializable {
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
                 ", uid=" + uid +
+                ", t_tatus='" + t_tatus + '\'' +
+                ", t_title='" + t_title + '\'' +
                 '}';
     }
 }
