@@ -46,7 +46,7 @@
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
           <h5 class="mb-0 font-weight-medium d-none d-lg-flex">后台管理系统</h5>
           <ul class="navbar-nav navbar-nav-right ml-auto">
-            <form class="search-form d-none d-md-block" action="../user/findByName.do">
+            <form class="search-form d-none d-md-block" action="../user/findByNameAdmin.do">
               <i class="icon-magnifier"></i>
               <input type="search" class="form-control" placeholder="查找" title="Search here" name="uname">
             </form>
@@ -176,7 +176,7 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <p class="card-description"> 用户列表</p>
+                    <p class="card-description"> 管理员列表</p>
                     <table class="table table-hover">
                       <thead>
                         <tr>
@@ -185,8 +185,6 @@
                             <th><h4>性别</h4></th>
                             <th><h4>email</h4></th>
                             <th><h4>状态</h4></th>
-                            <th><h4>操作1</h4></th>
-                            <th><h4>操作2</h4></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -198,8 +196,6 @@
                             <td>${user.sex}</td>
                             <td>${user.email}</td>
                             <td>${user.u_status}</td>
-                            <td><a href="../user/updateUser1.do?uid=${user.uid}" style="color: #a01a1f">封号</a></td>
-                            <td><a href="../user/updateUser2.do?uid=${user.uid}" style="color: #1d6b1f">解封</a></td>
                             <td><td>
                         </tr>
                       </c:forEach>

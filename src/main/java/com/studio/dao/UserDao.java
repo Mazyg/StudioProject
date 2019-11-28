@@ -20,11 +20,30 @@ public interface UserDao {
     )*/
     public List<User> findAll(String type);
 
+
     @Select("select * from user where uid=#{uid}")
    /* @ResultMap("userMap")*/
-    public User findById(Integer id);
+    public User findById(Integer uid);
 
-    public List<User> findByName(User user);
+    @Select("select * from user where uid=#{uid}")
+    public User findById1(String uid);
+
+    /**
+     * 根据用户名查找普通用户
+     * @param uname
+     * @return
+     */
+     @Select("SELECT * FROM user where u_type='user' and uname like CONCAT('%',#{uname},'%')")
+    public List<User> findByName(String uname);
+
+
+    /**
+     * 查找管理员
+     * @param uname
+     * @return
+     */
+    @Select("SELECT * FROM user where u_type='admin' and uname like CONCAT('%',#{uname},'%')")
+    public List<User> findByNameAdmin(String uname);
 
     public boolean deleUser(User user);
 
@@ -33,5 +52,12 @@ public interface UserDao {
     /*@ResultMap("userMap")*/
     public boolean saveUser(User user);
 
-    public boolean updateUser(User user);
+
+    /*封号处理*/
+    @Update("update user set u_status= '封号' where uid=#{uid}")
+    public boolean updateUser1(String uid);
+
+    /*解封处理*/
+    @Update("update user set u_status= '正常' where uid=#{uid}")
+    public boolean updateUser2(String uid);
 }

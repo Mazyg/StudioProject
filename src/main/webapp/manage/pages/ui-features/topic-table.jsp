@@ -8,7 +8,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>用户信息管理</title>
+    <title>话题管理</title>
     <base href="<%=basePath%>">
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
@@ -24,11 +24,11 @@
     <link rel="shortcut icon" href="images/favicon.png" />
     <script type="text/javascript">
       function status() {
-       var sta= "${status}";
+       var sta= "${topicdel}";
        if(sta == "true"){
-         alert("更改成功！");
+         alert("操作成功！");
        }else if(sta == "false"){
-         alert("已是该状态，请勿重复操作！");
+         alert("操作错误！");
        }
       }
     </script>
@@ -46,9 +46,9 @@
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
           <h5 class="mb-0 font-weight-medium d-none d-lg-flex">后台管理系统</h5>
           <ul class="navbar-nav navbar-nav-right ml-auto">
-            <form class="search-form d-none d-md-block" action="../user/findByName.do">
+            <form class="search-form d-none d-md-block" action="../topic/findByTitle.do">
               <i class="icon-magnifier"></i>
-              <input type="search" class="form-control" placeholder="查找" title="Search here" name="uname">
+              <input type="search" class="form-control" placeholder="查找" title="Search here" name="title">
             </form>
             <li class="nav-item dropdown language-dropdown d-none d-sm-flex align-items-center">
               <a class="nav-link d-flex align-items-center dropdown-toggle" id="LanguageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -170,42 +170,44 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h2 class="page-title"> 用户管理 </h2>
+              <h2 class="page-title"> 话题管理 </h2>
             </div>
             <div class="row">
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <p class="card-description"> 用户列表</p>
+                    <p class="card-description"> 话题列表</p>
+
                     <table class="table table-hover">
+
                       <thead>
                         <tr>
-                          <th><h4>用户ID</h4></th>
-                          <th><h4>用户昵称</h4></th>
-                            <th><h4>性别</h4></th>
-                            <th><h4>email</h4></th>
+                          <th><h4>话题ID</h4></th>
+                          <th><h4>话题标题</h4></th>
+                            <th><h4>话题简介</h4></th>
+                            <th><h4>时间</h4></th>
                             <th><h4>状态</h4></th>
                             <th><h4>操作1</h4></th>
                             <th><h4>操作2</h4></th>
                         </tr>
                       </thead>
                       <tbody>
-
-                        <c:forEach var="user" items="${user}">
+                        <c:forEach var="topic1" items="${topics}">
                           <tr>
-                            <td>${user.uid}</td>
-                            <td>${user.uname}</td>
-                            <td>${user.sex}</td>
-                            <td>${user.email}</td>
-                            <td>${user.u_status}</td>
-                            <td><a href="../user/updateUser1.do?uid=${user.uid}" style="color: #a01a1f">封号</a></td>
-                            <td><a href="../user/updateUser2.do?uid=${user.uid}" style="color: #1d6b1f">解封</a></td>
+                            <td>${topic1.tid}</td>
+                            <td>${topic1.t_title}</td>
+                            <td>${topic1.content}</td>
+                            <td>${topic1.date}</td>
+                            <td>${topic1.t_tatus}</td>
+                            <td><a href="../topic/updateStatus1.do?tid=${topic1.tid}" style="color: #1d6b1f">通过审核</a></td>
+                            <td><a href="../topic/deleTopic1.do?tid=${topic1.tid}" style="color: #a01a1f">删除</a></td>
                             <td><td>
                         </tr>
                       </c:forEach>
-
                       </tbody>
+
                     </table>
+
                   </div>
                 </div>
               </div>

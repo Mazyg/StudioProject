@@ -15,6 +15,7 @@ public class User implements Serializable {
     private String email;
     private String photo;
     private String u_type;
+    private String u_status;
 
     public Integer getUid() {
         return uid;
@@ -72,9 +73,17 @@ public class User implements Serializable {
         this.u_type = u_type;
     }
 
+    public String getU_status() {
+        return u_status;
+    }
+
+    public void setU_status(String u_status) {
+        this.u_status = u_status;
+    }
+
     @Override
     public String toString() {
-        return "user{" +
+        return "User{" +
                 "uid=" + uid +
                 ", uname='" + uname + '\'' +
                 ", password='" + password + '\'' +
@@ -82,8 +91,7 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", photo='" + photo + '\'' +
                 ", u_type='" + u_type + '\'' +
+                ", u_status='" + u_status + '\'' +
                 '}';
     }
-
-
 }
