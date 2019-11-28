@@ -26,8 +26,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findByName(User user) {
-        return userDao.findByName(user);
+    public User findById1(String uid) {
+        return userDao.findById1(uid);
+    }
+
+    @Override
+    public List<User> findByName(String uname) {
+        System.out.println("name"+userDao.findByName(uname));
+        return userDao.findByName(uname);
     }
 
     @Override
@@ -42,7 +48,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUser(User user) {
-        return false;
+    public boolean updateUser1(String uid) {
+        return userDao.updateUser1(uid);
+    }
+
+    @Override
+    public boolean updateUser2(String uid) {
+        return userDao.updateUser2(uid);
+    }
+
+    @Override
+    public List<User> findByNameAdmin(String uname) {
+        return userDao.findByNameAdmin(uname);
     }
 }

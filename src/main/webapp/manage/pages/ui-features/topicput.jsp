@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
   String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"manage/";
 %>
@@ -8,7 +7,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>用户信息管理</title>
+    <title>话题管理</title>
     <base href="<%=basePath%>">
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
@@ -16,24 +15,46 @@
     <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
+    <link rel="stylesheet" href="css/style.css"/><!-- End layout styles -->
     <link rel="shortcut icon" href="images/favicon.png" />
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="../ckeditor/ckeditor.js"></script>
     <script type="text/javascript">
-      function status() {
-       var sta= "${status}";
-       if(sta == "true"){
-         alert("更改成功！");
-       }else if(sta == "false"){
-         alert("已是该状态，请勿重复操作！");
-       }
+      window.onload = function()
+      {
+        CKEDITOR.replace( 'description');
+        var message = "${msg}";
+        if( message != ""){
+          alert(message);
+        }
+      };
+      function selectFile(){
+        $("#photo").trigger("click");
       }
     </script>
+    <script type="text/javascript">
+      function msssage () {
+        var top = "${top}";
+        if( top == "true"){
+          alert("发布成功！");
+        }else{
+          alert("无法提交！");
+        }
+      }
+    </script>
+    <script type="text/javascript">
+              $('select').change(function(){
+                $('input').val($('select').val());
+              });
+    </script>
   </head>
-  <body onload="status()">
+  <body>
     <div class="container-scroller">
       <!-- partial:../../partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -44,11 +65,11 @@
           <a class="navbar-brand brand-logo-mini" href="javascript:void(0);"><img src="images/logo-mini.svg" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
-          <h5 class="mb-0 font-weight-medium d-none d-lg-flex">后台管理系统</h5>
+          <h5 class="mb-0 font-weight-medium d-none d-lg-flex">后台管理界面</h5>
           <ul class="navbar-nav navbar-nav-right ml-auto">
-            <form class="search-form d-none d-md-block" action="../user/findByName.do">
+            <form class="search-form d-none d-md-block" action="#">
               <i class="icon-magnifier"></i>
-              <input type="search" class="form-control" placeholder="查找" title="Search here" name="uname">
+              <input type="search" class="form-control" placeholder="查找" title="Search here">
             </form>
             <li class="nav-item dropdown language-dropdown d-none d-sm-flex align-items-center">
               <a class="nav-link d-flex align-items-center dropdown-toggle" id="LanguageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -119,7 +140,7 @@
               <div class="collapse" id="ui-topic">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="pages/ui-features/topicput.jsp">发布话题</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="../topic/findAllTopicByStatus.do">未审核话题</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../topic/findAllTopicByStatus.do ">未审核话题</a></li>
                   <li class="nav-item"> <a class="nav-link" href="../topic/findAll.do">全部话题</a></li>
                 </ul>
               </div>
@@ -132,7 +153,7 @@
               <div class="collapse" id="info_manage">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="pages/forms/basic_elements.jsp">信息推送</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="#">信息管理</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="javascript:void(0);">信息管理</a></li>
                 </ul>
               </div>
             </li>
@@ -170,42 +191,27 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h2 class="page-title"> 用户管理 </h2>
+              <h3 class="page-title"> 话题发布 </h3>
             </div>
             <div class="row">
-              <div class="col-lg-12 grid-margin stretch-card">
+              <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <p class="card-description"> 用户列表</p>
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th><h4>用户ID</h4></th>
-                          <th><h4>用户昵称</h4></th>
-                            <th><h4>性别</h4></th>
-                            <th><h4>email</h4></th>
-                            <th><h4>状态</h4></th>
-                            <th><h4>操作1</h4></th>
-                            <th><h4>操作2</h4></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-
-                        <c:forEach var="user" items="${user}">
-                          <tr>
-                            <td>${user.uid}</td>
-                            <td>${user.uname}</td>
-                            <td>${user.sex}</td>
-                            <td>${user.email}</td>
-                            <td>${user.u_status}</td>
-                            <td><a href="../user/updateUser1.do?uid=${user.uid}" style="color: #a01a1f">封号</a></td>
-                            <td><a href="../user/updateUser2.do?uid=${user.uid}" style="color: #1d6b1f">解封</a></td>
-                            <td><td>
-                        </tr>
-                      </c:forEach>
-
-                      </tbody>
-                    </table>
+                    <form class="forms-sample" action="../topic/saveTopic.do" method="post">
+                      <div class="form-group">
+                        <label for="exampleInputName1">标题</label>
+                        <input type="text" class="col-10 form-control" id="exampleInputName1" placeholder="标题" required="required" name="t_title">
+                      </div>
+                      <div class="form-group">
+                        <label>简要描述</label>
+                        <input type="file" name="img[]" class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                          <textarea name="content"  placeholder="描述一下你的话题" required="required" class="col-10 form-control"  style=" height:100px"></textarea>
+                        </div>
+                      </div>
+                      <input type="submit" class="btn btn-primary mr-2" onclick="msssage()" value="提交">
+                      <input type="reset" class="btn btn-light" value="重置">
+                    </form>
                   </div>
                 </div>
               </div>
@@ -215,7 +221,6 @@
           <!-- partial:../../partials/_footer.html -->
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017  </span>
             </div>
           </footer>
           <!-- partial -->
@@ -229,12 +234,17 @@
     <script src="vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
+    <script src="vendors/select2/select2.min.js"></script>
+    <script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="js/off-canvas.js"></script>
     <script src="js/misc.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
+    <script src="js/typeahead.js"></script>
+    <script src="js/select2.js"></script>
     <!-- End custom js for this page -->
+
   </body>
 </html>

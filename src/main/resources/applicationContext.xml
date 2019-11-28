@@ -22,7 +22,7 @@
     <!--配置连接池-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://111.229.25.156:3306/web?useSSL=false&amp;serverTimezone=UTC"/>
+        <property name="jdbcUrl" value="jdbc:mysql://111.229.25.156:3306/web?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8"/>
         <property name="user" value="root"/>
         <property name="password" value="Mn&amp;123456"/>
     </bean>
