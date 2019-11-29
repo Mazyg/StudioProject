@@ -110,10 +110,17 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="pages/icons/simple-line-icons.jsp">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-topic" aria-expanded="false" aria-controls="ui-topic">
                         <span class="menu-title">话题管理</span>
                         <i class="icon-globe menu-icon"></i>
                     </a>
+                    <div class="collapse" id="ui-topic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/topicput.jsp">发布话题</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../topic/findAllTopicByStatus.do">未审核话题</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../topic/findAll.do">全部话题</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#info_manage" aria-expanded="false" aria-controls="info_manage">
@@ -128,10 +135,16 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../user/findAllUser.do">
+                    <a class="nav-link" data-toggle="collapse" href="#user_manage" aria-expanded="false" aria-controls="user_manage">
                         <span class="menu-title">用户管理</span>
                         <i class="icon-grid menu-icon"></i>
                     </a>
+                    <div class="collapse" id="user_manage">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="../user/findAllUser.do">用户</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../user/findAllAdmin.do">管理员</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
                 <li class="nav-item">
