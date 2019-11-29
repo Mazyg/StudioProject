@@ -11,6 +11,7 @@ public class Info  implements Serializable {
     private Integer info_id;
     private String title;
     private String content;
+    private String introduce;
     private String date;
     private String info_type;
     private String photo;
@@ -30,6 +31,10 @@ public class Info  implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getIntroduce() { return introduce; }
+
+    public void setIntroduce(String introduce) { this.introduce = introduce; }
 
     public String getContent() {
         return content;
@@ -69,6 +74,7 @@ public class Info  implements Serializable {
                 "info_id=" + info_id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
+                ", introduce='" + introduce + '\'' +
                 ", date='" + date + '\'' +
                 ", info_type='" + info_type + '\'' +
                 ", photo='" + photo + '\'' +
