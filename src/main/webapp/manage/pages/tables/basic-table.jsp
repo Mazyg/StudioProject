@@ -8,7 +8,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>用户管理</title>
+
+    <title>用户信息管理</title>
+
     <base href="<%=basePath%>">
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
@@ -22,8 +24,18 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
     <link rel="shortcut icon" href="images/favicon.png" />
+    <script type="text/javascript">
+      function status() {
+       var sta= "${status}";
+       if(sta == "true"){
+         alert("更改成功！");
+       }else if(sta == "false"){
+         alert("已是该状态，请勿重复操作！");
+       }
+      }
+    </script>
   </head>
-  <body>
+  <body onload="status()">
     <div class="container-scroller">
       <!-- partial:../../partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -36,9 +48,9 @@
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
           <h5 class="mb-0 font-weight-medium d-none d-lg-flex">后台管理系统</h5>
           <ul class="navbar-nav navbar-nav-right ml-auto">
-            <form class="search-form d-none d-md-block" action="#">
+            <form class="search-form d-none d-md-block" action="../user/findByName.do">
               <i class="icon-magnifier"></i>
-              <input type="search" class="form-control" placeholder="查找" title="Search here">
+              <input type="search" class="form-control" placeholder="查找" title="Search here" name="uname">
             </form>
             <li class="nav-item dropdown language-dropdown d-none d-sm-flex align-items-center">
               <a class="nav-link d-flex align-items-center dropdown-toggle" id="LanguageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -54,12 +66,12 @@
             </li>
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> ${user.getname()} </span></a>
+                <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> ${users.uname} </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
                   <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
-                  <p class="mb-1 mt-3">${user.getname()}</p>
-                  <p class="font-weight-light text-muted mb-0">${user.getEmail()}</p>
+                  <p class="mb-1 mt-3">${users.uname}</p>
+                  <p class="font-weight-light text-muted mb-0">${users.email}</p>
                 </div>
                 <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
                 <a class="dropdown-item" href="pages/samples/login.jsp"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
@@ -83,7 +95,7 @@
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">${user.getname()}</p>
+                  <p class="profile-name">${users.uname}</p>
                   <p class="designation">管理员</p>
                 </div>
               </a>
@@ -102,10 +114,17 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/icons/simple-line-icons.jsp">
+              <a class="nav-link" data-toggle="collapse" href="#ui-topic" aria-expanded="false" aria-controls="ui-topic">
                 <span class="menu-title">话题管理</span>
                 <i class="icon-globe menu-icon"></i>
               </a>
+              <div class="collapse" id="ui-topic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/topicput.jsp">发布话题</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../topic/findAllTopicByStatus.do">未审核话题</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../topic/findAll.do">全部话题</a></li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#info_manage" aria-expanded="false" aria-controls="info_manage">
@@ -120,10 +139,16 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../user/findAllUser.do">
+              <a class="nav-link" data-toggle="collapse" href="#user_manage" aria-expanded="false" aria-controls="user_manage">
                 <span class="menu-title">用户管理</span>
                 <i class="icon-grid menu-icon"></i>
               </a>
+              <div class="collapse" id="user_manage">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="../user/findAllUser.do">用户</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../user/findAllAdmin.do">管理员</a></li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
             <li class="nav-item">
@@ -161,17 +186,22 @@
                           <th><h4>用户昵称</h4></th>
                             <th><h4>性别</h4></th>
                             <th><h4>email</h4></th>
-                            <th><h4>操作</h4></th>
+                            <th><h4>状态</h4></th>
+                            <th><h4>操作1</h4></th>
+                            <th><h4>操作2</h4></th>
                         </tr>
                       </thead>
                       <tbody>
 
-                        <c:forEach var="user" items="${users}">
+                        <c:forEach var="user" items="${user}">
                           <tr>
                             <td>${user.uid}</td>
                             <td>${user.uname}</td>
                             <td>${user.sex}</td>
                             <td>${user.email}</td>
+                            <td>${user.u_status}</td>
+                            <td><a href="../user/updateUser1.do?uid=${user.uid}" style="color: #a01a1f">封号</a></td>
+                            <td><a href="../user/updateUser2.do?uid=${user.uid}" style="color: #1d6b1f">解封</a></td>
                             <td><td>
                         </tr>
                       </c:forEach>

@@ -17,12 +17,13 @@
     </context:component-scan>
 
     <!--配置视图解析器-->
+    <!--管理员-->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/manage/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
     <!--过滤静态资源-->
+    <!--管理员-->
     <mvc:resources mapping="/scss/**" location="/manage/scss/"/>
     <mvc:resources mapping="/css/**" location="/manage/css/"/>
     <mvc:resources mapping="/fonts/**" location="/manage/fonts/"/>
@@ -30,6 +31,12 @@
     <mvc:resources mapping="/vendors/**" location="/manage/vendors/"/>
     <mvc:resources mapping="/images/**" location="/manage/images/"/>
     <mvc:resources mapping="/gulp-tasks/**" location="/manage/gulp-tasks/"/>
+
+    <!-- 用户-->
+    <mvc:resources mapping="/css/**" location="/user/css/"/>
+    <mvc:resources mapping="/fonts/**" location="/user/font/"/>
+    <mvc:resources mapping="/js/**" location="/user/js/"/>
+    <mvc:resources mapping="/images/**" location="/user/img/"/>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize">
