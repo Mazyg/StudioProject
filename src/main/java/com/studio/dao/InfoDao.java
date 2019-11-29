@@ -9,22 +9,25 @@ import java.util.List;
 @Repository
 public interface InfoDao {
 
+    //查询所有信息
     @Select("select * from info ")
-   /* @Results(id = "infoMap",
-            value = {
-                    @Result(id=true,column = "info_id",property = "infoId"),
-                    @Result(column = "info_type",property = "type")
-            }
-    )*/
     public List<Info> findAllInfo();
-    @Insert("insert into info(title,content,info_type,photo,date) values('${title}','${content}','${info_type}','${photo}','${date}')")
-   /* @ResultMap("infoMap")*/
+
+    //增加信息
+    @Insert("insert into info(title,content,info_type,photo,date,introduce) values('${title}','${content}','${info_type}','${photo}','${date}','${introduce}')")
     public boolean addInfo(Info info);
 
     public List<Info> findAllByType(Info info);
-    public List<Info> findById(Info info);
+
+    //根据id查询信息
+    @Select("select * from info where info_id=#{info_id}")
+    public Info findById(String info_id);
+
     public List<Info> findByTitle(Info info);
-    public boolean saveInfo(Info info);
-    public boolean deleInfo(Info info);
+
+    @Delete("delete from info where info_id=#{info_id}")
+    public boolean deleteInfo(String info_id);
+
+    @Update("update info set title=#{title} , content=#{content} , info_type=#{info_type} , photo=#{photo} , introduce=#{introduce} where info_id=#{info_id}")
     public boolean updateInfo(Info info);
 }

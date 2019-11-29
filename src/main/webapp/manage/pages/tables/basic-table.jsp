@@ -8,7 +8,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>用户信息管理</title>
+
     <base href="<%=basePath%>">
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
@@ -72,7 +74,7 @@
                   <p class="font-weight-light text-muted mb-0">${users.email}</p>
                 </div>
                 <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
+                <a class="dropdown-item" href="pages/samples/login.jsp"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
               </div>
             </li>
           </ul>
@@ -132,7 +134,7 @@
               <div class="collapse" id="info_manage">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="pages/forms/basic_elements.jsp">信息推送</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="#">信息管理</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../info/findAllInfo.do">信息管理</a></li>
                 </ul>
               </div>
             </li>
