@@ -204,7 +204,6 @@
                       </div>
                       <div class="form-group">
                         <label>简要描述</label>
-                        <input type="file" name="img[]" class="file-upload-default">
                         <div class="input-group col-xs-12">
                           <textarea name="content"  placeholder="描述一下你的话题" required="required" class="col-10 form-control"  style=" height:100px"></textarea>
                         </div>

@@ -114,7 +114,7 @@
               <div class="collapse" id="info_manage">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="pages/forms/basic_elements.jsp">信息推送</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="#">信息管理</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../info/findAllInfo.do">信息管理</a></li>
                 </ul>
               </div>
             </li>
