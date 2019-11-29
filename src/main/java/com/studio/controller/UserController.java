@@ -43,14 +43,11 @@ public class UserController {
     }
 
     @RequestMapping("/findAllAdmin")
-    public ModelAndView findAllAmin( Model model,HttpServletRequest request){
-        /*String status = request.getParameter("status");
-        System.out.println("接收到数据"+status);*/
+    public ModelAndView findAllAmin(){
         mv = new ModelAndView();
         List<User> users = userService.findAll("admin");
         System.out.println(users);
         mv.addObject("user", users);
-        /*mv.addObject("status", status);*/
         mv.setViewName("pages/tables/admin-table");
         return mv;
     }
