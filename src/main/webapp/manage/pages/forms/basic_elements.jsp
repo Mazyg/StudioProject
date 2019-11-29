@@ -219,6 +219,12 @@
                         <input type="text" class="form-control" id="exampleInputName1" placeholder="标题" name="title">
                       </div>
                       <div class="form-group">
+                        <label for="introduction">简介</label>
+                        <div class="input-group col-xs-12">
+                          <textarea name="content" id="introduction" placeholder="简介" required="required" class="col-10 form-control"  style=" height:80px"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
                         <label for="info_category"> 信息类别</label>
                         <div class="col-sm-6" id="info_category">
                           <select class="form-control" id="info">
