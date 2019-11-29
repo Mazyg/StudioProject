@@ -24,24 +24,13 @@ public class UserController {
     boolean result;
     @RequestMapping("/findAllUser")
     public ModelAndView findAll(){
-       /* List<User> users = userService.findAll();
-        System.out.println(users);
-        model.addAttribute("users",users);
-        return "success";*/
        mv = new ModelAndView();
        List<User> users = userService.findAll("user");
-        System.out.println(users);
         mv.addObject("users", users);
         mv.setViewName("pages/tables/basic-table");
         return mv;
     }
 
-   /* @RequestMapping("/findById")
-    public String findById(User user,Model model){
-        List<User> users = userService.findById(user);
-        model.addAttribute("findById",users);
-        return "";
-    }*/
 
     @RequestMapping("/findByName")
     public String findByName(User user,Model model){
@@ -106,6 +95,19 @@ public class UserController {
         }
         mv.addObject("msg",msg);
         mv.setViewName("pages/samples/login");
+        return mv;
+    }
+
+    @RequestMapping("personalInfo")
+    public ModelAndView personalInfo(Integer uid){
+        mv = new ModelAndView();
+        user1 = userService.findById(uid);
+        if (user1 == null){
+            msg = "查询信息发生错误";
+        }else {
+            mv.addObject("user",user1);
+        }
+        mv.setViewName("pages/samples/personInfo");
         return mv;
     }
 }

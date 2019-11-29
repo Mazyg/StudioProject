@@ -22,8 +22,16 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
     <link rel="shortcut icon" href="images/favicon.png" />
+    <script type="text/javascript">
+        function msssage () {
+            var message = "${msg}";
+            if( message != ""){
+                alert(message);
+            }
+        }
+    </script>
 </head>
-<body>
+<body onload="msssage()">
 <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -62,7 +70,7 @@
                             <p class="font-weight-light text-muted mb-0">${user.getEmail()}</p>
                         </div>
                         <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
-                        <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
+                        <a class="dropdown-item" href="pages/samples/login.jsp"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
                     </div>
                 </li>
             </ul>
@@ -157,24 +165,24 @@
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
+                                        <th><h4>ID</h4></th>
                                         <th><h4>标题</h4></th>
                                         <th><h4>时间</h4></th>
                                         <th><h4>类型</h4></th>
                                         <th><h4>内容</h4></th>
                                         <th><h4>操作I</h4></th>
-                                        <th><h4>操作II</h4></th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
                                     <c:forEach var="info" items="${infos}">
                                         <tr>
+                                            <td>${info.info_id}</td>
                                             <td>${info.title}</td>
                                             <td>${info.date}</td>
                                             <td>${info.info_type}</td>
-                                            <td>查看详细</td>
-                                            <td>删除</td>
-                                            <td>修改</td>
+                                            <td><a href="../info/findById.do?info_id=${info.info_id}">查看详细</a></td>
+                                            <td><a href="../info/deleteInfo.do?info_id=${info.info_id}">删除</a></td>
 
                                         </tr>
                                     </c:forEach>

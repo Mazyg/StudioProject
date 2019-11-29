@@ -21,7 +21,6 @@ public interface UserDao {
     public List<User> findAll(String type);
 
     @Select("select * from user where uid=#{uid}")
-   /* @ResultMap("userMap")*/
     public User findById(Integer id);
 
     public List<User> findByName(User user);
