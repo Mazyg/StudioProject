@@ -22,6 +22,7 @@ public interface UserDao {
 
 
     @Select("select * from user where uid=#{uid}")
+
    /* @ResultMap("userMap")*/
     public User findById(Integer uid);
 
@@ -35,6 +36,7 @@ public interface UserDao {
      */
      @Select("SELECT * FROM user where u_type='user' and uname like CONCAT('%',#{uname},'%')")
     public List<User> findByName(String uname);
+
 
 
     /**

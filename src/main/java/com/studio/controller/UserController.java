@@ -29,6 +29,7 @@ public class UserController {
     User user1;
     String msg = null;
     boolean result;
+  
     @RequestMapping("/findAllUser")
     public ModelAndView findAllUser( Model model,HttpServletRequest request){
        String status = request.getParameter("status");
@@ -38,9 +39,11 @@ public class UserController {
         System.out.println(users);
         mv.addObject("user", users);
         mv.addObject("status", status);
+
         mv.setViewName("pages/tables/basic-table");
         return mv;
     }
+
 
     @RequestMapping("/findAllAdmin")
     public ModelAndView findAllAmin( Model model,HttpServletRequest request){
@@ -54,6 +57,7 @@ public class UserController {
         mv.setViewName("pages/tables/admin-table");
         return mv;
     }
+
 
     @RequestMapping("/findByName")
     public String findByName(Model model, HttpServletRequest request){
@@ -160,6 +164,19 @@ public class UserController {
         }
         mv.addObject("msg",msg);
         mv.setViewName("pages/samples/login");
+        return mv;
+    }
+
+    @RequestMapping("personalInfo")
+    public ModelAndView personalInfo(Integer uid){
+        mv = new ModelAndView();
+        user1 = userService.findById(uid);
+        if (user1 == null){
+            msg = "查询信息发生错误";
+        }else {
+            mv.addObject("user",user1);
+        }
+        mv.setViewName("pages/samples/personInfo");
         return mv;
     }
 }

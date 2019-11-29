@@ -15,6 +15,15 @@ public class Info  implements Serializable {
     private String date;
     private String info_type;
     private String photo;
+    private String introduce;
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
 
     public Integer getInfo_id() {
         return info_id;
@@ -78,6 +87,7 @@ public class Info  implements Serializable {
                 ", date='" + date + '\'' +
                 ", info_type='" + info_type + '\'' +
                 ", photo='" + photo + '\'' +
+                ", introduce='" + introduce + '\'' +
                 '}';
     }
 }
