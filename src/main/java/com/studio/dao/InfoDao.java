@@ -14,7 +14,7 @@ public interface InfoDao {
     public List<Info> findAllInfo();
 
     //增加信息
-    @Insert("insert into info(title,content,info_type,photo,date) values('${title}','${content}','${info_type}','${photo}','${date}')")
+    @Insert("insert into info(title,content,info_type,photo,date,introduce) values('${title}','${content}','${info_type}','${photo}','${date}','${introduce}')")
     public boolean addInfo(Info info);
 
     public List<Info> findAllByType(Info info);
@@ -28,6 +28,6 @@ public interface InfoDao {
     @Delete("delete from info where info_id=#{info_id}")
     public boolean deleteInfo(String info_id);
 
-    @Update("update info set title=#{title} , content=#{content} , info_type=#{info_type} , photo=#{photo} where info_id=#{info_id}")
+    @Update("update info set title=#{title} , content=#{content} , info_type=#{info_type} , photo=#{photo} , introduce=#{introduce} where info_id=#{info_id}")
     public boolean updateInfo(Info info);
 }
