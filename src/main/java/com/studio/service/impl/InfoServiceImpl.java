@@ -15,13 +15,13 @@ public class InfoServiceImpl implements InfoService {
     private InfoDao infoDao;
 
     @Override
-    public List<Info> findAllByType(Info info) {
+    public List<Info> findAllInfo(Info info) {
         return null;
     }
 
     @Override
-    public List<Info> findById(Info info) {
-        return null;
+    public Info findById(String info_id) {
+        return infoDao.findById(info_id);
     }
 
     @Override
@@ -29,19 +29,16 @@ public class InfoServiceImpl implements InfoService {
         return null;
     }
 
-    @Override
-    public boolean saveInfo(Info info) {
-        return false;
-    }
+
 
     @Override
-    public boolean deleInfo(Info info) {
-        return false;
+    public boolean deleteInfo(String info_id) {
+        return infoDao.deleteInfo(info_id);
     }
 
     @Override
     public boolean updateInfo(Info info) {
-        return false;
+        return infoDao.updateInfo(info);
     }
 
     @Override
@@ -51,6 +48,6 @@ public class InfoServiceImpl implements InfoService {
 
     @Override
     public List<Info> findAllInfo() {
-        return null;
+        return infoDao.findAllInfo();
     }
 }

@@ -109,7 +109,7 @@
                   <p class="font-weight-light text-muted mb-0">${user.getEmail()}</p>
                 </div>
                 <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
+                <a class="dropdown-item" href="pages/samples/login.jsp"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
               </div>
             </li>
           </ul>
@@ -169,7 +169,7 @@
               <div class="collapse" id="info_manage">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="pages/forms/basic_elements.jsp">信息推送</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="javascript:void(0);">信息管理</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../info/findAllInfo.do">信息管理</a></li>
                 </ul>
               </div>
             </li>
