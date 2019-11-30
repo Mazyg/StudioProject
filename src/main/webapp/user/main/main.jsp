@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"+"user/";
@@ -149,38 +150,44 @@
         <div class="cbg"></div>
         <div class="mainWrap">
             <div class="news clearfix">
+
                 <ul>
+                    <c:forEach items="${rolemodel}" var="rolemodel">
                     <li  class="fi" >
                         <a href="#" target="_blank">
-                            <img src="img/1.png" alt="">
+                            <img src="" alt="">
                             <div class="txtwrapper">
                                 <div class="time">
                                     <i class="icon-clock"></i> 2019.11.19
                                 </div>
-                                <p>2017年感动中国人物廖俊波：”牢记党的话，温暖群众的心“</p>
+                                <h3>${rolemodel.title}</h3>
+                                <p>${rolemodel.introduce}</p>
                             </div>
                         </a>
                     </li>
-                    <li >
-                        <a href="#" target="_blank">
-                            <img src="img/2.png" alt="">
-                            <div class="txtwrapper">
-                                <div class="time"><i class="icon-clock"></i> 2019.11.19
-                                </div>
-                                <p>刘练：青春在大漠沙海中闪光</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li >
-                        <a href="#" target="_blank">
-                            <img src="img/3.png" alt="">
-                            <div class="txtwrapper"><div class="time">
-                                <i class="icon-clock"></i> 2019.11.19
-                            </div>
-                                <p>”抠门“的老兵走了，留下”丰厚“的遗产！</p>
-                            </div>
-                        </a>
-                    </li>
+                    </c:forEach>
+<%--                    <li >--%>
+<%--                        <a href="#" target="_blank">--%>
+<%--                            <img src="img/2.png" alt="">--%>
+<%--                            <div class="txtwrapper">--%>
+<%--                                <div class="time"><i class="icon-clock"></i> 2019.11.19--%>
+<%--                                </div>--%>
+<%--                                <h3></h3>--%>
+<%--                                <p>刘练：青春在大漠沙海中闪光</p>--%>
+<%--                            </div>--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
+<%--                    <li >--%>
+<%--                        <a href="#" target="_blank">--%>
+<%--                            <img src="img/3.png" alt="">--%>
+<%--                            <div class="txtwrapper"><div class="time">--%>
+<%--                                <i class="icon-clock"></i> 2019.11.19--%>
+<%--                            </div>--%>
+<%--                                <h3></h3>--%>
+<%--                                <p>”抠门“的老兵走了，留下”丰厚“的遗产！</p>--%>
+<%--                            </div>--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
 
                 </ul>
             </div>
