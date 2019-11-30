@@ -35,7 +35,7 @@ public class InfoController {
         List<Info> infos = infoService.findAllInfo();
         mv.addObject("infos",infos);
         mv.addObject("msg",msg);
-        mv.setViewName("pages/forms/infoManage");
+        mv.setViewName("manage/pages/forms/infoManage");
         return mv;
     }
 
@@ -49,7 +49,7 @@ public class InfoController {
         }else {
             mv.addObject("info",info);
         }
-        mv.setViewName("pages/forms/showInfo");
+        mv.setViewName("manage/pages/forms/showInfo");
         return mv;
     }
 
@@ -100,7 +100,7 @@ public class InfoController {
             msg = "添加失败";
         }
         mv.addObject("msg",msg);
-        mv.setViewName("pages/forms/basic_elements");
+        mv.setViewName("manage/pages/forms/basic_elements");
         return mv;
     }
 }

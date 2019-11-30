@@ -38,12 +38,12 @@ public class TopicController {
         if("admin".equals(user.getU_type())){
             boolean top = topicService.saveTopicA(topic);
             mv.addObject("top", top);
-            mv.setViewName("pages/ui-features/topicput");
+            mv.setViewName("manage/pages/ui-features/topicput");
             return mv;
         }
         boolean top =topicService.saveTopic(topic);
         mv.addObject("top", top);
-        mv.setViewName("pages/ui-features/topicput");
+        mv.setViewName("manage/pages/ui-features/topicput");
         return mv;
     }
 
@@ -95,7 +95,7 @@ public class TopicController {
         System.out.println("Topic"+topic);
         mv.addObject("topicdel", topicdel);
         mv.addObject("topics", topic);
-        mv.setViewName("pages/ui-features/topic-table");
+        mv.setViewName("manage/pages/ui-features/topic-table");
         return mv;
     }
 
@@ -108,7 +108,7 @@ public class TopicController {
         System.out.println("Topic"+topic);
         mv.addObject("topics", topic);
         mv.addObject("topicdel", topicdel);
-        mv.setViewName("pages/ui-features/topic-bystatus");
+        mv.setViewName("manage/pages/ui-features/topic-bystatus");
         return mv;
     }
 
@@ -128,7 +128,7 @@ public class TopicController {
         List<Topic> topicList = topicService.findByTitle(title);
         System.out.println("Tp"+topicList);
         model.addAttribute("topics", topicList);
-        return "pages/ui-features/topic-table";
+        return "manage/pages/ui-features/topic-table";
     }
 
     /**
@@ -143,6 +143,6 @@ public class TopicController {
         List<Topic> topicList = topicService.findByTitleNot(title);
         System.out.println("nt"+topicList);
         model.addAttribute("topics", topicList);
-        return "pages/ui-features/topic-bystatus";
+        return "manage/pages/ui-features/topic-bystatus";
     }
 }
