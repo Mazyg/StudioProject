@@ -17,4 +17,7 @@ public interface InfoService {
     public boolean addInfo(Info info);
 
     public List<Info> findAllInfo();
+
+    //查询榜样的力量的信息，并按时间降序排列
+    public List<Info> findInfoBytype();
 }
