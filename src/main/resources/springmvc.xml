@@ -22,8 +22,6 @@
         <property name="prefix" value="/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
-
     <!--过滤静态资源-->
     <!--管理员-->
     <mvc:resources mapping="/scss/**" location="/manage/scss/"/>

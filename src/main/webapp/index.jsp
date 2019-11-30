@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<a href="user/findAll ">fdgdf</a>
+<a href="info/findInfoBytype.do">进入网站</a>
 </body>
 </html>

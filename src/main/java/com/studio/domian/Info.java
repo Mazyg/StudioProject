@@ -16,7 +16,6 @@ public class Info  implements Serializable {
     private String info_type;
     private String photo;
 
-
     public Integer getInfo_id() {
         return info_id;
     }
