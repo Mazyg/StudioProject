@@ -40,21 +40,18 @@ public class UserController {
         mv.addObject("user", users);
         mv.addObject("status", status);
 
-        mv.setViewName("pages/tables/basic-table");
+        mv.setViewName("manage/pages/tables/basic-table");
         return mv;
     }
 
 
     @RequestMapping("/findAllAdmin")
-    public ModelAndView findAllAmin( Model model,HttpServletRequest request){
-        /*String status = request.getParameter("status");
-        System.out.println("接收到数据"+status);*/
+    public ModelAndView findAllAmin(){
         mv = new ModelAndView();
         List<User> users = userService.findAll("admin");
         System.out.println(users);
         mv.addObject("user", users);
-        /*mv.addObject("status", status);*/
-        mv.setViewName("pages/tables/admin-table");
+        mv.setViewName("manage/pages/tables/admin-table");
         return mv;
     }
 
@@ -65,7 +62,7 @@ public class UserController {
         List<User> users = userService.findByName(request.getParameter("uname"));
         System.out.println(users);
         model.addAttribute("user", users);
-        return "pages/tables/basic-table";
+        return "manage/pages/tables/basic-table";
     }
     @RequestMapping("/findByNameAdmin")
     public String findByNameAdmin(Model model, HttpServletRequest request){
@@ -73,7 +70,7 @@ public class UserController {
         List<User> users = userService.findByNameAdmin(request.getParameter("uname"));
         System.out.println("userAdmin"+users);
         model.addAttribute("user", users);
-        return "pages/tables/admin-table";
+        return "manage/pages/tables/admin-table";
     }
 
     @RequestMapping("/updateUser1")
@@ -127,7 +124,7 @@ public class UserController {
                 //密码正确
                 mv.addObject("user",user1);
                 if (user1.getU_type().equals("admin")){
-                    mv.setViewName("admin");
+                    mv.setViewName("manage/admin");
                 }else {
                     mv.setViewName("user");
                 }
@@ -135,13 +132,13 @@ public class UserController {
                 //密码错误
                 msg = "密码错误";
                 mv.addObject("msg",msg);
-                mv.setViewName("pages/samples/login");
+                mv.setViewName("manage/pages/samples/login");
             }
         }else {
             //用户不存在
             msg = "用户不存在";
             mv.addObject("msg",msg);
-            mv.setViewName("pages/samples/login");
+            mv.setViewName("manage/pages/samples/login");
         }
         return mv;
     }
@@ -163,7 +160,7 @@ public class UserController {
             }
         }
         mv.addObject("msg",msg);
-        mv.setViewName("pages/samples/login");
+        mv.setViewName("manage/pages/samples/login");
         return mv;
     }
 
@@ -176,7 +173,7 @@ public class UserController {
         }else {
             mv.addObject("user",user1);
         }
-        mv.setViewName("pages/samples/personInfo");
+        mv.setViewName("manage/pages/samples/personInfo");
         return mv;
     }
 }

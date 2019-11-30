@@ -63,14 +63,14 @@
                 </li>
                 <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
                     <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                        <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> ${user.getname()} </span></a>
+                        <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> ${users.uname} </span></a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                         <div class="dropdown-header text-center">
                             <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
-                            <p class="mb-1 mt-3">${user.getname()}</p>
-                            <p class="font-weight-light text-muted mb-0">${user.getEmail()}</p>
+                            <p class="mb-1 mt-3">${users.uname}</p>
+                            <p class="font-weight-light text-muted mb-0">${users.email}</p>
                         </div>
-                        <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
+                        <a class="dropdown-item" href=""><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
                         <a class="dropdown-item" href="pages/samples/login.jsp"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
                     </div>
                 </li>
@@ -92,7 +92,7 @@
                             <div class="dot-indicator bg-success"></div>
                         </div>
                         <div class="text-wrapper">
-                            <p class="profile-name">${user.getname()}</p>
+                            <p class="profile-name">${user.uname}</p>
                             <p class="designation">管理员</p>
                         </div>
                     </a>
@@ -111,10 +111,17 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="pages/icons/simple-line-icons.jsp">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-topic" aria-expanded="false" aria-controls="ui-topic">
                         <span class="menu-title">话题管理</span>
                         <i class="icon-globe menu-icon"></i>
                     </a>
+                    <div class="collapse" id="ui-topic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/topicput.jsp">发布话题</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../topic/findAllTopicByStatus.do">未审核话题</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../topic/findAll.do">全部话题</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#info_manage" aria-expanded="false" aria-controls="info_manage">
@@ -169,9 +176,9 @@
 
                                         <img class="img-md rounded-circle" src="${user.photo}">
                                         <p class="font-weight-bold"> 账号： </p>
-                                        <p class="mb-2"> ${user.email} </p>
+                                        <p class="mb-2"> ${user.uid} </p>
                                         <p class="font-weight-bold"> 昵称： </p>
-                                        <p class="mb-2"> ${user.email} </p>
+                                        <p class="mb-2"> ${user.uname} </p>
                                         <p class="font-weight-bold"> 邮箱： </p>
                                         <p class="mb-2"> ${user.email} </p>
                                     </address>
