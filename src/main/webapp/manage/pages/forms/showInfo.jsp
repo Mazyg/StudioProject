@@ -29,8 +29,7 @@
             CKEDITOR.replace('description');
             $("#title").val('${info.title}');
             $("#info").val('${info.info_type}');
-            $("#photo").val('${info.photo}');
-            $("#introduction").val('${info.introduce}');
+            $("#url").val('${info.photo}')
         }
         function selectFile(){
             $("#photo").trigger("click");
@@ -93,7 +92,7 @@
                         <div class="dropdown-header text-center">
                             <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
                             <p class="mb-1 mt-3">${users.uname}</p>
-                            <p class="font-weight-light text-muted mb-0">${users.eamil}</p>
+                            <p class="font-weight-light text-muted mb-0">${users.email}</p>
                         </div>
                         <a class="dropdown-item" href="../user/personalInfo.do?uid=${users.uid}"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
                         <a class="dropdown-item" href="pages/samples/login.jsp"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
@@ -192,7 +191,9 @@
                                     <div class="form-group">
                                     <label for="introduction">简介</label>
                                     <div class="input-group col-xs-12">
-                                        <textarea name="content" id="introduction" placeholder="简介" required="required" class="col-10 form-control"  style=" height:80px"></textarea>
+                                        <textarea name="introduce" id="introduction" placeholder="简介" required="required" class="col-10 form-control"  style=" height:80px">
+                                            ${info.introduce}
+                                        </textarea>
                                     </div>
                                     </div>
                                     <div class="form-group">
@@ -201,8 +202,11 @@
                                             <select class="form-control" id="info">
                                                 <option value="榜样的力量">榜样的力量</option>
                                                 <option value="热点时事">热点时事</option>
-                                                <option></option>
-                                                <option></option>
+                                                <option value="最美中国人">最美中国人</option>
+                                                <option value="最美中国景">最美中国景</option>
+                                                <option value="最美中国事">最美中国事</option>
+                                                <option value="电影">电影</option>
+                                                <option value="书籍">书籍</option>
                                             </select>
                                             <input type="text"  style="display:none" id="type" name="info_type"/>
                                         </div>
