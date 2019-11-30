@@ -45,7 +45,7 @@ public class InfoController {
     public String findInfoBytype(Model model){
         List<Info> rolemodel= infoService.findInfoBytype();
         model.addAttribute("rolemodel", rolemodel);
-        return  "main/main";
+        return  "user/main/main";
     }
 
     @RequestMapping("/findById")

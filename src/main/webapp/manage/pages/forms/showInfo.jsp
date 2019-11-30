@@ -93,7 +93,7 @@
                         <div class="dropdown-header text-center">
                             <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
                             <p class="mb-1 mt-3">${users.uname}</p>
-                            <p class="font-weight-light text-muted mb-0">${users.eamil}</p>
+                            <p class="font-weight-light text-muted mb-0">${users.email}</p>
                         </div>
                         <a class="dropdown-item" href="../user/personalInfo.do?uid=${users.uid}"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
                         <a class="dropdown-item" href="pages/samples/login.jsp"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
