@@ -54,7 +54,6 @@ public class InfoServiceImpl implements InfoService {
     @Override
  
     public List<Info> findInfoBytype(String info_type,int start,int length) {
-        System.out.println(info_type);
         return  infoDao.findInfoBytype(info_type,start,length);
  
     }
