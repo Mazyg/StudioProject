@@ -16,10 +16,10 @@ public interface InfoDao {
     //查询榜样的力量的信息，并按时间降序排列取前三条
     @Select("SELECT  *\n" +
             "FROM `info`\n" +
-            "where info_type=#{info_type}\n" +
+            "where info_type='榜样力量'\n" +
             "order by date desc\n" +
-            "limit #{limit}")
-    public List<Info> findInfoBytype(@Param("info_type") String info_type,@Param("limit") Integer limit);
+            "limit 3")
+    public List<Info> findInfoBytype();
 
     //增加信息
     @Insert("insert into info(title,content,info_type,photo,date,introduce) values('${title}','${content}','${info_type}','${photo}','${date}','${introduce}')")

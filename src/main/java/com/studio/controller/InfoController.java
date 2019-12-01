@@ -43,8 +43,7 @@ public class InfoController {
     //首页榜样力量显示
     @RequestMapping("/findInfoBytype")
     public String findInfoBytype(Model model){
-        List<Info> rolemodel= infoService.findInfoBytype("榜样力量",3);
-        System.out.println("res"+rolemodel);
+        List<Info> rolemodel= infoService.findInfoBytype();
         model.addAttribute("rolemodel", rolemodel);
         return  "user/main/main";
     }

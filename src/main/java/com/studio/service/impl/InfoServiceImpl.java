@@ -52,7 +52,7 @@ public class InfoServiceImpl implements InfoService {
     }
 
     @Override
-    public List<Info> findInfoBytype(String info_type,Integer limit) {
-        return  infoDao.findInfoBytype(info_type,limit);
+    public List<Info> findInfoBytype() {
+        return  infoDao.findInfoBytype();
     }
 }
