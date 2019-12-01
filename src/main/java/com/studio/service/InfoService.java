@@ -19,6 +19,6 @@ public interface InfoService {
     public List<Info> findAllInfo();
  
 //首页信息显示，对info表的操作
-    public List<Info> findInfoBytype1(String info_type,int start,int length);
+    public List<Info> findInfoBytype(String info_type,int start,int length);
  
 }
