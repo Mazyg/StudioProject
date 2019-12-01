@@ -24,4 +24,8 @@ public interface TopicService {
     public boolean updateStatus(String tid);
 
     public Topic findTopicById(String tid);
+
+
+    //话题查询，按照时间排序，取N条
+    public List<Topic> findTopic(int start, int length);
 }

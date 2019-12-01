@@ -69,4 +69,15 @@ public class TopicServiceImpl implements TopicService {
     public Topic findTopicById(String tid) {
         return topicDao.findTopicById(tid);
     }
+
+    /**
+     * 话题查询，按照时间排序，取N条
+     * @param start
+     * @param length
+     * @return
+     */
+    @Override
+    public List<Topic> findTopic(int start, int length) {
+        return topicDao.findTopic(start,length);
+    }
 }

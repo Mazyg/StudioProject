@@ -57,6 +57,7 @@ public class TopicController {
     }
 
     /*全部话题界面删除*/
+    @RequestMapping("/deleTopic1")
     public String deleTopic1(HttpServletRequest request){
         String tid = request.getParameter("tid");
         System.out.println("tid"+tid);
@@ -144,5 +145,13 @@ public class TopicController {
         System.out.println("nt"+topicList);
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic-bystatus";
+    }
+
+    //首页显示，话题显示
+//    @RequestMapping("/findTopic")
+    public String findTopic(Model model){
+        List<Topic> topic= topicService.findTopic(0,3);
+        model.addAttribute("topic",topic);
+        return  "user/main/main";
     }
 }

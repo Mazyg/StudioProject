@@ -39,7 +39,7 @@
         <div class="nav">
             <div class="mainnav clearfix">
                 <ul id="nav">
-                    <li><a href="main/news.jsp">热点资讯</a>
+                    <li><a href="main/news.jsp">热点时事</a>
                     </li>
                     <li><a href="#">爱我中华</a>
                         <ul>
@@ -84,31 +84,13 @@
     </div>
     <div class="topimg">
         <ul>
-            <li style="background-image: url('img/tu1.jpg')">
+            <c:forEach items="${event}" var="event">
+            <li style="background-image: url('${event.photo}')">
                 <a href="#">
-                    <h3>我国再一次发射一箭双星</h3>
+                    <h3>${event.title}</h3>
                 </a>
             </li>
-            <li style="background-image:url('img/tu2.jpg')" >
-                <a href="#">
-                    <h3>中国制度的最大优势</h3>
-                </a>
-            </li>
-            <li style="background-image:url('img/tu3.jpg')">
-                <a href="#">
-                    <h3>中国国际进口博览会</h3>
-                </a>
-            </li>
-            <li style="background-image:url('img/tu4.jpg')">
-                <a href="#">
-                    <h3>国产航母驶入台湾海峡</h3>
-                </a>
-            </li>
-            <li style="background-image:url('img/tu5.jpg')">
-                <a href="#">
-                    <h3>学习马克思主义基本理论</h3>
-                </a>
-            </li>
+            </c:forEach>
 
         </ul>
     </div>
@@ -139,7 +121,7 @@
         }]
     });
     var mr=document.createElement("a");
-    mr.text="更多最新话题 >";
+    mr.text="更多热点时事>";
     mr.href="#";
     mr.target="_blank";
     mr.className="moreimg";
@@ -152,47 +134,37 @@
             <div class="news clearfix">
 
                 <ul>
-                    <c:forEach items="${rolemodel}" var="rolemodel">
+                <c:forEach items="${rolemodeltop}" var="rolemodeltop">
                     <li  class="fi" >
                         <a href="#" target="_blank">
-                            <img src="" alt="">
+                            <img src="${rolemodeltop.photo}" alt="">
                             <div class="txtwrapper">
                                 <div class="time">
-                                    <i class="icon-clock"></i> 2019.11.19
+                                    <i class="icon-clock"></i> ${rolemodeltop.date}
                                 </div>
-                                <h3>${rolemodel.title}</h3>
-                                <p>${rolemodel.introduce}</p>
+                                <p>${rolemodeltop.title}<br/>
+                                ${rolemodeltop.introduce}</p>
+                            </div>
+                        </a>
+                    </li>
+                </c:forEach>
+                    <c:forEach items="${rolemodel}" var="rolemodel">
+                    <li >
+                        <a href="#" target="_blank">
+                            <img src="${rolemodel.photo}" alt="">
+                            <div class="txtwrapper">
+                                <div class="time"><i class="icon-clock"></i>${rolemodel.date}
+                                </div>
+                                <p>${rolemodel.title}<br/>
+                                ${rolemodel.introduce}</p>
                             </div>
                         </a>
                     </li>
                     </c:forEach>
-<%--                    <li >--%>
-<%--                        <a href="#" target="_blank">--%>
-<%--                            <img src="img/2.png" alt="">--%>
-<%--                            <div class="txtwrapper">--%>
-<%--                                <div class="time"><i class="icon-clock"></i> 2019.11.19--%>
-<%--                                </div>--%>
-<%--                                <h3></h3>--%>
-<%--                                <p>刘练：青春在大漠沙海中闪光</p>--%>
-<%--                            </div>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
-<%--                    <li >--%>
-<%--                        <a href="#" target="_blank">--%>
-<%--                            <img src="img/3.png" alt="">--%>
-<%--                            <div class="txtwrapper"><div class="time">--%>
-<%--                                <i class="icon-clock"></i> 2019.11.19--%>
-<%--                            </div>--%>
-<%--                                <h3></h3>--%>
-<%--                                <p>”抠门“的老兵走了，留下”丰厚“的遗产！</p>--%>
-<%--                            </div>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
-
                 </ul>
             </div>
             <div class="events">
-                <h2><b></b>新闻资讯<b></b></h2>
+                <h2><b></b>热门话题<b></b></h2>
                 <ul class="clearfix">
                     <li>
                         <a href="#" target="_blank">
@@ -229,7 +201,7 @@
                     </li>
                 </ul>
             </div>
-            <a href="#" target="_blank" class="newsmore">更多新闻资讯</a>
+            <a href="#" target="_blank" class="newsmore">更多热门话题</a>
         </div>
     </div>
     <div class="section_2">
@@ -238,62 +210,31 @@
             <div class="focus">
                 <div class="bigpic">
                     <ul>
+                    <c:forEach items="${chinese}" var="chinese">
                         <li>
                             <a href="#" target="_blank">
-                                <img src="img/art.jpg "alt=""><div class="txtwrapper">
-                                <div class="cata">最美中国事</div>
-                                <h3>近200项非遗项目在黄山市展出</h3>
-                                <p> 2019年11月，第4届中国非遗传统技艺大展在安徽省黄山市举办。
-                                    本届大展共有全国30个省区市近200项传统美术、传统技艺、传统医药等非遗项目参展...</p>
+                                <img src="${chinese.photo}"alt=""><div class="txtwrapper">
+                                <div class="cata">${chinese.info_type}</div>
+                                <h3> ${chinese.title}</h3>
+                                <p> ${chinese.introduce}</p>
                             </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" target="_blank">
-                                <img src="img/scenery.png" alt="">
-                                <div class="txtwrapper">
-                                    <div class="cata">最美中国景</div>
-                                    <h3>辽宁葫芦岛：三礁揽胜 梦幻海湾</h3>
-                                    <p>  三礁揽胜位于辽宁兴城市兴海湾浴场，是一-座由三块巨大礁石连接而成的观景石桥。三礁揽胜蜿蜒曲折探入大海，是兴城市的地标性建筑。不论春夏秋冬... </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank"><img src="img/people.jpg" alt="">
-                                <div class="txtwrapper">
-                                    <div class="cata">最美中国人</div>
-                                    <h3>中国艺术体操队在京进行体能检验</h3>
-                                    <p>11月22日，为进一步做好备战东京奥运会强化体能工作，中国艺术体操队在北京体育大学进行了体能测验，检测运动员水平... </p>
-                                </div>
-                            </a>
-                        </li>
-
+                    </c:forEach>
                     </ul>
                 </div>
                 <div class="smallpic">
                     <ul>
+                    <c:forEach items="${chinese}" var="chinese">
                         <li>
                             <a href="#" target="_blank">
-                                <img src="img/people.jpg" alt=""><div class="txtwrapper">
-                                <div class="cata">最美中国人</div>
-                                <h3>中国艺术体操队在京进行体能检验</h3>
+                                <img src="${chinese.photo}" alt=""><div class="txtwrapper">
+                                <div class="cata">${chinese.info_type}</div>
+                                <h3>${chinese.title}</h3>
                             </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" target="_blank"><img src="img/art.jpg" alt="">
-                                <div class="txtwrapper"><div class="cata">最美中国事</div>
-                                    <h3>近200项非遗项目在黄山市展出</h3>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank"><img src="img/scenery.png" alt="">
-                                <div class="txtwrapper"><div class="cata">最美中国景</div>
-                                    <h3>辽宁葫芦岛：三礁揽胜 梦幻海湾</h3>
-                                </div>
-                            </a>
-                        </li>
+                    </c:forEach>
                     </ul>
                 </div>
             </div>
@@ -334,65 +275,70 @@
             <div class="datawrapper">
                 <div class="dataitem">
                     <ul>
+                    <c:forEach items="${movies1}" var="movies1">
                         <li>
                             <div class="wrapper">
-                                <img src="img/movie9.jpg" alt="">
+                                <img src="${movies1.photo}" alt="">
                                 <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                                    <h4>${movies1.title}</h4>
+                                    <p>${movies1.introduce}</p>
                                 </div>
                             </div>
                         </li>
-                        <li><div class="wrapper"><img src="img/movie10.jpg" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
+                    </c:forEach>
+<%--                        <li><div class="wrapper"><img src="img/movie10.jpg" alt="">--%>
+<%--                            <div class="txtwrapper">--%>
+<%--                                <h4>名称</h4>--%>
+<%--                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        </li>--%>
 
                     </ul>
                 </div>
                 <div class="dataitem">
                     <ul>
+                    <c:forEach items="${movies2}" var="movies2">
                         <li>
                             <div class="wrapper">
-                                <img src="img/movie11.jpg" alt="">
+                                <img src="${movies2.photo}" alt="">
                                 <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                                    <h4>${movies2.title}</h4>
+                                    <p>${movies2.introduce}</p>
                                 </div>
                             </div>
                         </li>
-                        <li><div class="wrapper"><img src="img/movie12.jpg" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
+                    </c:forEach>
+<%--                        <li><div class="wrapper"><img src="img/movie12.jpg" alt="">--%>
+<%--                            <div class="txtwrapper">--%>
+<%--                                <h4>名称</h4>--%>
+<%--                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        </li>--%>
 
                     </ul>
                 </div>
                 <div class="dataitem">
                     <ul>
+                    <c:forEach items="${movies3}" var="movies3">
                         <li>
                             <div class="wrapper">
-                                <img src="img/movie13.jpg" alt="">
+                                <img src="${movies3.photo}" alt="">
                                 <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                                    <h4>${movies3.title}</h4>
+                                    <p>${movies3.introduce}</p>
                                 </div>
                             </div>
                         </li>
-
-                        <li><div class="wrapper"><img src="img/movie14.jpg" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
+                    </c:forEach>
+<%--                        <li><div class="wrapper"><img src="img/movie14.jpg" alt="">--%>
+<%--                            <div class="txtwrapper">--%>
+<%--                                <h4>名称</h4>--%>
+<%--                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        </li>--%>
 
                     </ul>
                 </div>
