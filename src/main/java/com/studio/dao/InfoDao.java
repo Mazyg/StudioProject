@@ -18,7 +18,7 @@ public interface InfoDao {
             "FROM `info`\n" +
             "where info_type like #{info_type}\n"+
             "order by date desc\n"+"limit #{start},#{length}")
-    public List<Info> findInfoBytype( @Param("info_type") String info_type,@Param("start") int start,@Param("length") int length);
+    public List<Info> findInfoBytype1( @Param("info_type") String info_type,@Param("start") int start,@Param("length") int length);
 
     //增加信息
     @Insert("insert into info(title,content,info_type,photo,date,introduce) values('${title}','${content}','${info_type}','${photo}','${date}','${introduce}')")
