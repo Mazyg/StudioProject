@@ -1,10 +1,7 @@
 package com.studio.dao;
 
 import com.studio.domian.Topic;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -66,4 +63,15 @@ public interface TopicDao {
      */
     @Select("select * from topic where tid=#{tid}")
     public Topic findTopicById(String tid);
+
+    /**
+     * 话题查询，按照时间排序，取N条
+     *
+     */
+    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uid\n" +
+            " from  topic\n" +
+            " where t_tatus='已审核'\n" +
+            " order by date desc "
+            +"limit #{start},#{length}")
+    public List<Topic> findTopic(@Param("start") int start, @Param("length") int length);
 }
