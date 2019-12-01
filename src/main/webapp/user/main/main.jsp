@@ -76,8 +76,8 @@
             </div>
             <div class="subnav clearfix">
                 <ul>
-                    <li>登录</li>
-                    <li class="en">注册</li>
+                    <li><a href="../manage/pages/samples/login.jsp">登录</a></li>
+                    <li class="en"><a href="../manage/pages/samples/register.jsp">注册</a></li>
                 </ul>
             </div>
         </div>
