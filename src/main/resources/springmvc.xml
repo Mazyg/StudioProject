@@ -19,7 +19,7 @@
     <!--配置视图解析器-->
     <!--管理员-->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/manage/"/>
+        <property name="prefix" value="/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
     <!--过滤静态资源-->

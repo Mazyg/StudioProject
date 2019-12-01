@@ -108,7 +108,7 @@
                   <p class="mb-1 mt-3">${users.uname}</p>
                   <p class="font-weight-light text-muted mb-0">${users.email}</p>
                 </div>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
+                <a class="dropdown-item" href="../user/personalInfo.do?uid=${users.uid}"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
                 <a class="dropdown-item" href="pages/samples/login.jsp"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
               </div>
             </li>
@@ -185,22 +185,6 @@
                 </ul>
               </div>
             </li>
-            <li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <span class="menu-title">General Pages</span>
-                <i class="icon-doc menu-icon"></i>
-              </a>
-              <div class="collapse" id="auth">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/login.jsp"> Login </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/register.jsp"> Register </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.jsp"> 404 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.jsp"> 500 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.jsp"> Blank Page </a></li>
-                </ul>
-              </div>
-            </li>
           </ul>
         </nav>
         <!-- partial -->
@@ -221,17 +205,21 @@
                       <div class="form-group">
                         <label for="introduction">简介</label>
                         <div class="input-group col-xs-12">
-                          <textarea name="content" id="introduction" placeholder="简介" required="required" class="col-10 form-control"  style=" height:80px"></textarea>
+                          <textarea name="introduce" id="introduction" placeholder="简介" required="required" class="col-10 form-control"  style=" height:80px"></textarea>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="info_category"> 信息类别</label>
                         <div class="col-sm-6" id="info_category">
                           <select class="form-control" id="info">
-                            <option value="榜样的力量">榜样的力量</option>
+                            <option value="榜样力量">榜样力量</option>
                             <option value="热点时事">热点时事</option>
-                            <option></option>
-                            <option></option>
+                            <option value="最美中国人">最美中国人</option>
+                            <option value="最美中国景">最美中国景</option>
+                            <option value="最美中国事">最美中国事</option>
+                            <option value="电影">电影</option>
+                            <option value="书籍">书籍</option>
+                            <option value=""></option>
                           </select>
                           <input type="text"  style="display:none" id="type" name="info_type"/>
                         </div>

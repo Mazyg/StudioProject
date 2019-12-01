@@ -50,4 +50,9 @@ public class InfoServiceImpl implements InfoService {
     public List<Info> findAllInfo() {
         return infoDao.findAllInfo();
     }
+
+    @Override
+    public List<Info> findInfoBytype() {
+        return  infoDao.findInfoBytype();
+    }
 }

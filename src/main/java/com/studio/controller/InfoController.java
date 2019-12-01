@@ -5,6 +5,7 @@ import com.studio.domian.Info;
 import com.studio.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,8 +36,16 @@ public class InfoController {
         List<Info> infos = infoService.findAllInfo();
         mv.addObject("infos",infos);
         mv.addObject("msg",msg);
-        mv.setViewName("pages/forms/infoManage");
+        mv.setViewName("manage/pages/forms/infoManage");
         return mv;
+    }
+
+    //首页榜样力量显示
+    @RequestMapping("/findInfoBytype")
+    public String findInfoBytype(Model model){
+        List<Info> rolemodel= infoService.findInfoBytype();
+        model.addAttribute("rolemodel", rolemodel);
+        return  "user/main/main";
     }
 
     @RequestMapping("/findById")
@@ -49,7 +58,7 @@ public class InfoController {
         }else {
             mv.addObject("info",info);
         }
-        mv.setViewName("pages/forms/showInfo");
+        mv.setViewName("manage/pages/forms/showInfo");
         return mv;
     }
 
@@ -100,7 +109,7 @@ public class InfoController {
             msg = "添加失败";
         }
         mv.addObject("msg",msg);
-        mv.setViewName("pages/forms/basic_elements");
+        mv.setViewName("manage/pages/forms/basic_elements");
         return mv;
     }
 }

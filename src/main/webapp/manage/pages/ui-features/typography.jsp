@@ -53,14 +53,14 @@
             </li>
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> ${user.getname()} </span></a>
+                <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> ${users.uname} </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
                   <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
-                  <p class="mb-1 mt-3">${user.getname()}</p>
-                  <p class="font-weight-light text-muted mb-0">${user.getEmail()}</p>
+                  <p class="mb-1 mt-3">${users.uname}</p>
+                  <p class="font-weight-light text-muted mb-0">${users.email}</p>
                 </div>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息 </a>
+                <a class="dropdown-item" href="../user/personalInfo.do?uid=${users.uid}"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息 </a>
                 <a class="dropdown-item" href="pages/samples/login.jsp"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
               </div>
             </li>
@@ -82,7 +82,7 @@
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">${user.getname()}</p>
+                  <p class="profile-name">${users.uname}</p>
                   <p class="designation">管理员</p>
                 </div>
               </a>
@@ -134,22 +134,6 @@
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="../user/findAllUser.do">用户</a></li>
                   <li class="nav-item"> <a class="nav-link" href="../user/findAllAdmin.do">管理员</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <span class="menu-title">General Pages</span>
-                <i class="icon-doc menu-icon"></i>
-              </a>
-              <div class="collapse" id="auth">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/login.jsp"> Login </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/register.jsp"> Register </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.jsp"> 404 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.jsp"> 500 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.jsp"> Blank Page </a></li>
                 </ul>
               </div>
             </li>
