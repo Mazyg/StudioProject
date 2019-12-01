@@ -43,8 +43,20 @@ public class InfoController {
     //首页榜样力量显示
     @RequestMapping("/findInfoBytype")
     public String findInfoBytype(Model model){
-        List<Info> rolemodel= infoService.findInfoBytype();
-        model.addAttribute("rolemodel", rolemodel);
+        List<Info> rolemodeltop= infoService.findInfoBytype1("榜样力量",0,1);
+        model.addAttribute("rolemodeltop",rolemodeltop);
+        List<Info> rolemodel= infoService.findInfoBytype1("榜样力量",1,2);
+        model.addAttribute("rolemodel",rolemodel);
+        List<Info> chinese= infoService.findInfoBytype1("最美%",0,3);
+        model.addAttribute("chinese",chinese);
+        List<Info> event= infoService.findInfoBytype1("热点时事",0,5);
+        model.addAttribute("event",event);
+        List<Info> movies1= infoService.findInfoBytype1("电影",0,2);
+        model.addAttribute("movies1",movies1);
+        List<Info> movies2= infoService.findInfoBytype1("电影",2,2);
+        model.addAttribute("movies2",movies2);
+        List<Info> movies3= infoService.findInfoBytype1("电影",4,2);
+        model.addAttribute("movies3",movies3);
         return  "user/main/main";
     }
 

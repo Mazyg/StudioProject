@@ -17,7 +17,8 @@ public interface InfoService {
     public boolean addInfo(Info info);
 
     public List<Info> findAllInfo();
-
-    //查询榜样的力量的信息，并按时间降序排列
-    public List<Info> findInfoBytype();
+ 
+//首页信息显示，对info表的操作
+    public List<Info> findInfoBytype1(String info_type,int start,int length);
+ 
 }
