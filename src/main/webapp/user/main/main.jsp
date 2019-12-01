@@ -332,14 +332,6 @@
                             </div>
                         </li>
                     </c:forEach>
-<%--                        <li><div class="wrapper"><img src="img/movie14.jpg" alt="">--%>
-<%--                            <div class="txtwrapper">--%>
-<%--                                <h4>名称</h4>--%>
-<%--                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        </li>--%>
-
                     </ul>
                 </div>
                 <div class="dataitem">
