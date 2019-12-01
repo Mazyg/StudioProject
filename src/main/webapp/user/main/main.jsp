@@ -27,7 +27,7 @@
     <script src="js/slick.min.js"></script>
     <script src="js/comm.js?v=1" type="text/javascript"></script>
 </head>
-<body>
+<body onload="tset()">
 <div class="header" id="header">
     <div class="topline"></div>
     <div class="masklayer"></div>

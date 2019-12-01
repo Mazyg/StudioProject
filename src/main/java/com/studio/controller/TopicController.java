@@ -3,6 +3,7 @@ package com.studio.controller;
 import com.studio.domian.Topic;
 import com.studio.domian.User;
 import com.studio.service.TopicService;
+import com.studio.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,9 @@ public class TopicController {
     @Autowired
     private TopicService topicService;
 
+    @Autowired
+    private UserService userService;
+
     private ModelAndView mv;
 
     @RequestMapping("/saveTopic")
@@ -37,6 +41,7 @@ public class TopicController {
         topic.setUid(user.getUid());
         if("admin".equals(user.getU_type())){
             boolean top = topicService.saveTopicA(topic);
+            System.out.println("topic"+top);
             mv.addObject("top", top);
             mv.setViewName("manage/pages/ui-features/topicput");
             return mv;
@@ -147,11 +152,15 @@ public class TopicController {
         return "manage/pages/ui-features/topic-bystatus";
     }
 
-    //首页显示，话题显示
-//    @RequestMapping("/findTopic")
-    public String findTopic(Model model){
-        List<Topic> topic= topicService.findTopic(0,3);
-        model.addAttribute("topic",topic);
-        return  "user/main/main";
+    /*通过id查找话题*/
+    @RequestMapping("/findById")
+    public String findById(Model model,HttpServletRequest request){
+        String tid = request.getParameter("tid");
+       Topic topicList = topicService.findTopicById(tid);
+        System.out.println("topic"+topicList);
+        User usersTopic = userService.findById(topicList.getUid());
+        model.addAttribute("usersTopic", usersTopic);
+        model.addAttribute("topics", topicList);
+        return "manage/pages/ui-features/topic_show";
     }
 }

@@ -43,7 +43,8 @@
         var top = "${top}";
         if( top == "true"){
           alert("发布成功！");
-        }else{
+        }else
+          if( top == "false"){
           alert("无法提交！");
         }
       }
@@ -54,7 +55,7 @@
               });
     </script>
   </head>
-  <body>
+  <body onload="msssage()">
     <div class="container-scroller">
       <!-- partial:../../partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -192,7 +193,7 @@
                           <textarea name="content"  placeholder="描述一下你的话题" required="required" class="col-10 form-control"  style=" height:100px"></textarea>
                         </div>
                       </div>
-                      <input type="submit" class="btn btn-primary mr-2" onclick="msssage()" value="提交">
+                      <input type="submit" class="btn btn-primary mr-2"  value="提交">
                       <input type="reset" class="btn btn-light" value="重置">
                     </form>
                   </div>

@@ -51,10 +51,8 @@ public class InfoServiceImpl implements InfoService {
         return infoDao.findAllInfo();
     }
 
-    //首页信息显示
     @Override
-    public List<Info> findInfoBytype(String info_type,int start,int length) {
-        System.out.println(info_type);
-        return  infoDao.findInfoBytype(info_type,start,length);
+    public List<Info> findInfoBytype() {
+        return  infoDao.findInfoBytype();
     }
 }

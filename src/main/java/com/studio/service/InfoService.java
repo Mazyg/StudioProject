@@ -1,7 +1,6 @@
 package com.studio.service;
 
 import com.studio.domian.Info;
-import com.studio.domian.Topic;
 
 import java.util.List;
 
@@ -19,6 +18,6 @@ public interface InfoService {
 
     public List<Info> findAllInfo();
 
-//首页信息显示，对info表的操作
-    public List<Info> findInfoBytype(String info_type,int start,int length);
+    //查询榜样的力量的信息，并按时间降序排列
+    public List<Info> findInfoBytype();
 }
