@@ -27,7 +27,7 @@
     <script src="js/slick.min.js"></script>
     <script src="js/comm.js?v=1" type="text/javascript"></script>
 </head>
-<body>
+<body onload="tset()">
 <div class="header" id="header">
     <div class="topline"></div>
     <div class="masklayer"></div>
@@ -76,8 +76,8 @@
             </div>
             <div class="subnav clearfix">
                 <ul>
-                    <li>登录</li>
-                    <li class="en">注册</li>
+                    <li><a href="../manage/pages/samples/login.jsp">登录</a></li>
+                    <li class="en"><a href="../manage/pages/samples/register.jsp">注册</a></li>
                 </ul>
             </div>
         </div>

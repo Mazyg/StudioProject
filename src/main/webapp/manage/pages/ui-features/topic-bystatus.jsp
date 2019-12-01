@@ -5,7 +5,6 @@
 %>
 <html>
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>话题管理</title>
@@ -14,12 +13,6 @@
     <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
     <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
     <link rel="shortcut icon" href="images/favicon.png" />
     <script type="text/javascript">
@@ -166,8 +159,8 @@
                         <tr>
                           <th><h4>话题ID</h4></th>
                           <th><h4>话题标题</h4></th>
-                            <th><h4>话题简介</h4></th>
-                            <th><h4>时间</h4></th>
+                           <th><h4>时间</h4></th>
+                          <th><h4>内容</h4></th>
                             <th><h4>状态</h4></th>
                             <th><h4>操作1</h4></th>
                             <th><h4>操作2</h4></th>
@@ -179,8 +172,8 @@
                           <tr>
                             <td>${topic1.tid}</td>
                             <td>${topic1.t_title}</td>
-                            <td>${topic1.content}</td>
                             <td>${topic1.date}</td>
+                            <td><a href="../topic/findById.do?tid=${topic1.tid}">查看详情</a> </td>
                             <td>${topic1.t_tatus}</td>
                             <td><a href="../topic/updateStatus.do?tid=${topic1.tid}" style="color: #1d6b1f">通过审核</a></td>
                             <td><a href="../topic/deleTopic.do?tid=${topic1.tid}" style="color: #a01a1f" >删除</a></td>

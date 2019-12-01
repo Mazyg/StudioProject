@@ -13,8 +13,8 @@ public interface InfoDao {
     @Select("select * from info ")
     public List<Info> findAllInfo();
 
-    // 首页信息显示
-    @Select("SELECT  info_id,title,introduce,content,date_format(date ,'%Y-%m-%d' ) date,info_type,photo\n" +
+    //查询榜样的力量的信息，并按时间降序排列取前三条
+    @Select("SELECT  *\n" +
             "FROM `info`\n" +
             "where info_type like #{info_type}\n"+
             "order by date desc\n"+"limit #{start},#{length}")

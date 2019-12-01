@@ -1,7 +1,6 @@
 package com.studio.service;
 
 import com.studio.domian.Info;
-import com.studio.domian.Topic;
 
 import java.util.List;
 
@@ -18,7 +17,8 @@ public interface InfoService {
     public boolean addInfo(Info info);
 
     public List<Info> findAllInfo();
-
+ 
 //首页信息显示，对info表的操作
     public List<Info> findInfoBytype1(String info_type,int start,int length);
+ 
 }

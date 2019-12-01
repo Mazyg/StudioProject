@@ -40,7 +40,7 @@ public class InfoController {
         return mv;
     }
 
-    //首页显示
+    //首页榜样力量显示
     @RequestMapping("/findInfoBytype")
     public String findInfoBytype(Model model){
         List<Info> rolemodeltop= infoService.findInfoBytype1("榜样力量",0,1);
