@@ -27,7 +27,7 @@
     <script src="js/slick.min.js"></script>
     <script src="js/comm.js?v=1" type="text/javascript"></script>
 </head>
-<body>
+<body onload="tset()">
 <div class="header" id="header">
     <div class="topline"></div>
     <div class="masklayer"></div>
@@ -166,29 +166,6 @@
                         </a>
                     </li>
                     </c:forEach>
-<%--                    <li >--%>
-<%--                        <a href="#" target="_blank">--%>
-<%--                            <img src="img/2.png" alt="">--%>
-<%--                            <div class="txtwrapper">--%>
-<%--                                <div class="time"><i class="icon-clock"></i> 2019.11.19--%>
-<%--                                </div>--%>
-<%--                                <h3></h3>--%>
-<%--                                <p>刘练：青春在大漠沙海中闪光</p>--%>
-<%--                            </div>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
-<%--                    <li >--%>
-<%--                        <a href="#" target="_blank">--%>
-<%--                            <img src="img/3.png" alt="">--%>
-<%--                            <div class="txtwrapper"><div class="time">--%>
-<%--                                <i class="icon-clock"></i> 2019.11.19--%>
-<%--                            </div>--%>
-<%--                                <h3></h3>--%>
-<%--                                <p>”抠门“的老兵走了，留下”丰厚“的遗产！</p>--%>
-<%--                            </div>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
-
                 </ul>
             </div>
             <div class="events">

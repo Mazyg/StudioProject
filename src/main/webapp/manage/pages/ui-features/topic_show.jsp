@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
   String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"manage/";
 %>
@@ -16,24 +15,47 @@
     <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
+    <link rel="stylesheet" href="css/style.css"/><!-- End layout styles -->
     <link rel="shortcut icon" href="images/favicon.png" />
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="../ckeditor/ckeditor.js"></script>
     <script type="text/javascript">
-      function status() {
-       var sta= "${topicdel}";
-       if(sta == "true"){
-         alert("操作成功！");
-       }else if(sta == "false"){
-         alert("操作错误！");
-       }
+      window.onload = function()
+      {
+        CKEDITOR.replace( 'description');
+        var message = "${msg}";
+        if( message != ""){
+          alert(message);
+        }
+      };
+      function selectFile(){
+        $("#photo").trigger("click");
       }
     </script>
+    <script type="text/javascript">
+      function msssage () {
+        var top = "${top}";
+        if( top == "true"){
+          alert("发布成功！");
+        }else
+          if( top == "false"){
+          alert("无法提交！");
+        }
+      }
+    </script>
+    <script type="text/javascript">
+              $('select').change(function(){
+                $('input').val($('select').val());
+              });
+    </script>
   </head>
-  <body onload="status()">
+  <body onload="msssage()">
     <div class="container-scroller">
       <!-- partial:../../partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -44,11 +66,11 @@
           <a class="navbar-brand brand-logo-mini" href="javascript:void(0);"><img src="images/logo-mini.svg" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
-          <h5 class="mb-0 font-weight-medium d-none d-lg-flex">后台管理系统</h5>
+          <h5 class="mb-0 font-weight-medium d-none d-lg-flex">后台管理界面</h5>
           <ul class="navbar-nav navbar-nav-right ml-auto">
-            <form class="search-form d-none d-md-block" action="../topic/findByTitle.do">
+            <form class="search-form d-none d-md-block" action="#">
               <i class="icon-magnifier"></i>
-              <input type="search" class="form-control" placeholder="查找" title="Search here" name="title">
+              <input type="search" class="form-control" placeholder="查找" title="Search here">
             </form>
             <li class="nav-item dropdown language-dropdown d-none d-sm-flex align-items-center">
               <a class="nav-link d-flex align-items-center dropdown-toggle" id="LanguageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -119,7 +141,7 @@
               <div class="collapse" id="ui-topic">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="pages/ui-features/topicput.jsp">发布话题</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="../topic/findAllTopicByStatus.do">未审核话题</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../topic/findAllTopicByStatus.do ">未审核话题</a></li>
                   <li class="nav-item"> <a class="nav-link" href="../topic/findAll.do">全部话题</a></li>
                 </ul>
               </div>
@@ -132,7 +154,7 @@
               <div class="collapse" id="info_manage">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="pages/forms/basic_elements.jsp">信息推送</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="#">信息管理</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="javascript:void(0);">信息管理</a></li>
                 </ul>
               </div>
             </li>
@@ -154,44 +176,31 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h2 class="page-title"> 话题管理 </h2>
+              <h3 class="page-title"> 话题发布 </h3>
             </div>
             <div class="row">
-              <div class="col-lg-12 grid-margin stretch-card">
+              <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <p class="card-description"> 话题列表</p>
-
-                    <table class="table table-hover">
-
-                      <thead>
-                        <tr>
-                          <th><h4>话题ID</h4></th>
-                          <th><h4>话题标题</h4></th>
-                          <th><h4>时间</h4></th>
-                          <th><h4>简介</h4></th>
-                          <th><h4>状态</h4></th>
-                          <th><h4>操作1</h4></th>
-                          <th><h4>操作2</h4></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <c:forEach var="topic1" items="${topics}">
-                          <tr>
-                            <td>${topic1.tid}</td>
-                            <td>${topic1.t_title}</td>
-                            <td>${topic1.date}</td>
-                            <td ><a href="../topic/findById.do?tid=${topic1.tid}">查看详情</a></td>
-                            <td>${topic1.t_tatus}</td>
-                            <td><a href="../topic/updateStatus1.do?tid=${topic1.tid}" style="color: #1d6b1f">通过审核</a></td>
-                            <td><a href="../topic/deleTopic1.do?tid=${topic1.tid}" style="color: #a01a1f">删除</a></td>
-                            <td><td>
-                        </tr>
-                      </c:forEach>
-                      </tbody>
-
-                    </table>
-
+                    <form class="forms-sample" action="../topic/saveTopic.do" method="post">
+                      <div class="form-group">
+                        <label for="exampleInputName1">标题</label>
+                        <input type="text" class="col-10 form-control" id="exampleInputName1" placeholder="标题" required="required" name="t_title" value="${topics.t_title}">
+                      </div>
+                      <div class="form-group">
+                        <label>简要描述</label>
+                        <div class="input-group col-xs-12">
+                          <textarea name="content"  placeholder="描述一下你的话题" required="required" class="col-10 form-control"  style=" height:100px">
+                            ${topics.content}
+                          </textarea>
+                        </div>
+                      </div>
+                      <div>
+                        <p>话题发布者：${usersTopic.uname}</p>
+                        <p>发布者ID：${usersTopic.uid}</p>
+                        <p>话题状态:${topics.t_tatus}</p>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -201,7 +210,6 @@
           <!-- partial:../../partials/_footer.html -->
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017  </span>
             </div>
           </footer>
           <!-- partial -->
@@ -215,12 +223,17 @@
     <script src="vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
+    <script src="vendors/select2/select2.min.js"></script>
+    <script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="js/off-canvas.js"></script>
     <script src="js/misc.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
+    <script src="js/typeahead.js"></script>
+    <script src="js/select2.js"></script>
     <!-- End custom js for this page -->
+
   </body>
 </html>

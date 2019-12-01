@@ -29,6 +29,7 @@ public interface UserDao {
     @Select("select * from user where uid=#{uid}")
     public User findById1(String uid);
 
+
     /**
      * 根据用户名查找普通用户
      * @param uname
