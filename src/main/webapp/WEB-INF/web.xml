@@ -5,6 +5,9 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
           http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+  <welcome-file-list>
+    <welcome-file>info/findInfoBytype.do</welcome-file>
+  </welcome-file-list>
   <!--解决中文乱码的过滤器-->
   <filter>
     <filter-name>characterEncodingFilter</filter-name>
