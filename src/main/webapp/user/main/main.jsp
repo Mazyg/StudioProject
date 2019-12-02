@@ -29,7 +29,7 @@
 </head>
 <body onload="tset()">
 <div class="header" id="header">
-    <div class="topline"></div>
+<%--    <div class="topline"></div>--%>
     <div class="masklayer"></div>
     <div class="smenu" id="smenu"><i class="icon-menu"></i></div>
     <div class="navwrapper">
