@@ -140,8 +140,7 @@ h1,h2,h3,h4
 
 header
 {
-	background-image: url(../img/red_bg.jpg);
-	background-size: 165px;
+	background: #542185 url(../img/red_bg.jpg) no-repeat center center;
 	padding-top:25px;
 }
 
@@ -213,7 +212,7 @@ header .navwrap li
 header .navwrap li a
 {
 	display:block;
-	/*padding:0 50px;*/
+	padding:0 40px;
 	line-height:60px;
 	height:60px;
 	color: #fff;
@@ -286,9 +285,9 @@ footer .copyright span a:hover
 	border:1px solid #ccc\9;
 	background:#fff;
 	z-index:100;
-	/*width:150px;*/
-	/*padding:5px 0;*/
-	/*margin-left:-25px;*/
+	width:150px;
+	padding:5px 0;
+	margin-left:-25px;
 	height:auto;
 	box-shadow:0px 0px 5px #666;
 }
@@ -442,12 +441,12 @@ footer .copyright span a:hover
 	header .navwrap #nav
 	{
 		position: absolute;
-		/*width: 200px;*/
+		width: 200px;
 		z-index: 999;
 		background: #4C4F52;
 		right:0;
 		top:-57px;
-		/*padding: 10px 0;*/
+		padding: 10px 0;
 		display: none;
 	}
 
@@ -465,7 +464,7 @@ footer .copyright span a:hover
 	header .navwrap #nav li a
 	{
 		line-height: 40px;
-		/*padding: 0 0 0 35px;*/
+		padding: 0 0 0 35px;
 		color: #fff;
 		font-size: 14px;
 		height:auto;

@@ -8,6 +8,7 @@
   <welcome-file-list>
     <welcome-file>info/findInfoBytype.do</welcome-file>
   </welcome-file-list>
+
   <!--解决中文乱码的过滤器-->
   <filter>
     <filter-name>characterEncodingFilter</filter-name>
