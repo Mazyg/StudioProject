@@ -213,6 +213,8 @@
                         <div class="col-sm-6" id="info_category">
                           <select class="form-control" id="info">
                             <option value="榜样力量">榜样力量</option>
+                            <option value="身边榜样">身边榜样</option>
+                            <option value="新时代楷模">新时代楷模</option>
                             <option value="热点时事">热点时事</option>
                             <option value="最美中国人">最美中国人</option>
                             <option value="最美中国景">最美中国景</option>

@@ -2,6 +2,7 @@ package com.studio.controller;
 
 
 import com.studio.domian.Info;
+import com.studio.domian.Topic;
 import com.studio.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,6 +59,25 @@ public class InfoController {
         List<Info> movies3= infoService.findInfoBytype("电影",4,2);
         model.addAttribute("movies3",movies3);
         return  "user/main/main";
+    }
+
+
+    /**
+     * 榜样页面信息
+     * @param model
+     * @return
+     */
+    @RequestMapping("/findPersonInfo")
+    public String findPersonInfo(Model model){
+        List<Info> person = infoService.findInfoBytype("身边榜样", 0, 2);
+        model.addAttribute("person", person);
+        List<Info> rolemodeltop= infoService.findInfoBytype("榜样力量",0,3);
+        model.addAttribute("rolemodeltop",rolemodeltop);
+        List<Info> persontip= infoService.findInfoBytype("新时代楷模",0,2);
+        model.addAttribute("persontip",persontip);
+        List<Info> personOne= infoService.findInfoBytype("人物",0,1);
+        model.addAttribute("personone",personOne);
+        return "user/main/personal";
     }
 
     @RequestMapping("/findById")
