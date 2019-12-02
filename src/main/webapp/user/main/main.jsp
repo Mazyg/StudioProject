@@ -142,7 +142,7 @@
                                 <div class="time">
                                     <i class="icon-clock"></i> ${rolemodeltop.date}
                                 </div>
-                                <p>${rolemodeltop.title}<br/>
+                                <p><b>${rolemodeltop.title}</b><br/>
                                 ${rolemodeltop.introduce}</p>
                             </div>
                         </a>
@@ -155,7 +155,7 @@
                             <div class="txtwrapper">
                                 <div class="time"><i class="icon-clock"></i>${rolemodel.date}
                                 </div>
-                                <p>${rolemodel.title}<br/>
+                                <p><b>${rolemodel.title}</b><br/>
                                 ${rolemodel.introduce}</p>
                             </div>
                         </a>
