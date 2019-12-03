@@ -48,7 +48,7 @@
                             <li><a href="#">最美中国事</a></li>
                         </ul>
                     </li>
-                    <li><a href="#" class="">榜样力量</a>
+                    <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
                         <ul>
                             <li><a href="#">新时代楷模</a></li>
                             <li><a href="#">改革先锋</a></li>
@@ -65,6 +65,7 @@
                     </li>
                     <li><a href="#" class="">书籍</a></li>
                     <li><a href="#">电影</a></li>
+                    <c:if test="${users.uname==null}">
                     <li><a href="#" class="">个人中心</a>
                         <ul class="last">
                             <li><a href="#">我的收藏</a></li>
@@ -72,14 +73,33 @@
                             <li><a href="#">个人信息</a></li>
                         </ul>
                     </li>
+                    </c:if>
+                    <c:if test="${users.uname!=null}">
+                        <li><a href="#" class="">${users.uname}的主页</a>
+                            <ul class="last">
+                                <li><a href="#">个人中心</a></li>
+                                <li><a href="#">我的消息</a></li>
+                                <li><a href="#">退出登录</a></li>
+                            </ul>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
+            <c:if test="${users.uname==null}">
             <div class="subnav clearfix">
                 <ul>
                     <li><a href="../manage/pages/samples/login.jsp">登录</a></li>
                     <li class="en"><a href="../manage/pages/samples/register.jsp">注册</a></li>
                 </ul>
             </div>
+            </c:if>
+           <%-- <c:if test="${users.uname!=null}">
+                <div class="subnav clearfix">
+                    <ul>
+                        <li>欢迎${users.uname}</li>
+                    </ul>
+                </div>
+            </c:if>--%>
         </div>
     </div>
     <div class="topimg">

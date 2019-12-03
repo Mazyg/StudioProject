@@ -110,23 +110,32 @@ public class UserController {
 
 
     @RequestMapping("/login")
-    public ModelAndView login(User user,HttpServletRequest request){
+    public ModelAndView login(/*User user,*/HttpServletRequest request){
         mv = new ModelAndView();
-        System.out.println("user:"+user);
-        user1 =  userService.findById(user.getUid());
+        /*System.out.println("user:"+user);
+        user1 =  userService.findById(user.getUid());*/
+        String uid = request.getParameter("uid");
+        String password = request.getParameter("password");
+        System.out.println("up"+uid + password);
+        user1 = userService.findById1(uid);
         HttpSession session = request.getSession(true);
         session.setAttribute("users", user1);
         System.out.println("text"+session.getAttribute("user"));
         System.out.println("user1:"+user1);
         if (user1 != null){
+            if(user1.getU_status().equals("封号")){
+                msg = "账号受限";
+                mv.addObject("msg",msg);
+                mv.setViewName("manage/pages/samples/login");
+            }else
             //验证密码
-            if (user.getPassword().equals(user1.getPassword())){
+            if (/*user.getPassword()*/password.equals(user1.getPassword())){
                 //密码正确
                 mv.addObject("user",user1);
                 if (user1.getU_type().equals("admin")){
                     mv.setViewName("manage/admin");
                 }else {
-                    mv.setViewName("user");
+                    return new ModelAndView("redirect:/info/findInfoBytype.do");
                 }
             }else {
                 //密码错误

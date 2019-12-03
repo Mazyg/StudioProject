@@ -2,6 +2,7 @@ package com.studio.controller;
 
 
 import com.studio.domian.Info;
+import com.studio.domian.Topic;
 import com.studio.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,7 @@ public class InfoController {
         return mv;
     }
 
-    //首页榜样力量显示
+    //首页显示
     @RequestMapping("/findInfoBytype")
     public String findInfoBytype(Model model){
         List<Info> rolemodeltop= infoService.findInfoBytype("榜样力量",0,1);
@@ -60,6 +61,7 @@ public class InfoController {
         return  "user/main/main";
     }
 
+ 
     //热点资讯页面信息显示
     @RequestMapping("/findEvent")
     public String findEvent(Model model){
@@ -82,6 +84,25 @@ public class InfoController {
         List<Info> chineseAll= infoService.findInfoBytype("最美%",0,12);
         model.addAttribute("chineseAll",chineseAll);
         return  "user/main/chinese";
+ 
+
+    /**
+     * 榜样页面信息
+     * @param model
+     * @return
+     */
+    @RequestMapping("/findPersonInfo")
+    public String findPersonInfo(Model model){
+        List<Info> person = infoService.findInfoBytype("身边榜样", 0, 2);
+        model.addAttribute("person", person);
+        List<Info> rolemodeltop= infoService.findInfoBytype("榜样力量",0,3);
+        model.addAttribute("rolemodeltop",rolemodeltop);
+        List<Info> persontip= infoService.findInfoBytype("新时代楷模",0,2);
+        model.addAttribute("persontip",persontip);
+        List<Info> personOne= infoService.findInfoBytype("人物",0,1);
+        model.addAttribute("personone",personOne);
+        return "user/main/personal";
+ 
     }
 
     @RequestMapping("/findById")
