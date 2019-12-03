@@ -74,18 +74,18 @@ public class InfoController {
 
     //爱我中华页面信息显示
     @RequestMapping("/findChinese")
-    public String findChinese(Model model){
-        List<Info> chineseScenery= infoService.findInfoBytype("最美中国景",0,4);
-        model.addAttribute("chineseScenery",chineseScenery);
-        List<Info> chinesePeople= infoService.findInfoBytype("最美中国人",0,5);
-        model.addAttribute("chinesePeople",chinesePeople);
-        List<Info> chineseEvent= infoService.findInfoBytype("最美中国事",0,5);
-        model.addAttribute("chineseEvent",chineseEvent);
-        List<Info> chineseAll= infoService.findInfoBytype("最美%",0,12);
-        model.addAttribute("chineseAll",chineseAll);
-        return  "user/main/chinese";
- 
+    public String findChinese(Model model) {
+        List<Info> chineseScenery = infoService.findInfoBytype("最美中国景", 0, 4);
+        model.addAttribute("chineseScenery", chineseScenery);
+        List<Info> chinesePeople = infoService.findInfoBytype("最美中国人", 0, 5);
+        model.addAttribute("chinesePeople", chinesePeople);
+        List<Info> chineseEvent = infoService.findInfoBytype("最美中国事", 0, 5);
+        model.addAttribute("chineseEvent", chineseEvent);
+        List<Info> chineseAll = infoService.findInfoBytype("最美%", 0, 12);
+        model.addAttribute("chineseAll", chineseAll);
+        return "user/main/chinese";
 
+    }
     /**
      * 榜样页面信息
      * @param model
