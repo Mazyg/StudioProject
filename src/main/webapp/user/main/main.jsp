@@ -39,9 +39,9 @@
         <div class="nav">
             <div class="mainnav clearfix">
                 <ul id="nav">
-                    <li><a href="main/news.jsp">热点时事</a>
+                    <li><a href="../info/findEvent.do">热点时事</a>
                     </li>
-                    <li><a href="#">爱我中华</a>
+                    <li><a href="../info/findChinese.do">爱我中华</a>
                         <ul>
                             <li><a href="#">最美中国景</a></li>
                             <li><a href="#">最美中国人</a></li>

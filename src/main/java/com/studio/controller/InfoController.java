@@ -41,7 +41,7 @@ public class InfoController {
         return mv;
     }
 
-    //首页榜样力量显示
+    //首页显示
     @RequestMapping("/findInfoBytype")
     public String findInfoBytype(Model model){
         List<Info> rolemodeltop= infoService.findInfoBytype("榜样力量",0,1);
@@ -61,6 +61,30 @@ public class InfoController {
         return  "user/main/main";
     }
 
+ 
+    //热点资讯页面信息显示
+    @RequestMapping("/findEvent")
+    public String findEvent(Model model){
+        List<Info> eventTop= infoService.findInfoBytype("热点时事",0,1);
+        model.addAttribute("eventTop",eventTop);
+        List<Info> eventList= infoService.findInfoBytype("热点时事",1,4);
+        model.addAttribute("eventList",eventList);
+        return  "user/main/news";
+    }
+
+    //爱我中华页面信息显示
+    @RequestMapping("/findChinese")
+    public String findChinese(Model model){
+        List<Info> chineseScenery= infoService.findInfoBytype("最美中国景",0,4);
+        model.addAttribute("chineseScenery",chineseScenery);
+        List<Info> chinesePeople= infoService.findInfoBytype("最美中国人",0,5);
+        model.addAttribute("chinesePeople",chinesePeople);
+        List<Info> chineseEvent= infoService.findInfoBytype("最美中国事",0,5);
+        model.addAttribute("chineseEvent",chineseEvent);
+        List<Info> chineseAll= infoService.findInfoBytype("最美%",0,12);
+        model.addAttribute("chineseAll",chineseAll);
+        return  "user/main/chinese";
+ 
 
     /**
      * 榜样页面信息
@@ -78,6 +102,7 @@ public class InfoController {
         List<Info> personOne= infoService.findInfoBytype("人物",0,1);
         model.addAttribute("personone",personOne);
         return "user/main/personal";
+ 
     }
 
     @RequestMapping("/findById")
