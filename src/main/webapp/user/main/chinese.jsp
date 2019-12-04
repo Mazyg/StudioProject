@@ -184,16 +184,16 @@
     <nav class="navwrap yahei">
         <section class="mainWrap">
             <ul id="nav">
-                <li><a href="main/news.jsp">热点资讯</a>
+                <li><a href="../info/findEvent.do">热点时事</a>
                 </li>
-                <li><a href="main/chinese.jsp">爱我中华</a>
+                <li><a href="../info/findChinese.do">爱我中华</a>
                     <ul>
                         <li><a href="#">最美中国景</a></li>
                         <li><a href="#">最美中国人</a></li>
                         <li><a href="#">最美中国事</a></li>
                     </ul>
                 </li>
-                <li><a href="#" class="">榜样力量</a>
+                <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
                     <ul>
                         <li><a href="#">新时代楷模</a></li>
                         <li><a href="#">改革先锋</a></li>
@@ -235,15 +235,16 @@
                 <div class="biggallerywraper">
                     <ul class="biggallerylist">
                     <c:forEach items="${chineseScenery}" var="chineseScenery">
-                        <li><a href="#" target="_blank"><img src="${chineseScenery.photo}"></a></li>
+                        <li>
+                            <a href="#" target="_blank"><img src="${chineseScenery.photo}"></a>
+                            <div class="imgintro">
+                            <b></b>
+                            <h3><a href="#" target="_blank" class="jiequ">【${chineseScenery.info_type}】${chineseScenery.title}</a></h3>
+                            <p> ${chineseScenery.introduce}</p>
+                            </div>
+                        </li>
                     </c:forEach>
                     </ul>
-                    <c:forEach items="${chineseScenery}" var="chineseScenery">
-                    <div class="imgintro">
-                        <h3><a href="#" target="_blank" class="jiequ">【${chineseScenery.info_type}】${chineseScenery.title}</a></h3>
-                        <p>${chineseScenery.introduce}</p>
-                    </div>
-                    </c:forEach>
                 </div>
                 <div class="imgthumb clearfix">
                     <ul>
@@ -262,22 +263,24 @@
                             slidesToScroll: 1,
                             autoplay: true,
                             centerMode: false,
-                            prevArrow:"<div class=\"sliderbutton prev\"><i class=\"thunews-angle-left\"></i></div>",
-                            nextArrow:"<div class=\"sliderbutton next\"><i class=\"thunews-angle-right\"></i></div>"
+                            prevArrow:"<div class=\"sliderbutton prev\"><i>&lt;</i></div>",
+                            nextArrow:"<div class=\"sliderbutton next\"><i>&gt;</i></div>"
                         });
                         $('.biggallery .biggallerywraper .biggallerylist').on('beforeChange', function(event, slick, currentSlide,nextSlide){
                             $(".biggallery .imgthumb li").removeClass("active");
                             $(".biggallery .imgthumb li").eq(nextSlide).addClass("active");
+                            $(".biggallery .biggallerywraper .imgintro li").removeClass("active");
+                            $(".biggallery .biggallerywraper .imgintro li").eq(nextSlide).addClass("active");
                         });
 
                         $(".biggallery .imgthumb li").click(function(){
                             $('.biggallery .biggallerywraper .biggallerylist').slick("slickGoTo",$(this).index());
                         })
-
                     })
                 </script>
             </div>
             <ul class="picwhitenewslist clearfix">
+            <c:forEach items="${chineseAll}" var="chineseAll">
                 <script language="javascript" type="text/javascript">
                     $(document).ready(function(){
                         getResData();
@@ -291,372 +294,373 @@
                 </script>
                 <li>
                     <figure>
-                        <a href="publish/thunews/9652/2019/20191115111315714796419/20191115111315714796419_.html" target="_blank"><img src="publish/thunews/9652/20191115111315714796419/20191115111826688694626.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191115111315714796419/20191115111315714796419_.html" class="jiequ">【组图】清华美院陈楠教授笔下的甲骨文艺术设计作品</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.11.18 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191115111315714796419"><span id="itemlist_total_20191115111315714796419"></span></font></div>
+                        <a href="#" target="_blank"><img src="${chineseAll.photo}"></a>
+                        <figcaption><a target="_blank" href="#" class="jiequ">【${chineseAll.info_type}】${chineseAll.title}</a></figcaption>
+                        <div class="thumb"><i class="thunews-clock-o"></i>${chineseAll.date}<i class="thunews-eye"></i> <font id="font_itemlist_total_20191115111315714796419"><span id="itemlist_total_20191115111315714796419"></span></font></div>
                     </figure>
                 </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191106111628773279674&"+Math.random(), function(data){
-                                $("#itemlist_total_20191106111628773279674").empty();
-                                $("#itemlist_total_20191106111628773279674").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20191106111628773279674/20191106111628773279674_.html" target="_blank"><img src="publish/thunews/9652/20191106111628773279674/20191108103911942168184.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191106111628773279674/20191106111628773279674_.html" class="jiequ">【组图】漫步清华园 徒爱清华秋</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.11.08 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191106111628773279674"><span id="itemlist_total_20191106111628773279674"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191029145736856666520&"+Math.random(), function(data){
-                                $("#itemlist_total_20191029145736856666520").empty();
-                                $("#itemlist_total_20191029145736856666520").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20191029145736856666520/20191029145736856666520_.html" target="_blank"><img src="publish/thunews/9652/20191029145736856666520/20191031095527869297113.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191029145736856666520/20191029145736856666520_.html" class="jiequ">【组图】欲说少年梦 何不趁秋光</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.10.31 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191029145736856666520"><span id="itemlist_total_20191029145736856666520"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191023142354224842345&"+Math.random(), function(data){
-                                $("#itemlist_total_20191023142354224842345").empty();
-                                $("#itemlist_total_20191023142354224842345").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20191023142354224842345/20191023142354224842345_.html" target="_blank"><img src="publish/thunews/9666/20191023142354224842345/20191025154921254323705.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191023142354224842345/20191023142354224842345_.html" class="jiequ">【组图】北京市第二届大学生3D打印大赛在清华举行</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.10.25 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191023142354224842345"><span id="itemlist_total_20191023142354224842345"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191015094104599265355&"+Math.random(), function(data){
-                                $("#itemlist_total_20191015094104599265355").empty();
-                                $("#itemlist_total_20191015094104599265355").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20191015094104599265355/20191015094104599265355_.html" target="_blank"><img src="publish/thunews/9666/20191015094104599265355/20191017140602798948173.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191015094104599265355/20191015094104599265355_.html" class="jiequ">【组图】健康始于足下——2019年新生赤足运动会举行</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.10.17 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191015094104599265355"><span id="itemlist_total_20191015094104599265355"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191001132932513954927&"+Math.random(), function(data){
-                                $("#itemlist_total_20191001132932513954927").empty();
-                                $("#itemlist_total_20191001132932513954927").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20191001132932513954927/20191001132932513954927_.html" target="_blank"><img src="publish/thunews/9652/20191001132932513954927/20191001134359333702299.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191001132932513954927/20191001132932513954927_.html" class="jiequ">【组图】祖国，我为你自豪——参加国庆群众游行的同学回到清华园</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.10.01 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191001132932513954927"><span id="itemlist_total_20191001132932513954927"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191001131540307242860&"+Math.random(), function(data){
-                                $("#itemlist_total_20191001131540307242860").empty();
-                                $("#itemlist_total_20191001131540307242860").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20191001131540307242860/20191001131540307242860_.html" target="_blank"><img src="publish/thunews/9652/20191001131540307242860/20191001141720383809862.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191001131540307242860/20191001131540307242860_.html" class="jiequ">【组图】共同祝福亲爱的祖国</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.10.01 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191001131540307242860"><span id="itemlist_total_20191001131540307242860"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191001100319856587408&"+Math.random(), function(data){
-                                $("#itemlist_total_20191001100319856587408").empty();
-                                $("#itemlist_total_20191001100319856587408").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20191001100319856587408/20191001100319856587408_.html" target="_blank"><img src="publish/thunews/9652/20191001100319856587408/20191001102209559478563.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191001100319856587408/20191001100319856587408_.html" class="jiequ">【组图】今天是你的生日，我的中国</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.10.01 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191001100319856587408"><span id="itemlist_total_20191001100319856587408"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190927103943554764584&"+Math.random(), function(data){
-                                $("#itemlist_total_20190927103943554764584").empty();
-                                $("#itemlist_total_20190927103943554764584").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190927103943554764584/20190927103943554764584_.html" target="_blank"><img src="publish/thunews/9652/20190927103943554764584/20190927105016035300639.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190927103943554764584/20190927103943554764584_.html" class="jiequ">【组图】国旗，从清华园升起</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.09.27 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190927103943554764584"><span id="itemlist_total_20190927103943554764584"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190911145158401852153&"+Math.random(), function(data){
-                                $("#itemlist_total_20190911145158401852153").empty();
-                                $("#itemlist_total_20190911145158401852153").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190911145158401852153/20190911145158401852153_.html" target="_blank"><img src="publish/thunews/9666/20190911145158401852153/20190911145447003394855.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190911145158401852153/20190911145158401852153_.html" class="jiequ">【组图】2019年清华研究生运动会为祖国喝彩</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.09.12 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190911145158401852153"><span id="itemlist_total_20190911145158401852153"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190909135048721703114&"+Math.random(), function(data){
-                                $("#itemlist_total_20190909135048721703114").empty();
-                                $("#itemlist_total_20190909135048721703114").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190909135048721703114/20190909135048721703114_.html" target="_blank"><img src="publish/thunews/9652/20190825090818683511348/20190909145723327253897.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190909135048721703114/20190909135048721703114_.html" class="jiequ">【组图】九字班集结完毕，请检阅！</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.09.10 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190909135048721703114"><span id="itemlist_total_20190909135048721703114"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190909084123389596286&"+Math.random(), function(data){
-                                $("#itemlist_total_20190909084123389596286").empty();
-                                $("#itemlist_total_20190909084123389596286").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190909084123389596286/20190909084123389596286_.html" target="_blank"><img src="publish/thunews/9652/20190909084123389596286/20190909085129455693126.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190909084123389596286/20190909084123389596286_.html" class="jiequ">【组图】700余人参加2019-2020学年度清华大学升国旗仪式</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.09.09 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190909084123389596286"><span id="itemlist_total_20190909084123389596286"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190906160403571257688&"+Math.random(), function(data){
-                                $("#itemlist_total_20190906160403571257688").empty();
-                                $("#itemlist_total_20190906160403571257688").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190906160403571257688/20190906160403571257688_.html" target="_blank"><img src="publish/thunews/9652/20190906160403571257688/20190906161758519152924.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190906160403571257688/20190906160403571257688_.html" class="jiequ">【组图】清华大学2019年迎新晚会异彩纷呈</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.09.06 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190906160403571257688"><span id="itemlist_total_20190906160403571257688"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190829114557108707418&"+Math.random(), function(data){
-                                $("#itemlist_total_20190829114557108707418").empty();
-                                $("#itemlist_total_20190829114557108707418").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190829114557108707418/20190829114557108707418_.html" target="_blank"><img src="publish/thunews/9666/20190829114557108707418/20190829134749996664945.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190829114557108707418/20190829114557108707418_.html" class="jiequ">【组图】书香润清华 开卷益青春——清华图书馆喜迎九字班新读者</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.29 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190829114557108707418"><span id="itemlist_total_20190829114557108707418"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190828090937944801542&"+Math.random(), function(data){
-                                $("#itemlist_total_20190828090937944801542").empty();
-                                $("#itemlist_total_20190828090937944801542").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190828090937944801542/20190828090937944801542_.html" target="_blank"><img src="publish/thunews/9666/20190828090937944801542/20190828112755416381061.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190828090937944801542/20190828090937944801542_.html" class="jiequ">【组图】2019年中外研究生新生欢迎会搭建沟通桥梁</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.28 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190828090937944801542"><span id="itemlist_total_20190828090937944801542"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190825090818683511348&"+Math.random(), function(data){
-                                $("#itemlist_total_20190825090818683511348").empty();
-                                $("#itemlist_total_20190825090818683511348").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190825090818683511348/20190825090818683511348_.html" target="_blank"><img src="publish/thunews/9652/20190825090818683511348/20190826084402850595596.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190825090818683511348/20190825090818683511348_.html" class="jiequ">【组图】勇往直前！清华大学本科生新生军训拉练现场直击</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.25 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190825090818683511348"><span id="itemlist_total_20190825090818683511348"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190821111748778836918&"+Math.random(), function(data){
-                                $("#itemlist_total_20190821111748778836918").empty();
-                                $("#itemlist_total_20190821111748778836918").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190821111748778836918/20190821111748778836918_.html" target="_blank"><img src="publish/thunews/9652/20190821111748778836918/20190821112039133387879.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190821111748778836918/20190821111748778836918_.html" class="jiequ">【迎新组图】2019级研究生新生开学典礼现场直击</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.21 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190821111748778836918"><span id="itemlist_total_20190821111748778836918"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190821091029147265558&"+Math.random(), function(data){
-                                $("#itemlist_total_20190821091029147265558").empty();
-                                $("#itemlist_total_20190821091029147265558").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190821091029147265558/20190821091029147265558_.html" target="_blank"><img src="publish/thunews/9652/20190821091029147265558/20190821095020794985667.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190821091029147265558/20190821091029147265558_.html" class="jiequ">【迎新组图】2019级研究生新生开学典礼精彩瞬间</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.21 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190821091029147265558"><span id="itemlist_total_20190821091029147265558"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190820111002332930252&"+Math.random(), function(data){
-                                $("#itemlist_total_20190820111002332930252").empty();
-                                $("#itemlist_total_20190820111002332930252").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190820111002332930252/20190820111002332930252_.html" target="_blank"><img src="publish/thunews/9652/20190820111002332930252/20190820124552620366450.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190820111002332930252/20190820111002332930252_.html" class="jiequ">【迎新组图】2019级研究生新生报到撷英</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.20 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190820111002332930252"><span id="itemlist_total_20190820111002332930252"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190820090820598966703&"+Math.random(), function(data){
-                                $("#itemlist_total_20190820090820598966703").empty();
-                                $("#itemlist_total_20190820090820598966703").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190820090820598966703/20190820090820598966703_.html" target="_blank"><img src="publish/thunews/9652/20190820090820598966703/20190820154620796276644.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190820090820598966703/20190820090820598966703_.html" class="jiequ">【迎新组图】2019级研究生新生雨中报到清华园</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.20 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190820090820598966703"><span id="itemlist_total_20190820090820598966703"></span></font></div>
-                    </figure>
-                </li>
-                <script language="javascript" type="text/javascript">
-                    $(document).ready(function(){
-                        getResData();
-                        function getResData(){
-                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190815135033956435938&"+Math.random(), function(data){
-                                $("#itemlist_total_20190815135033956435938").empty();
-                                $("#itemlist_total_20190815135033956435938").append(data);
-                            });
-                        };
-                    });
-                </script>
-                <li>
-                    <figure>
-                        <a href="publish/thunews/9652/2019/20190815135033956435938/20190815135033956435938_.html" target="_blank"><img src="publish/thunews/9652/20190815135033956435938/20190815143131592132274.jpg"></a>
-                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190815135033956435938/20190815135033956435938_.html" class="jiequ">【组图】展青春风采 谱人生华章</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.15 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190815135033956435938"><span id="itemlist_total_20190815135033956435938"></span></font></div>
-                    </figure>
-                </li>
-            </ul>
+            </c:forEach>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191106111628773279674&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20191106111628773279674").empty();--%>
+<%--                                $("#itemlist_total_20191106111628773279674").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20191106111628773279674/20191106111628773279674_.html" target="_blank"><img src="publish/thunews/9652/20191106111628773279674/20191108103911942168184.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191106111628773279674/20191106111628773279674_.html" class="jiequ">【组图】漫步清华园 徒爱清华秋</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.11.08 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191106111628773279674"><span id="itemlist_total_20191106111628773279674"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191029145736856666520&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20191029145736856666520").empty();--%>
+<%--                                $("#itemlist_total_20191029145736856666520").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20191029145736856666520/20191029145736856666520_.html" target="_blank"><img src="publish/thunews/9652/20191029145736856666520/20191031095527869297113.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191029145736856666520/20191029145736856666520_.html" class="jiequ">【组图】欲说少年梦 何不趁秋光</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.10.31 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191029145736856666520"><span id="itemlist_total_20191029145736856666520"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191023142354224842345&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20191023142354224842345").empty();--%>
+<%--                                $("#itemlist_total_20191023142354224842345").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20191023142354224842345/20191023142354224842345_.html" target="_blank"><img src="publish/thunews/9666/20191023142354224842345/20191025154921254323705.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191023142354224842345/20191023142354224842345_.html" class="jiequ">【组图】北京市第二届大学生3D打印大赛在清华举行</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.10.25 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191023142354224842345"><span id="itemlist_total_20191023142354224842345"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191015094104599265355&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20191015094104599265355").empty();--%>
+<%--                                $("#itemlist_total_20191015094104599265355").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20191015094104599265355/20191015094104599265355_.html" target="_blank"><img src="publish/thunews/9666/20191015094104599265355/20191017140602798948173.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191015094104599265355/20191015094104599265355_.html" class="jiequ">【组图】健康始于足下——2019年新生赤足运动会举行</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.10.17 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191015094104599265355"><span id="itemlist_total_20191015094104599265355"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191001132932513954927&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20191001132932513954927").empty();--%>
+<%--                                $("#itemlist_total_20191001132932513954927").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20191001132932513954927/20191001132932513954927_.html" target="_blank"><img src="publish/thunews/9652/20191001132932513954927/20191001134359333702299.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191001132932513954927/20191001132932513954927_.html" class="jiequ">【组图】祖国，我为你自豪——参加国庆群众游行的同学回到清华园</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.10.01 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191001132932513954927"><span id="itemlist_total_20191001132932513954927"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191001131540307242860&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20191001131540307242860").empty();--%>
+<%--                                $("#itemlist_total_20191001131540307242860").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20191001131540307242860/20191001131540307242860_.html" target="_blank"><img src="publish/thunews/9652/20191001131540307242860/20191001141720383809862.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191001131540307242860/20191001131540307242860_.html" class="jiequ">【组图】共同祝福亲爱的祖国</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.10.01 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191001131540307242860"><span id="itemlist_total_20191001131540307242860"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20191001100319856587408&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20191001100319856587408").empty();--%>
+<%--                                $("#itemlist_total_20191001100319856587408").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20191001100319856587408/20191001100319856587408_.html" target="_blank"><img src="publish/thunews/9652/20191001100319856587408/20191001102209559478563.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20191001100319856587408/20191001100319856587408_.html" class="jiequ">【组图】今天是你的生日，我的中国</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.10.01 <i class="thunews-eye"></i> <font id="font_itemlist_total_20191001100319856587408"><span id="itemlist_total_20191001100319856587408"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190927103943554764584&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190927103943554764584").empty();--%>
+<%--                                $("#itemlist_total_20190927103943554764584").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20190927103943554764584/20190927103943554764584_.html" target="_blank"><img src="publish/thunews/9652/20190927103943554764584/20190927105016035300639.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190927103943554764584/20190927103943554764584_.html" class="jiequ">【组图】国旗，从清华园升起</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.09.27 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190927103943554764584"><span id="itemlist_total_20190927103943554764584"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190911145158401852153&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190911145158401852153").empty();--%>
+<%--                                $("#itemlist_total_20190911145158401852153").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20190911145158401852153/20190911145158401852153_.html" target="_blank"><img src="publish/thunews/9666/20190911145158401852153/20190911145447003394855.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190911145158401852153/20190911145158401852153_.html" class="jiequ">【组图】2019年清华研究生运动会为祖国喝彩</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.09.12 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190911145158401852153"><span id="itemlist_total_20190911145158401852153"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190909135048721703114&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190909135048721703114").empty();--%>
+<%--                                $("#itemlist_total_20190909135048721703114").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20190909135048721703114/20190909135048721703114_.html" target="_blank"><img src="publish/thunews/9652/20190825090818683511348/20190909145723327253897.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190909135048721703114/20190909135048721703114_.html" class="jiequ">【组图】九字班集结完毕，请检阅！</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.09.10 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190909135048721703114"><span id="itemlist_total_20190909135048721703114"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190909084123389596286&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190909084123389596286").empty();--%>
+<%--                                $("#itemlist_total_20190909084123389596286").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20190909084123389596286/20190909084123389596286_.html" target="_blank"><img src="publish/thunews/9652/20190909084123389596286/20190909085129455693126.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190909084123389596286/20190909084123389596286_.html" class="jiequ">【组图】700余人参加2019-2020学年度清华大学升国旗仪式</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.09.09 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190909084123389596286"><span id="itemlist_total_20190909084123389596286"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190906160403571257688&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190906160403571257688").empty();--%>
+<%--                                $("#itemlist_total_20190906160403571257688").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20190906160403571257688/20190906160403571257688_.html" target="_blank"><img src="publish/thunews/9652/20190906160403571257688/20190906161758519152924.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190906160403571257688/20190906160403571257688_.html" class="jiequ">【组图】清华大学2019年迎新晚会异彩纷呈</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.09.06 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190906160403571257688"><span id="itemlist_total_20190906160403571257688"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190829114557108707418&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190829114557108707418").empty();--%>
+<%--                                $("#itemlist_total_20190829114557108707418").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="#" target="_blank"><img src=""></a>--%>
+<%--                        <figcaption><a target="_blank" href="#" class="jiequ">【组图】书香润清华 开卷益青春——清华图书馆喜迎九字班新读者</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.29 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190829114557108707418"><span id="itemlist_total_20190829114557108707418"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190828090937944801542&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190828090937944801542").empty();--%>
+<%--                                $("#itemlist_total_20190828090937944801542").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20190828090937944801542/20190828090937944801542_.html" target="_blank"><img src="publish/thunews/9666/20190828090937944801542/20190828112755416381061.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190828090937944801542/20190828090937944801542_.html" class="jiequ">【组图】2019年中外研究生新生欢迎会搭建沟通桥梁</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.28 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190828090937944801542"><span id="itemlist_total_20190828090937944801542"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190825090818683511348&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190825090818683511348").empty();--%>
+<%--                                $("#itemlist_total_20190825090818683511348").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20190825090818683511348/20190825090818683511348_.html" target="_blank"><img src="publish/thunews/9652/20190825090818683511348/20190826084402850595596.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190825090818683511348/20190825090818683511348_.html" class="jiequ">【组图】勇往直前！清华大学本科生新生军训拉练现场直击</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.25 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190825090818683511348"><span id="itemlist_total_20190825090818683511348"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190821111748778836918&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190821111748778836918").empty();--%>
+<%--                                $("#itemlist_total_20190821111748778836918").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20190821111748778836918/20190821111748778836918_.html" target="_blank"><img src="publish/thunews/9652/20190821111748778836918/20190821112039133387879.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190821111748778836918/20190821111748778836918_.html" class="jiequ">【迎新组图】2019级研究生新生开学典礼现场直击</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.21 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190821111748778836918"><span id="itemlist_total_20190821111748778836918"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190821091029147265558&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190821091029147265558").empty();--%>
+<%--                                $("#itemlist_total_20190821091029147265558").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20190821091029147265558/20190821091029147265558_.html" target="_blank"><img src="publish/thunews/9652/20190821091029147265558/20190821095020794985667.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190821091029147265558/20190821091029147265558_.html" class="jiequ">【迎新组图】2019级研究生新生开学典礼精彩瞬间</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.21 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190821091029147265558"><span id="itemlist_total_20190821091029147265558"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190820111002332930252&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190820111002332930252").empty();--%>
+<%--                                $("#itemlist_total_20190820111002332930252").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20190820111002332930252/20190820111002332930252_.html" target="_blank"><img src="publish/thunews/9652/20190820111002332930252/20190820124552620366450.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190820111002332930252/20190820111002332930252_.html" class="jiequ">【迎新组图】2019级研究生新生报到撷英</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.20 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190820111002332930252"><span id="itemlist_total_20190820111002332930252"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190820090820598966703&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190820090820598966703").empty();--%>
+<%--                                $("#itemlist_total_20190820090820598966703").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20190820090820598966703/20190820090820598966703_.html" target="_blank"><img src="publish/thunews/9652/20190820090820598966703/20190820154620796276644.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190820090820598966703/20190820090820598966703_.html" class="jiequ">【迎新组图】2019级研究生新生雨中报到清华园</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.20 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190820090820598966703"><span id="itemlist_total_20190820090820598966703"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--                <script language="javascript" type="text/javascript">--%>
+<%--                    $(document).ready(function(){--%>
+<%--                        getResData();--%>
+<%--                        function getResData(){--%>
+<%--                            jQuery.get("application/visitor/article_list_visitors_2.jsp?articleID=20190815135033956435938&"+Math.random(), function(data){--%>
+<%--                                $("#itemlist_total_20190815135033956435938").empty();--%>
+<%--                                $("#itemlist_total_20190815135033956435938").append(data);--%>
+<%--                            });--%>
+<%--                        };--%>
+<%--                    });--%>
+<%--                </script>--%>
+<%--                <li>--%>
+<%--                    <figure>--%>
+<%--                        <a href="publish/thunews/9652/2019/20190815135033956435938/20190815135033956435938_.html" target="_blank"><img src="publish/thunews/9652/20190815135033956435938/20190815143131592132274.jpg"></a>--%>
+<%--                        <figcaption><a target="_blank" href="publish/thunews/9652/2019/20190815135033956435938/20190815135033956435938_.html" class="jiequ">【组图】展青春风采 谱人生华章</a></figcaption>--%>
+<%--                        <div class="thumb"><i class="thunews-clock-o"></i>2019.08.15 <i class="thunews-eye"></i> <font id="font_itemlist_total_20190815135033956435938"><span id="itemlist_total_20190815135033956435938"></span></font></div>--%>
+<%--                    </figure>--%>
+<%--                </li>--%>
+<%--            </ul>--%>
             <script type="text/javascript">
                 var strUrl = window.location.href;
                 var curPage=1;

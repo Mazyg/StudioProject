@@ -46,16 +46,16 @@
     <nav class="navwrap yahei">
         <section class="mainWrap">
             <ul id="nav">
-                <li><a href="main/news.jsp">热点资讯</a>
+                <li><a href="../info/findEvent.do">热点时事</a>
                 </li>
-                <li><a href="main/chinese.jsp">爱我中华</a>
+                <li><a href="../info/findChinese.do">爱我中华</a>
                     <ul>
                         <li><a href="#">最美中国景</a></li>
                         <li><a href="#">最美中国人</a></li>
                         <li><a href="#">最美中国事</a></li>
                     </ul>
                 </li>
-                <li><a href="#" class="">榜样力量</a>
+                <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
                     <ul>
                         <li><a href="#">新时代楷模</a></li>
                         <li><a href="#">改革先锋</a></li>
