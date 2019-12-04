@@ -30,7 +30,8 @@ public interface TopicDao {
     @Select("select * from topic where t_tatus='未审核'")
     public List<Topic> findAllByStatus();
 
-    public List<Topic> findAllByUid(Topic topic);
+    @Select("select * from topic where uid = #{uid}")
+    public List<Topic> findAllByUid(Integer uid);
 
     /**
      * 根据title查找话题

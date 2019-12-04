@@ -55,6 +55,10 @@ public interface UserDao {
     /*@ResultMap("userMap")*/
     public boolean saveUser(User user);
 
+    /*更新用户信息*/
+    @Update("update user set uname= '${uname}' , password = '${password}', sex = '${sex}', email='${email}' where uid = '${uid}'")
+    public boolean updateUser3(User user);
+
 
     /*封号处理*/
     @Update("update user set u_status= '封号' where uid=#{uid}")
