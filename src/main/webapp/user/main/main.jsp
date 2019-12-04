@@ -127,8 +127,8 @@
         dots:true,
         speed:1000,
         autoplaySpeed:6000,
-        prevArrow:"<div class='pre arrow'><i class='icon-angle-left'></i></div>",
-        nextArrow:"<div class='next arrow'><i class='icon-angle-right'></i></div>",
+        prevArrow:"<div class='pre arrow'><i>&lt;</i></div>",
+        nextArrow:"<div class='next arrow'><i>&gt;</i></div>",
         customPaging:function(slider, i) {
             return '<button>0' + (i + 1) +"</button>";
         },

@@ -82,7 +82,7 @@
 
 .subchannel .imgintro_1 .imgcontent
 {
-	background: url(../images/imgbg.png) repeat-x top center;
+	background: url(../img/imgbg.png) repeat-x top center;
 	margin-left: 80px;
 
 }
@@ -851,12 +851,12 @@
 
 .subchannel .biggallery .biggallerywraper .imgintro
 {
-	position: absolute;
-	bottom: 0;
+	/*position: absolute;*/
+	/*bottom: 0;*/
 	color: #fff;
 	z-index: 0;
-	width: 100%;
-	left: 0
+	/*width: 100%;*/
+	/*left: 0*/
 }
 
 .subchannel .biggallery .biggallerywraper .imgintro b
@@ -872,7 +872,7 @@
 	top: 0;
 }
 
-.subchannel .biggallery .biggallerywraper .imgintro h3 
+.subchannel .biggallery .biggallerywraper .imgintro h3
 {
 	padding: 25px 35px 10px 35px;
 	font-size: 18px;
