@@ -185,4 +185,19 @@ public class UserController {
         mv.setViewName("manage/pages/samples/personInfo");
         return mv;
     }
+
+    /**
+     * 更新用户信息
+     * @param user
+     * @param model
+     * @return
+     */
+    @RequestMapping("personUpdate")
+    public String personUpdate(User user,Model model){
+        System.out.println("user"+user);
+       boolean user3 = userService.updateUser3(user);
+        System.out.println(user3+"user3");
+       model.addAttribute("user3", user3);
+       return "user/main/personInfo";
+    }
 }

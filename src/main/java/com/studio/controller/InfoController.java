@@ -102,7 +102,19 @@ public class InfoController {
         List<Info> personOne= infoService.findInfoBytype("人物",0,1);
         model.addAttribute("personone",personOne);
         return "user/main/personal";
- 
+    }
+
+    /**
+     * 个人首页政策信息显示
+     * @param model
+     * @return
+     */
+    @RequestMapping("/findPersonalMainInfo")
+    public String findPersonalMainInfo(Model model){
+        List<Info> personal = infoService.findInfoBytype("近期政策", 0, 3);
+        System.out.println("per"+personal);
+        model.addAttribute("personalMainInfo", personal);
+        return "user/main/person";
     }
 
     @RequestMapping("/findById")

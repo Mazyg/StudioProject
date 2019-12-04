@@ -41,8 +41,8 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<Topic> findAllByUid(Topic topic) {
-        return null;
+    public List<Topic> findAllByUid(Integer uid) {
+        return topicDao.findAllByUid(uid);
     }
 
     @Override
