@@ -158,6 +158,17 @@
                     <img src="img/icon.png" class="col-sm-2 col-xs-2" style="border-radius: 50%">
                     <div class="col-sm-10 col-xs-10">
                         <span style="font-weight: bold;">Jack.C</span>
+                            <ul class="nav navbar-nav navbar-right" >
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">删除</a></li>
+                                        <li><a href="#">编辑</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         <br>
                         <small class="date" style="color:#999">1分钟前</small>
                         <div class="msg_content">happy day!
@@ -207,25 +218,6 @@
                     <span class="pull-right item_num">34.6亿</span>
                 </div>
             </c:forEach>
-<%--                <div class="col-sm-12 item_hot" >--%>
-<%--                    <span class="pull-left">#今天霜降#</span>--%>
-<%--                    <span class="pull-right item_num">2.6亿</span>--%>
-<%--                </div>--%>
-
-<%--                <div class="col-sm-12 item_hot" >--%>
-<%--                    <span class="pull-left">#亚洲新歌榜#</span>--%>
-<%--                    <span class="pull-right item_num">10.4亿</span>--%>
-<%--                </div>--%>
-
-<%--                <div class="col-sm-12 item_hot" >--%>
-<%--                    <span class="pull-left">#扑通扑通少女心#</span>--%>
-<%--                    <span class="pull-right item_num">1.5亿</span>--%>
-<%--                </div>--%>
-
-<%--                <div class="col-sm-12 item_hot" >--%>
-<%--                    <span class="pull-left">#突然开心#</span>--%>
-<%--                    <span class="pull-right item_num">1.1亿</span>--%>
-<%--                </div>--%>
                 <hr style="margin: 0;padding: 0;width: 100%">
 
                 <div class="col-sm-12 text-center" style="padding: 10px"><a href="#">查看更多</a></div>
