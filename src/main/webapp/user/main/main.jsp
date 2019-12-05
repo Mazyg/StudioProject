@@ -56,6 +56,12 @@
                     <li><a href="#">电影</a></li>
                     <c:if test="${users.uname==null}">
                     <li><a href="../info/findPersonalMainInfo.do" class="">个人中心</a>
+                        <ul class="last">
+                            <li><a href="#">我的收藏</a></li>
+                            <li><a href="#">话题管理</a></li>
+                            <li><a href="#">个人信息</a></li>
+                            <li><a href="../dynamic/myDynamic.do">我的动态</a></li>
+                        </ul>
                     </li>
                     </c:if>
                     <c:if test="${users.uname!=null}">
@@ -274,8 +280,8 @@
             <div class="datawrapper">
                 <div class="dataitem">
                     <ul>
-                    <c:forEach items="${movies1}" var="movies1">
-                        <li>
+
+                        <li> <c:forEach items="${movies1}" var="movies1">
                             <div class="wrapper">
                                 <img src="${movies1.photo}" alt="">
                                 <div class="txtwrapper">

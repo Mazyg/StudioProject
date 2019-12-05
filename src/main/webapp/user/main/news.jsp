@@ -92,7 +92,8 @@
                     <ul class="biggallerylist clearfix">
                         <li><a href="#" target="_blank"><img src="${eventTop.photo}"></a></li>
                     </ul>
-                    <div class="imgintro">
+                    <div class="imgintro1">
+                        <b></b>
                         <h3>
                             <span class="tips" id="keyword1-1">${eventTop.info_type}</span>
                             <a href="#" target="_blank"  id="title1-1" class="jiequ">【${eventTop.info_type}】${eventTop.title}</a>
