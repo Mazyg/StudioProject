@@ -57,8 +57,8 @@
                 </li>
                 <li><a href="#" class="">榜样力量</a>
                     <ul>
-                        <li><a href="#">新时代楷模</a></li>
-                        <li><a href="#">改革先锋</a></li>
+                        <li><a href="javascript:void(0)" onclick="window.location.hash='ab'">新时代楷模</a></li>
+                        <li><a href="javascript:void(0)" onclick="window.location.hash = 'aa'">身边榜样</a></li>
                         <li><a href="#">最美奋斗者</a></li>
                         <li><a href="#">道德模范</a></li>
                     </ul>
@@ -103,6 +103,7 @@
                 </div>
             </div>
             <ul class="picnewslist people">
+
                 <c:forEach items="${rolemodeltop}" var="role">
                 <li class="clearfix">
                     <figure>
@@ -131,6 +132,7 @@
                 </figure>
                 </li>
                 </c:forEach>
+                <a name="aa"></a>
                 <c:forEach items="${person}" var="person">
                 <li class="clearfix">
                     <figure>
@@ -159,6 +161,7 @@
                 </figure>
                 </li>
                 </c:forEach>
+                <a name="ab">新时代楷模</a>
                 <c:forEach items="${persontip}" var="persontip">
                 <li class="clearfix">
                     <figure>
