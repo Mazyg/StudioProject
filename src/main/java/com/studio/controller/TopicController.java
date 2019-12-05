@@ -163,4 +163,5 @@ public class TopicController {
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic_show";
     }
+
 }
