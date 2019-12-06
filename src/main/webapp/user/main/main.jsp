@@ -63,8 +63,8 @@
                             <li><a href="#">话题3</a></li>
                         </ul>
                     </li>
-                    <li><a href="#" class="">书籍</a></li>
-                    <li><a href="#">电影</a></li>
+                    <li><a href="../info/findBooks.do">书籍</a></li>
+                    <li><a href="../info/findMovies.do">电影</a></li>
                     <c:if test="${users.uname==null}">
                     <li><a href="#" class="">个人中心</a>
                         <ul class="last">
@@ -298,22 +298,15 @@
                     <c:forEach items="${movies1}" var="movies1">
                         <li>
                             <div class="wrapper">
-                                <img src="${movies1.photo}" alt="">
+                                <img src="${movies1.photo}">
                                 <div class="txtwrapper">
+                                    <br/>
+                                    <br/>
                                     <h4>${movies1.title}</h4>
-                                    <p>${movies1.introduce}</p>
                                 </div>
                             </div>
                         </li>
                     </c:forEach>
-<%--                        <li><div class="wrapper"><img src="img/movie10.jpg" alt="">--%>
-<%--                            <div class="txtwrapper">--%>
-<%--                                <h4>名称</h4>--%>
-<%--                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        </li>--%>
-
                     </ul>
                 </div>
                 <div class="dataitem">
@@ -321,22 +314,15 @@
                     <c:forEach items="${movies2}" var="movies2">
                         <li>
                             <div class="wrapper">
-                                <img src="${movies2.photo}" alt="">
+                                <img src="${movies2.photo}">
                                 <div class="txtwrapper">
+                                    <br/>
+                                    <br/>
                                     <h4>${movies2.title}</h4>
-                                    <p>${movies2.introduce}</p>
                                 </div>
                             </div>
                         </li>
                     </c:forEach>
-<%--                        <li><div class="wrapper"><img src="img/movie12.jpg" alt="">--%>
-<%--                            <div class="txtwrapper">--%>
-<%--                                <h4>名称</h4>--%>
-<%--                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        </li>--%>
-
                     </ul>
                 </div>
                 <div class="dataitem">
@@ -344,10 +330,11 @@
                     <c:forEach items="${movies3}" var="movies3">
                         <li>
                             <div class="wrapper">
-                                <img src="${movies3.photo}" alt="">
+                                <img src="${movies3.photo}">
                                 <div class="txtwrapper">
+                                    <br/>
+                                    <br/>
                                     <h4>${movies3.title}</h4>
-                                    <p>${movies3.introduce}</p>
                                 </div>
                             </div>
                         </li>
@@ -356,195 +343,21 @@
                 </div>
                 <div class="dataitem">
                     <ul>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                        <c:forEach items="${movies3}" var="movies3">
+                            <li>
+                                <div class="wrapper">
+                                    <img src="${movies3.photo}">
+                                    <div class="txtwrapper">
+                                        <br/>
+                                        <br/>
+                                        <h4>${movies3.title}</h4>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li><div class="wrapper"><img src="" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
-
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
-                <div class="dataitem">
-                    <ul>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li><div class="wrapper"><img src="" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
 
-                    </ul>
-                </div>
-                <div class="dataitem">
-                    <ul>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                </div>
-                            </div>
-                        </li>
-
-                    </ul>
-                </div>
-                <div class="dataitem">
-                    <ul>
-                        <li><div class="wrapper"><img src="" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="dataitem">
-                    <ul>
-
-                        <li><div class="wrapper"><img src="" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="dataitem">
-                    <ul>
-
-                        <li><div class="wrapper"><img src="" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="dataitem">
-                    <ul>
-
-                        <li><div class="wrapper"><img src="" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="dataitem">
-                    <ul>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li><div class="wrapper"><img src="" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
-
-                    </ul>
-                </div>
-                <div class="dataitem">
-                    <ul>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li><div class="wrapper"><img src="" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
-
-                    </ul>
-                </div>
 
             </div>
         </div>

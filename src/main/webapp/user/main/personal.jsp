@@ -71,7 +71,7 @@
                     </ul>
                 </li>
                 <li><a href="#" class="">书籍</a></li>
-                <li><a href="#">电影</a></li>
+                <li><a href="../info/findMovies.do">电影</a></li>
                 <li><a href="#" class="">个人中心</a>
                     <ul class="last">
                         <li><a href="#">我的收藏</a></li>
