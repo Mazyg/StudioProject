@@ -131,6 +131,22 @@ public class InfoController {
         return mv;
     }
 
+    /**
+     * 跳转到详情页
+     * @param
+     * @param model
+     * @return
+     */
+    @RequestMapping("/findByIdInfo")
+    public String findByIdInfo(Model model,HttpServletRequest request){
+        String info_id = request.getParameter("person");
+        System.out.println("id"+info_id);
+        Info info = infoService.findById(info_id);
+        System.out.println("info"+info);
+        model.addAttribute("infos", info);
+        return "user/main/details";
+    }
+
     @RequestMapping("/findByTitle")
     public String findByTitle(){
         return "";

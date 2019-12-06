@@ -142,7 +142,7 @@
                         <div class="contentwraper">
                             <figcaption>
                                 <span class="tips">身边榜样</span>
-                                <a href="#" target="_blank"  class="jiequ">
+                                <a href="../info/findByIdInfo.do?person=${person.info_id}" target="_blank"  class="jiequ">
                                    ${person.title}
                                 </a>
                             </figcaption>
