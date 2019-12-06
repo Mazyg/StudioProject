@@ -15,7 +15,7 @@ public interface TopicService {
 
     public List<Topic> findAllByStatus();
 
-    public List<Topic> findAllByUid(Topic topic);
+    public List<Topic> findAllByUid(Integer uid);
 
     public List<Topic> findByTitle(String t_title);
 

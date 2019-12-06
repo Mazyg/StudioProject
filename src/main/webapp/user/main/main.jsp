@@ -39,9 +39,9 @@
         <div class="nav">
             <div class="mainnav clearfix">
                 <ul id="nav">
-                    <li><a href="main/news.jsp">热点时事</a>
+                    <li><a href="../info/findEvent.do">热点时事</a>
                     </li>
-                    <li><a href="#">爱我中华</a>
+                    <li><a href="../info/findChinese.do">爱我中华</a>
                         <ul>
                             <li><a href="#">最美中国景</a></li>
                             <li><a href="#">最美中国人</a></li>
@@ -49,57 +49,37 @@
                         </ul>
                     </li>
                     <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
-                        <ul>
-                            <li><a href="#">新时代楷模</a></li>
-                            <li><a href="#">改革先锋</a></li>
-                            <li><a href="#">最美奋斗者</a></li>
-                            <li><a href="#">道德模范</a></li>
-                        </ul>
                     </li>
                     <li><a href="#" class="">话题</a>
-                        <ul>
-                            <li><a href="#">话题1</a></li>
-                            <li><a href="#">话题2</a></li>
-                            <li><a href="#">话题3</a></li>
-                        </ul>
                     </li>
+
                     <li><a href="../info/findBooks.do">书籍</a></li>
                     <li><a href="../info/findMovies.do">电影</a></li>
-                    <c:if test="${users.uname==null}">
-                    <li><a href="#" class="">个人中心</a>
+
+                    <c:if test="${users.uname!=null}">
+                    <li><a href="../info/findPersonalMainInfo.do" class="">个人中心</a>
+
                         <ul class="last">
                             <li><a href="#">我的收藏</a></li>
                             <li><a href="#">话题管理</a></li>
                             <li><a href="#">个人信息</a></li>
+                            <li><a href="../dynamic/myDynamic.do">我的动态</a></li>
                         </ul>
                     </li>
                     </c:if>
-                    <c:if test="${users.uname!=null}">
-                        <li><a href="#" class="">${users.uname}的主页</a>
-                            <ul class="last">
-                                <li><a href="#">个人中心</a></li>
-                                <li><a href="#">我的消息</a></li>
-                                <li><a href="#">退出登录</a></li>
-                            </ul>
-                        </li>
-                    </c:if>
                 </ul>
             </div>
-            <c:if test="${users.uname==null}">
             <div class="subnav clearfix">
                 <ul>
+                <c:if test="${users.uname==null}">
                     <li><a href="../manage/pages/samples/login.jsp">登录</a></li>
+                </c:if>
+                <c:if test="${users.uname!=null}">
+                    <li><a href="../manage/pages/samples/login.jsp">${users.uname}</a></li>
+                </c:if>
                     <li class="en"><a href="../manage/pages/samples/register.jsp">注册</a></li>
                 </ul>
             </div>
-            </c:if>
-           <%-- <c:if test="${users.uname!=null}">
-                <div class="subnav clearfix">
-                    <ul>
-                        <li>欢迎${users.uname}</li>
-                    </ul>
-                </div>
-            </c:if>--%>
         </div>
     </div>
     <div class="topimg">
@@ -127,8 +107,8 @@
         dots:true,
         speed:1000,
         autoplaySpeed:6000,
-        prevArrow:"<div class='pre arrow'><i class='icon-angle-left'></i></div>",
-        nextArrow:"<div class='next arrow'><i class='icon-angle-right'></i></div>",
+        prevArrow:"<div class='pre arrow'><i>&lt;</i></div>",
+        nextArrow:"<div class='next arrow'><i>&gt;</i></div>",
         customPaging:function(slider, i) {
             return '<button>0' + (i + 1) +"</button>";
         },
@@ -295,8 +275,8 @@
             <div class="datawrapper">
                 <div class="dataitem">
                     <ul>
-                    <c:forEach items="${movies1}" var="movies1">
-                        <li>
+
+                        <li> <c:forEach items="${movies1}" var="movies1">
                             <div class="wrapper">
                                 <img src="${movies1.photo}">
                                 <div class="txtwrapper">

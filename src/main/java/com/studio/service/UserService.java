@@ -25,4 +25,5 @@ public interface UserService {
     public boolean updateUser2(String uid);
 
     public List<User> findByNameAdmin(String uname);
+    public boolean updateUser3(User user);
 }

@@ -70,6 +70,15 @@ public class TopicController {
         return "redirect:/topic/findAll.do?topicdel="+topicdel;
     }
 
+    @RequestMapping("/deleTopic2")
+    public String deleTopic2(HttpServletRequest request,Model model){
+       String tid = request.getParameter("tid");
+        System.out.println("tid"+tid);
+        boolean topicDele = topicService.deleTopic(tid);
+        model.addAttribute("topicDel", topicDele);
+        return "user/main/personInfoTopic";
+    }
+
     /*未审核审核*/
     @RequestMapping("/updateStatus")
     public String updateStatus(HttpServletRequest request){
@@ -118,9 +127,25 @@ public class TopicController {
         return mv;
     }
 
+    /**
+     * 通过用户id查找话题
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping("/findByUid")
-    public String findByUid(){
-        return "";
+    public String findByUid(HttpServletRequest request,Model model){
+       User user = (User) request.getSession().getAttribute("users");
+       if(user==null){
+           return "user/main/personInfoTopic";
+       }
+        Integer uid = user.getUid();
+        System.out.println("user"+user);
+        System.out.println("uid"+uid);
+        List<Topic> topicInfo = topicService.findAllByUid(uid);
+        System.out.println("topic"+topicInfo);
+        model.addAttribute("topicInfo", topicInfo);
+        return "user/main/personInfoTopic";
     }
 
     /**
@@ -163,4 +188,5 @@ public class TopicController {
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic_show";
     }
+
 }

@@ -82,7 +82,7 @@
 
 .subchannel .imgintro_1 .imgcontent
 {
-	background: url(../images/imgbg.png) repeat-x top center;
+	background: url(../img/imgbg.png) repeat-x top center;
 	margin-left: 80px;
 
 }
@@ -850,16 +850,36 @@
 
 
 .subchannel .biggallery .biggallerywraper .imgintro
+ {
+	 /*position: absolute;*/
+	 /*bottom: 0;*/
+	 color: #fff;
+	 z-index: 0;
+	 /*width:100%;*/
+	 /*left: 0*/
+ }
+.subchannel .biggallery .biggallerywraper .imgintro1
 {
 	position: absolute;
 	bottom: 0;
 	color: #fff;
 	z-index: 0;
-	width: 100%;
+	width:100%;
 	left: 0
 }
-
 .subchannel .biggallery .biggallerywraper .imgintro b
+{
+	position: absolute;
+	z-index: -1;
+	background: #160724;
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+.subchannel .biggallery .biggallerywraper .imgintro1 b
 {
 	position: absolute;
 	z-index: -1;
@@ -872,7 +892,12 @@
 	top: 0;
 }
 
-.subchannel .biggallery .biggallerywraper .imgintro h3 
+.subchannel .biggallery .biggallerywraper .imgintro h3
+{
+	padding: 25px 35px 10px 35px;
+	font-size: 18px;
+}
+.subchannel .biggallery .biggallerywraper .imgintro1 h3
 {
 	padding: 25px 35px 10px 35px;
 	font-size: 18px;
@@ -882,12 +907,28 @@
 	color: #fff;
 	display: block;
 }
+.subchannel .biggallery .biggallerywraper .imgintro1 h3 a
+{
+	color: #fff;
+	display: block;
+}
 .subchannel .biggallery .biggallerywraper .imgintro h3 a:hover
+{
+	color: #ff7800;
+}
+.subchannel .biggallery .biggallerywraper .imgintro1 h3 a:hover
 {
 	color: #ff7800;
 }
 
 .subchannel .biggallery .biggallerywraper .imgintro p
+{
+	color: #ddd;
+	padding: 0px 35px 20px 35px;
+	zoom:1;
+}
+
+.subchannel .biggallery .biggallerywraper .imgintro1 p
 {
 	color: #ddd;
 	padding: 0px 35px 20px 35px;
