@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="css/owl.carousel.css">
     <script src="js/owl.carousel.min.js" type="text/javascript"></script>
     <script src="js/comm.js" type="text/javascript"></script>
-    <script src="publish/thunews/js/regex-cn.js" type="text/javascript"></script>
 <body>
 <header class="clearfix">
     <section class="mainWrap">
@@ -71,7 +70,7 @@
                     </ul>
                 </li>
                 <li><a href="#" class="">书籍</a></li>
-                <li><a href="#">电影</a></li>
+                <li><a href="../info/findMovies.do">电影</a></li>
                 <li><a href="#" class="">个人中心</a>
                     <ul class="last">
                         <li><a href="#">我的收藏</a></li>
@@ -119,9 +118,37 @@
                             </figcaption>
                             <p>${eventList.introduce}</p>
                             <div class="thumb">
+
+                                
                                 <i class="thunews-clock-o"></i>
                                 ${eventList.date}
                                 <i class="thunews-eye"></i>
+                                <font  >
+                                    <span  ></span>
+                                </font>
+
+                            </div>
+                        </div>
+                    </figure>
+                </li>
+
+                <li class="clearfix">
+                    <figure>
+                        <a class="picwraper" href="#" target="_blank">
+                            <img src="img/tu5.jpg">
+                        </a>
+                        <div class="contentwraper">
+                            <figcaption>
+                                <span class="tips"  >资讯</span>
+                                <a href="#" target="_blank"  class="jiequ">
+                                    【资讯】新闻标题
+                                </a>
+                            </figcaption>
+                            <p>新闻内容</p>
+                            <div class="thumb">
+                                <i class=""></i>
+                                2019.10.31 （新闻时间）
+                                <i class=""></i>
                                 <font  >
                                     <span  ></span>
                                 </font>
@@ -129,7 +156,33 @@
                         </div>
                     </figure>
                 </li>
+                <li class="clearfix">
+                    <figure>
+                        <a class="picwraper" href="#" target="_blank">
+                            <img src="img/tu5.jpg">
+                        </a>
+                        <div class="contentwraper">
+                            <figcaption>
+                                <span class="tips" id="keyword-1">资讯</span>
+                                <a href="#" target="_blank" id="title-1" class="jiequ">
+                                    【资讯】新闻标题
+                                </a>
+                            </figcaption>
+                            <p>新闻内容</p>
+                            <div class="thumb">
+                                <i class="thunews-clock-o"></i>
+                                2019.10.31 （新闻时间）
+                                <i class="thunews-eye"></i>
+                                <font id="font_itemlist_total_20191029161652878588253">
+                                    <span id="itemlist_total_20191029161652878588253"></span>
+                                </font>
+                            </div>
+                        </div>
+                    </figure>
+                </li>
+
             </c:forEach>
+
             </ul>
             <script type="text/javascript">
                 var strUrl = window.location.href;
@@ -252,4 +305,5 @@
 </div>
 </body>
 </html>
+
 
