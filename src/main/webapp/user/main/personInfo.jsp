@@ -76,6 +76,23 @@
 window.onload = function () {
    $("#sex").val('${users.sex}')
 }
+    function getImage() {
+        var obj = new FormData();
+        var file = document.getElementById("photo").files[0];
+        obj.append("file", file);
+        $.ajax({
+            url : '../load/getImageUrl.do',
+            type : 'POST',
+            data : obj,
+            contentType : false,
+            processData : false,
+            mimeType : 'multipart/form-data',
+            success : function(data) {
+                $("#url").val(data) ;
+            }
+        })
+
+    }
 </script>
 <body onload="message()">
 <header class="clearfix">
@@ -163,10 +180,20 @@ window.onload = function () {
                 </c:if>
                 <c:if test="${users.uname != null}">
                     <form class="form-horizontal" role="form" action="../user/personUpdate.do"  method="post">
+
+                        <div class="form-group">
+                            <label for="disabledTextInput" class="col-sm-2 control-label">头像</label>
+                            <div class="col-sm-8">
+                                <input type="file" class="form-control" id="photo" name="photo" value="${users.photo}" multiple="multiple" onchange="getImage()">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="disabledTextInput" class="col-sm-2 control-label">账号</label>
                             <div class="col-sm-8">
+                                <span>
                                 <input type="text" id="disabledTextInput" class="form-control" name="uid" value="${users.uid}"  readonly = "readonly">
+                                <button class="file-upload-browse btn btn-primary" type="button" onclick="selectFile()">上传</button>
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
