@@ -120,17 +120,17 @@ public class InfoController {
      * @return
      */
     @RequestMapping("/findBooks")
-    public String findBook(Model model){
+    public String findBook(Model model) {
         List<Info> books = infoService.findBooks();
-        model.addAttribute("books",books);
+        model.addAttribute("books", books);
         return "user/main/books";
-
-     * 个人首页政策信息显示
+    }
+   /*  * 个人首页政策信息显示
      * @param model
-     * @return
-     */
-    @RequestMapping("/findPersonalMainInfo")
-    public String findPersonalMainInfo(Model model){
+     * @return*/
+
+     @RequestMapping("/findPersonalMainInfo")
+      public String findPersonalMainInfo(Model model){
         List<Info> personal = infoService.findInfoBytype("近期政策", 0, 3);
         System.out.println("per"+personal);
         model.addAttribute("personalMainInfo", personal);
@@ -152,12 +152,8 @@ public class InfoController {
         return mv;
     }
 
-    /**
-     * 跳转到详情页
-     * @param
-     * @param model
-     * @return
-     */
+
+
     @RequestMapping("/findByIdInfo")
     public String findByIdInfo(Model model,HttpServletRequest request){
         String info_id = request.getParameter("person");
