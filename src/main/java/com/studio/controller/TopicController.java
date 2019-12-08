@@ -194,6 +194,7 @@ public class TopicController {
        Topic topicList = topicService.findTopicById(tid);
         System.out.println("topic"+topicList);
         User usersTopic = userService.findByName(topicList.getUname());
+        System.out.println("usert"+usersTopic);
         model.addAttribute("usersTopic", usersTopic);
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic_show";

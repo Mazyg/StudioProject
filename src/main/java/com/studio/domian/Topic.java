@@ -12,7 +12,7 @@ public class Topic implements Serializable {
     private String date;
     private String content;
     private String uname;
-    private String t_status;
+    private String t_tatus;
     private String t_title;
     private String t_type;
 
@@ -50,11 +50,11 @@ public class Topic implements Serializable {
     }
 
     public String getT_status() {
-        return t_status;
+        return t_tatus;
     }
 
     public void setT_status(String t_status) {
-        this.t_status = t_status;
+        this.t_tatus = t_tatus;
     }
 
     public String getT_title() {
@@ -80,7 +80,7 @@ public class Topic implements Serializable {
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
                 ", uname='" + uname + '\'' +
-                ", t_status='" + t_status + '\'' +
+                ", t_status='" + t_tatus + '\'' +
                 ", t_title='" + t_title + '\'' +
                 ", t_type='" + t_type + '\'' +
                 '}';
