@@ -4,7 +4,7 @@ package com.studio.domian;
 /**
  * 评论表
  * cid 评论编号，date 评论时间，content 评论内容
- * uid 评论者id，wid 动态话题id；
+ * uid 评论者id，rid 被评论者id，wid 动态话题id；
  */
 public class Comment {
 
@@ -12,7 +12,18 @@ public class Comment {
     private String date;
     private String content;
     private Integer uid;
+    private Integer rid;
     private Integer wid;
+
+    public Integer getRid() {
+        return rid;
+    }
+
+    public void setRid(Integer rid) {
+        this.rid = rid;
+    }
+
+
 
     public Integer getCid() {
         return cid;
@@ -61,6 +72,7 @@ public class Comment {
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
                 ", uid=" + uid +
+                ", rid=" + rid +
                 ", wid=" + wid +
                 '}';
     }

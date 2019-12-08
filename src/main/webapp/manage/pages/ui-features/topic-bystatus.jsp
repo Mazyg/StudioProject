@@ -174,7 +174,7 @@
                             <td>${topic1.t_title}</td>
                             <td>${topic1.date}</td>
                             <td><a href="../topic/findById.do?tid=${topic1.tid}">查看详情</a> </td>
-                            <td>${topic1.t_tatus}</td>
+                            <td>${topic1.t_status}</td>
                             <td><a href="../topic/updateStatus.do?tid=${topic1.tid}" style="color: #1d6b1f">通过审核</a></td>
                             <td><a href="../topic/deleTopic.do?tid=${topic1.tid}" style="color: #a01a1f" >删除</a></td>
                             <td><td>

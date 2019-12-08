@@ -1,6 +1,7 @@
 package com.studio.domian;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * dynamic 动态表
@@ -14,6 +15,15 @@ public class Dynamic implements Serializable {
     private String content;
     private Integer uid;
     private Integer tid;
+    List<Comment> comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Integer getWid() {
         return wid;
@@ -57,12 +67,13 @@ public class Dynamic implements Serializable {
 
     @Override
     public String toString() {
-        return "dynamic{" +
+        return "Dynamic{" +
                 "wid=" + wid +
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
                 ", uid=" + uid +
                 ", tid=" + tid +
+                ", comments=" + comments +
                 '}';
     }
 }
