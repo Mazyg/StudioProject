@@ -34,8 +34,8 @@
           alert(message);
         }
       };
-      function selectFile(){
-        $("#photo").trigger("click");
+      function change(){
+        $("#type").val($("#topic").val()) ;
       }
     </script>
     <script type="text/javascript">
@@ -188,12 +188,24 @@
                         <input type="text" class="col-10 form-control" id="exampleInputName1" placeholder="标题" required="required" name="t_title">
                       </div>
                       <div class="form-group">
+                        <label for="topic_category"> 话题类别</label>
+                        <div class="col-sm-6" id="topic_category">
+                          <select class="form-control" id="topic">
+                            <option value="榜样的力量">榜样的力量</option>
+                            <option value="热点时事">热点时事</option>
+                            <option value="电影">电影</option>
+                            <option value="书籍">书籍</option>
+                          </select>
+                          <input type="text"  style="display:none" id="type" name="t_type"/>
+                        </div>
+                      </div>
+                      <div class="form-group">
                         <label>简要描述</label>
                         <div class="input-group col-xs-12">
                           <textarea name="content"  placeholder="描述一下你的话题" required="required" class="col-10 form-control"  style=" height:100px"></textarea>
                         </div>
                       </div>
-                      <input type="submit" class="btn btn-primary mr-2"  value="提交">
+                      <input type="submit" class="btn btn-primary mr-2"  value="提交" onclick="change()">
                       <input type="reset" class="btn btn-light" value="重置">
                     </form>
                   </div>

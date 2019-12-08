@@ -1,7 +1,11 @@
 package com.studio.controller;
 
+import com.studio.domian.Comment;
+import com.studio.domian.Dynamic;
 import com.studio.domian.Topic;
 import com.studio.domian.User;
+import com.studio.service.CommentService;
+import com.studio.service.DynamicService;
 import com.studio.service.TopicService;
 import com.studio.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,12 @@ public class TopicController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private DynamicService dynamicService;
+
+    @Autowired
+    private CommentService commentService;
+
     private ModelAndView mv;
 
     @RequestMapping("/saveTopic")
@@ -35,7 +45,7 @@ public class TopicController {
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = ft.format(now);
         topic.setDate(time);
-        System.out.println(time);
+        System.out.println(topic);
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("users");
         topic.setUid(user.getUid());
@@ -92,7 +102,7 @@ public class TopicController {
     public String updateStatus1(HttpServletRequest request){
         String tid = request.getParameter("tid");
         Topic topics = topicService.findTopicById(tid);
-        if("已审核".equals(topics.getT_tatus())){
+        if("已审核".equals(topics.getT_status())){
             boolean topicStatus = false;
             return "redirect:/topic/findAll.do?topicdel="+topicStatus;
         }
@@ -189,4 +199,28 @@ public class TopicController {
         return "manage/pages/ui-features/topic_show";
     }
 
+    /*跳转到话题页面*/
+    @RequestMapping("/showTopic")
+    public ModelAndView showTopic(){
+        mv = new ModelAndView();
+        List<Topic> topic =  topicService.findAllTopic();
+        System.out.println("Topic"+topic);
+        mv.addObject("topics", topic);
+        mv.setViewName("user/main/topic");
+        return mv;
+    }
+
+    /*通过id进入话题回复评论页面*/
+    @RequestMapping("/findTopicById")
+    public String findTopicById(String tid,Model model){
+        Topic topic = topicService.findTopicById(tid);
+        System.out.println("topic"+topic);
+        List<Dynamic> dynamics = dynamicService.findByTid(tid);
+        for (Dynamic dynamic: dynamics){
+            dynamic.setComments(commentService.findByWid(dynamic.getWid()));
+        }
+        model.addAttribute("dynamics", dynamics);
+        model.addAttribute("topic", topic);
+        return "user/main/tiezi";
+    }
 }

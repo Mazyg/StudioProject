@@ -120,12 +120,12 @@ public class InfoController {
      * @return
      */
     @RequestMapping("/findBooks")
-    public String findBook(Model model){
+    public String findBook(Model model) {
         List<Info> books = infoService.findBooks();
-        model.addAttribute("books",books);
+        model.addAttribute("books", books);
         return "user/main/books";
-
-     * 个人首页政策信息显示
+    }
+     /* 个人首页政策信息显示
      * @param model
      * @return
      */

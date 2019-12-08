@@ -60,7 +60,7 @@ public class TopicServiceImpl implements TopicService {
     }
 
 
-    @Override
+
     public boolean updateStatus(String tid) {
         return topicDao.updateStatus(tid);
     }
