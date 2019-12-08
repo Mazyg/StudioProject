@@ -15,7 +15,7 @@ public class CommentServiceImpl implements CommentService {
     private CommentDao commentDao;
     @Override
     public boolean saveComment(Comment comment) {
-        return false;
+        return commentDao.saveComment(comment);
     }
 
     @Override

@@ -19,13 +19,6 @@
         <a href=""><img src="img/logo.png" alt="" class="headPic1"/></a>
         <ul class="headNav">
             <li><a href="">首页</a></li>
-            <li><a href="">沪牌竞拍</a></li>
-            <li><a href="">拍王助手</a></li>
-            <li><a href="">深圳竞价摇号</a></li>
-            <li><a href="">广州竞价摇号</a></li>
-            <li><a href="">杭州竞价摇号</a></li>
-            <li><a href="">天津竞价摇号</a></li>
-            <li><a href="">增值服务</a></li>
         </ul>
         <!--未登入开始-->
         <div class="ltForm appear">
@@ -118,12 +111,8 @@
                 </div>
                 <div class="indexPublic_con">
                     <ul class="weekHot">
-                        <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                        <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                        <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                        <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                        <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                        <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
+                        <li><a href="">本周热议</a><span>29</span></li>
+
                     </ul>
                 </div>
             </div>
@@ -133,13 +122,13 @@
                 </div>
                 <div class="indexPublic_con">
                     <ul class="indexLink">
-                        <li><a href="">拍王淘宝链接</a></li>
-                        <li><a href="">拍王网站</a></li>
-                        <li><a href="">拍王助手</a></li>
-                        <li><a href="">沪牌模拟</a></li>
-                        <li><a href="">拍王合作咨询</a></li>
-                        <li><a href="">快法务</a></li>
-                        <li><a href="">国拍网</a></li>
+                        <li><a href=""></a></li>
+                        <li><a href=""></a></li>
+                        <li><a href=""></a></li>
+                        <li><a href=""></a></li>
+                        <li><a href=""></a></li>
+                        <li><a href=""></a></li>
+                        <li><a href=""></a></li>
                     </ul>
                 </div>
             </div>
