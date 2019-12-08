@@ -36,7 +36,7 @@ public interface UserDao {
      * @return
      */
      @Select("SELECT * FROM user where u_type='user' and uname like CONCAT('%',#{uname},'%')")
-    public List<User> findByName(String uname);
+    public User findByName(String uname);
 
 
 

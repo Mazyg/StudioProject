@@ -13,7 +13,7 @@ public class Dynamic implements Serializable {
     private Integer wid;
     private String date;
     private String content;
-    private Integer uid;
+    private String uname;
     private Integer tid;
     List<Comment> comments;
 
@@ -49,12 +49,12 @@ public class Dynamic implements Serializable {
         this.content = content;
     }
 
-    public Integer getUid() {
-        return uid;
+    public String getUname() {
+        return uname;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
     public Integer getTid() {
@@ -71,7 +71,7 @@ public class Dynamic implements Serializable {
                 "wid=" + wid +
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
-                ", uid=" + uid +
+                ", uname=" + uname +
                 ", tid=" + tid +
                 ", comments=" + comments +
                 '}';

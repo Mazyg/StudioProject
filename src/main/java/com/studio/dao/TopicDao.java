@@ -69,7 +69,7 @@ public interface TopicDao {
      * 话题查询，按照时间排序，取N条
      *
      */
-    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uid\n" +
+    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname\n" +
             " from  topic\n" +
             " where t_tatus='已审核'\n" +
             " order by date desc "
