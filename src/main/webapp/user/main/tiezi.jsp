@@ -20,13 +20,6 @@
         <a href=""><img src="img/logo.png" alt="" class="headPic1"/></a>
         <ul class="headNav">
             <li><a href="">首页</a></li>
-            <li><a href="">沪牌竞拍</a></li>
-            <li><a href="">拍王助手</a></li>
-            <li><a href="">深圳竞价摇号</a></li>
-            <li><a href="">广州竞价摇号</a></li>
-            <li><a href="">杭州竞价摇号</a></li>
-            <li><a href="">天津竞价摇号</a></li>
-            <li><a href="">增值服务</a></li>
         </ul>
         <!--未登入开始-->
         <div class="ltForm">
@@ -84,6 +77,7 @@
                 <div class="pendDetail">
                     <div class="pendDetail_head">
                         <p>${dynamic.uname} <span>${dynamic.date}</span></p>
+                        <input type="text" style="display: none" id="wid" value="${dynamic.wid}">
                     </div>
                     <div class="pendDetail_con">
                         <p>${dynamic.content}</p>
@@ -97,7 +91,7 @@
                                         <button class="replayBtn" id="comment">回复</button></span></p>
                                     <div class="pendDetail_action">
                                         <input type="text" placeholder="回复${comment.uname}:"/>
-                                        <button onclick="postMessage()">评论</button>
+                                        <button onclick="postMessage()">回复</button>
                                         <button>取消</button>
                                     </div>
                                 </c:forEach>
@@ -112,8 +106,9 @@
                         </ul >
                     </div>
                     <div class="pendDetail_action">
-                        <input type="text" placeholder=" 回复 ${dynamic.uname} :"/>
-                        <button onclick="postMessage()">评论</button>
+                        <input type="text" placeholder=" 回复 ${dynamic.uname} :" id="content"/>
+                        <input type="text" style="display: none" id="postPeople" value="${dynamic.uname}">
+                        <button id="replyTopic">回复</button>
                         <button>取消</button>
                     </div>
                 </div>
@@ -176,12 +171,7 @@
             </div>
             <div class="indexPublic_con">
                 <ul class="weekHot">
-                    <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                    <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                    <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                    <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                    <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
-                    <li><a href="">关注上海车牌竞拍方面的资讯</a><span>29</span></li>
+                    <li><a href="">${topic.t_title}</a><span>29</span></li>
                 </ul>
             </div>
         </div>
@@ -197,6 +187,27 @@
 <script src="js/tiezi.js"></script>
 <script>
         $(function () {
+            $("#replyTopic").click(function () {
+                var $uname = $("#user").text();
+                var $rname = $("#postPeople").val();
+                var $content = $("#content").val();
+                var $wid = $("#wid").val();
+                var $tid = $("#topicId").val();
+                $.ajax({
+                    url:"../comment/saveComment.do",
+                    contentType:"application/json;charset=UTF-8",
+                    data:JSON.stringify({"content":$content,"uname":$uname,"rname":$rname,"wid":$wid}),
+                    dataType:"json",
+                    type:"post",
+                    success:function (data) {
+                        if (data == null){
+                            alert("回复失败")
+                        }else {
+                            window.location.href = "../topic/findTopicById.do?tid="+$tid;
+                        }
+                    }
+                });
+            });
             $("#postMsg").click(function () {
                 var $content = $(".commentText").val();
                 var $user = $("#user").text();
@@ -213,7 +224,6 @@
                         }else {
                             window.location.href = "../topic/findTopicById.do?tid="+$tid;
                         }
-
                     }
                 });
             });
