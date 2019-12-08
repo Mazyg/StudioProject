@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  User:MN
+  User: grandir
   Date: 2019/11/26
   Time: 9:50
   To change this template use File | Settings | File Templates.
@@ -16,7 +16,7 @@
 <head>
     <base href="<%=basePath%>">
     <meta charset="utf-8">
-    <title>个人中心</title>
+    <title>详情</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="css/base_news.css" rel="stylesheet" type="text/css">
     <link href="font/font.css" rel="stylesheet" type="text/css">
@@ -29,53 +29,18 @@
     <script src="js/owl.carousel.min.js" type="text/javascript"></script>
     <script src="js/comm.js" type="text/javascript"></script>
     <script src="publish/thunews/js/regex-cn.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<style type="text/css">
-    body{
-        /*background-color: aliceblue;*/
-        background: url(img/bg_02.jpg);
-    }
-    .back{
-        background: url(img/bg32.jpg);
-        border-radius: 1%;
-        height: 240px;
-    }
-    .imgs{
-        border-radius: 50%;
-        width: 70px;
-        height: 70px;
-    }
-    .back1{
-        background-color: white;
-    }
-
-    /*.back2{
-        background-color: white;
-        border-radius: 1%;
-    }*/
-    .img1{
-        width: 20%;
-        width: 200px;
-    }
-</style>
+    <style type="text/css">
+        .dh2{
+            font-size: 25px;
+           text-align: center;
+        }
+        .siz{
+            font-size: 15px;
+        }
+    </style>
 <body>
-<%--<ul class="breadcrumb back1">
-    <li><a href="../info/findInfoBytype.do">首页</a></li>
-    <li><a href="../info/findEvent.do">热点资讯</a></li>
-    <li><a href="../info/findChinese.do" class="styles">爱我中华</a></li>
-    <li><a href="../info/findPersonInfo.do" class="">榜样力量</a></li>
-    <li><a href="#" class="">话题</a></li>
-    <li><a href="#" class="">书籍</a></li>
-    <li><a href="#">电影</a></li>
-    <li><a href="../info/findPersonalMainInfo.do" class="">个人中心</a></li>
-</ul>--%>
-
 <header class="clearfix">
-    <%--<section class="mainWrap">
+    <section class="mainWrap">
         <div class="topwraper relative clearfix">
             <div class="search">
                 <form id="searchForm" target="_blank">
@@ -86,7 +51,7 @@
                 </form>
             </div>
         </div>
-    </section>--%>
+    </section>
     <nav class="navwrap yahei">
         <section class="mainWrap">
             <ul id="nav">
@@ -122,49 +87,34 @@
         </section>
     </nav>
 </header>
-<br><br>
-<div class="col-md-8 col-md-offset-2">
-    <div class="col-md-12 back">
-        <div>
-            <br><br><br><br><br><br><br>
-            <table>
-                <tr><td>&nbsp;&nbsp;<img class="imgs" src="img/png.png" alt=""></td>
-                    <td><h4>&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
-                </tr>
-            </table>
-        </div>
-    </div>
+<div class="content yahei subchannel">
+    <div class="mainWrap clearfix">
+        <section class="colunm1">
+            <br>
+            <h2 class="dh2">${infos.title}</h2>
+            <br><br><br>
+            <span class="siz">${infos.content}</span>
 
-    <div class="col-md-12 back2">
-        <br>
-        <h4>Hi! ${users.uname} 这里是你的主页，用来展示你的生活和发现，也是别人认识你的地方。<br><br>
-            完善你的个人资料，开始全新的旅程吧</h4>
-        <br>
-        <c:if test="${users.uname == null}">
-            还未登录，<a href="../manage/pages/samples/login.jsp">登录</a>了解更多
-        </c:if>
-        <br><br>
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#main" data-toggle="tab">主页</a></li>
-            <li><a href="main/personInfo.jsp" >个人信息</a></li>
-            <li><a href="../topic/findByUid.do?uid="+${users.uid} >我的话题</a></li>
-        </ul>
-        <div id="mytab-content" class="tab-content">
-            <div class="tab-pane fade in active" id="main">
-                <br>
-                <h4>近期政策</h4>
-                   <br>
-                <ul>
-                    <c:forEach items="${personalMainInfo}" var="personalMainInfo">
-                        <li><h4>&nbsp;&nbsp;&nbsp;<a href="#">${personalMainInfo.title}</a><small>&nbsp;&nbsp;&nbsp;&nbsp;${personalMainInfo.date}
-                        <br>&nbsp;&nbsp;&nbsp;&nbsp;${personalMainInfo.introduce}</small></h4></li>
-                        <br>
-                    </c:forEach>
+        </section>
+        <section class="colunm2">
+            <section class="mod withborder">
+                <h2 class="red"><span class="iconwraper">
+            <i class="thunews-line-chart"></i>
+            </span>
+                    近期热点
+                    <a href="#" style="font-size:12px; color:#666; margin-left:30px">
+                        更多 &#8250;
+                    </a>
+                </h2>
+                <ul class="newslist clearfix"  id="resText">
+                    <li>热点一</li>
+                    <li>热点二</li>
+                    <li>热点三</li>
+                    <li>热点四</li>
                 </ul>
-            </div>
-        </div>
+            </section>
+        </section>
     </div>
-
 </div>
 </body>
 </html>
