@@ -30,6 +30,11 @@ public interface InfoDao {
     @Select("select * from info where info_id=#{info_id}")
     public Info findById(String info_id);
 
+    //根据类别查询信息
+    @Select("SELECT count(*) FROM `info`\n" +
+            "where info_type like #{info_type}")
+    public int countByType(String info_type);
+
     public List<Info> findByTitle(Info info);
 
     @Delete("delete from info where info_id=#{info_id}")

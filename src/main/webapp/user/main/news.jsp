@@ -131,90 +131,73 @@
                 </li>
             </c:forEach>
             </ul>
+            <br>
+            <!-- 上一页 按钮 -->
+            <div class="pager">
+                <%--            <div id="pageControl">--%>
+                <c:choose>
+                    <c:when test="${page+1!= 1}">
+                        <a href="../info/findEvent.do?page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
+                        <%--                            <input type="button" name="lastPage" value="上一页" />--%>
+                    </c:when>
+                    <c:otherwise>
+                        <%--                        <input type="button" disabled="true" name="lastPage" value="上一页" /><!-- 为了要那个灰掉的button -->--%>
+                        <a><<</a>
+                    </c:otherwise>
+                </c:choose>
+
+                <!-- 页数列表 -->
+                <c:forEach items="${pageList}" var="item">
+                    <c:choose>
+                        <c:when test="${item == page+1}">
+                            <a href="../info/findEvent.do?page=${item-1}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="../info/findEvent.do?page=${item-1}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" >${item}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+                <!-- 下一页 按钮 -->
+                <c:choose>
+                    <c:when test="${page+1!= totalPage}">
+                        <a href="../info/findEvent.do?page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                            >>
+                        </a>
+                        <%--                            <input type="button" name="nextPage" value="下一页" />--%>
+
+                    </c:when>
+                    <c:otherwise>
+                        <%--                        <input type="button" disabled=true name="nextPage" value="下一页" /><!-- 为了要那个灰掉的button -->--%>
+                        <a>>></a>
+                    </c:otherwise>
+                </c:choose>
+
+                <!-- 直接跳转 -->
+                共${totalPage}页&nbsp;&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage})" />
+                <!-- 设置每页显示条数 -->
+                    &nbsp;&nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},${page})" />
+            </div>
             <script type="text/javascript">
-                var strUrl = window.location.href;
-                var curPage=1;
-                var pageCount = 21;//total pages count
-                if(strUrl.lastIndexOf('index_')!=-1)
-                    curPage=parseInt(strUrl.substring(strUrl.lastIndexOf('_')+1,strUrl.lastIndexOf('.')));//current page number
-                var pageStr = "<div class=\"pager\">";
-                if(pageCount>1){
-                    pageStr += '<a href="javascript:;" class="p" title="前一页" onclick="doGo('+(curPage-1)+');">«</a>';
-                }
-                if(pageCount <= 9){
-                    for(var i=0;i<pageCount;i++){
-                        var currentClass = ((i+1)==curPage)?"current":"";
-                        pageStr += '<a href="javascript:;" class="'+currentClass+'" onclick="doGo('+(i+1)+')">'+(i+1)+'</a>';
-                    }
-                }else if(pageCount > 9 && (curPage + 4) <= pageCount && (curPage - 4) <= 0){
-                    for(var i=0;i<9;i++){
-                        var currentClass = ((i+1)==curPage)?"current":"";
-                        pageStr += '<a href="javascript:;" class="'+currentClass+'" onclick="doGo('+(i+1)+')">'+(i+1)+'</a>';
-                    }
-                }else if(pageCount > 9 && (curPage + 4) <= pageCount && (curPage - 4) > 0){
-                    for(var i=(curPage - 3);i<(curPage + 4);i++){
-                        var currentClass = ((i+1)==curPage)?"current":"";
-                        pageStr += '<a href="javascript:;" class="'+currentClass+'" onclick="doGo('+(i+1)+')">'+(i+1)+'</a>';
-                    }
-                }else{
-                    for(var i=(pageCount - 8);i<(pageCount);i++){
-                        var currentClass = ((i+1)==curPage)?"current":"";
-                        pageStr += '<a href="javascript:;" class="'+currentClass+'" onclick="doGo('+(i+1)+')">'+(i+1)+'</a>';
-                    }
-                }
-                if(curPage < pageCount){
-                    pageStr += '<a href="javascript:;" onclick="doGo('+(curPage+1)+')" class="p" title="后一页">»</a>';
-                }
-                pageStr += "<span>到第<input name=\"\" type=\"text\" id=\"ymz\">页 <a href=\"#\"  onclick=\"goto_ymz()\">确定</a></span>";
-                pageStr += "</div>";
-                var pageStr1 = "<div class=\"mobilemore clearfix\">";
-                if(pageCount>1){
-                    pageStr1 += '<a href="javascript:;" class="prev" title="上一页" onclick="doGo('+(curPage-1)+');">上一页</a>';
-                }
-                if(curPage < pageCount){
-                    pageStr1 += '<a href="javascript:;" onclick="doGo('+(curPage+1)+')" class="next" title="下一页">下一页</a>';
-                }
-                pageStr1 += "</div>";
-                document.write(pageStr);
-                document.write(pageStr1);
-            </script>
-            <script type="text/javascript">
-                function doGo(jumpvalue){
-                    if(jumpvalue<1 || jumpvalue>21)
-                        return;
-                    var urlstr = window.location.href;
-                    var urlColumnId = urlstr.substr(urlstr.indexOf('#')+1,8);
-                    urlColumnId = urlColumnId.replace("","");
-                    if(1==jumpvalue){
-                        urlstr = urlstr.substr(0,urlstr.lastIndexOf('')+1)+'index.html';
+                function jumpTo(maxPage,numberPerPage){
+                    var page = $("#jumpTo").val();
+                    if(page > maxPage || page < 1){
+                        alert("对不起，无法到达该页")
                     }else{
-                        urlstr = urlstr.substr(0,urlstr.lastIndexOf('')+1)+'index_'+jumpvalue+'.html';
+                        page=page-1;
+                        window.location.href="../info/findEvent.do?page="+page+"&numberPerPage="+numberPerPage;
                     }
-                    window.location.href = urlstr;
                 }
-                function goto_ymz(){
-                    jumpvalue0 = $('#ymz').val();
-                    if(jumpvalue0<1 || jumpvalue0>21)
-                        return;
-                    var urlstr0 = window.location.href;
-                    if(1==jumpvalue0){
-                        urlstr0 = urlstr0.substr(0,urlstr0.lastIndexOf('')+1)+'index.html';
+
+                function change(total,page){
+                    var numberPerPage=$("#numberPerPage").val();
+                    if(numberPerPage > total || numberPerPage < 1){
+                        alert("对不起，无法设置")
                     }else{
-                        urlstr0 = urlstr0.substr(0,urlstr0.lastIndexOf('')+1)+'index_'+jumpvalue0+'.html';
+                        window.location.href="../info/findEvent.do?page="+page+"&numberPerPage="+numberPerPage;
                     }
-                    window.location.href = urlstr0;
                 }
             </script>
-            <p style="display:none">
-<span style='font-size:12px'>
-		共<b>436</b>条&nbsp;&nbsp;
-		分<b>21</b>页&nbsp;&nbsp;
-		当前&nbsp;第<b>1</b>页&nbsp;&nbsp;
-		 <font color='#C0C0C0'>首页</font>
-		 <font color='#C0C0C0'>上一页</font>
-		 <a href='#'><font color='#000000'>下一页</font></a>
-		 <a href='#'><font color='#000000'>末页</font></a>
-</span></p>
         </section>
         <section class="colunm2">
             <section class="mod withborder">

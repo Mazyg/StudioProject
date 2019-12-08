@@ -33,13 +33,10 @@ public class UserController {
     @RequestMapping("/findAllUser")
     public ModelAndView findAllUser( Model model,HttpServletRequest request){
        String status = request.getParameter("status");
-        System.out.println("接收到数据"+status);
        mv = new ModelAndView();
        List<User> users = userService.findAll("user");
-        System.out.println(users);
         mv.addObject("user", users);
         mv.addObject("status", status);
-
         mv.setViewName("manage/pages/tables/basic-table");
         return mv;
     }
@@ -49,7 +46,6 @@ public class UserController {
     public ModelAndView findAllAmin(){
         mv = new ModelAndView();
         List<User> users = userService.findAll("admin");
-        System.out.println(users);
         mv.addObject("user", users);
         mv.setViewName("manage/pages/tables/admin-table");
         return mv;
@@ -60,7 +56,6 @@ public class UserController {
     public String findByName(Model model, HttpServletRequest request){
         System.out.println("uname"+request.getParameter("uname"));
         List<User> users = userService.findByName(request.getParameter("uname"));
-        System.out.println(users);
         model.addAttribute("user", users);
         return "manage/pages/tables/basic-table";
     }
@@ -68,7 +63,6 @@ public class UserController {
     public String findByNameAdmin(Model model, HttpServletRequest request){
         System.out.println("uname"+request.getParameter("uname"));
         List<User> users = userService.findByNameAdmin(request.getParameter("uname"));
-        System.out.println("userAdmin"+users);
         model.addAttribute("user", users);
         return "manage/pages/tables/admin-table";
     }
@@ -77,15 +71,11 @@ public class UserController {
     public String updateUser1(Integer uid,  HttpServletRequest request,HttpServletResponse response){
         mv = new ModelAndView();
         String id =  request.getParameter("uid");
-        System.out.println(request.getParameter("uid"));
         User users =  userService.findById1(id);
-        System.out.println("status"+users.getU_status());
         if("封号".equals(users.getU_status())){
-            System.out.println("false");
             return "redirect:/user/findAllUser.do?status="+false;
         }else{
             boolean user = userService.updateUser1(request.getParameter("uid"));
-            System.out.println(user);
         }
         return "redirect:/user/findAllUser.do?status="+true;
     }
@@ -94,15 +84,11 @@ public class UserController {
     public String updateUser2(Integer uid, Model model,HttpServletRequest request){
         mv = new ModelAndView();
         String id =  request.getParameter("uid");
-        System.out.println(request.getParameter("uid"));
         User users =  userService.findById1(id);
-        System.out.println("status"+users.getU_status());
         if("正常".equals(users.getU_status())){
-            System.out.println("false");
             return "forward:/user/findAllUser.do?status="+false;
         }else{
             boolean user = userService.updateUser2(request.getParameter("uid"));
-            System.out.println(user);
         }
         return "forward:/user/findAllUser.do?status="+true;
     }
@@ -112,16 +98,11 @@ public class UserController {
     @RequestMapping("/login")
     public ModelAndView login(/*User user,*/HttpServletRequest request){
         mv = new ModelAndView();
-        /*System.out.println("user:"+user);
-        user1 =  userService.findById(user.getUid());*/
         String uid = request.getParameter("uid");
         String password = request.getParameter("password");
-        System.out.println("up"+uid + password);
         user1 = userService.findById1(uid);
         HttpSession session = request.getSession(true);
         session.setAttribute("users", user1);
-        System.out.println("text"+session.getAttribute("user"));
-        System.out.println("user1:"+user1);
         if (user1 != null){
             if(user1.getU_status().equals("封号")){
                 msg = "账号受限";
@@ -155,7 +136,6 @@ public class UserController {
     @RequestMapping("/register")
     public ModelAndView register(User user){
         user.setU_type("user");
-        System.out.println("insert"+user);
         mv = new ModelAndView();
         user1 =  userService.findById(user.getUid());
         if (user1!=null){
@@ -194,9 +174,7 @@ public class UserController {
      */
     @RequestMapping("personUpdate")
     public String personUpdate(User user,Model model){
-        System.out.println("user"+user);
        boolean user3 = userService.updateUser3(user);
-        System.out.println(user3+"user3");
        model.addAttribute("user3", user3);
        return "user/main/personInfo";
     }
