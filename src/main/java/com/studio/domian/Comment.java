@@ -11,19 +11,26 @@ public class Comment {
     private Integer cid;
     private String date;
     private String content;
-    private Integer uid;
-    private Integer rid;
+    private String uname;
+    private String rname;
     private Integer wid;
 
-    public Integer getRid() {
-        return rid;
+
+    public String getUname() {
+        return uname;
     }
 
-    public void setRid(Integer rid) {
-        this.rid = rid;
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
+    public String getRname() {
+        return rname;
+    }
 
+    public void setRname(String rname) {
+        this.rname = rname;
+    }
 
     public Integer getCid() {
         return cid;
@@ -49,13 +56,7 @@ public class Comment {
         this.content = content;
     }
 
-    public Integer getUid() {
-        return uid;
-    }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
 
     public Integer getWid() {
         return wid;
@@ -71,8 +72,8 @@ public class Comment {
                 "cid=" + cid +
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
-                ", uid=" + uid +
-                ", rid=" + rid +
+                ", uname='" + uname + '\'' +
+                ", rname='" + rname + '\'' +
                 ", wid=" + wid +
                 '}';
     }

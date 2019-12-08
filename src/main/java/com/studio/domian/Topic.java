@@ -11,7 +11,7 @@ public class Topic implements Serializable {
     private Integer tid;
     private String date;
     private String content;
-    private Integer uid;
+    private String uname;
     private String t_status;
     private String t_title;
     private String t_type;
@@ -41,12 +41,12 @@ public class Topic implements Serializable {
         this.content = content;
     }
 
-    public Integer getUid() {
-        return uid;
+    public String getUname() {
+        return uname;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
     public String getT_status() {
@@ -79,7 +79,7 @@ public class Topic implements Serializable {
                 "tid=" + tid +
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
-                ", uid=" + uid +
+                ", uname='" + uname + '\'' +
                 ", t_status='" + t_status + '\'' +
                 ", t_title='" + t_title + '\'' +
                 ", t_type='" + t_type + '\'' +

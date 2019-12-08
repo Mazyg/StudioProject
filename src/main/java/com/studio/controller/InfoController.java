@@ -127,6 +127,9 @@ public class InfoController {
     }
 
    /**个人首页政策信息显示
+   /*  * 个人首页政策信息显示
+    }
+     /* 个人首页政策信息显示
      * @param model
      * @return*/
 

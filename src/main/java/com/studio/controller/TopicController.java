@@ -48,7 +48,7 @@ public class TopicController {
         System.out.println(topic);
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("users");
-        topic.setUid(user.getUid());
+        topic.setUname(user.getUname());
         if("admin".equals(user.getU_type())){
             boolean top = topicService.saveTopicA(topic);
             System.out.println("topic"+top);
@@ -193,7 +193,7 @@ public class TopicController {
         String tid = request.getParameter("tid");
        Topic topicList = topicService.findTopicById(tid);
         System.out.println("topic"+topicList);
-        User usersTopic = userService.findById(topicList.getUid());
+        User usersTopic = userService.findByName(topicList.getUname());
         model.addAttribute("usersTopic", usersTopic);
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic_show";
@@ -204,7 +204,6 @@ public class TopicController {
     public ModelAndView showTopic(){
         mv = new ModelAndView();
         List<Topic> topic =  topicService.findAllTopic();
-        System.out.println("Topic"+topic);
         mv.addObject("topics", topic);
         mv.setViewName("user/main/topic");
         return mv;
@@ -214,7 +213,6 @@ public class TopicController {
     @RequestMapping("/findTopicById")
     public String findTopicById(String tid,Model model){
         Topic topic = topicService.findTopicById(tid);
-        System.out.println("topic"+topic);
         List<Dynamic> dynamics = dynamicService.findByTid(tid);
         for (Dynamic dynamic: dynamics){
             dynamic.setComments(commentService.findByWid(dynamic.getWid()));

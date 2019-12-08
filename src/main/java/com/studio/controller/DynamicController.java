@@ -1,13 +1,18 @@
 package com.studio.controller;
 
+import com.studio.domian.Dynamic;
 import com.studio.domian.Topic;
 import com.studio.service.DynamicService;
 import com.studio.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -20,19 +25,20 @@ public class DynamicController {
     @Autowired
     private TopicService topicService;
 
-    @RequestMapping("/findByTid")
-    public String findByTid(){
-        return "";
-    }
-
-    @RequestMapping("/findByUid")
-    public String findByUid(){
-        return "";
-    }
 
     @RequestMapping("/saveDynamic")
-    public String saveDynamic(){
-        return "";
+    public @ResponseBody Dynamic saveDynamic(@RequestBody Dynamic dynamic){
+        System.out.println("收到的dynamic="+dynamic);
+        Date now = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = ft.format(now);
+        dynamic.setDate(time);
+        boolean result = dynamicService.saveDynamic(dynamic);
+        if (result){
+            return dynamic;
+        }else {
+            return null;
+        }
     }
 
     @RequestMapping("/deleDynamic")

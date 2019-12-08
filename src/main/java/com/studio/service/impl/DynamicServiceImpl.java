@@ -27,7 +27,7 @@ public class DynamicServiceImpl implements DynamicService {
 
     @Override
     public boolean saveDynamic(Dynamic dynamic) {
-        return false;
+        return dynamicDao.saveDynamic(dynamic);
     }
 
     @Override
