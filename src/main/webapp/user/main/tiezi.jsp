@@ -55,9 +55,8 @@
                 <div class="tzCon_head_right">
                     <h1>${topic.t_title}</h1>
                     <ul>
-                        <li>花开花落</li>
+                        <li>${topic.uname}</li>
                         <li>${topic.date}</li>
-                        <li>21</li>
                     </ul>
                 </div>
                 <div class="clear"></div>
@@ -84,23 +83,27 @@
                 <div class="pendPic"></div>
                 <div class="pendDetail">
                     <div class="pendDetail_head">
-                        <p>${dynamic.uid} <span>${dynamic.date}</span></p>
+                        <p>${dynamic.uname} <span>${dynamic.date}</span></p>
                     </div>
                     <div class="pendDetail_con">
                         <p>${dynamic.content}</p>
                     </div>
-                    <div class="pendDetail_replayCon">
-                        <c:forEach items="${dynamic.comments}" var="comment">
-                            <p><span>${comment.uid}回复${comment.rid}：${comment.content}
-                                <button class="replayBtn" id="comment">回复</button></span></p>
-                            <div class="pendDetail_action">
-                                <input type="text" placeholder="回复${comment.uid}:"/>
-                                <button onclick="postMessage()">评论</button>
-                                <button>取消</button>
+                    <c:choose>
+                        <c:when test="${dynamic.comments == null}"></c:when>
+                        <c:otherwise>
+                            <div class="pendDetail_replayCon">
+                                <c:forEach items="${dynamic.comments}" var="comment">
+                                    <p><span>${comment.uname} 回复 ${comment.rname}：${comment.content}
+                                        <button class="replayBtn" id="comment">回复</button></span></p>
+                                    <div class="pendDetail_action">
+                                        <input type="text" placeholder="回复${comment.uname}:"/>
+                                        <button onclick="postMessage()">评论</button>
+                                        <button>取消</button>
+                                    </div>
+                                </c:forEach>
                             </div>
-                        </c:forEach>
-                    </div>
-
+                        </c:otherwise>
+                    </c:choose>
                     <div class="pendDetail_btn">
                         <ul>
                             <li>361</li>
@@ -109,7 +112,7 @@
                         </ul >
                     </div>
                     <div class="pendDetail_action">
-                        <input type="text" placeholder="回复${dynamic.uid} :" class="commentText"/>
+                        <input type="text" placeholder=" 回复 ${dynamic.uname} :"/>
                         <button onclick="postMessage()">评论</button>
                         <button>取消</button>
                     </div>
@@ -134,8 +137,8 @@
                 <div class="newPending_head_tittle">评论</div>
             </div>
             <div class="writePending_con">
-                <input type="text" placeholder="写下你的评论..."/>
-                <input type="submit" value="评论"/>
+                <input type="text" placeholder="写下你的评论..." class="commentText"/>
+                <input type="submit" value="评论" id="postMsg"/>
             </div>
         </div>
     </div>
@@ -143,24 +146,29 @@
         <div class="myMsg">
             <div class="myMsg_con">
                 <div class="myMsg_conPic"></div>
-                <p>花开花落</p>
+                <p id="user">${users.uname}</p>
             </div>
-            <div  class="myMsg_footer">
-                <ul>
-                    <li><a href="">
-                        <p>主题数</p>
-                        <p>23</p>
-                    </a></li>
-                    <li><a href="">
-                        <p>精华数</p>
-                        <p>23</p>
-                    </a></li>
-                    <li><a href="">
-                        <p>注册排名</p>
-                        <p>23</p>
-                    </a></li>
-                </ul>
-            </div>
+            <c:choose>
+                <c:when test="${users == null}"></c:when>
+                <c:otherwise>
+                    <div  class="myMsg_footer">
+                        <ul>
+                            <li><a href="">
+                                <p>主题数</p>
+                                <p>23</p>
+                            </a></li>
+                            <li><a href="">
+                                <p>精华数</p>
+                                <p>23</p>
+                            </a></li>
+                            <li><a href="">
+                                <p>注册排名</p>
+                                <p>23</p>
+                            </a></li>
+                        </ul>
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
         <div class="indexPublic">
             <div class="indexPublic_head">
@@ -178,7 +186,7 @@
             </div>
         </div>
     </div>
-    <div class="clear"></div>
+    <div class="clear"><input type="text" style="display: none" id="topicId" value="${topic.tid}"></div>
 </div>
 <footer class="publicFooter">
     <p></p>
@@ -188,19 +196,26 @@
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/tiezi.js"></script>
 <script>
-        function postMessage() {
-            var $content = $(".commentText").val();
-            $.ajax({
-                url:,
-                type:"post",
-                data:"content="+$content,
-                success:function (result) {
-                    if(result=="true"){
+        $(function () {
+            $("#postMsg").click(function () {
+                var $content = $(".commentText").val();
+                var $user = $("#user").text();
+                var $tid = $("#topicId").val();
+                $.ajax({
+                    url:"../dynamic/saveDynamic.do",
+                    contentType:"application/json;charset=UTF-8",
+                    data:JSON.stringify({"content":$content,"uname":$user,"tid":$tid}),
+                    dataType:"json",
+                    type:"post",
+                    success:function (data) {
+                        if (data == null){
+                            alert("评论失败")
+                        }else {
+                            window.location.href = "../topic/findTopicById.do?tid="+$tid;
+                        }
 
-                    }else {
-                        alert("评论失败");
                     }
-                }
+                });
             });
-        }
+        });
 </script>
