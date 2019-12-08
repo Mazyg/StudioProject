@@ -13,9 +13,11 @@ public class DynamicServiceImpl implements DynamicService {
 
     @Autowired
     private DynamicDao dynamicDao;
-    @Override
-    public List<Dynamic> findByTid(Dynamic dynamic) {
-        return null;
+
+
+
+    public List<Dynamic> findByTid(String tid) {
+        return dynamicDao.findByTid(tid);
     }
 
     @Override
@@ -25,7 +27,7 @@ public class DynamicServiceImpl implements DynamicService {
 
     @Override
     public boolean saveDynamic(Dynamic dynamic) {
-        return false;
+        return dynamicDao.saveDynamic(dynamic);
     }
 
     @Override

@@ -4,15 +4,33 @@ package com.studio.domian;
 /**
  * 评论表
  * cid 评论编号，date 评论时间，content 评论内容
- * uid 评论者id，wid 动态话题id；
+ * uid 评论者id，rid 被评论者id，wid 动态话题id；
  */
 public class Comment {
 
     private Integer cid;
     private String date;
     private String content;
-    private Integer uid;
+    private String uname;
+    private String rname;
     private Integer wid;
+
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
+
+    public String getRname() {
+        return rname;
+    }
+
+    public void setRname(String rname) {
+        this.rname = rname;
+    }
 
     public Integer getCid() {
         return cid;
@@ -38,13 +56,7 @@ public class Comment {
         this.content = content;
     }
 
-    public Integer getUid() {
-        return uid;
-    }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
 
     public Integer getWid() {
         return wid;
@@ -60,7 +72,8 @@ public class Comment {
                 "cid=" + cid +
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
-                ", uid=" + uid +
+                ", uname='" + uname + '\'' +
+                ", rname='" + rname + '\'' +
                 ", wid=" + wid +
                 '}';
     }

@@ -65,7 +65,7 @@ public class UserController {
     @RequestMapping("/findByName")
     public String findByName(Model model, HttpServletRequest request){
         System.out.println("uname"+request.getParameter("uname"));
-        List<User> users = userService.findByName(request.getParameter("uname"));
+        User users = userService.findByName(request.getParameter("uname"));
         System.out.println(users);
         model.addAttribute("user", users);
         return "manage/pages/tables/basic-table";

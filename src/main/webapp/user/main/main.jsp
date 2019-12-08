@@ -50,7 +50,7 @@
                     </li>
                     <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
                     </li>
-                    <li><a href="#" class="">话题</a>
+                    <li><a href="../topic/showTopic.do" class="">话题</a>
                     </li>
 
                     <li><a href="../info/findBooks.do">书籍</a></li>
@@ -61,7 +61,7 @@
 
                         <ul class="last">
                             <li><a href="#">我的收藏</a></li>
-                            <li><a href="#">话题管理</a></li>
+                            <li><a href="">话题管理</a></li>
                             <li><a href="#">个人信息</a></li>
                             <li><a href="../dynamic/myDynamic.do">我的动态</a></li>
                         </ul>
@@ -275,8 +275,8 @@
             <div class="datawrapper">
                 <div class="dataitem">
                     <ul>
-
-                        <li> <c:forEach items="${movies1}" var="movies1">
+                        <c:forEach items="${movies1}" var="movies1">
+                        <li>
                             <div class="wrapper">
                                 <img src="${movies1.photo}">
                                 <div class="txtwrapper">

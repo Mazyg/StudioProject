@@ -10,13 +10,13 @@ import java.util.List;
 public interface TopicDao {
 
     /*保存用户话题*/
-    @Insert("insert into topic (date,t_title,content,uid) \n" +
-            "VALUES('${date}','${t_title}','${content}','${uid}')")
+    @Insert("insert into topic (date,t_title,content,uid,t_type) \n" +
+            "VALUES('${date}','${t_title}','${content}','${uid}','${t_type}')")
     public boolean saveTopic(Topic topic);
 
     /*保存管理员话题*/
-    @Insert("insert into topic (date,t_title,content,t_tatus,uid) \n" +
-            "VALUES('${date}','${t_title}','${content}','已审核','${uid}')")
+    @Insert("insert into topic (date,t_title,content,t_tatus,uid,t_type) \n" +
+            "VALUES('${date}','${t_title}','${content}','已审核','${uid}','${t_type}')")
     public boolean saveTopicA(Topic topic);
 
     @Delete("delete from topic where tid=#{tid}")
@@ -69,7 +69,7 @@ public interface TopicDao {
      * 话题查询，按照时间排序，取N条
      *
      */
-    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uid\n" +
+    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname\n" +
             " from  topic\n" +
             " where t_tatus='已审核'\n" +
             " order by date desc "
