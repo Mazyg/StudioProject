@@ -5,8 +5,12 @@ import com.studio.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -14,8 +18,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -193,7 +199,20 @@ public class UserController {
      * @return
      */
     @RequestMapping("personUpdate")
-    public String personUpdate(User user,Model model){
+    public String personUpdate(User user, Model model) throws IOException {
+       String filePath = "F:\\upload";//保存图片的路径,tomcat中有配置
+        /*//获取原始图片的拓展名
+        String originalFilename = photo.getOriginalFilename();
+        System.out.println(originalFilename);*/
+        //新的文件名字，使用uuid随机生成数+原始图片名字，这样不会重复
+       /* String newFileName = UUID.randomUUID()+user.getPhoto();
+        System.out.println("n"+newFileName);
+     //封装上传文件位置的全路径，就是硬盘路径+文件名
+        File targetFile = new File(filePath,newFileName);
+        System.out.println("d"+targetFile);
+        photo.transferTo(targetFile);
+       user.setPhoto(newFileName);//文件名保存到实体类对应属性上*/
+
         System.out.println("user"+user);
        boolean user3 = userService.updateUser3(user);
         System.out.println(user3+"user3");
