@@ -21,7 +21,7 @@
     <link href="css/base_news.css" rel="stylesheet" type="text/css">
     <link href="font/font.css" rel="stylesheet" type="text/css">
     <link href="css/inner.css" rel="stylesheet" type="text/css">
-    <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="css/slick.css">
     <script src="js/slick.min.js" type="text/javascript"></script>
     <script src="js/regexcut.js" type="text/javascript"></script>
@@ -48,18 +48,6 @@
         width: 70px;
         height: 70px;
     }
-    /*.back1{
-        background-color: white;
-    }*/
-
-    /*.back2{
-        background-color: white;
-        border-radius: 1%;
-    }*/
-    .img1{
-        width: 20%;
-        width: 200px;
-    }
 </style>
 <script type="text/javascript">
     function message() {
@@ -73,9 +61,11 @@
                 alert("出错了！")
             }
     }
-window.onload = function () {
-   $("#sex").val('${users.sex}')
-}
+
+    function selectFile(){
+        $("#photo").trigger("click");
+    }
+
     function getImage() {
         var obj = new FormData();
         var file = document.getElementById("photo").files[0];
@@ -96,18 +86,6 @@ window.onload = function () {
 </script>
 <body onload="message()">
 <header class="clearfix">
-    <%--<section class="mainWrap">
-        <div class="topwraper relative clearfix">
-            <div class="search">
-                <form id="searchForm" target="_blank">
-                    <input name="query" type="text" >
-                    <input name="ie" type="hidden" value="utf8">
-                    <input name="cid" type="hidden" value="3">
-                    <a href="javascript:;" onclick="searchSub();"><i>搜索</i></a>
-                </form>
-            </div>
-        </div>
-    </section>--%>
     <nav class="navwrap yahei">
         <section class="mainWrap">
             <ul id="nav">
@@ -179,12 +157,17 @@ window.onload = function () {
                     <br>
                 </c:if>
                 <c:if test="${users.uname != null}">
-                    <form class="form-horizontal" role="form" action="../user/personUpdate.do"  method="post">
+                    <form class="form-horizontal" role="form" action="../user/personUpdate.do"  method="post" enctype="ultipart/form-data">
 
                         <div class="form-group">
-                            <label for="disabledTextInput" class="col-sm-2 control-label">头像</label>
-                            <div class="col-sm-8">
-                                <input type="file" class="form-control" id="photo" name="photo" value="${users.photo}" multiple="multiple" onchange="getImage()">
+                            <label>上传封面</label>
+                            <input type="file" name="img[]" class="file-upload-default">
+                            <div class="input-group col-xs-12">
+                                <input type="text" class="form-control file-upload-info" readonly placeholder="上传封面" id="url" name="photo" >
+                                <span class="input-group-a ppend">
+                            <input type="file" id="photo" style="display:none" multiple="multiple" onchange="getImage()">
+                            <button class="file-upload-browse btn btn-primary" type="button" onclick="selectFile()">上传</button>
+                          </span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -192,12 +175,11 @@ window.onload = function () {
                             <div class="col-sm-8">
                                 <span>
                                 <input type="text" id="disabledTextInput" class="form-control" name="uid" value="${users.uid}"  readonly = "readonly">
-                                <button class="file-upload-browse btn btn-primary" type="button" onclick="selectFile()">上传</button>
                                 </span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="disabledTextInput" class="col-sm-2 control-label">账号</label>
+                            <label for="disabledTextInput" class="col-sm-2 control-label">状态</label>
                             <div class="col-sm-8">
                                 <input type="text"  class="form-control" name="u_status" value="${users.u_status}"  readonly = "readonly">
                             </div>
