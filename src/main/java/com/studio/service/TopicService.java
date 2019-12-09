@@ -25,6 +25,8 @@ public interface TopicService {
 
     public Topic findTopicById(String tid);
 
+    public List<Topic> findAllByUname(String uname);
+
 
     //话题查询，按照时间排序，取N条
     public List<Topic> findTopic(int start, int length);

@@ -49,11 +49,11 @@ public class Topic implements Serializable {
         this.uname = uname;
     }
 
-    public String getT_status() {
+    public String getT_tatus() {
         return t_tatus;
     }
 
-    public void setT_status(String t_status) {
+    public void setT_tatus(String t_tatus) {
         this.t_tatus = t_tatus;
     }
 
