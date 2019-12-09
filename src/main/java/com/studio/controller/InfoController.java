@@ -2,18 +2,15 @@ package com.studio.controller;
 
 
 import com.studio.domian.Info;
-import com.studio.domian.Topic;
 import com.studio.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -152,15 +149,43 @@ public class InfoController {
     }
 
     /**
-     * 个人首页政策信息显示
+
+     * 显示电影信息
      * @param model
      * @return
      */
-    @RequestMapping("/findPersonalMainInfo")
-    public String findPersonalMainInfo(Model model){
+    @RequestMapping("/findMovies")
+    public String findMovie(Model model){
+        List<Info> movies = infoService.findMovies();
+        model.addAttribute("movies",movies);
+        return "user/main/movies";
+    }
+
+    /**
+     * 显示书籍信息
+     * @param model
+     * @return
+     */
+    @RequestMapping("/findBooks")
+    public String findBook(Model model) {
+        List<Info> books = infoService.findBooks();
+        model.addAttribute("books", books);
+        return "user/main/books";
+    }
+
+   /**个人首页政策信息显示
+   /*  * 个人首页政策信息显示
+    }
+     /* 个人首页政策信息显示
+     * @param model
+     * @return*/
+
+     @RequestMapping("/findPersonalMainInfo")
+      public String findPersonalMainInfo(Model model){
         List<Info> personal = infoService.findInfoBytype("近期政策", 0, 3);
         model.addAttribute("personalMainInfo", personal);
         return "user/main/person";
+
     }
 
     @RequestMapping("/findById")
@@ -177,9 +202,23 @@ public class InfoController {
         return mv;
     }
 
+
+
+    @RequestMapping("/findByIdInfo")
+    public String findByIdInfo(Model model,HttpServletRequest request){
+        String info_id = request.getParameter("person");
+        System.out.println("id"+info_id);
+        Info info = infoService.findById(info_id);
+        System.out.println("info"+info);
+        model.addAttribute("infos", info);
+        return "user/main/details";
+    }
+
     @RequestMapping("/findByTitle")
-    public String findByTitle(){
-        return "";
+    public String findByTitle(Model model,String title){
+        Info info = infoService.findByTitle(title);
+        model.addAttribute("movie",info);
+        return "user/main/movie";
     }
 
     @RequestMapping("/saveInfo")

@@ -25,6 +25,11 @@ public class InfoServiceImpl implements InfoService {
     }
 
     @Override
+    public Info findByTitle(String title) {
+        return infoDao.findInfoByTitle(title);
+    }
+
+
     public List<Info> findByTitle(Info info) {
         return null;
     }
@@ -59,7 +64,17 @@ public class InfoServiceImpl implements InfoService {
     }
 
     @Override
+ 
     public int countBytype(String info_type) {
         return infoDao.countByType(info_type);
+}
+ @Override
+    public List<Info> findMovies() {
+        return infoDao.findMovie();
+    }
+
+    @Override
+    public List<Info> findBooks() {
+        return infoDao.findBook();
     }
 }

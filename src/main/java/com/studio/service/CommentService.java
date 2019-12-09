@@ -9,6 +9,6 @@ public interface CommentService {
 
     public boolean deleComment(Comment comment);
 
-    public List<Comment> findByWid(Comment comment);
+    public List<Comment> findByWid(Integer wid);
 }
 

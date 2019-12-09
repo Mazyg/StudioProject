@@ -36,7 +36,7 @@ public interface UserDao {
      * @return
      */
      @Select("SELECT * FROM user where u_type='user' and uname like CONCAT('%',#{uname},'%')")
-    public List<User> findByName(String uname);
+    public User findByName(String uname);
 
 
 
@@ -56,7 +56,7 @@ public interface UserDao {
     public boolean saveUser(User user);
 
     /*更新用户信息*/
-    @Update("update user set uname= '${uname}' , password = '${password}', sex = '${sex}', email='${email}' where uid = '${uid}'")
+    @Update("update user set uname= '${uname}' , password = '${password}', sex = '${sex}', email='${email}',photo='${photo}' where uid = '${uid}'")
     public boolean updateUser3(User user);
 
 

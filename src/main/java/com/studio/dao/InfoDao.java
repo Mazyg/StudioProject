@@ -20,6 +20,13 @@ public interface InfoDao {
             "order by date desc\n"+"limit #{start},#{length}")
     public List<Info> findInfoBytype( @Param("info_type") String info_type,@Param("start") int start,@Param("length") int length);
 
+    //查询电影
+    @Select("select * from info where info_type='电影'")
+    public List<Info> findMovie();
+
+    //查询书籍
+    @Select("select * from info where info_type='书籍'")
+    public List<Info> findBook();
     //增加信息
     @Insert("insert into info(title,content,info_type,photo,date,introduce) values('${title}','${content}','${info_type}','${photo}','${date}','${introduce}')")
     public boolean addInfo(Info info);
@@ -30,10 +37,16 @@ public interface InfoDao {
     @Select("select * from info where info_id=#{info_id}")
     public Info findById(String info_id);
 
+ 
     //根据类别查询信息
     @Select("SELECT count(*) FROM `info`\n" +
             "where info_type like #{info_type}")
     public int countByType(String info_type);
+  
+    //根据title查询信息
+    @Select("select * from info where title=#{title}")
+    public Info findInfoByTitle(String title);
+
 
     public List<Info> findByTitle(Info info);
 

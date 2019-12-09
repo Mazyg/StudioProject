@@ -11,9 +11,10 @@ public class Topic implements Serializable {
     private Integer tid;
     private String date;
     private String content;
-    private Integer uid;
+    private String uname;
     private String t_tatus;
     private String t_title;
+    private String t_type;
 
 
     public Integer getTid() {
@@ -40,19 +41,19 @@ public class Topic implements Serializable {
         this.content = content;
     }
 
-    public Integer getUid() {
-        return uid;
+    public String getUname() {
+        return uname;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
-    public String getT_tatus() {
+    public String getT_status() {
         return t_tatus;
     }
 
-    public void setT_tatus(String t_tatus) {
+    public void setT_status(String t_status) {
         this.t_tatus = t_tatus;
     }
 
@@ -64,15 +65,24 @@ public class Topic implements Serializable {
         this.t_title = t_title;
     }
 
+    public String getT_type() {
+        return t_type;
+    }
+
+    public void setT_type(String t_type) {
+        this.t_type = t_type;
+    }
+
     @Override
     public String toString() {
         return "Topic{" +
                 "tid=" + tid +
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
-                ", uid=" + uid +
-                ", t_tatus='" + t_tatus + '\'' +
+                ", uname='" + uname + '\'' +
+                ", t_status='" + t_tatus + '\'' +
                 ", t_title='" + t_title + '\'' +
+                ", t_type='" + t_type + '\'' +
                 '}';
     }
 }

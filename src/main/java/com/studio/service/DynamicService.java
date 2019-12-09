@@ -6,7 +6,7 @@ import com.studio.domian.Dynamic;
 import java.util.List;
 
 public interface DynamicService {
-    public List<Dynamic> findByTid(Dynamic dynamic);
+    public List<Dynamic> findByTid(String tid);
 
     public List<Dynamic> findByUid(Dynamic dynamic);
 

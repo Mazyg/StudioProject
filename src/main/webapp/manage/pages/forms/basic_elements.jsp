@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="vendors/select2/select2.min.css">
     <link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
     <!-- End plugin css for this page -->
+
+
+
+
+    *
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
@@ -232,7 +237,7 @@
                         <input type="file" name="img[]" class="file-upload-default">
                         <div class="input-group col-xs-12">
                           <input type="text" class="form-control file-upload-info" readonly placeholder="上传封面" id="url" name="photo" >
-                          <span class="input-group-append">
+                          <span class="input-group-a ppend">
                             <input type="file" id="photo" style="display:none" multiple="multiple" onchange="getImage()">
                             <button class="file-upload-browse btn btn-primary" type="button" onclick="selectFile()">上传</button>
                           </span>

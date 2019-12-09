@@ -15,7 +15,7 @@ public class CommentServiceImpl implements CommentService {
     private CommentDao commentDao;
     @Override
     public boolean saveComment(Comment comment) {
-        return false;
+        return commentDao.saveComment(comment);
     }
 
     @Override
@@ -24,7 +24,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> findByWid(Comment comment) {
-        return null;
+    public List<Comment> findByWid(Integer wid) {
+        return commentDao.findByWid(wid);
     }
+
+
 }
