@@ -140,7 +140,7 @@ h1,h2,h3,h4
 
 header
 {
-	background: #542185 url(../img/red_bg.jpg) no-repeat center center;
+	background: #db0706 url(../img/red_bg.jpg) no-repeat center center;
 	padding-top:25px;
 }
 
@@ -198,7 +198,7 @@ header .topwraper
 
 header .navwrap
 {
-	border-top:1px solid #C00;
+	border-top:1px solid #db0706;
 }
 
 header .navwrap li
@@ -371,7 +371,7 @@ footer .copyright span a:hover
 .pager b {	background:none; color: #461B6E; display: inline-block;	line-height: 32px;	margin: 0 2px;	padding: 0 10px;	height:32px;vertical-align:middle;}
 .pager a:hover, .pager a.current {	background-color: #461B6E;	border:none;	color: #FFFFFF;	font-weight: bold;	text-decoration: none;	line-height: 34px;	height:34px;	padding: 0 11px;}
 .pager .p {	font-size:22px;}
-.pager input {height: 32px;line-height: 32px; width: 30px;text-align: center;background: none;border: 1px solid #aaa; vertical-align: middle;border-radius:3px;margin:0 5px;}
+.pager input {color: #461B6E;padding:2px;height: 32px;line-height: 32px; width: 30px;text-align: center;background: none;border: 1px solid #aaa; vertical-align: middle;border-radius:3px;margin:0 5px;}
 .pager span {padding: 0  0 0 20px;color: #777}
 
 @media screen and (max-width:800px)

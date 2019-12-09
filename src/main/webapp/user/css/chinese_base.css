@@ -501,7 +501,7 @@ footer .copyright span a:hover
 .pager b {	background:none; color: #461B6E; display: inline-block;	line-height: 32px;	margin: 0 2px;	padding: 0 10px;	height:32px;vertical-align:middle;}
 .pager a:hover, .pager a.current {	background-color: #461B6E;	border:none;	color: #FFFFFF;	font-weight: bold;	text-decoration: none;	line-height: 34px;	height:34px;	padding: 0 11px;}
 .pager .p {	font-size:22px;}
-.pager input {height: 32px;line-height: 32px; width: 30px;text-align: center;background: none;border: 1px solid #aaa; vertical-align: middle;border-radius:3px;margin:0 5px;}
+.pager input {height: 32px;line-height: 32px; width: 30px;text-align: center;background: none;border: 1px solid #aaa; vertical-align: middle;border-radius:3px;margin:0 5px;color: #461B6E;}
 .pager span {padding: 0  0 0 20px;color: #777}
 
 @media screen and (max-width:800px)
