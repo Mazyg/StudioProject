@@ -12,6 +12,6 @@ public interface DynamicService {
 
     public boolean saveDynamic(Dynamic dynamic);
 
-    public boolean deleDynamic(Dynamic dynamic);
+    public boolean deleteDynamic(Integer wid);
 
 }

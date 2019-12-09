@@ -1,6 +1,7 @@
 package com.studio.dao;
 
 import com.studio.domian.Dynamic;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -19,5 +20,6 @@ public interface DynamicDao {
     @Insert("insert into dynamic(date,content,uname,tid) values('${date}','${content}','${uname}','${tid}')")
     public boolean saveDynamic(Dynamic dynamic);
 
-    public boolean deleDynamic(Dynamic dynamic);
+    @Delete("delete from dynamic where wid=#{wid} ")
+    public boolean deleteDynamic(Integer wid);
 }

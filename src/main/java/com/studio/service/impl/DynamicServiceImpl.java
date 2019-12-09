@@ -31,7 +31,7 @@ public class DynamicServiceImpl implements DynamicService {
     }
 
     @Override
-    public boolean deleDynamic(Dynamic dynamic) {
-        return false;
+    public boolean deleteDynamic(Integer wid) {
+        return dynamicDao.deleteDynamic(wid);
     }
 }

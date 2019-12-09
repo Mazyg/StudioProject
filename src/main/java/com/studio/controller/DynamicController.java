@@ -41,9 +41,13 @@ public class DynamicController {
         }
     }
 
-    @RequestMapping("/deleDynamic")
-    public String deleDynamic(){
-        return "";
+    @RequestMapping("/deleteDynamic")
+    public @ResponseBody String deleteDynamic(Integer wid){
+        boolean result = dynamicService.deleteDynamic(wid);
+        if (result){
+            return "success";
+        }
+        return "false";
     }
     /**
      * 用户发动态页面显示
