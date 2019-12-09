@@ -551,13 +551,13 @@ body{
     cursor: pointer;
 }
 .pendDetail_action{
-    width: 615px;
+    width: 600px;
     height: 80px;
     margin-top: 12px;
     display: none;
 }
 .pendDetail_action input[type=text]{
-    width: 80%;
+    width: 90%;
     height: 30px;
     border: none;
     border-radius: 2px;
@@ -568,20 +568,16 @@ body{
 .pendDetail_action button{
     width: 68px;
     height: 36px;
-    border-radius: 2px;
+    border-radius: 10px;
     border: none;
     float: right;
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 5px;
     font-size: 14px;
 }
-.pendDetail_action button:first-of-type{
+.pendDetail_action button{
     background-color: #e43e20;
     color: #fff;
-}
-.pendDetail_action button:last-of-type{
-    background-color: #f2f2f2;
-    color: #333;
 }
 .pendDetail_btn li:nth-child(1){
     background: url("../img/zan.png") no-repeat 0 center;
@@ -653,11 +649,12 @@ body{
     text-indent: 20px;
     float: left;
 }
-.writePending_con input[type=button]{
+.writePending_con input[type=submit]{
     width: 90px;
     height: 45px;
     float: right;
     border: none;
+    border-radius: 10px;
     background-color: #e43e20;
     color: #fff;
     font-size: 14px;

@@ -27,6 +27,7 @@
     <script src="js/slick.min.js"></script>
     <script src="js/comm.js?v=1" type="text/javascript"></script>
 </head>
+
 <body onload="tset()">
 <div class="header" id="header">
 <%--    <div class="topline"></div>--%>
@@ -39,9 +40,9 @@
         <div class="nav">
             <div class="mainnav clearfix">
                 <ul id="nav">
-                    <li><a href="../info/findEvent.do">热点时事</a>
+                    <li><a href="../info/findEvent.do?page=0&numberPerPage=3">热点时事</a>
                     </li>
-                    <li><a href="../info/findChinese.do">爱我中华</a>
+                    <li><a href="../info/findChinese.do?page=0&numberPerPage=3">爱我中华</a>
                         <ul>
                             <li><a href="#">最美中国景</a></li>
                             <li><a href="#">最美中国人</a></li>
@@ -73,11 +74,11 @@
                 <ul>
                 <c:if test="${users.uname==null}">
                     <li><a href="../manage/pages/samples/login.jsp">登录</a></li>
+                    <li class="en"><a href="../manage/pages/samples/register.jsp">注册</a></li>
                 </c:if>
                 <c:if test="${users.uname!=null}">
                     <li><a href="../manage/pages/samples/login.jsp">${users.uname}</a></li>
                 </c:if>
-                    <li class="en"><a href="../manage/pages/samples/register.jsp">注册</a></li>
                 </ul>
             </div>
         </div>
@@ -164,44 +165,24 @@
                 </ul>
             </div>
             <div class="events">
-                <h2><b></b>热门话题<b></b></h2>
+                <h2><b></b>热门时事<b></b></h2>
                 <ul class="clearfix">
+                <c:forEach items="${event2}" var="event2">
                     <li>
                         <a href="#" target="_blank">
                             <div class="time">
-                                <span>15</span>2019.11
+                                <span></span>${event2.date}
                             </div>
                             <div class="txtwrapper">
-                                <h3>新闻资讯标题</h3>
-                                <p>新闻资讯内容</p>
+                                <h3>${event2.title}</h3>
+                                <p>${event2.introduce}</p>
                             </div>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" target="_blank">
-                            <div class="time">
-                                <span>15</span>2019.11
-                            </div>
-                            <div class="txtwrapper">
-                                <h3>新闻资讯标题</h3>
-                                <p>新闻资讯内容</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" target="_blank">
-                            <div class="time">
-                                <span>15</span>2019.11
-                            </div>
-                            <div class="txtwrapper">
-                                <h3>新闻资讯标题</h3>
-                                <p>新闻资讯内容... </p>
-                            </div>
-                        </a>
-                    </li>
+                </c:forEach>
                 </ul>
             </div>
-            <a href="#" target="_blank" class="newsmore">更多热门话题</a>
+            <a href="#" target="_blank" class="newsmore">更多热点时事</a>
         </div>
     </div>
     <div class="section_2">
@@ -266,7 +247,6 @@
         });
 
     </script>
-
     <div class="section_3">
         <div class="tbg"><div><img src="img/btbg.png" alt=""></div></div>
         <div class="tcbg"></div>
@@ -337,8 +317,88 @@
                         </c:forEach>
                     </ul>
                 </div>
+                        <li><div class="wrapper"><img src="" alt="">
+                            <div class="txtwrapper">
+                                <h4>名称</h4>
+                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                            </div>
+                        </div>
+                        </li>
+                        <li>
+                            <div class="wrapper">
+                                <img src="" alt="">
+                                <div class="txtwrapper">
+                                    <h4>名称</h4>
+                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dataitem">
+                    <ul>
 
+                        <li><div class="wrapper"><img src="" alt="">
+                            <div class="txtwrapper">
+                                <h4>名称</h4>
+                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                            </div>
+                        </div>
+                        </li>
+                        <li>
+                            <div class="wrapper">
+                                <img src="" alt="">
+                                <div class="txtwrapper">
+                                    <h4>名称</h4>
+                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dataitem">
+                    <ul>
+                        <li>
+                            <div class="wrapper">
+                                <img src="" alt="">
+                                <div class="txtwrapper">
+                                    <h4>名称</h4>
+                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li><div class="wrapper"><img src="" alt="">
+                            <div class="txtwrapper">
+                                <h4>名称</h4>
+                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                            </div>
+                        </div>
+                        </li>
 
+                    </ul>
+                </div>
+                <div class="dataitem">
+                    <ul>
+                        <li>
+                            <div class="wrapper">
+                                <img src="" alt="">
+                                <div class="txtwrapper">
+                                    <h4>名称</h4>
+                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li><div class="wrapper"><img src="" alt="">
+                            <div class="txtwrapper">
+                                <h4>名称</h4>
+                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                            </div>
+                        </div>
+                        </li>
+
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -377,7 +437,33 @@
         })
     </script>
 </div>
-
+<div class="footer">
+    <div class="mainWrap">
+        <div class="ulink clearfix">
+            <div class="plink">
+                <h2>常用链接</h2>
+                <ul class="plink_1 clearfix">
+                    <li><a href="#" target="_blank">Campus Map</a></li>
+                    <li><a href="#" target="_blank">Campus Tour</a></li>
+                    <li><a href="#" target="_blank">Services</a></li>
+                    <li><a href="#" target="_blank">Giving to Tsinghua</a></li>
+                </ul>
+                <ul class="plink_2 clearfix">
+                    <li><a href="#" target="_blank">Academic Calendar</a></li>
+                    <li><a href="#" target="_blank">Online Learning</a></li>
+                    <li><a href="#" target="_blank">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copy">
+        <div class="mainWrap clearfix">
+            <div class="contact">
+                Tel:2-4-3-2002018　<br>Email:524864369@jxnu.edu.cn
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
 

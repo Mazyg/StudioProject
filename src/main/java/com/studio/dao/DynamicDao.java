@@ -20,4 +20,8 @@ public interface DynamicDao {
     public boolean saveDynamic(Dynamic dynamic);
 
     public boolean deleDynamic(Dynamic dynamic);
+
+    //增加信息
+    @Insert("insert into dynamic(date,content,uid,tid) values(now(),'${dynamic.content}','${dynamic.uid}','${dynamic.tid}')")
+    public boolean addInfo(Dynamic dynamic);
 }
