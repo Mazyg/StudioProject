@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 @Controller
 @RequestMapping("/info")
@@ -21,7 +22,6 @@ public class InfoController {
 
     @Autowired
     private InfoService infoService;
-
     ModelAndView mv;
     boolean result;
     String msg;
@@ -49,6 +49,8 @@ public class InfoController {
         model.addAttribute("chinese",chinese);
         List<Info> event= infoService.findInfoBytype("热点时事",0,5);
         model.addAttribute("event",event);
+        List<Info> event2= infoService.findInfoBytype("热点时事",2,3);
+        model.addAttribute("event2",event2);
         List<Info> movies1= infoService.findInfoBytype("电影",0,2);
         model.addAttribute("movies1",movies1);
         List<Info> movies2= infoService.findInfoBytype("电影",2,2);
@@ -61,25 +63,70 @@ public class InfoController {
  
     //热点资讯页面信息显示
     @RequestMapping("/findEvent")
-    public String findEvent(Model model){
+    public String findEvent(Model model,HttpServletRequest request){
         List<Info> eventTop= infoService.findInfoBytype("热点时事",0,1);
         model.addAttribute("eventTop",eventTop);
-        List<Info> eventList= infoService.findInfoBytype("热点时事",1,4);
+        int total=infoService.countBytype("热点时事");
+        model.addAttribute("total", total);
+        int page = Integer.parseInt(request.getParameter("page"));
+        model.addAttribute("page",page);
+        int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
+        model.addAttribute("numberPerPage",numberPerPage);
+        List<Info> eventList= infoService.findInfoBytype("热点时事",page,numberPerPage);
         model.addAttribute("eventList",eventList);
+        int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
+        model.addAttribute("totalPage",totalPage);
+        Vector<Integer> pageArr = new Vector<Integer>();
+        int start = 1;
+        if((page+1) >=5){
+            start = (page+1)/5 *5;
+        }
+        int num = start;
+        while(!(num > totalPage || num > start +4)){
+            pageArr.add(new Integer(num));
+            ++num;
+        }
+        model.addAttribute("pageList",pageArr);
         return  "user/main/news";
     }
 
     //爱我中华页面信息显示
     @RequestMapping("/findChinese")
-    public String findChinese(Model model) {
+    public String findChinese(Model model,HttpServletRequest request) {
         List<Info> chineseScenery = infoService.findInfoBytype("最美中国景", 0, 4);
         model.addAttribute("chineseScenery", chineseScenery);
         List<Info> chinesePeople = infoService.findInfoBytype("最美中国人", 0, 5);
         model.addAttribute("chinesePeople", chinesePeople);
         List<Info> chineseEvent = infoService.findInfoBytype("最美中国事", 0, 5);
         model.addAttribute("chineseEvent", chineseEvent);
-        List<Info> chineseAll = infoService.findInfoBytype("最美%", 0, 12);
+        int total=infoService.countBytype("最美%");
+        model.addAttribute("total", total);
+        int page = Integer.parseInt(request.getParameter("page"));
+        model.addAttribute("page",page);
+//        int numberPerPage=1;
+        int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
+        model.addAttribute("numberPerPage",numberPerPage);
+        List<Info> chineseAll = infoService.findInfoBytype("最美%",page,numberPerPage);
         model.addAttribute("chineseAll", chineseAll);
+        int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
+        model.addAttribute("totalPage",totalPage);
+        Vector<Integer> pageArr = new Vector<Integer>();
+        int start = 1;
+        if((page+1) >=5){
+            start = (page+1)/5 *5;
+        }
+        int num = start;
+        while(!(num > totalPage || num > start + 4)){
+            pageArr.add(new Integer(num));
+            ++num;
+        }
+        model.addAttribute("pageList",pageArr);
         return "user/main/chinese";
 
     }
@@ -136,7 +183,6 @@ public class InfoController {
      @RequestMapping("/findPersonalMainInfo")
       public String findPersonalMainInfo(Model model){
         List<Info> personal = infoService.findInfoBytype("近期政策", 0, 3);
-        System.out.println("per"+personal);
         model.addAttribute("personalMainInfo", personal);
         return "user/main/person";
 
@@ -209,7 +255,6 @@ public class InfoController {
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = ft.format(now);
         info.setDate(time);
-        System.out.println(info);
         result =infoService.addInfo(info);
         if (result){
             msg = "添加成功";
