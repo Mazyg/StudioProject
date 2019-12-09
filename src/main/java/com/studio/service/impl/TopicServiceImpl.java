@@ -70,6 +70,11 @@ public class TopicServiceImpl implements TopicService {
         return topicDao.findTopicById(tid);
     }
 
+    @Override
+    public List<Topic> findAllByUname(String uname) {
+        return topicDao.findAllByUname(uname);
+    }
+
     /**
      * 话题查询，按照时间排序，取N条
      * @param start

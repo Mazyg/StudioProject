@@ -65,4 +65,9 @@ public class UserServiceImpl implements UserService {
     public boolean updateUser3(User user) {
         return userDao.updateUser3(user);
     }
+
+    @Override
+    public User findByNameAll(String uname) {
+        return userDao.findByNameAll(uname);
+    }
 }

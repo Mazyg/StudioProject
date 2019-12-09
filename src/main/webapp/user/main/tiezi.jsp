@@ -83,7 +83,7 @@
                         <p>${dynamic.content}</p>
                     </div>
                     <c:choose>
-                        <c:when test="${dynamic.comments == null}"></c:when>
+                        <c:when test="${empty dynamic.comments}"></c:when>
                         <c:otherwise>
                             <div class="pendDetail_replayCon">
                                 <c:forEach items="${dynamic.comments}" var="comment">
@@ -91,7 +91,9 @@
                                         <button class="replayBtn" id="comment">回复</button></span></p>
                                     <div class="pendDetail_action">
                                         <input type="text" placeholder="回复${comment.uname}:"/>
-                                        <button onclick="postMessage()">回复</button>
+                                        <input type="text" style="display: none" value="${comment.uname}" >
+                                        <input type="text" style="display: none" value="${dynamic.wid}" >
+                                        <button class="replyTopic">回复</button>
                                         <button>取消</button>
                                     </div>
                                 </c:forEach>
@@ -102,13 +104,20 @@
                         <ul>
                             <li>361</li>
                             <li class="replayBtn">278</li>
-                            <li class="delateBtn">删除</li>
+                            <c:choose>
+                                <c:when test="${dynamic.uname == users.uname}">
+                                    <input type="text" style="display: none" value="${dynamic.wid}" >
+                                    <li class="delateBtn">删除</li>
+                                </c:when>
+                                <c:otherwise></c:otherwise>
+                            </c:choose>
                         </ul >
                     </div>
                     <div class="pendDetail_action">
-                        <input type="text" placeholder=" 回复 ${dynamic.uname} :" id="content"/>
-                        <input type="text" style="display: none" id="postPeople" value="${dynamic.uname}">
-                        <button id="replyTopic">回复</button>
+                        <input type="text" placeholder=" 回复 ${dynamic.uname} :" />
+                        <input type="text" style="display: none" value="${dynamic.uname}" >
+                        <input type="text" style="display: none" value="${dynamic.wid}" >
+                        <button class="replyTopic">回复</button>
                         <button>取消</button>
                     </div>
                 </div>
@@ -187,12 +196,23 @@
 <script src="js/tiezi.js"></script>
 <script>
         $(function () {
-            $("#replyTopic").click(function () {
+
+            //评论
+            $(".replyTopic").click(function () {
                 var $uname = $("#user").text();
-                var $rname = $("#postPeople").val();
-                var $content = $("#content").val();
-                var $wid = $("#wid").val();
                 var $tid = $("#topicId").val();
+                //var $rname = $(this).prev().val();
+                var $content = $(this).parent().children('input').eq(0).val();
+                var $rname = $(this).parent().children('input').eq(1).val();
+                var $wid = $(this).parent().children('input').eq(2).val();
+                if ($uname == null) {
+                    alert("请先登录!");
+                    return ;
+                }
+                if($content == ""){
+                    alert("请输入内容!");
+                    return;
+                }
                 $.ajax({
                     url:"../comment/saveComment.do",
                     contentType:"application/json;charset=UTF-8",
@@ -208,10 +228,20 @@
                     }
                 });
             });
+
+            //回复话题
             $("#postMsg").click(function () {
                 var $content = $(".commentText").val();
                 var $user = $("#user").text();
                 var $tid = $("#topicId").val();
+                if ($user == null) {
+                    alert("请先登录!");
+                    return ;
+                }
+                if($content == ""){
+                    alert("请输入内容!");
+                    return;
+                }
                 $.ajax({
                     url:"../dynamic/saveDynamic.do",
                     contentType:"application/json;charset=UTF-8",
@@ -227,5 +257,25 @@
                     }
                 });
             });
+
+            //删除回复
+            $(".delateBtn").click(function () {
+                var $wid = $(this).prev().val();
+                var $tid = $("#topicId").val();
+                $.ajax({
+                    url:"../dynamic/deleteDynamic.do",
+                    data:"wid="+$wid,
+                    type:"post",
+                    success:function (result) {
+                        if (result == "false"){
+                            alert("删除回复失败");
+                        }else {
+                            window.location.href = "../topic/findTopicById.do?tid="+$tid;
+                        }
+                    }
+                });
+            });
+
+
         });
 </script>

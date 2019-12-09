@@ -10,13 +10,13 @@ import java.util.List;
 public interface TopicDao {
 
     /*保存用户话题*/
-    @Insert("insert into topic (date,t_title,content,uid,t_type) \n" +
-            "VALUES('${date}','${t_title}','${content}','${uid}','${t_type}')")
+    @Insert("insert into topic (date,t_title,content,uname,t_type) \n" +
+            "VALUES('${date}','${t_title}','${content}','${uname}','${t_type}')")
     public boolean saveTopic(Topic topic);
 
     /*保存管理员话题*/
-    @Insert("insert into topic (date,t_title,content,t_tatus,uid,t_type) \n" +
-            "VALUES('${date}','${t_title}','${content}','已审核','${uid}','${t_type}')")
+    @Insert("insert into topic (date,t_title,content,t_tatus,uname,t_type) \n" +
+            "VALUES('${date}','${t_title}','${content}','已审核','${uname}','${t_type}')")
     public boolean saveTopicA(Topic topic);
 
     @Delete("delete from topic where tid=#{tid}")
@@ -32,6 +32,14 @@ public interface TopicDao {
 
     @Select("select * from topic where uid = #{uid}")
     public List<Topic> findAllByUid(Integer uid);
+
+    /**
+     * 通过用户名查询用户发布的话题
+     * @param uname
+     * @return
+     */
+    @Select("select * from topic where uname = #{uname}")
+    public List<Topic> findAllByUname(String uname);
 
     /**
      * 根据title查找话题
