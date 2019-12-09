@@ -34,6 +34,14 @@ public interface TopicDao {
     public List<Topic> findAllByUid(Integer uid);
 
     /**
+     * 通过用户名查询用户发布的话题
+     * @param uname
+     * @return
+     */
+    @Select("select * from topic where uname = #{uname}")
+    public List<Topic> findAllByUname(String uname);
+
+    /**
      * 根据title查找话题
      * @param t_title
      * @return

@@ -171,7 +171,7 @@
                                 <td>${topicInfo.t_title}</td>
                                 <td>${topicInfo.date}</td>
                                 <td>${topicInfo.t_tatus}</td>
-                                <td><a href="#">详情</a> </td>
+                                <td><a href="../topic/findTopicById.do?tid=${topicInfo.tid}">详情</a> </td>
                                 <td><a href="../topic/deleTopic2.do?tid=${topicInfo.tid}">删除</a></td>
                             </tr>
                         </c:forEach>

@@ -129,7 +129,7 @@ public class TopicController {
     public String updateStatus1(HttpServletRequest request){
         String tid = request.getParameter("tid");
         Topic topics = topicService.findTopicById(tid);
-        if("已审核".equals(topics.getT_status())){
+        if("已审核".equals(topics.getT_tatus())){
             boolean topicStatus = false;
             return "redirect:/topic/findAll.do?topicdel="+topicStatus;
         }
@@ -172,8 +172,8 @@ public class TopicController {
        if(user==null){
            return "user/main/personInfoTopic";
        }
-        Integer uid = user.getUid();
-        List<Topic> topicInfo = topicService.findAllByUid(uid);
+       String uname = user.getUname();
+        List<Topic> topicInfo = topicService.findAllByUname(uname);
         model.addAttribute("topicInfo", topicInfo);
         return "user/main/personInfoTopic";
     }
@@ -208,11 +208,11 @@ public class TopicController {
     @RequestMapping("/findById")
     public String findById(Model model,HttpServletRequest request){
         String tid = request.getParameter("tid");
-       Topic topicList = topicService.findTopicById(tid);c
+       Topic topicList = topicService.findTopicById(tid);
         System.out.println("topic"+topicList);
         User usersTopic = userService.findByNameAll(topicList.getUname());
         System.out.println("usert"+usersTopic);
- master
+
         model.addAttribute("usersTopic", usersTopic);
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic_show";
