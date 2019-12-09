@@ -100,14 +100,38 @@
     </div>
     <div class="indexMain_right">
         <div class="indexMain_rightCon">
-            <a href="" class="newMsg">发新帖</a>
-            <div class="pwfb">
-                <div class="pwfbHead">
-                    拍王发布
+            <a href="main/write.jsp " class="newMsg">发新帖</a>
+            <div class="indexMain_right">
+                <div class="myMsg">
+                    <div class="myMsg_con">
+                        <div class="myMsg_conPic"></div>
+                        <c:if test="${users.uname==null}">
+                            <p>未登录</p>
+                        </c:if>
+                        <p id="user">${users.uname}</p>
+                    </div>
+                    <c:choose>
+                        <c:when test="${users == null}"></c:when>
+                        <c:otherwise>
+                            <div  class="myMsg_footer">
+                                <ul>
+                                    <li><a href="">
+                                        <p>主题数</p>
+                                        <p>23</p>
+                                    </a></li>
+                                    <li><a href="">
+                                        <p>精华数</p>
+                                        <p>23</p>
+                                    </a></li>
+                                    <li><a href="">
+                                        <p>注册排名</p>
+                                        <p>23</p>
+                                    </a></li>
+                                </ul>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
-                <div class="pwfbCon"></div>
-                <div class="pwfbFooter"></div>
-            </div>
             <div class="indexSearch">
                 <input type="text" placeholder="请输入关键词"/>
                 <input type="submit" value="搜索"/>

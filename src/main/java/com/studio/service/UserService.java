@@ -26,4 +26,6 @@ public interface UserService {
 
     public List<User> findByNameAdmin(String uname);
     public boolean updateUser3(User user);
+
+    public User findByNameAll(String uname);
 }
