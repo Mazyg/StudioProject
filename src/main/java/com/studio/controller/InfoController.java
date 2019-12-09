@@ -72,20 +72,29 @@ public class InfoController {
         model.addAttribute("page",page);
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         model.addAttribute("numberPerPage",numberPerPage);
-        List<Info> eventList= infoService.findInfoBytype("热点时事",page,numberPerPage);
+        int length= Integer.parseInt(request.getParameter("length"));
+        List<Info> eventList= infoService.findInfoBytype("热点时事",page,length);
         model.addAttribute("eventList",eventList);
+        System.out.println("开始的位置："+page);
+        System.out.println("设置每页显示条数 ："+numberPerPage);
+        System.out.println("实际显示条数："+length);
+        int rest=total-(page+numberPerPage);
+        System.out.println("剩余："+rest);
+        model.addAttribute("rest",rest);
         int totalPage = total/numberPerPage;
         if(total % numberPerPage != 0){
             totalPage += 1;
         }
         model.addAttribute("totalPage",totalPage);
+        System.out.println("总页数："+totalPage);
+        System.out.println("/n------------------------/n");
         Vector<Integer> pageArr = new Vector<Integer>();
         int start = 1;
-        if((page+1) >=5){
-            start = (page+1)/5 *5;
+        if((page+1) >=6){
+            start = (page+1)/6 *6;
         }
         int num = start;
-        while(!(num > totalPage || num > start +4)){
+        while(!(num > totalPage || num > start +5)){
             pageArr.add(new Integer(num));
             ++num;
         }
