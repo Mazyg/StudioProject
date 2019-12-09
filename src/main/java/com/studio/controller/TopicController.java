@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,6 +58,37 @@ public class TopicController {
         boolean top =topicService.saveTopic(topic);
         mv.addObject("top", top);
         mv.setViewName("manage/pages/ui-features/topicput");
+        return mv;
+    }
+
+    /**
+     * 用户界面发布话题
+     * @param topic
+     * @param request
+     * @return
+     */
+    @RequestMapping("/saveTopicUser")
+    public ModelAndView saveTopicUser(Topic topic,HttpServletRequest request){
+        mv = new ModelAndView();
+        Date now = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = ft.format(now);
+        topic.setDate(time);
+        System.out.println("top"+topic);
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("users");
+        System.out.println("user"+user);
+        if(user == null){
+            System.out.println("false");
+            mv.addObject("top", false);
+            mv.setViewName("user/main/write");
+        }else{
+        topic.setUname(user.getUname());
+        boolean top =topicService.saveTopic(topic);
+            System.out.println("top"+top);
+        mv.addObject("top",top);
+        mv.setViewName("user/main/write");
+        }
         return mv;
     }
 
@@ -176,8 +208,11 @@ public class TopicController {
     @RequestMapping("/findById")
     public String findById(Model model,HttpServletRequest request){
         String tid = request.getParameter("tid");
-       Topic topicList = topicService.findTopicById(tid);
-        User usersTopic = userService.findByName(topicList.getUname());
+       Topic topicList = topicService.findTopicById(tid);c
+        System.out.println("topic"+topicList);
+        User usersTopic = userService.findByNameAll(topicList.getUname());
+        System.out.println("usert"+usersTopic);
+ master
         model.addAttribute("usersTopic", usersTopic);
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic_show";
