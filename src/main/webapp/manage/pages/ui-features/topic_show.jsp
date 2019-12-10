@@ -5,6 +5,7 @@
 %>
 <html>
 <head>
+  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>话题管理</title>
@@ -13,6 +14,12 @@
   <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
   <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <!-- endinject -->
+  <!-- Layout styles -->
   <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
   <link rel="shortcut icon" href="images/favicon.png" />
   <script type="text/javascript">
@@ -64,8 +71,8 @@
               <p class="mb-1 mt-3">${users.uname}</p>
               <p class="font-weight-light text-muted mb-0">${users.email}</p>
             </div>
-            <a class="dropdown-item" href="../user/personalInfo.do?uid=${users.uid}"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
-            <a class="dropdown-item" href="pages/samples/login.jsp"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
+            <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
+            <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
           </div>
         </li>
       </ul>
@@ -99,7 +106,7 @@
           </a>
           <div class="collapse" id="ui-basic">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="../dynamic/findAllTopic.do">动态管理</a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.jsp">动态管理</a></li>
               <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.jsp">动态推送</a></li>
             </ul>
           </div>
@@ -141,6 +148,22 @@
             </ul>
           </div>
         </li>
+        <li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+            <span class="menu-title">General Pages</span>
+            <i class="icon-doc menu-icon"></i>
+          </a>
+          <div class="collapse" id="auth">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/login.jsp"> Login </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/register.jsp"> Register </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.jsp"> 404 </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.jsp"> 500 </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.jsp"> Blank Page </a></li>
+            </ul>
+          </div>
+        </li>
       </ul>
     </nav>
     <!-- partial -->
@@ -153,34 +176,55 @@
           <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <p class="card-description"> 话题详情</p>
-                <form class="forms-sample" action="../topic/saveTopic.do" method="post">
+                <p class="card-description">话题详情</p>
+
+                <form class="forms-sample" action="" method="post">
                   <div class="form-group">
-                    <label for="exampleInputName1">标题</label>
-                    <input type="text" class="col-10 form-control" id="exampleInputName1" placeholder="标题" required="required" name="t_title" value="${topics.t_title}">
-                  </div>
+                  <label >标题</label>
+                  <input type="text" class="col-10 form-control"  name="t_title" readonly="readonly" value="${topics.t_title}">
+                 </div>
+
                   <div class="form-group">
                     <label for="topic_category"> 话题类别</label>
                     <div class="col-sm-6" id="topic_category">
-                      <input type="text" class="col-10 form-control"    name="t_title" value="${topics.t_type}" readonly="readonly">
+                      <input type="text" class="col-10 form-control" name="t_type" readonly="readonly" value="${topics.t_type}">
                     </div>
                   </div>
                   <div class="form-group">
                     <label>简要描述</label>
                     <div class="input-group col-xs-12">
-                      <textarea name="content"  placeholder="描述一下你的话题" required="required" class="col-10 form-control"  style=" height:100px">
-                        ${topics.content}
-                      </textarea>
+                      <textarea name="content"    class="col-10 form-control"  style=" height:100px" readonly="readonly">${topics.content}</textarea>
                     </div>
                   </div>
-
-                  <div>
-                    <p>发布者ID：${usersTopic.uid}</p>
-                    <p>用户姓名：${usersTopic.uname}</p>
-                    <p>用户类型：${usersTopic.u_type}</p>
-                    <p>话题状态：${topics.t_status}</p>
+                  <div class="form-group">
+                    <label></label>
+                    <input type="text" class="col-10 form-control"  name="t_title" readonly="readonly" value="发布者ID：${usersTopic.uid}">
+                    <input type="text" class="col-10 form-control"  name="t_title" readonly="readonly" value="用户昵称：${usersTopic.uname}">
+                    <input type="text" class="col-10 form-control"  name="t_title" readonly="readonly" value="用户类型：${usersTopic.u_type}">
+                    <input type="text" class="col-10 form-control"  name="t_title" readonly="readonly" value="话题状态：${topics.t_tatus}">
+                    <input type="text" class="col-10 form-control"  name="t_title" readonly="readonly" value="发布时间：${topics.date}">
                   </div>
+                 <%-- <div class="form-group">
+                    <div class="input-group col-xs-12">
+                      <textarea name="content"  class="col-10 form-control"  style=" height:100px" readonly="readonly">发布者ID：${usersTopic.uid}${usersTopic.uname}
+                      </textarea>
+                    </div>
+                  </div>--%>
+                  <%--<div class="form-group">
+                 发布者ID：${usersTopic.uid}
+                 用户姓名：${usersTopic.uname}}
+                  用户类型：${usersTopic.u_type}
+                 话题状态：${topics.t_status}
+                  &lt;%&ndash;  <p>发布时间：${topics.date}</p>&ndash;%&gt;
+                  </div>--%>
+
                 </form>
+
+
+
+
+
+
               </div>
             </div>
           </div>
@@ -190,7 +234,7 @@
       <!-- partial:../../partials/_footer.html -->
       <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017  </span>
+          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">  </span>
         </div>
       </footer>
       <!-- partial -->

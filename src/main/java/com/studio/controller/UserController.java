@@ -179,8 +179,13 @@ public class UserController {
      * @return
      */
     @RequestMapping("/personUpdate")
-    public String personUpdate(User user, Model model) {
+    public String personUpdate(User user, Model model,HttpServletRequest request) {
        boolean user3 = userService.updateUser3(user);
+       if(user3==true){
+           User users1 = userService.findById(user.getUid());
+           HttpSession session = request.getSession(true);
+           session.setAttribute("users", users1);
+       }
        model.addAttribute("user3", user3);
        return "user/main/personInfo";
     }
@@ -198,6 +203,21 @@ public class UserController {
             session.setAttribute("users", users1);
         }
         model.addAttribute("up", up);
+        if("admin".equals(users.getU_type())){
+            return "manage/pages/samples/personInfo";
+        }else
         return "user/main/personInfo";
+    }
+
+    @RequestMapping("/personUpdateAdm")
+    public String personUpdateAdm(User user, Model model,HttpServletRequest request) {
+        boolean user3 = userService.updateUser3(user);
+        if(user3==true){
+            User users1 = userService.findById(user.getUid());
+            HttpSession session = request.getSession(true);
+            session.setAttribute("users", users1);
+        }
+        model.addAttribute("user3", user3);
+        return "manage/pages/samples/personInfo";
     }
 }

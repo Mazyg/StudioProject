@@ -143,6 +143,7 @@ public class TopicController {
         mv = new ModelAndView();
         String topicdel = request.getParameter("topicdel");
         List<Topic> topic =  topicService.findAllTopic();
+        System.out.println("top"+topic);
         mv.addObject("topicdel", topicdel);
         mv.addObject("topics", topic);
         mv.setViewName("manage/pages/ui-features/topic-table");
