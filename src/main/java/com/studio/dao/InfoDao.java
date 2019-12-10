@@ -38,7 +38,7 @@ public interface InfoDao {
     public Info findById(String info_id);
 
  
-    //根据类别查询信息
+    //根据类别查询信息的数量
     @Select("SELECT count(*) FROM `info`\n" +
             "where info_type like #{info_type}")
     public int countByType(String info_type);
