@@ -68,17 +68,20 @@ public class InfoController {
         model.addAttribute("eventTop",eventTop);
         int total=infoService.countBytype("热点时事");
         model.addAttribute("total", total);
+        int start = Integer.parseInt(request.getParameter("start"));
+        model.addAttribute("start",start);
+        int length= Integer.parseInt(request.getParameter("length"));
         int page = Integer.parseInt(request.getParameter("page"));
         model.addAttribute("page",page);
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         model.addAttribute("numberPerPage",numberPerPage);
-        int length= Integer.parseInt(request.getParameter("length"));
-        List<Info> eventList= infoService.findInfoBytype("热点时事",page,length);
+        List<Info> eventList= infoService.findInfoBytype("热点时事",start,length);
         model.addAttribute("eventList",eventList);
-        System.out.println("开始的位置："+page);
+        System.out.println("开始的位置："+start);
+        System.out.println("当前页数："+page);
         System.out.println("设置每页显示条数 ："+numberPerPage);
         System.out.println("实际显示条数："+length);
-        int rest=total-(page+numberPerPage);
+        int rest=total-(start+length);
         System.out.println("剩余："+rest);
         model.addAttribute("rest",rest);
         int totalPage = total/numberPerPage;
@@ -87,14 +90,14 @@ public class InfoController {
         }
         model.addAttribute("totalPage",totalPage);
         System.out.println("总页数："+totalPage);
-        System.out.println("/n------------------------/n");
+        System.out.println("\n------------------------\n");
         Vector<Integer> pageArr = new Vector<Integer>();
-        int start = 1;
-        if((page+1) >=6){
-            start = (page+1)/6 *6;
+        int startx=1;
+        if(page>5){
+            startx= page/5*5;
         }
-        int num = start;
-        while(!(num > totalPage || num > start +5)){
+        int num = startx;
+        while(!(num > totalPage || num > startx +5)){
             pageArr.add(new Integer(num));
             ++num;
         }

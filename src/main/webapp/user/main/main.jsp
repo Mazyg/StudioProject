@@ -40,9 +40,9 @@
         <div class="nav">
             <div class="mainnav clearfix">
                 <ul id="nav">
-                    <li><a href="../info/findEvent.do?page=0&numberPerPage=3">热点时事</a>
+                    <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点时事</a>
                     </li>
-                    <li><a href="../info/findChinese.do?page=0&numberPerPage=3">爱我中华</a>
+                    <li><a href="../info/findChinese.do?page=0&numberPerPage=3&length=3">爱我中华</a>
                         <ul>
                             <li><a href="#">最美中国景</a></li>
                             <li><a href="#">最美中国人</a></li>
@@ -299,40 +299,6 @@
                             </div>
                         </li>
                     </c:forEach>
-                    </ul>
-                </div>
-                <div class="dataitem">
-                    <ul>
-                        <c:forEach items="${movies3}" var="movies3">
-                            <li>
-                                <div class="wrapper">
-                                    <img src="${movies3.photo}">
-                                    <div class="txtwrapper">
-                                        <br/>
-                                        <br/>
-                                        <h4>${movies3.title}</h4>
-                                    </div>
-                                </div>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </div>
-                        <li><div class="wrapper"><img src="" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                </div>
-                            </div>
-                        </li>
                     </ul>
                 </div>
                 <div class="dataitem">

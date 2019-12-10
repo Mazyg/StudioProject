@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="css/owl.carousel.css">
     <script src="js/owl.carousel.min.js" type="text/javascript"></script>
     <script src="js/comm.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/jump.js"></script>
 <body>
 <header class="clearfix">
     <section class="mainWrap">
@@ -131,70 +132,16 @@
                         </div>
                     </figure>
                 </li>
-
-                <li class="clearfix">
-                    <figure>
-                        <a class="picwraper" href="#" target="_blank">
-                            <img src="img/tu5.jpg">
-                        </a>
-                        <div class="contentwraper">
-                            <figcaption>
-                                <span class="tips"  >资讯</span>
-                                <a href="#" target="_blank"  class="jiequ">
-                                    【资讯】新闻标题
-                                </a>
-                            </figcaption>
-                            <p>新闻内容</p>
-                            <div class="thumb">
-                                <i class=""></i>
-                                2019.10.31 （新闻时间）
-                                <i class=""></i>
-                                <font  >
-                                    <span  ></span>
-                                </font>
-                            </div>
-                        </div>
-                    </figure>
-                </li>
-                <li class="clearfix">
-                    <figure>
-                        <a class="picwraper" href="#" target="_blank">
-                            <img src="img/tu5.jpg">
-                        </a>
-                        <div class="contentwraper">
-                            <figcaption>
-                                <span class="tips" id="keyword-1">资讯</span>
-                                <a href="#" target="_blank" id="title-1" class="jiequ">
-                                    【资讯】新闻标题
-                                </a>
-                            </figcaption>
-                            <p>新闻内容</p>
-                            <div class="thumb">
-                                <i class="thunews-clock-o"></i>
-                                2019.10.31 （新闻时间）
-                                <i class="thunews-eye"></i>
-                                <font id="font_itemlist_total_20191029161652878588253">
-                                    <span id="itemlist_total_20191029161652878588253"></span>
-                                </font>
-                            </div>
-                        </div>
-                    </figure>
-                </li>
-
             </c:forEach>
-
             </ul>
             <br>
             <!-- 上一页 按钮 -->
             <div class="pager">
-                <%--            <div id="pageControl">--%>
                 <c:choose>
-                    <c:when test="${page+1!= 1}">
-                        <a href="../info/findEvent.do?page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
-                        <%--                            <input type="button" name="lastPage" value="上一页" />--%>
+                    <c:when test="${page>1}">
+                        <a href="../info/findEvent.do?start=${start-numberPerPage}&length=${numberPerPage}&page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
                     </c:when>
                     <c:otherwise>
-                        <%--                        <input type="button" disabled="true" name="lastPage" value="上一页" /><!-- 为了要那个灰掉的button -->--%>
                         <a><<</a>
                     </c:otherwise>
                 </c:choose>
@@ -202,55 +149,37 @@
                 <!-- 页数列表 -->
                 <c:forEach items="${pageList}" var="item">
                     <c:choose>
-                        <c:when test="${item == page+1}">
-                            <a href="../info/findEvent.do?page=${item-1}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
+                        <c:when test="${(total-(item-1)*numberPerPage)>=numberPerPage}">
+                            <a href="../info/findEvent.do?start=${(item-1)*numberPerPage}&length=${numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="../info/findEvent.do?page=${item-1}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" >${item}</a>
+                            <a href="../info/findEvent.do?start=${(item-1)*numberPerPage}&length=${total-(item-1)*numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
 
                 <!-- 下一页 按钮 -->
                 <c:choose>
-                    <c:when test="${page+1!= totalPage}">
-                        <a href="../info/findEvent.do?page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                    <c:when test="${page<totalPage && rest>=numberPerPage}">
+                        <a href="../info/findEvent.do?start=${start+numberPerPage}&length=${numberPerPage}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
                             >>
                         </a>
-                        <%--                            <input type="button" name="nextPage" value="下一页" />--%>
-
+                    </c:when>
+                    <c:when test="${page<totalPage && rest<numberPerPage && rest>0}">
+                        <a href="../info/findEvent.do?start=${start+numberPerPage}&length=${rest}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                            >>
+                        </a>
                     </c:when>
                     <c:otherwise>
-                        <%--                        <input type="button" disabled=true name="nextPage" value="下一页" /><!-- 为了要那个灰掉的button -->--%>
                         <a>>></a>
                     </c:otherwise>
                 </c:choose>
 
                 <!-- 直接跳转 -->
-                共${totalPage}页&nbsp;&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage})" />
+                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage},${total})" />
                 <!-- 设置每页显示条数 -->
-                    &nbsp;&nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},${page})" />
+                    &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total})" />
             </div>
-            <script type="text/javascript">
-                function jumpTo(maxPage,numberPerPage){
-                    var page = $("#jumpTo").val();
-                    if(page > maxPage || page < 1){
-                        alert("对不起，无法到达该页")
-                    }else{
-                        page=page-1;
-                        window.location.href="../info/findEvent.do?page="+page+"&numberPerPage="+numberPerPage;
-                    }
-                }
-
-                function change(total,page){
-                    var numberPerPage=$("#numberPerPage").val();
-                    if(numberPerPage > total || numberPerPage < 1){
-                        alert("对不起，无法设置")
-                    }else{
-                        window.location.href="../info/findEvent.do?page="+page+"&numberPerPage="+numberPerPage;
-                    }
-                }
-            </script>
         </section>
         <section class="colunm2">
             <section class="mod withborder">
