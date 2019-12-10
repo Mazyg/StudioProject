@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -9,7 +8,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>信息管理</title>
+    <title>动态管理</title>
     <base href="<%=basePath%>">
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
@@ -70,7 +69,7 @@
                             <p class="mb-1 mt-3">${users.uname}</p>
                             <p class="font-weight-light text-muted mb-0">${users.email}</p>
                         </div>
-                        <a class="dropdown-item" href=""><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
+                        <a class="dropdown-item" href="../user/personalInfo.do?uid=${users.uid}"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
                         <a class="dropdown-item" href="pages/samples/login.jsp"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
                     </div>
                 </li>
@@ -92,7 +91,7 @@
                             <div class="dot-indicator bg-success"></div>
                         </div>
                         <div class="text-wrapper">
-                            <p class="profile-name">${user.uname}</p>
+                            <p class="profile-name">${users.uname}</p>
                             <p class="designation">管理员</p>
                         </div>
                     </a>
@@ -136,24 +135,14 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../user/findAllUser.do">
+                    <a class="nav-link" data-toggle="collapse" href="#user_manage" aria-expanded="false" aria-controls="user_manage">
                         <span class="menu-title">用户管理</span>
                         <i class="icon-grid menu-icon"></i>
                     </a>
-                </li>
-                <li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                        <span class="menu-title">General Pages</span>
-                        <i class="icon-doc menu-icon"></i>
-                    </a>
-                    <div class="collapse" id="auth">
+                    <div class="collapse" id="user_manage">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.jsp"> Login </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/register.jsp"> Register </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.jsp"> 404 </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.jsp"> 500 </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.jsp"> Blank Page </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../user/findAllUser.do">用户</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../user/findAllAdmin.do">管理员</a></li>
                         </ul>
                     </div>
                 </li>
@@ -163,27 +152,40 @@
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="page-header">
-                    <h2 class="page-title">  </h2>
+                    <h2 class="page-title"> 回复评论管理 </h2>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <p class="card-description"> 个人信息</p>
+                                <p class="card-description"> 回复列表</p>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th><h4>ID</h4></th>
+                                        <th><h4>回复时间</h4></th>
+                                        <th><h4>回复内容</h4></th>
+                                        <th><h4>回复者</h4></th>
+                                        <th><h4>操作I</h4></th>
+                                        <th><h4>操作II</h4></th>
+                                        <th><h4><a href="javascript:;" onClick="javascript:history.back(-1);">返回上一页</a></h4></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
-                                <div class="col-md-6">
-                                    <address class="text-primary">
-
-                                        <img class="img-md rounded-circle" src="${user.photo}">
-                                        <p class="font-weight-bold"> 账号： </p>
-                                        <p class="mb-2"> ${user.uid} </p>
-                                        <p class="font-weight-bold"> 昵称： </p>
-                                        <p class="mb-2"> ${user.uname} </p>
-                                        <p class="font-weight-bold"> 邮箱： </p>
-                                        <p class="mb-2"> ${user.email} </p>
-                                    </address>
-                                </div>
-
+                                    <c:forEach var="dynamic" items="${dynamics}">
+                                        <tr>
+                                            <td><p id="wid">${dynamic.wid}</p></td>
+                                            <td>${dynamic.date}</td>
+                                            <td><textarea readonly>${dynamic.content}</textarea></td>
+                                            <td>${dynamic.uname}</td>
+                                            <td><a href="../dynamic/findAllReplyByWid.do?wid=${dynamic.wid}" style="color: dodgerblue">查看相关评论</a></td>
+                                            <td><a href="javascript:void(0)" style="color: orangered" class="deleteReply">删除回复</a></td>
+                                            <p id="tid" style="display: none">${dynamic.tid}</p>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -211,8 +213,27 @@
 <!-- inject:js -->
 <script src="js/off-canvas.js"></script>
 <script src="js/misc.js"></script>
-<!-- endinject -->
-<!-- Custom js for this page -->
-<!-- End custom js for this page -->
+<script src="js/jquery-1.8.3.js"></script>
+<script>
+    $(function () {
+        $(".deleteReply").click(function () {
+            var $tid = $("#tid").text();
+            var $wid = $("#wid").text();
+            $.ajax({
+                url:"../dynamic/deleteDynamic.do",
+                data:"wid="+$wid,
+                type:"post",
+                success:function (result) {
+                    if (result == "success"){
+                        alert("删除成功");
+                        window.location.href = "../dynamic/findAllDynamicByTid.do?tid="+$tid;
+                    }else {
+                        alert("删除失败");
+                    }
+                }
+            });
+        })
+    })
+</script>
 </body>
 </html>

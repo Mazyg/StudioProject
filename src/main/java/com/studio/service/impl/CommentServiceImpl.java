@@ -19,8 +19,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public boolean deleComment(Comment comment) {
-        return false;
+    public boolean deleteComment(Integer cid) {
+        return commentDao.deleteComment(cid);
     }
 
     @Override

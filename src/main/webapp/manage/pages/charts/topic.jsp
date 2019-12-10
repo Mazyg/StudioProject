@@ -5,28 +5,33 @@
 %>
 <html>
 <head>
+  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>话题管理</title>
+  <title>动态管理</title>
   <base href="<%=basePath%>">
   <!-- plugins:css -->
   <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
   <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <!-- endinject -->
+  <!-- Layout styles -->
   <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
   <link rel="shortcut icon" href="images/favicon.png" />
   <script type="text/javascript">
-    function status() {
-      var sta= "${topicdel}";
-      if(sta == "true"){
-        alert("操作成功！");
-      }else if(sta == "false"){
-        alert("操作错误！");
+    function msssage () {
+      var message = "${msg}";
+      if( message != ""){
+        alert(message);
       }
     }
   </script>
 </head>
-<body onload="status()">
+<body onload="msssage()">
 <div class="container-scroller">
   <!-- partial:../../partials/_navbar.html -->
   <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -39,9 +44,9 @@
     <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
       <h5 class="mb-0 font-weight-medium d-none d-lg-flex">后台管理系统</h5>
       <ul class="navbar-nav navbar-nav-right ml-auto">
-        <form class="search-form d-none d-md-block" action="../topic/findByTitleNot.do">
+        <form class="search-form d-none d-md-block" action="#">
           <i class="icon-magnifier"></i>
-          <input type="search" class="form-control" placeholder="查找" title="Search here" name="title">
+          <input type="search" class="form-control" placeholder="查找" title="Search here">
         </form>
         <li class="nav-item dropdown language-dropdown d-none d-sm-flex align-items-center">
           <a class="nav-link d-flex align-items-center dropdown-toggle" id="LanguageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -125,7 +130,7 @@
           <div class="collapse" id="info_manage">
             <ul class="nav flex-column sub-menu">
               <li class="nav-item"> <a class="nav-link" href="pages/forms/basic_elements.jsp">信息推送</a></li>
-              <li class="nav-item"> <a class="nav-link" href="#">信息管理</a></li>
+              <li class="nav-item"> <a class="nav-link" href="../info/findAllInfo.do">信息管理</a></li>
             </ul>
           </div>
         </li>
@@ -147,7 +152,7 @@
     <div class="main-panel">
       <div class="content-wrapper">
         <div class="page-header">
-          <h2 class="page-title"> 话题管理 </h2>
+          <h2 class="page-title"> 回复评论管理 </h2>
         </div>
         <div class="row">
           <div class="col-lg-12 grid-margin stretch-card">
@@ -157,27 +162,25 @@
                 <table class="table table-hover">
                   <thead>
                   <tr>
-                    <th><h4>话题ID</h4></th>
-                    <th><h4>话题标题</h4></th>
-                    <th><h4>时间</h4></th>
-                    <th><h4>内容</h4></th>
-                    <th><h4>状态</h4></th>
-                    <th><h4>操作1</h4></th>
-                    <th><h4>操作2</h4></th>
+                    <th><h4>ID</h4></th>
+                    <th><h4>标题</h4></th>
+                    <th><h4>发布时间</h4></th>
+                    <th><h4>话题类型</h4></th>
+                    <th><h4>话题发布者</h4></th>
+                    <th><h4>操作</h4></th>
                   </tr>
                   </thead>
                   <tbody>
 
-                  <c:forEach var="topic1" items="${topics}">
+                  <c:forEach var="topic" items="${topics}">
                     <tr>
-                      <td>${topic1.tid}</td>
-                      <td>${topic1.t_title}</td>
-                      <td>${topic1.date}</td>
-                      <td><a href="../topic/findById.do?tid=${topic1.tid}">查看详情</a> </td>
-                      <td>${topic1.t_status}</td>
-                      <td><a href="../topic/updateStatus1.do?tid=${topic1.tid}" style="color: #1d6b1f">通过审核</a></td>
-                      <td><a href="../topic/deleTopic1.do?tid=${topic1.tid}" style="color: #a01a1f" >删除</a></td>
-                      <td><td>
+                      <td>${topic.tid}</td>
+                      <td>${topic.t_title}</td>
+                      <td>${topic.date}</td>
+                      <td>${topic.t_type}</td>
+                      <td>${topic.uname}</td>
+                      <td><a href="../dynamic/findAllDynamicByTid.do?tid=${topic.tid}" style="color: dodgerblue">查看相关回复</a></td>
+
                     </tr>
                   </c:forEach>
 
