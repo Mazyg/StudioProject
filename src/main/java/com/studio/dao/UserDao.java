@@ -74,4 +74,7 @@ public interface UserDao {
     /*解封处理*/
     @Update("update user set u_status= '正常' where uid=#{uid}")
     public boolean updateUser2(String uid);
+
+    @Update("update user set photo=#{photo} where uid=#{uid}")
+    public boolean personPhoto(User user);
 }

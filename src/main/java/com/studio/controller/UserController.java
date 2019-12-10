@@ -159,7 +159,7 @@ public class UserController {
         return mv;
     }
 
-    @RequestMapping("personalInfo")
+    @RequestMapping("/personalInfo")
     public ModelAndView personalInfo(Integer uid){
         mv = new ModelAndView();
         user1 = userService.findById(uid);
@@ -178,22 +178,26 @@ public class UserController {
      * @param model
      * @return
      */
-    @RequestMapping("personUpdate")
-    public String personUpdate(User user, Model model) throws IOException {
-       String filePath = "F:\\upload";//保存图片的路径,tomcat中有配置
-        /*//获取原始图片的拓展名
-        String originalFilename = photo.getOriginalFilename();
-        System.out.println(originalFilename);*/
-        //新的文件名字，使用uuid随机生成数+原始图片名字，这样不会重复
-       /* String newFileName = UUID.randomUUID()+user.getPhoto();
-        System.out.println("n"+newFileName);
-     //封装上传文件位置的全路径，就是硬盘路径+文件名
-        File targetFile = new File(filePath,newFileName);
-        System.out.println("d"+targetFile);
-        photo.transferTo(targetFile);
-       user.setPhoto(newFileName);//文件名保存到实体类对应属性上*/
+    @RequestMapping("/personUpdate")
+    public String personUpdate(User user, Model model) {
        boolean user3 = userService.updateUser3(user);
        model.addAttribute("user3", user3);
        return "user/main/personInfo";
+    }
+
+    @RequestMapping("/personPhoto")
+    public String personPhoto(User user,Model model,HttpServletRequest request){
+        System.out.println("userp"+user);
+        User users = (User) request.getSession().getAttribute("users");
+        System.out.println("userid"+users.getUid());
+        user.setUid(users.getUid());
+        boolean up = userService.personPhoto(user);
+        if(up==true){
+            User users1 = userService.findById(users.getUid());
+            HttpSession session = request.getSession(true);
+            session.setAttribute("users", users1);
+        }
+        model.addAttribute("up", up);
+        return "user/main/personInfo";
     }
 }
