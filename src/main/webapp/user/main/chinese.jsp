@@ -30,6 +30,7 @@
     <script src="js/regex-cn.js" type="text/javascript"></script>
     <!--[if lt IE 8]-->
     <link rel="stylesheet" href="font/ie7/ie7.css">
+    <script type="text/javascript" src="js/jump.js"></script>
 </head>
 <body>
 <header class="clearfix">
@@ -155,16 +156,13 @@
             </c:forEach>
             </ul>
             <br>
-            <!-- 上一页 按钮 -->
             <div class="pager">
-<%--            <div id="pageControl">--%>
+                <!-- 上一页 按钮 -->
                 <c:choose>
-                    <c:when test="${page+1!= 1}">
-                        <a href="../info/findChinese.do?page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
-<%--                            <input type="button" name="lastPage" value="上一页" />--%>
+                    <c:when test="${page>1}">
+                        <a href="../info/findChinese.do?start=${start-numberPerPage}&length=${numberPerPage}&page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
                     </c:when>
                     <c:otherwise>
-<%--                        <input type="button" disabled="true" name="lastPage" value="上一页" /><!-- 为了要那个灰掉的button -->--%>
                         <a><<</a>
                     </c:otherwise>
                 </c:choose>
@@ -172,55 +170,37 @@
                 <!-- 页数列表 -->
                 <c:forEach items="${pageList}" var="item">
                     <c:choose>
-                        <c:when test="${item == page+1}">
-                            <a href="../info/findChinese.do?page=${item-1}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
+                        <c:when test="${(total-(item-1)*numberPerPage)>=numberPerPage}">
+                            <a href="../info/findChinese.do?start=${(item-1)*numberPerPage}&length=${numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="../info/findChinese.do?page=${item-1}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" >${item}</a>
+                            <a href="../info/findChinese.do?start=${(item-1)*numberPerPage}&length=${total-(item-1)*numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
 
                 <!-- 下一页 按钮 -->
                 <c:choose>
-                    <c:when test="${page+1!= totalPage}">
-                        <a href="../info/findChinese.do?page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                    <c:when test="${page<totalPage && rest>=numberPerPage}">
+                        <a href="../info/findChinese.do?start=${start+numberPerPage}&length=${numberPerPage}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
                             >>
                         </a>
-<%--                            <input type="button" name="nextPage" value="下一页" />--%>
-
+                    </c:when>
+                    <c:when test="${page<totalPage && rest<numberPerPage && rest>0}">
+                        <a href="../info/findChinese.do?start=${start+numberPerPage}&length=${rest}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                            >>
+                        </a>
                     </c:when>
                     <c:otherwise>
-<%--                        <input type="button" disabled=true name="nextPage" value="下一页" /><!-- 为了要那个灰掉的button -->--%>
                         <a>>></a>
                     </c:otherwise>
                 </c:choose>
 
                 <!-- 直接跳转 -->
-                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage})" />
+                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage},${total},'findChinese')" />
                 <!-- 设置每页显示条数 -->
-                &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},${page})" />
+                &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},'findChinese')" />
             </div>
-            <script type="text/javascript">
-                function jumpTo(maxPage,numberPerPage){
-                    var page = $("#jumpTo").val();
-                    if(page > maxPage || page < 1){
-                        alert("对不起，无法到达该页")
-                    }else{
-                        page=page-1;
-                        window.location.href="../info/findChinese.do?page="+page+"&numberPerPage="+numberPerPage;
-                    }
-                }
-
-                function change(total,page){
-                    var numberPerPage=$("#numberPerPage").val();
-                    if(numberPerPage > total || numberPerPage < 1){
-                        alert("对不起，无法设置")
-                    }else{
-                        window.location.href="../info/findChinese.do?page="+page+"&numberPerPage="+numberPerPage;
-                    }
-                }
-            </script>
 </section>
         <section class="colunm2">
             <section class="mod withborder">

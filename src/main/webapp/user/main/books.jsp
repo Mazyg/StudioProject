@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="css/owl.carousel.css">
     <script src="js/owl.carousel.min.js" type="text/javascript"></script>
     <script src="js/comm.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/jump.js"></script>
 <body>
 <header class="clearfix">
     <section class="mainWrap">
@@ -106,17 +107,52 @@
                     </li>
                 </c:forEach>
             </ul>
-            <p style="display:none">
-        <span style='font-size:12px'>
-                共<b>10</b>条&nbsp;&nbsp;
-                分<b>2</b>页&nbsp;&nbsp;
-                当前&nbsp;第<b>1</b>页&nbsp;&nbsp;
-                 <font color='#C0C0C0'>首页</font>
-                 <font color='#C0C0C0'>上一页</font>
-                 <a href='#'><font color='#000000'>下一页</font></a>
-                 <a href='#'><font color='#000000'>末页</font></a>
-        </span>
-            </p>
+            <br>
+            <div class="pager">
+                <!-- 上一页 按钮 -->
+                <c:choose>
+                    <c:when test="${page>1}">
+                        <a href="../info/findBooks.do?start=${start-numberPerPage}&length=${numberPerPage}&page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a><<</a>
+                    </c:otherwise>
+                </c:choose>
+
+                <!-- 页数列表 -->
+                <c:forEach items="${pageList}" var="item">
+                    <c:choose>
+                        <c:when test="${(total-(item-1)*numberPerPage)>=numberPerPage}">
+                            <a href="../info/findBooks.do?start=${(item-1)*numberPerPage}&length=${numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="../info/findBooks.do?start=${(item-1)*numberPerPage}&length=${total-(item-1)*numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+                <!-- 下一页 按钮 -->
+                <c:choose>
+                    <c:when test="${page<totalPage && rest>=numberPerPage}">
+                        <a href="../info/findBooks.do?start=${start+numberPerPage}&length=${numberPerPage}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                            >>
+                        </a>
+                    </c:when>
+                    <c:when test="${page<totalPage && rest<numberPerPage && rest>0}">
+                        <a href="../info/findBooks.do?start=${start+numberPerPage}&length=${rest}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                            >>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a>>></a>
+                    </c:otherwise>
+                </c:choose>
+
+                <!-- 直接跳转 -->
+                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage},${total},'findBooks')" />
+                <!-- 设置每页显示条数 -->
+                &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},'findBooks')" />
+            </div>
         </section>
         <section class="colunm2">
             <section class="mod withborder">

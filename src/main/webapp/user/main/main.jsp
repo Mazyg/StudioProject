@@ -42,7 +42,7 @@
                 <ul id="nav">
                     <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点时事</a>
                     </li>
-                    <li><a href="../info/findChinese.do?page=0&numberPerPage=3&length=3">爱我中华</a>
+                    <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
                         <ul>
                             <li><a href="#">最美中国景</a></li>
                             <li><a href="#">最美中国人</a></li>
@@ -54,8 +54,8 @@
                     <li><a href="../topic/showTopic.do" class="">话题</a>
                     </li>
 
-                    <li><a href="../info/findBooks.do">书籍</a></li>
-                    <li><a href="../info/findMovies.do">电影</a></li>
+                    <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3">书籍</a></li>
+                    <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
 
                     <c:if test="${users.uname!=null}">
                     <li><a href="../info/findPersonalMainInfo.do" class="">个人中心</a>

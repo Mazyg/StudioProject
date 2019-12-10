@@ -135,8 +135,8 @@
             </c:forEach>
             </ul>
             <br>
-            <!-- 上一页 按钮 -->
             <div class="pager">
+                <!-- 上一页 按钮 -->
                 <c:choose>
                     <c:when test="${page>1}">
                         <a href="../info/findEvent.do?start=${start-numberPerPage}&length=${numberPerPage}&page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
@@ -176,9 +176,9 @@
                 </c:choose>
 
                 <!-- 直接跳转 -->
-                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage},${total})" />
+                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage},${total},'findEvent')" />
                 <!-- 设置每页显示条数 -->
-                    &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total})" />
+                    &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},'findEvent')" />
             </div>
         </section>
         <section class="colunm2">
