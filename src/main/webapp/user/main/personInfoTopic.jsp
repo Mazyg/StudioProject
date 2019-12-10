@@ -117,7 +117,7 @@
         <div>
             <br><br><br><br><br><br><br>
             <table>
-                <tr><td>&nbsp;&nbsp;<img class="imgs" src="img/png.png" alt=""></td>
+                <tr><td>&nbsp;&nbsp;<img class="imgs" src="${users.photo}" alt=""></td>
                     <c:if test="${users.uname == null}">
                     <td><h4>&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                     </c:if>

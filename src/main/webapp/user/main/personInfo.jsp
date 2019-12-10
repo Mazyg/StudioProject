@@ -17,19 +17,15 @@
     <base href="<%=basePath%>">
     <meta charset="utf-8">
     <title>个人中心</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 , shrink-to-fit=no">
     <link href="css/base_news.css" rel="stylesheet" type="text/css">
     <link href="font/font.css" rel="stylesheet" type="text/css">
     <link href="css/inner.css" rel="stylesheet" type="text/css">
-    <script src="../js/jquery-1.8.3.min.js" type="text/javascript"></script>
+     <link rel="stylesheet" href="css/style.css"/>
+    <script src="js/jquery-1.8.3.js"></script>
     <link rel="stylesheet" href="css/slick.css">
     <script src="js/slick.min.js" type="text/javascript"></script>
     <script src="js/regexcut.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <script src="js/owl.carousel.min.js" type="text/javascript"></script>
-    <script src="js/comm.js" type="text/javascript"></script>
-    <script src="publish/thunews/js/regex-cn.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -62,6 +58,14 @@
             }
     }
 
+
+
+
+
+
+
+</script>
+<script type="text/javascript">
     function selectFile(){
         $("#photo").trigger("click");
     }
@@ -79,8 +83,11 @@
             mimeType : 'multipart/form-data',
             success : function(data) {
                 $("#url").val(data) ;
+                $("#src").attr("src",data)
             }
         })
+
+
 
     }
 </script>
@@ -127,7 +134,42 @@
         <div>
             <br><br><br><br><br><br><br>
             <table>
-                <tr><td>&nbsp;&nbsp;<img class="imgs" src="img/png.png" alt=""></td>
+                <tr><td>
+                    <img class="imgs" src="${users.photo}" alt="" data-toggle="modal" data-target="#myModal"/>
+
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="../user/personPhoto.do" method="post">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">更换头像</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                  <%--  <input type="file" name="img[]" class="file-upload-default">--%>
+                                    <div class="input-group col-xs-12" style="text-align:center">
+                                        <img class="imgs  center-block" src="${users.photo} " id="src">
+                                        <input type="text" class="form-control file-upload-info" style="display:none" readonly placeholder="上传封面" id="url" name="photo" >
+                                        <span class="input-group-append">
+                                            <br>
+                                        <input type="file" id="photo" style="display:none" multiple="multiple" onchange="getImage()">
+                                        <button class="file-upload-browse btn btn-primary" type="button" onclick="selectFile()">上传</button>
+                                     </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="submit" class="btn btn-primary">提交更改</button>
+                            </div>
+                            </form>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+        </div>
+                    </td>
                     <c:if test="${users.uname == null}">
                     <td><h4>&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                     </c:if>

@@ -28,4 +28,6 @@ public interface UserService {
     public boolean updateUser3(User user);
 
     public User findByNameAll(String uname);
+
+    public boolean personPhoto(User user);
 }
