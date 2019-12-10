@@ -1,6 +1,7 @@
 package com.studio.dao;
 
 import com.studio.domian.Comment;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,8 @@ public interface CommentDao {
             "values('${date}','${uname}','${rname}','${wid}','${content}')")
     public boolean saveComment(Comment comment);
 
-    public boolean deleComment(Comment comment);
+    @Delete("delete from comment where cid=#{cid}")
+    public boolean deleteComment(Integer cid);
 
     @Select("select * from comment where wid=#{wid}")
     public List<Comment> findByWid(Integer wid);

@@ -1,7 +1,9 @@
 package com.studio.controller;
 
+import com.studio.domian.Comment;
 import com.studio.domian.Dynamic;
 import com.studio.domian.Topic;
+import com.studio.service.CommentService;
 import com.studio.service.DynamicService;
 import com.studio.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class DynamicController {
 
     @Autowired
     private TopicService topicService;
+
+    @Autowired
+    private CommentService commentService;
 
 
     @RequestMapping("/saveDynamic")
@@ -59,4 +64,26 @@ public class DynamicController {
         System.out.println("topic");
         return  "user/main/dynamic";
     }
+
+    @RequestMapping("/findAllTopic")
+    public String findAllTopic(Model model){
+        List<Topic> topics = topicService.findAllTopic();
+        model.addAttribute("topics",topics);
+        return  "manage/pages/charts/topic";
+    }
+
+    @RequestMapping("/findAllDynamicByTid")
+    public String findAllDynamicByTid(String tid,Model model){
+        List<Dynamic> dynamics = dynamicService.findByTid(tid);
+        model.addAttribute("dynamics",dynamics);
+        return "manage/pages/charts/dynamic";
+    }
+
+    @RequestMapping("/findAllReplyByWid")
+    public String findAllReplyByWid(Integer wid,Model model){
+        List<Comment> comments = commentService.findByWid(wid);
+        model.addAttribute("comments",comments);
+        return "manage/pages/charts/reply";
+    }
+
 }

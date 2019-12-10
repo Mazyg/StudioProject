@@ -7,7 +7,7 @@ import java.util.List;
 public interface CommentService {
     public boolean saveComment(Comment comment);
 
-    public boolean deleComment(Comment comment);
+    public boolean deleteComment(Integer cid);
 
     public List<Comment> findByWid(Integer wid);
 }
