@@ -135,7 +135,7 @@
             <br><br><br><br><br><br><br>
             <table>
                 <tr><td>
-                    <img class="imgs" src="${users.photo}" alt="" data-toggle="modal" data-target="#myModal"/>
+                    <img class="imgs" src="${users.photo}" alt="头像" data-toggle="modal" data-target="#myModal"/>
 
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">

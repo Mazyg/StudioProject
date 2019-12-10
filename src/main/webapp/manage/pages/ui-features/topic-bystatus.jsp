@@ -5,6 +5,7 @@
 %>
 <html>
 <head>
+  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>话题管理</title>
@@ -13,6 +14,12 @@
   <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
   <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <!-- endinject -->
+  <!-- Layout styles -->
   <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
   <link rel="shortcut icon" href="images/favicon.png" />
   <script type="text/javascript">
@@ -64,8 +71,8 @@
               <p class="mb-1 mt-3">${users.uname}</p>
               <p class="font-weight-light text-muted mb-0">${users.email}</p>
             </div>
-            <a class="dropdown-item" href="../user/personalInfo.do?uid=${users.uid}"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
-            <a class="dropdown-item" href="pages/samples/login.jsp"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
+            <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
+            <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
           </div>
         </li>
       </ul>
@@ -99,7 +106,7 @@
           </a>
           <div class="collapse" id="ui-basic">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="../dynamic/findAllTopic.do">动态管理</a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.jsp">动态管理</a></li>
               <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.jsp">动态推送</a></li>
             </ul>
           </div>
@@ -141,6 +148,22 @@
             </ul>
           </div>
         </li>
+        <li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+            <span class="menu-title">General Pages</span>
+            <i class="icon-doc menu-icon"></i>
+          </a>
+          <div class="collapse" id="auth">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/login.jsp"> Login </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/register.jsp"> Register </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.jsp"> 404 </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.jsp"> 500 </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.jsp"> Blank Page </a></li>
+            </ul>
+          </div>
+        </li>
       </ul>
     </nav>
     <!-- partial -->
@@ -174,7 +197,7 @@
                       <td>${topic1.t_title}</td>
                       <td>${topic1.date}</td>
                       <td><a href="../topic/findById.do?tid=${topic1.tid}">查看详情</a> </td>
-                      <td>${topic1.t_status}</td>
+                      <td>${topic1.t_tatus}</td>
                       <td><a href="../topic/updateStatus.do?tid=${topic1.tid}" style="color: #1d6b1f">通过审核</a></td>
                       <td><a href="../topic/deleTopic.do?tid=${topic1.tid}" style="color: #a01a1f" >删除</a></td>
                       <td><td>
