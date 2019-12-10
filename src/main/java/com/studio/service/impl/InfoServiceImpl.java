@@ -64,6 +64,11 @@ public class InfoServiceImpl implements InfoService {
     }
 
     @Override
+ 
+    public int countBytype(String info_type) {
+        return infoDao.countByType(info_type);
+}
+ @Override
     public List<Info> findMovies() {
         return infoDao.findMovie();
     }

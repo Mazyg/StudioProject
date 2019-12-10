@@ -20,6 +20,11 @@ public interface DynamicDao {
     @Insert("insert into dynamic(date,content,uname,tid) values('${date}','${content}','${uname}','${tid}')")
     public boolean saveDynamic(Dynamic dynamic);
 
+  
     @Delete("delete from dynamic where wid=#{wid} ")
     public boolean deleteDynamic(Integer wid);
+
+ 
+
+
 }

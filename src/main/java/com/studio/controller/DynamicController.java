@@ -11,8 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+ 
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+=======
+import org.springframework.web.bind.annotation.ResponseBody;
+ 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +28,11 @@ public class DynamicController {
 
     @Autowired
     private DynamicService dynamicService;
+
+    ModelAndView mv;
+    boolean result;
+    String msg;
+    Dynamic dynamic;
 
     @Autowired
     private TopicService topicService;
@@ -61,7 +71,6 @@ public class DynamicController {
     public String findEvent(Model model){
         List<Topic> topic=topicService.findTopic(0,5);
         model.addAttribute("topic",topic);
-        System.out.println("topic");
         return  "user/main/dynamic";
     }
 

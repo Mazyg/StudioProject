@@ -39,6 +39,13 @@ public interface UserDao {
     public User findByName(String uname);
 
 
+    /**
+     * 根据用户名查询所有用户
+     * @param uname
+     * @return
+     */
+    @Select("SELECT * FROM user where  uname like CONCAT('%',#{uname},'%')")
+     public User findByNameAll(String uname);
 
     /**
      * 查找管理员
