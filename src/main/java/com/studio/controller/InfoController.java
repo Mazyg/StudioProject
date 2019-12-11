@@ -38,6 +38,51 @@ public class InfoController {
         return mv;
     }
 
+    //全局模糊查询
+    @RequestMapping("/findAll")
+    public String findAll(Model model,HttpServletRequest request){
+        String search=request.getParameter("search");
+        model.addAttribute("search",search);
+        String keyword="%"+search+"%";
+        int total=infoService.countAll(keyword);
+        model.addAttribute("total", total);
+        int start = Integer.parseInt(request.getParameter("start"));
+        model.addAttribute("start",start);
+        int length= Integer.parseInt(request.getParameter("length"));
+        int page = Integer.parseInt(request.getParameter("page"));
+        model.addAttribute("page",page);
+        int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
+        model.addAttribute("numberPerPage",numberPerPage);
+        List<Info>  infos=infoService.showAll(keyword,start,length);
+        model.addAttribute("infos",infos);
+        System.out.println("开始的位置："+start);
+        System.out.println("当前页数："+page);
+        System.out.println("设置每页显示条数 ："+numberPerPage);
+        System.out.println("实际显示条数："+length);
+        int rest=total-(start+length);
+        System.out.println("剩余："+rest);
+        model.addAttribute("rest",rest);
+        int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
+        model.addAttribute("totalPage",totalPage);
+        System.out.println("总页数："+totalPage);
+        System.out.println("\n------------------------\n");
+        Vector<Integer> pageArr = new Vector<Integer>();
+        int startx=1;
+        if(page>5){
+            startx= page/5*5;
+        }
+        int num = startx;
+        while(!(num > totalPage || num >=startx +5)){
+            pageArr.add(new Integer(num));
+            ++num;
+        }
+        model.addAttribute("pageList",pageArr);
+      return "user/main/search";
+    }
+
     //首页显示
     @RequestMapping("/findInfoBytype")
     public String findInfoBytype(Model model){
@@ -322,4 +367,6 @@ public class InfoController {
         mv.setViewName("manage/pages/forms/basic_elements");
         return mv;
     }
+
+
 }
