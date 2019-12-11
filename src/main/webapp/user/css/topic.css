@@ -80,7 +80,7 @@ body{
     color: #000;
 }
 .indexMain_left_btn li a.on{
-    color: #e43e20;
+    color: red;
 }
 .indexMain_left_con{
     width: 100%;
@@ -230,7 +230,7 @@ body{
     border-right: none;
 }
 .indexFooter_con a.on {
-    background-color: #e43e20;
+    background-color: red;
     border-right: none;
     color: #fff;
 }
@@ -245,7 +245,7 @@ body{
     text-align: center;
     line-height: 40px;
     letter-spacing: 1px;
-    background-color: #e43e20;
+    background-color: red;
 }
 .pwfb{
     width: 100%;
@@ -301,7 +301,7 @@ body{
     border-radius: 0 10px 10px 0;
     border: none;
     float: left;
-    background-color: #e43e20;
+    background-color: red;
     font-size: 14px;
 }
 .indexPublic{

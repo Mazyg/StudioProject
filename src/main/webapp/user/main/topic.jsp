@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="css/reset.css"/>
     <link rel="stylesheet" href="css/public.css"/>
     <link rel="stylesheet" href="css/topic.css"/>
+    <style type="text/css">
+        body{
+            background: url("img/bg_02.jpg");
+        }
+    </style>
 </head>
 <body>
 <header class="ltHead">
