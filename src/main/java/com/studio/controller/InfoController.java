@@ -80,8 +80,9 @@ public class InfoController {
             ++num;
         }
         model.addAttribute("pageList",pageArr);
-      return "user/main/search";
+        return "user/main/search";
     }
+
 
     //首页显示
     @RequestMapping("/findInfoBytype")
@@ -105,7 +106,7 @@ public class InfoController {
         return  "user/main/main";
     }
 
- 
+
     //热点资讯页面信息显示
     @RequestMapping("/findEvent")
     public String findEvent(Model model,HttpServletRequest request){
@@ -367,6 +368,4 @@ public class InfoController {
         mv.setViewName("manage/pages/forms/basic_elements");
         return mv;
     }
-
-
 }
