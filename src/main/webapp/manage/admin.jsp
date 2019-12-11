@@ -58,10 +58,10 @@
             </li>
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> ${user.uname} </span></a>
+                <img class="img-xs rounded-circle ml-2" src="<%--images/faces/face8.jpg--%> ${users.photo}" alt="Profile image"> <span class="font-weight-normal"> ${user.uname} </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
-                  <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
+                  <img class="img-md rounded-circle" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="Profile image">
                   <p class="mb-1 mt-3">${user.uname}</p>
                   <p class="font-weight-light text-muted mb-0">${users.email}</p>
                 </div>
@@ -83,7 +83,7 @@
             <li class="nav-item nav-profile">
               <a href="javascript:void(0);" class="nav-link">
                 <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="profile image">
+                  <img class="img-xs rounded-circle" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="profile image">
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
@@ -113,7 +113,7 @@
                 <div class="collapse" id="ui-topic">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="pages/ui-features/topicput.jsp">发布话题</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="#">未审核话题</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="../topic/findAllTopicByStatus.do">未审核话题</a></li>
                       <li class="nav-item"> <a class="nav-link" href="../topic/findAll.do">全部话题</a></li>
                     </ul>
                 </div>

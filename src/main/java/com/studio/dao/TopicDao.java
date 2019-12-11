@@ -46,7 +46,7 @@ public interface TopicDao {
      * @param t_title
      * @return
      */
-    @Select("select * from topic where t_title=#{t_title}")
+    @Select("select * from topic where t_title like CONCAT('%',#{t_title},'%')")
     public List<Topic> findByTitle(String t_title);
 
     /**
@@ -54,7 +54,7 @@ public interface TopicDao {
      * @param t_title
      * @return
      */
-    @Select("select * from topic where t_title= #{t_title} and t_tatus='未审核'")
+    @Select("select * from topic where t_title like CONCAT('%',#{t_title},'%') and t_tatus='未审核'")
     public List<Topic> findByTitleNot(String t_title);
 
     /**
