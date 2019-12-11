@@ -21,7 +21,7 @@
     <link href="css/base_news.css" rel="stylesheet" type="text/css">
     <link href="font/font.css" rel="stylesheet" type="text/css">
     <link href="css/inner.css" rel="stylesheet" type="text/css">
-    <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="js/jquery-1.8.3.js" type="text/javascript"></script>
     <link rel="stylesheet" href="css/slick.css">
     <script src="js/slick.min.js" type="text/javascript"></script>
     <script src="js/regexcut.js" type="text/javascript"></script>
@@ -29,6 +29,7 @@
     <script src="js/owl.carousel.min.js" type="text/javascript"></script>
     <script src="js/comm.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/searchsub.js"></script>
+    <script type="text/javascript" src="js/jump.js"></script>
 </head>
 <body>
 <header class="clearfix">

@@ -154,13 +154,17 @@
     </div>
     <div class="indexMain_right">
         <div class="myMsg">
-            <div class="myMsg_con">
-                <div class="myMsg_conPic"></div>
-                <p id="user">${users.uname}</p>
-            </div>
             <c:choose>
-                <c:when test="${users == null}"></c:when>
+                <c:when test="${users == null}">
+                    <div class="myMsg_con">
+                        <div class="myMsg_conPic"></div>
+                    </div>
+                </c:when>
                 <c:otherwise>
+                    <div class="myMsg_con">
+                        <div class="myMsg_conPic"><img src="${users.photo}"></div>
+                        <p id="user">${users.uname}</p>
+                    </div>
                     <div  class="myMsg_footer">
                         <ul>
                             <li><a href="">
