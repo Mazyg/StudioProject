@@ -18,14 +18,19 @@
     <div class="ltHead_cen">
         <a href=""><img src="img/logo.png" alt="" class="headPic1"/></a>
         <ul class="headNav">
-            <li><a href="">首页</a></li>
+            <li><a href="../info/findInfoBytype.do">首页</a></li>
         </ul>
         <!--未登入开始-->
         <div class="ltForm appear">
             <a href=""><img src="img/indexForm_bg.png" alt="" class="headPic2"/></a>
             <ul>
-                <li><a href="">登入</a></li>
-                <li><a href="">注册</a></li>
+                <c:choose>
+                    <c:when test="${users == null}">
+                        <li><a href="../manage/pages/samples/login.jsp">登录</a></li>
+                        <li><a href="../manage/pages/samples/register.jsp">注册</a></li>
+                    </c:when>
+                    <c:otherwise></c:otherwise>
+                </c:choose>
             </ul>
         </div>
         <!-- 未登入结束-->
@@ -39,12 +44,12 @@
         <!-- 登入结束-->
         <div class="navFix">
             <!--登入开始-->
-            <a href="" class="navMe">花花</a>
+            <a class="navMe">${users.uname}</a>
             <!--登入结束-->
             <!--未登入开始-->
             <!--<a href="" class="navLogin">登录</a>-->
             <!--未登入结束-->
-            <a href="" class="navWrite">发新帖</a>
+            <a href="main/write.jsp" class="navWrite">发新帖</a>
         </div>
     </div>
 </header>
@@ -52,7 +57,6 @@
     <div class="indexMain_left">
         <div class="indexMain_left_btn">
             <ul>
-                <li><a href="javascript:">置顶</a></li>
                 <li><a href="javascript:" class="on">最新</a></li>
             </ul>
         </div>
@@ -60,7 +64,7 @@
             <!--有主题图循环开始-->
             <c:forEach items="${topics}" var="topic">
             <div class="indexCon_msg">
-                <div class="indexCon_msg_pic"></div>
+                <div class="indexCon_msg_pic"><img src="${topic.user.photo}"></div>
                 <div class="indexCon_msg_detail">
                     <a href="../topic/findTopicById.do?tid=${topic.tid}">
                         <div class="indexCon_msg_detail_tittle">
@@ -97,11 +101,16 @@
             <div class="indexMain_right">
                 <div class="myMsg">
                     <div class="myMsg_con">
-                        <div class="myMsg_conPic"></div>
-                        <c:if test="${users.uname==null}">
-                            <p>未登录</p>
-                        </c:if>
-                        <p id="user">${users.uname}</p>
+                        <c:choose>
+                            <c:when test="${users.uname==null}">
+                                <div class="myMsg_conPic"></div>
+                                <p>未登录</p>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="myMsg_conPic"><img src="${users.photo}"></div>
+                                <p id="user">${users.uname}</p>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <c:choose>
                         <c:when test="${users == null}"></c:when>

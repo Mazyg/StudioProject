@@ -15,7 +15,15 @@ public class Topic implements Serializable {
     private String t_tatus;
     private String t_title;
     private String t_type;
+    private User user;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getTid() {
         return tid;
@@ -80,9 +88,10 @@ public class Topic implements Serializable {
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
                 ", uname='" + uname + '\'' +
-                ", t_status='" + t_tatus + '\'' +
+                ", t_tatus='" + t_tatus + '\'' +
                 ", t_title='" + t_title + '\'' +
                 ", t_type='" + t_type + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

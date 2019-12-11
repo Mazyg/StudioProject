@@ -16,6 +16,15 @@ public class Dynamic implements Serializable {
     private String uname;
     private Integer tid;
     List<Comment> comments;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public List<Comment> getComments() {
         return comments;
