@@ -223,8 +223,11 @@ public class TopicController {
     @RequestMapping("/showTopic")
     public ModelAndView showTopic(){
         mv = new ModelAndView();
-        List<Topic> topic =  topicService.findAllTopic();
-        mv.addObject("topics", topic);
+        List<Topic> topics =  topicService.findAllTopic();
+        for (Topic topic : topics){
+            topic.setUser(userService.findByNameAll(topic.getUname()));
+        }
+        mv.addObject("topics", topics);
         mv.setViewName("user/main/topic");
         return mv;
     }
@@ -233,9 +236,11 @@ public class TopicController {
     @RequestMapping("/findTopicById")
     public String findTopicById(String tid,Model model){
         Topic topic = topicService.findTopicById(tid);
+        topic.setUser(userService.findByNameAll(topic.getUname()));
         List<Dynamic> dynamics = dynamicService.findByTid(tid);
         for (Dynamic dynamic: dynamics){
             dynamic.setComments(commentService.findByWid(dynamic.getWid()));
+            dynamic.setUser(userService.findByNameAll(dynamic.getUname()));
         }
         model.addAttribute("dynamics", dynamics);
         model.addAttribute("topic", topic);

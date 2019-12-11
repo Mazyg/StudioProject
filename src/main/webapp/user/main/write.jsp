@@ -39,13 +39,6 @@
         <a href=""><img src="img/logo.png" alt="" class="headPic1"/></a>
         <ul class="headNav">
             <li><a href="">首页</a></li>
-            <li><a href="">沪牌竞拍</a></li>
-            <li><a href="">拍王助手</a></li>
-            <li><a href="">深圳竞价摇号</a></li>
-            <li><a href="">广州竞价摇号</a></li>
-            <li><a href="">杭州竞价摇号</a></li>
-            <li><a href="">天津竞价摇号</a></li>
-            <li><a href="">增值服务</a></li>
         </ul>
         <!--未登入开始-->
         <!--<div class="ltForm">-->
@@ -78,7 +71,7 @@
 </header>
 <div class="writeCon">
     <div class="writeCon_head">
-        <p>发新帖</p>
+        <p>发新话题</p>
     </div>
     <div class="writeCon_cen">
         <br><br><br><br>

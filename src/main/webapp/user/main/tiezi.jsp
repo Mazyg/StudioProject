@@ -19,14 +19,20 @@
     <div class="ltHead_cen">
         <a href=""><img src="img/logo.png" alt="" class="headPic1"/></a>
         <ul class="headNav">
-            <li><a href="">首页</a></li>
+            <li><a href="../info/findInfoBytype.do">首页</a></li>
+            <li><a href="javascript:;" onClick="javascript:history.back(-1);">返回上一页</a></li>
         </ul>
         <!--未登入开始-->
         <div class="ltForm">
             <a href=""><img src="img/indexForm_bg.png" alt="" class="headPic2"/></a>
             <ul>
-                <li><a href="">登入</a></li>
-                <li><a href="">注册</a></li>
+                <c:choose>
+                    <c:when test="${users == null}">
+                        <li><a href="../manage/pages/samples/login.jsp">登录</a></li>
+                        <li><a href="../manage/pages/samples/register.jsp">注册</a></li>
+                    </c:when>
+                    <c:otherwise></c:otherwise>
+                </c:choose>
             </ul>
         </div>
         <!-- 未登入结束-->
@@ -44,7 +50,7 @@
     <div class="indexMain_left">
         <div class="tzCon">
             <div class="tzCon_head">
-                <div class="tzCon_head_left"></div>
+                <div class="tzCon_head_left"><img src="${topic.user.photo}"></div>
                 <div class="tzCon_head_right">
                     <h1>${topic.t_title}</h1>
                     <ul>
@@ -73,7 +79,7 @@
             <!--回复后的情况-->
             <c:forEach items="${dynamics}" var="dynamic">
             <div class="newPending_son">
-                <div class="pendPic"></div>
+                <div class="pendPic"><img src="${dynamic.user.photo}"></div>
                 <div class="pendDetail">
                     <div class="pendDetail_head">
                         <p>${dynamic.uname} <span>${dynamic.date}</span></p>

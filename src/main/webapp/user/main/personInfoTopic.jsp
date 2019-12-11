@@ -148,7 +148,7 @@
                 </c:if>
                 <c:if test="${users.uname != null}">
                     <c:if test="${topicInfo.size()== 0}">
-                        还没有发布话题，去<a href="#">发布话题</a>
+                        还没有发布话题，去<a href="main/write.jsp">发布话题</a>
                         <br>
                     </c:if>
                     <c:if test="${topicInfo.size()!= 0}">
