@@ -28,7 +28,7 @@
     <script type="text/javascript">
       window.onload = function()
       {
-        CKEDITOR.replace( 'description');
+         CKEDITOR.replace( 'description');
         var message = "${msg}";
         if( message != ""){
           alert(message);
@@ -199,8 +199,8 @@
                   <div class="card-body">
                     <form class="forms-sample" action="../info/addInfo.do" method="post">
                       <div class="form-group">
-                        <label for="exampleInputName1">标题</label>
-                        <input type="text" class="form-control" id="exampleInputName1" placeholder="标题" name="title">
+                        <label for="title">标题</label>
+                        <input type="text" class="form-control" id="title" placeholder="标题" name="title">
                       </div>
                       <div class="form-group">
                         <label for="introduction">简介</label>
@@ -242,13 +242,33 @@
                         <label for="description">内容</label>
                         <textarea id="description"  name="content"></textarea>
                       </div>
-                      <input type="submit" class="btn btn-primary mr-2" value="提交" onclick="change()">
                       <input type="reset" class="btn btn-light" value="重置">
+                      <input type="submit" class="btn btn-primary mr-2" value="提交" onclick="change()">
                     </form>
+                    <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#myModal" id="view">
+                      预览
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          <!--预览-->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="view-title">
+                  </h4>
+                </div>
+                <div class="modal-body" id="view-content">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                  </button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:../../partials/_footer.html -->
@@ -278,6 +298,12 @@
     <script src="js/typeahead.js"></script>
     <script src="js/select2.js"></script>
     <!-- End custom js for this page -->
+    <script>
+      $("#view").click(function () {
 
+        $("#view-title").html($("#title").val());
+        $("#view-content").html(CKEDITOR.instances.description.getData());
+      })
+    </script>
   </body>
 </html>

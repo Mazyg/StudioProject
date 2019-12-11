@@ -61,7 +61,7 @@
                 <img class="img-xs rounded-circle ml-2" src="<%--images/faces/face8.jpg--%> ${users.photo}" alt="Profile image"> <span class="font-weight-normal"> ${user.uname} </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
-                  <img class="img-md rounded-circle" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="Profile image">
+                  <img class="img-lg rounded-circle" src="${users.photo}" alt="Profile image">
                   <p class="mb-1 mt-3">${user.uname}</p>
                   <p class="font-weight-light text-muted mb-0">${users.email}</p>
                 </div>
