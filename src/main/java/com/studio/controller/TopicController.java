@@ -187,6 +187,7 @@ public class TopicController {
     public String findByTitle(HttpServletRequest request, Model model){
         String title = request.getParameter("title");
         List<Topic> topicList = topicService.findByTitle(title);
+        System.out.println("tl"+topicList);
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic-table";
     }
