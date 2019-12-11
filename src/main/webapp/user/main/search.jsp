@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="css/owl.carousel.css">
     <script src="js/owl.carousel.min.js" type="text/javascript"></script>
     <script src="js/comm.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/jump.js"></script>
     <script type="text/javascript" src="js/searchsub.js"></script>
 </head>
 <body>
@@ -36,8 +35,8 @@
     <section class="mainWrap">
         <div class="topwraper relative clearfix">
             <div class="search">
-                    <input type="text" id="search"/>
-                    <a onclick="searchSub(${numberPerPage})"><i>搜索</i></a>
+                <input name="query" type="text" id="search" >
+                <a onclick="searchSub()"><i>搜索</i></a>
             </div>
         </div>
     </section>
@@ -84,60 +83,40 @@
 <div class="content yahei subchannel">
     <div class="mainWrap clearfix">
         <section class="colunm1">
-            <div class="biggallery">
-                <c:forEach items="${eventTop}" var="eventTop">
-                <div class="biggallerywraper">
-                    <ul class="biggallerylist clearfix">
-                        <li><a href="#" target="_blank"><img src="${eventTop.photo}"></a></li>
-                    </ul>
-                    <div class="imgintro1">
-                        <b></b>
-                        <h3>
-                            <span class="tips" id="keyword1-1">${eventTop.info_type}</span>
-                            <a href="#" target="_blank"  id="title1-1" class="jiequ">【${eventTop.info_type}】${eventTop.title}</a>
-                        </h3>
-                        <p>${eventTop.introduce}</p>
-                    </div>
-                </div>
-                </c:forEach>
-            </div>
             <ul class="picnewslist people">
-            <c:forEach items="${eventList}" var="eventList">
-                <li class="clearfix">
-                    <figure>
-                        <a class="picwraper" href="#" target="_blank">
-                            <img src="${eventList.photo}">
-                        </a>
-                        <div class="contentwraper">
-                            <figcaption>
-                                <span class="tips">${eventList.info_type}</span>
-                                <a href="#" target="_blank"  class="jiequ">
-                                    【${eventList.info_type}】${eventList.title}
-                                </a>
-                            </figcaption>
-                            <p>${eventList.introduce}</p>
-                            <div class="thumb">
-
-                                
-                                <i class="thunews-clock-o"></i>
-                                ${eventList.date}
-                                <i class="thunews-eye"></i>
-                                <font  >
-                                    <span  ></span>
-                                </font>
-
+                <c:forEach items="${infos}" var="infos">
+                    <li class="clearfix">
+                        <figure>
+                            <a class="picwraper" href="#" target="_blank">
+                                <img src="${infos.photo}">
+                            </a>
+                            <div class="contentwraper">
+                                <figcaption>
+                                    <span class="tips">${infos.info_type}</span>
+                                    <a href="#" target="_blank"  class="jiequ">
+                                        【${infos.info_type}】${infos.title}
+                                    </a>
+                                </figcaption>
+                                <p>${infos.introduce}</p>
+                                <div class="thumb">
+                                    <i class="thunews-clock-o"></i>
+                                        ${infos.date}
+                                    <i class="thunews-eye"></i>
+                                    <font  >
+                                        <span  ></span>
+                                    </font>
+                                </div>
                             </div>
-                        </div>
-                    </figure>
-                </li>
-            </c:forEach>
+                        </figure>
+                    </li>
+                </c:forEach>
             </ul>
             <br>
             <div class="pager">
                 <!-- 上一页 按钮 -->
                 <c:choose>
                     <c:when test="${page>1}">
-                        <a href="../info/findEvent.do?start=${start-numberPerPage}&length=${numberPerPage}&page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
+                        <a href="../info/findAll.do?start=${start-numberPerPage}&length=${numberPerPage}&page=${page-1}&numberPerPage=${numberPerPage}&search=${search}" rel="external nofollow" ><<</a>
                     </c:when>
                     <c:otherwise>
                         <a><<</a>
@@ -148,10 +127,10 @@
                 <c:forEach items="${pageList}" var="item">
                     <c:choose>
                         <c:when test="${(total-(item-1)*numberPerPage)>=numberPerPage}">
-                            <a href="../info/findEvent.do?start=${(item-1)*numberPerPage}&length=${numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
+                            <a href="../info/findAll.do?start=${(item-1)*numberPerPage}&length=${numberPerPage}&page=${item}&numberPerPage=${numberPerPage}&search=${search}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="../info/findEvent.do?start=${(item-1)*numberPerPage}&length=${total-(item-1)*numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
+                            <a href="../info/findAll.do?start=${(item-1)*numberPerPage}&length=${total-(item-1)*numberPerPage}&page=${item}&numberPerPage=${numberPerPage}&search=${search}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
@@ -159,12 +138,12 @@
                 <!-- 下一页 按钮 -->
                 <c:choose>
                     <c:when test="${page<totalPage && rest>=numberPerPage}">
-                        <a href="../info/findEvent.do?start=${start+numberPerPage}&length=${numberPerPage}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                        <a href="../info/findAll.do?start=${start+numberPerPage}&length=${numberPerPage}&page=${page+1}&numberPerPage=${numberPerPage}&search=${search}" rel="external nofollow">
                             >>
                         </a>
                     </c:when>
                     <c:when test="${page<totalPage && rest<numberPerPage && rest>0}">
-                        <a href="../info/findEvent.do?start=${start+numberPerPage}&length=${rest}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                        <a href="../info/findAll.do?start=${start+numberPerPage}&length=${rest}&page=${page+1}&numberPerPage=${numberPerPage}&search=${search}" rel="external nofollow">
                             >>
                         </a>
                     </c:when>
@@ -172,11 +151,10 @@
                         <a>>></a>
                     </c:otherwise>
                 </c:choose>
-
                 <!-- 直接跳转 -->
-                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage},${total},'findEvent')" />
+                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo2(${totalPage},${numberPerPage},${total},${search})" />
                 <!-- 设置每页显示条数 -->
-                    &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},'findEvent')" />
+                &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change2(${total},${search})" />
             </div>
         </section>
         <section class="colunm2">
@@ -205,9 +183,9 @@
                     </a>
                 </h2>
                 <ul class="newslist clearfix"  id="resText">
-                <c:forEach items="${eventList}" var="eventList">
-                    <li>${eventList.title}</li>
-                </c:forEach>
+                    <c:forEach items="${eventList}" var="eventList">
+                        <li>${eventList.title}</li>
+                    </c:forEach>
                 </ul>
             </section>
         </section>

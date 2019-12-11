@@ -64,11 +64,27 @@ public class InfoServiceImpl implements InfoService {
     }
 
     @Override
+    public List<Info> showAll(String keyword, int start, int length) {
+        return infoDao.showAll(keyword,start,length);
+    }
+
+    @Override
  
     public int countBytype(String info_type) {
         return infoDao.countByType(info_type);
 }
- @Override
+
+    @Override
+    public int countAll(String keyword) {
+        return infoDao.countAll(keyword);
+    }
+
+    @Override
+    public List<Info> findAll(String keyword) {
+        return infoDao.findAll(keyword);
+    }
+
+    @Override
     public List<Info> findMovies() {
         return infoDao.findMovie();
     }
