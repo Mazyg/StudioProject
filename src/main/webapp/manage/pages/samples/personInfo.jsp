@@ -31,6 +31,52 @@
             }
         }
     </script>
+
+    <script type="text/javascript">
+        function selectFile(){
+            $("#photo").trigger("click");
+        }
+
+        function getImage() {
+            var obj = new FormData();
+            var file = document.getElementById("photo").files[0];
+            obj.append("file", file);
+            $.ajax({
+                url : '../load/getImageUrl.do',
+                type : 'POST',
+                data : obj,
+                contentType : false,
+                processData : false,
+                mimeType : 'multipart/form-data',
+                success : function(data) {
+                    $("#url").val(data) ;
+                    $("#src").attr("src",data)
+                }
+            })
+
+
+
+        }
+    </script>
+
+    <style type="text/css">
+        .imgs{
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+        }
+
+        .h4a{
+            float: left;
+        }
+        .div1{
+            text-align: center;
+        }
+        .img2{
+            margin:0 auto ;
+        }
+    </style>
+
 </head>
 <body onload="msssage()">
 <div class="container-scroller">
@@ -63,10 +109,10 @@
                 </li>
                 <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
                     <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                        <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> ${users.uname} </span></a>
+                        <img class="img-xs rounded-circle ml-2" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="Profile image"> <span class="font-weight-normal"> ${users.uname} </span></a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                         <div class="dropdown-header text-center">
-                            <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
+                            <img class="img-lg rounded-circle" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="Profile image">
                             <p class="mb-1 mt-3">${users.uname}</p>
                             <p class="font-weight-light text-muted mb-0">${users.email}</p>
                         </div>
@@ -88,11 +134,11 @@
                 <li class="nav-item nav-profile">
                     <a href="javascript:void(0);" class="nav-link">
                         <div class="profile-image">
-                            <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="profile image">
+                            <img class="img-xs rounded-circle" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="profile image">
                             <div class="dot-indicator bg-success"></div>
                         </div>
                         <div class="text-wrapper">
-                            <p class="profile-name">${user.uname}</p>
+                            <p class="profile-name">${users.uname}</p>
                             <p class="designation">管理员</p>
                         </div>
                     </a>
@@ -105,7 +151,7 @@
                     </a>
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.jsp">动态管理</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../dynamic/findAllTopic.do">动态管理</a></li>
                             <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.jsp">动态推送</a></li>
                         </ul>
                     </div>
@@ -136,24 +182,14 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../user/findAllUser.do">
+                    <a class="nav-link" data-toggle="collapse" href="#user_manage" aria-expanded="false" aria-controls="user_manage">
                         <span class="menu-title">用户管理</span>
                         <i class="icon-grid menu-icon"></i>
                     </a>
-                </li>
-                <li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                        <span class="menu-title">General Pages</span>
-                        <i class="icon-doc menu-icon"></i>
-                    </a>
-                    <div class="collapse" id="auth">
+                    <div class="collapse" id="user_manage">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.jsp"> Login </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/register.jsp"> Register </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.jsp"> 404 </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.jsp"> 500 </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.jsp"> Blank Page </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../user/findAllUser.do">用户</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../user/findAllAdmin.do">管理员</a></li>
                         </ul>
                     </div>
                 </li>
@@ -171,18 +207,109 @@
                             <div class="card-body">
                                 <p class="card-description"> 个人信息</p>
 
-                                <div class="col-md-6">
-                                    <address class="text-primary">
+                                <div class="form-group">
+                                    <label for="disabledTextInput" class="col-sm-2  control-label">头像</label>
+                                    <div class="col-sm-8">
+                                 <span>
+                               <img class="imgs" src="${users.photo}" alt="头像" data-toggle="modal" data-target="#myModal"/>
 
-                                        <img class="img-md rounded-circle" src="${user.photo}">
-                                        <p class="font-weight-bold"> 账号： </p>
-                                        <p class="mb-2"> ${user.uid} </p>
-                                        <p class="font-weight-bold"> 昵称： </p>
-                                        <p class="mb-2"> ${user.uname} </p>
-                                        <p class="font-weight-bold"> 邮箱： </p>
-                                        <p class="mb-2"> ${user.email} </p>
-                                    </address>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="../user/personPhoto.do" method="post">
+                            <div class="modal-header">
+                                <h4 class="<%--modal-title--%> h4a" id="myModalLabel">更换头像</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="form-group div1">
+                                  <%--  <input type="file" name="img[]" class="file-upload-default">--%>
+                                    <div class="input-group col-xs-12" >
+                                        <img class="imgs img2" src="${users.photo} " id="src" style="margin: 0 auto;">
+                                        <input type="text" class="form-control file-upload-info" style="display:none" readonly placeholder="上传封面" id="url" name="photo" >
+                                        <br>
+                                        <div style="height: 20px"></div>
+                                        <span class="input-group-append">
+                                            <br>
+                                            <input type="file" id="photo" style="display:none" multiple="multiple" onchange="getImage()">
+
+                                     </span><br>
+                                    </div><button class="file-upload-browse btn btn-primary" type="button" onclick="selectFile()">上传</button>
                                 </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="submit" class="btn btn-primary">提交更改</button>
+                            </div>
+                            </form>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                    </div> </span>
+                                    </div>
+                                </div>
+                                <form class="form-horizontal " role="form" action="../user/personUpdateAdm.do"  method="post" >
+
+
+
+                                    <div class="form-group">
+                                        <label for="disabledTextInput" class="col-sm-2  control-label">账号</label>
+                                        <div class="col-sm-8">
+                                <span>
+                                <input type="text" id="disabledTextInput" class="form-control" name="uid" value="${users.uid}"  readonly = "readonly">
+                                </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="disabledTextInput" class="col-sm-2 control-label">状态</label>
+                                        <div class="col-sm-8">
+                                            <input type="text"  class="form-control" name="u_status" value="${users.u_status}"  readonly = "readonly">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="col-sm-2 control-label">昵称</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="uname" placeholder="请输入名字" value="${users.uname}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="col-sm-2 control-label">密码</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="password" placeholder="请输入密码" value="${users.password}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="col-sm-2 control-label">性别</label>
+                                        <input type="hidden" id ="selectRefundReason" value="{sex}"/>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" name="sex" value="${users.sex}">
+                                                <option value="男" <c:if test="${'男'.equals(users.sex)}">selected</c:if>>男</option>
+                                                <option value="女" <c:if test="${'女'.equals(users.sex)}">selected</c:if>>女</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="col-sm-2 control-label">email</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control"  name="email" placeholder="请输入email" value="${users.email}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-8">
+                                            <button type="submit" class="btn btn-primary btn-lg btn-block">修改</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <%--<div class="col-md-6">
+                                    <address class="text-primary">
+                                        <img class="img-md rounded-circle" src="${users.photo}">
+                                        <p class="font-weight-bold"> 账号： </p>
+                                        <p class="mb-2"> ${users.uid} </p>
+                                        <p class="font-weight-bold"> 昵称： </p>
+                                        <p class="mb-2"> ${users.uname} </p>
+                                        <p class="font-weight-bold"> 邮箱： </p>
+                                        <p class="mb-2"> ${users.email} </p>
+                                    </address>
+                                </div>--%>
 
                             </div>
                         </div>
@@ -214,5 +341,11 @@
 <!-- endinject -->
 <!-- Custom js for this page -->
 <!-- End custom js for this page -->
+<script>
+    function x() {
+        var fi
+
+    }
+</script>
 </body>
 </html>
