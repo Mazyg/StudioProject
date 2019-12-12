@@ -1,13 +1,18 @@
 package com.studio.controller;
 
+import com.studio.domian.Comment;
+import com.studio.domian.Dynamic;
 import com.studio.domian.Topic;
 import com.studio.domian.User;
+import com.studio.service.CommentService;
+import com.studio.service.DynamicService;
 import com.studio.service.TopicService;
 import com.studio.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +31,12 @@ public class TopicController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private DynamicService dynamicService;
+
+    @Autowired
+    private CommentService commentService;
+
     private ModelAndView mv;
 
     @RequestMapping("/saveTopic")
@@ -35,13 +46,11 @@ public class TopicController {
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = ft.format(now);
         topic.setDate(time);
-        System.out.println(time);
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("users");
-        topic.setUid(user.getUid());
+        topic.setUname(user.getUname());
         if("admin".equals(user.getU_type())){
             boolean top = topicService.saveTopicA(topic);
-            System.out.println("topic"+top);
             mv.addObject("top", top);
             mv.setViewName("manage/pages/ui-features/topicput");
             return mv;
@@ -52,11 +61,41 @@ public class TopicController {
         return mv;
     }
 
+    /**
+     * 用户界面发布话题
+     * @param topic
+     * @param request
+     * @return
+     */
+    @RequestMapping("/saveTopicUser")
+    public ModelAndView saveTopicUser(Topic topic,HttpServletRequest request){
+        mv = new ModelAndView();
+        Date now = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = ft.format(now);
+        topic.setDate(time);
+        System.out.println("top"+topic);
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("users");
+        System.out.println("user"+user);
+        if(user == null){
+            System.out.println("false");
+            mv.addObject("top", false);
+            mv.setViewName("user/main/write");
+        }else{
+        topic.setUname(user.getUname());
+        boolean top =topicService.saveTopic(topic);
+            System.out.println("top"+top);
+        mv.addObject("top",top);
+        mv.setViewName("user/main/write");
+        }
+        return mv;
+    }
+
     /*删除话题*/
     @RequestMapping("/deleTopic")
     public String deleTopic(HttpServletRequest request){
         String tid = request.getParameter("tid");
-        System.out.println("tid"+tid);
         boolean topicdel = topicService.deleTopic(tid);
         return "redirect:/topic/findAllTopicByStatus.do?topicdel="+topicdel;
     }
@@ -65,7 +104,6 @@ public class TopicController {
     @RequestMapping("/deleTopic1")
     public String deleTopic1(HttpServletRequest request){
         String tid = request.getParameter("tid");
-        System.out.println("tid"+tid);
         boolean topicdel = topicService.deleTopic(tid);
         return "redirect:/topic/findAll.do?topicdel="+topicdel;
     }
@@ -73,7 +111,6 @@ public class TopicController {
     @RequestMapping("/deleTopic2")
     public String deleTopic2(HttpServletRequest request,Model model){
        String tid = request.getParameter("tid");
-        System.out.println("tid"+tid);
         boolean topicDele = topicService.deleTopic(tid);
         model.addAttribute("topicDel", topicDele);
         return "user/main/personInfoTopic";
@@ -105,9 +142,8 @@ public class TopicController {
     public ModelAndView  findAll(HttpServletRequest request){
         mv = new ModelAndView();
         String topicdel = request.getParameter("topicdel");
-        System.out.println("top"+topicdel);
         List<Topic> topic =  topicService.findAllTopic();
-        System.out.println("Topic"+topic);
+        System.out.println("top"+topic);
         mv.addObject("topicdel", topicdel);
         mv.addObject("topics", topic);
         mv.setViewName("manage/pages/ui-features/topic-table");
@@ -118,9 +154,7 @@ public class TopicController {
     public ModelAndView  findAllByStatus(HttpServletRequest request){
         mv = new ModelAndView();
         String topicdel = request.getParameter("topicdel");
-        System.out.println("top"+topicdel);
         List<Topic> topic =  topicService.findAllByStatus();
-        System.out.println("Topic"+topic);
         mv.addObject("topics", topic);
         mv.addObject("topicdel", topicdel);
         mv.setViewName("manage/pages/ui-features/topic-bystatus");
@@ -139,11 +173,8 @@ public class TopicController {
        if(user==null){
            return "user/main/personInfoTopic";
        }
-        Integer uid = user.getUid();
-        System.out.println("user"+user);
-        System.out.println("uid"+uid);
-        List<Topic> topicInfo = topicService.findAllByUid(uid);
-        System.out.println("topic"+topicInfo);
+       String uname = user.getUname();
+        List<Topic> topicInfo = topicService.findAllByUname(uname);
         model.addAttribute("topicInfo", topicInfo);
         return "user/main/personInfoTopic";
     }
@@ -155,9 +186,8 @@ public class TopicController {
     @RequestMapping("/findByTitle")
     public String findByTitle(HttpServletRequest request, Model model){
         String title = request.getParameter("title");
-        System.out.println("ts"+title);
         List<Topic> topicList = topicService.findByTitle(title);
-        System.out.println("Tp"+topicList);
+        System.out.println("tl"+topicList);
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic-table";
     }
@@ -172,7 +202,6 @@ public class TopicController {
     public String findByTitleNot(HttpServletRequest request,Model model){
         String title = request.getParameter("title");
         List<Topic> topicList = topicService.findByTitleNot(title);
-        System.out.println("nt"+topicList);
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic-bystatus";
     }
@@ -183,9 +212,39 @@ public class TopicController {
         String tid = request.getParameter("tid");
        Topic topicList = topicService.findTopicById(tid);
         System.out.println("topic"+topicList);
-        User usersTopic = userService.findById(topicList.getUid());
+        User usersTopic = userService.findByNameAll(topicList.getUname());
+        System.out.println("usert"+usersTopic);
+
         model.addAttribute("usersTopic", usersTopic);
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic_show";
+    }
+
+    /*跳转到话题页面*/
+    @RequestMapping("/showTopic")
+    public ModelAndView showTopic(){
+        mv = new ModelAndView();
+        List<Topic> topics =  topicService.findAllTopic();
+        for (Topic topic : topics){
+            topic.setUser(userService.findByNameAll(topic.getUname()));
+        }
+        mv.addObject("topics", topics);
+        mv.setViewName("user/main/topic");
+        return mv;
+    }
+
+    /*通过id进入话题回复评论页面*/
+    @RequestMapping("/findTopicById")
+    public String findTopicById(String tid,Model model){
+        Topic topic = topicService.findTopicById(tid);
+        topic.setUser(userService.findByNameAll(topic.getUname()));
+        List<Dynamic> dynamics = dynamicService.findByTid(tid);
+        for (Dynamic dynamic: dynamics){
+            dynamic.setComments(commentService.findByWid(dynamic.getWid()));
+            dynamic.setUser(userService.findByNameAll(dynamic.getUname()));
+        }
+        model.addAttribute("dynamics", dynamics);
+        model.addAttribute("topic", topic);
+        return "user/main/tiezi";
     }
 }

@@ -71,7 +71,7 @@
                     </ul>
                 </li>
                 <li><a href="#" class="">书籍</a></li>
-                <li><a href="#">电影</a></li>
+                <li><a href="../info/findMovies.do">电影</a></li>
                 <li><a href="#" class="">个人中心</a>
                     <ul class="last">
                         <li><a href="#">我的收藏</a></li>
@@ -91,7 +91,7 @@
                     <ul class="biggallerylist clearfix">
                         <li><a href="#" target="_blank"><img src="${personone.get(0).photo}"></a></li>
                     </ul>
-                    <div class="imgintro">
+                    <div class="imgintro1">
                         <b></b>
                         <h3>
                             <span class="tips" id="keyword1-1">人物</span>
@@ -142,7 +142,7 @@
                         <div class="contentwraper">
                             <figcaption>
                                 <span class="tips">身边榜样</span>
-                                <a href="#" target="_blank"  class="jiequ">
+                                <a href="../info/findByIdInfo.do?person=${person.info_id}" target="_blank"  class="jiequ">
                                    ${person.title}
                                 </a>
                             </figcaption>

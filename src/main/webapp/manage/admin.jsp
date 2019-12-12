@@ -58,10 +58,10 @@
             </li>
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> ${user.uname} </span></a>
+                <img class="img-xs rounded-circle ml-2" src="<%--images/faces/face8.jpg--%> ${users.photo}" alt="Profile image"> <span class="font-weight-normal"> ${user.uname} </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
-                  <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
+                  <img class="img-lg rounded-circle" src="${users.photo}" alt="Profile image">
                   <p class="mb-1 mt-3">${user.uname}</p>
                   <p class="font-weight-light text-muted mb-0">${users.email}</p>
                 </div>
@@ -83,7 +83,7 @@
             <li class="nav-item nav-profile">
               <a href="javascript:void(0);" class="nav-link">
                 <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="profile image">
+                  <img class="img-xs rounded-circle" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="profile image">
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
@@ -100,7 +100,7 @@
               </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.jsp">动态管理</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../dynamic/findAllTopic.do">动态管理</a></li>
                   <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.jsp">动态推送</a></li>
                 </ul>
               </div>
@@ -113,7 +113,7 @@
                 <div class="collapse" id="ui-topic">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="pages/ui-features/topicput.jsp">发布话题</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="#">未审核话题</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="../topic/findAllTopicByStatus.do">未审核话题</a></li>
                       <li class="nav-item"> <a class="nav-link" href="../topic/findAll.do">全部话题</a></li>
                     </ul>
                 </div>
@@ -139,22 +139,6 @@
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="../user/findAllUser.do">用户</a></li>
                   <li class="nav-item"> <a class="nav-link" href="../user/findAllAdmin.do">管理员</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <span class="menu-title">General Pages</span>
-                <i class="icon-doc menu-icon"></i>
-              </a>
-              <div class="collapse" id="auth">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/login.jsp"> Login </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/register.jsp"> Register </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.jsp"> 404 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.jsp"> 500 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.jsp"> Blank Page </a></li>
                 </ul>
               </div>
             </li>

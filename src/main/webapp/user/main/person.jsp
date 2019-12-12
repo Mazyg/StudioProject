@@ -37,10 +37,10 @@
 <style type="text/css">
     body{
         /*background-color: aliceblue;*/
-        background: url(img/bg_01.jpg);
+        background: url(img/bg_02.jpg);
     }
     .back{
-        background: url(img/23.jpg);
+        background: url(img/bg32.jpg);
         border-radius: 1%;
         height: 240px;
     }
@@ -53,17 +53,17 @@
         background-color: white;
     }
 
-    .back2{
+    /*.back2{
         background-color: white;
         border-radius: 1%;
-    }
+    }*/
     .img1{
         width: 20%;
         width: 200px;
     }
 </style>
 <body>
-<ul class="breadcrumb back1">
+<%--<ul class="breadcrumb back1">
     <li><a href="../info/findInfoBytype.do">首页</a></li>
     <li><a href="../info/findEvent.do">热点资讯</a></li>
     <li><a href="../info/findChinese.do" class="styles">爱我中华</a></li>
@@ -72,13 +72,63 @@
     <li><a href="#" class="">书籍</a></li>
     <li><a href="#">电影</a></li>
     <li><a href="../info/findPersonalMainInfo.do" class="">个人中心</a></li>
-</ul>
+</ul>--%>
+
+<header class="clearfix">
+    <%--<section class="mainWrap">
+        <div class="topwraper relative clearfix">
+            <div class="search">
+                <form id="searchForm" target="_blank">
+                    <input name="query" type="text" >
+                    <input name="ie" type="hidden" value="utf8">
+                    <input name="cid" type="hidden" value="3">
+                    <a href="javascript:;" onclick="searchSub();"><i>搜索</i></a>
+                </form>
+            </div>
+        </div>
+    </section>--%>
+    <nav class="navwrap yahei">
+        <section class="mainWrap">
+            <ul id="nav">
+                <li><a href="main/news.jsp">热点资讯</a>
+                </li>
+                <li><a href="#">爱我中华</a>
+                    <ul>
+                        <li><a href="#">最美中国景</a></li>
+                        <li><a href="#">最美中国人</a></li>
+                        <li><a href="#">最美中国事</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="">榜样力量</a>
+                    <ul>
+                        <li><a href="javascript:void(0)" onclick="window.location.hash='ab'">新时代楷模</a></li>
+                        <li><a href="javascript:void(0)" onclick="window.location.hash = 'aa'">身边榜样</a></li>
+                        <li><a href="#">最美奋斗者</a></li>
+                        <li><a href="#">道德模范</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="">话题</a>
+                </li>
+                <li><a href="#" class="">书籍</a></li>
+                <li><a href="#">电影</a></li>
+                <li><a href="#" class="">个人中心</a>
+                    <ul class="last">
+                        <li><a href="#">我的收藏</a></li>
+                        <li><a href="#">话题管理</a></li>
+                        <li><a href="#">个人信息</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </nav>
+</header>
+<br><br>
 <div class="col-md-8 col-md-offset-2">
     <div class="col-md-12 back">
         <div>
             <br><br><br><br><br><br><br>
             <table>
-                <tr><td>&nbsp;&nbsp;<img class="imgs" src="img/png.png" alt=""></td>
+                <tr><td>&nbsp;&nbsp;<img class="imgs" src="${users.photo}" alt=""></td>
                     <td><h4>&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                 </tr>
             </table>

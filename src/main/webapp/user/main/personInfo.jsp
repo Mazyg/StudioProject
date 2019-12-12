@@ -17,29 +17,25 @@
     <base href="<%=basePath%>">
     <meta charset="utf-8">
     <title>个人中心</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 , shrink-to-fit=no">
     <link href="css/base_news.css" rel="stylesheet" type="text/css">
     <link href="font/font.css" rel="stylesheet" type="text/css">
     <link href="css/inner.css" rel="stylesheet" type="text/css">
-    <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+     <link rel="stylesheet" href="css/style.css"/>
+    <script src="js/jquery-1.8.3.js"></script>
     <link rel="stylesheet" href="css/slick.css">
     <script src="js/slick.min.js" type="text/javascript"></script>
     <script src="js/regexcut.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <script src="js/owl.carousel.min.js" type="text/javascript"></script>
-    <script src="js/comm.js" type="text/javascript"></script>
-    <script src="publish/thunews/js/regex-cn.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style type="text/css">
     body{
-        background: url(img/bg_01.jpg);
+        background: url(img/bg_02.jpg);
     }
     .back{
-        background: url(img/23.jpg);
+        background: url(img/bg32.jpg);
         border-radius: 1%;
         height: 240px;
     }
@@ -47,18 +43,6 @@
         border-radius: 50%;
         width: 70px;
         height: 70px;
-    }
-    .back1{
-        background-color: white;
-    }
-
-    .back2{
-        background-color: white;
-        border-radius: 1%;
-    }
-    .img1{
-        width: 20%;
-        width: 200px;
     }
 </style>
 <script type="text/javascript">
@@ -73,27 +57,148 @@
                 alert("出错了！")
             }
     }
-window.onload = function () {
-   $("#sex").val('${users.sex}')
-}
+
+
+
+
+
+
+
+</script>
+<script type="text/javascript">
+    function selectFile(){
+        $("#photo").trigger("click");
+    }
+
+    function getImage() {
+        /*var obj = new FormData();
+        var file = document.getElementById("photo").files[0];
+        obj.append("file", file);
+        $.ajax({
+            url : '../load/getImageUrl.do',
+            type : 'POST',
+            data : obj,
+            contentType : false,
+            processData : false,
+            mimeType : 'multipart/form-data',
+            success : function(data) {
+                $("#url").val(data) ;
+                $("#src").attr("src",data)
+            }
+        })*/
+
+        console.log("hello")
+        var photo=document.querySelector("#photo");
+        console.log(photo);
+        var file=photo.files[0];
+        var formData=new FormData();
+        formData.append("img",file);
+        var xhr=new XMLHttpRequest();
+        xhr.open("post","http://111.229.25.156:7777/upload/img")
+        xhr.onload=function (ev) {
+            var json;
+            if(xhr.status!==200){
+                failFun('HTTP Error:'+xhr.status);
+                return
+            }
+            json=JSON.parse(this.responseText);
+            if(!json||typeof json.location !='string'){
+                failFun('Invalid JSON:'+xhr.responseText);
+                return;
+            }else{
+                console.log(json.location);
+                $("#url").val(json.location) ;
+                $("#src").attr("src",json.location);
+            }
+
+
+        };
+        xhr.send(formData);
+
+
+
+
+    }
 </script>
 <body onload="message()">
-<ul class="breadcrumb back1">
-    <li><a href="../info/findInfoBytype.do">首页</a></li>
-    <li><a href="../info/findEvent.do">热点资讯</a></li>
-    <li><a href="../info/findChinese.do" class="styles">爱我中华</a></li>
-    <li><a href="../info/findPersonInfo.do" class="">榜样力量</a></li>
-    <li><a href="#" class="">话题</a></li>
-    <li><a href="#" class="">书籍</a></li>
-    <li><a href="#">电影</a></li>
-    <li><a href="../info/findPersonalMainInfo.do" class="">个人中心</a></li>
-</ul>
+<header class="clearfix">
+    <nav class="navwrap yahei">
+        <section class="mainWrap">
+            <ul id="nav">
+                <li><a href="main/news.jsp">热点资讯</a>
+                </li>
+                <li><a href="#">爱我中华</a>
+                    <ul>
+                        <li><a href="#">最美中国景</a></li>
+                        <li><a href="#">最美中国人</a></li>
+                        <li><a href="#">最美中国事</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="">榜样力量</a>
+                    <ul>
+                        <li><a href="javascript:void(0)" onclick="window.location.hash='ab'">新时代楷模</a></li>
+                        <li><a href="javascript:void(0)" onclick="window.location.hash = 'aa'">身边榜样</a></li>
+                        <li><a href="#">最美奋斗者</a></li>
+                        <li><a href="#">道德模范</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="">话题</a>
+                </li>
+                <li><a href="#" class="">书籍</a></li>
+                <li><a href="#">电影</a></li>
+                <li><a href="#" class="">个人中心</a>
+                    <ul class="last">
+                        <li><a href="#">我的收藏</a></li>
+                        <li><a href="#">话题管理</a></li>
+                        <li><a href="#">个人信息</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </nav>
+</header>
+<br><br>
 <div class="col-md-8 col-md-offset-2">
     <div class="col-md-12 back">
         <div>
             <br><br><br><br><br><br><br>
             <table>
-                <tr><td>&nbsp;&nbsp;<img class="imgs" src="img/png.png" alt=""></td>
+                <tr><td>
+                    <img class="imgs" src="${users.photo}" alt="头像" data-toggle="modal" data-target="#myModal"/>
+
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="../user/personPhoto.do" method="post">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">更换头像</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                  <%--  <input type="file" name="img[]" class="file-upload-default">--%>
+                                    <div class="input-group col-xs-12" style="text-align:center">
+                                        <img class="imgs  center-block" src="${users.photo} " id="src">
+                                        <input type="text" class="form-control file-upload-info" style="display:none" readonly placeholder="上传封面" id="url" name="photo" >
+                                        <span class="input-group-append">
+                                            <br>
+                                        <input type="file" id="photo" style="display:none" multiple="multiple" onchange="getImage()">
+                                        <button class="file-upload-browse btn btn-primary" type="button" onclick="selectFile()">上传</button>
+                                     </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="submit" class="btn btn-primary">提交更改</button>
+                            </div>
+                            </form>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+        </div>
+                    </td>
                     <c:if test="${users.uname == null}">
                     <td><h4>&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                     </c:if>
@@ -123,15 +228,17 @@ window.onload = function () {
                     <br>
                 </c:if>
                 <c:if test="${users.uname != null}">
-                    <form class="form-horizontal" role="form" action="../user/personUpdate.do"  method="post">
+                    <form class="form-horizontal" role="form" action="../user/personUpdate.do"  method="post" >
                         <div class="form-group">
                             <label for="disabledTextInput" class="col-sm-2 control-label">账号</label>
                             <div class="col-sm-8">
+                                <span>
                                 <input type="text" id="disabledTextInput" class="form-control" name="uid" value="${users.uid}"  readonly = "readonly">
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="disabledTextInput" class="col-sm-2 control-label">账号</label>
+                            <label for="disabledTextInput" class="col-sm-2 control-label">状态</label>
                             <div class="col-sm-8">
                                 <input type="text"  class="form-control" name="u_status" value="${users.u_status}"  readonly = "readonly">
                             </div>

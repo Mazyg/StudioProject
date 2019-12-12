@@ -60,7 +60,7 @@ public class TopicServiceImpl implements TopicService {
     }
 
 
-    @Override
+
     public boolean updateStatus(String tid) {
         return topicDao.updateStatus(tid);
     }
@@ -68,6 +68,11 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public Topic findTopicById(String tid) {
         return topicDao.findTopicById(tid);
+    }
+
+    @Override
+    public List<Topic> findAllByUname(String uname) {
+        return topicDao.findAllByUname(uname);
     }
 
     /**

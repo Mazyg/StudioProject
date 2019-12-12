@@ -15,16 +15,18 @@ public class CommentServiceImpl implements CommentService {
     private CommentDao commentDao;
     @Override
     public boolean saveComment(Comment comment) {
-        return false;
+        return commentDao.saveComment(comment);
     }
 
     @Override
-    public boolean deleComment(Comment comment) {
-        return false;
+    public boolean deleteComment(Integer cid) {
+        return commentDao.deleteComment(cid);
     }
 
     @Override
-    public List<Comment> findByWid(Comment comment) {
-        return null;
+    public List<Comment> findByWid(Integer wid) {
+        return commentDao.findByWid(wid);
     }
+
+
 }

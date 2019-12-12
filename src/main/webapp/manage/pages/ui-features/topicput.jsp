@@ -34,8 +34,8 @@
           alert(message);
         }
       };
-      function selectFile(){
-        $("#photo").trigger("click");
+      function change(){
+        $("#type").val($("#topic").val()) ;
       }
     </script>
     <script type="text/javascript">
@@ -86,10 +86,10 @@
             </li>
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> ${users.uname} </span></a>
+                <img class="img-xs rounded-circle ml-2" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="Profile image"> <span class="font-weight-normal"> ${users.uname} </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
-                  <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
+                  <img class="img-lg rounded-circle" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="Profile image">
                   <p class="mb-1 mt-3">${users.uname}</p>
                   <p class="font-weight-light text-muted mb-0">${users.email}</p>
                 </div>
@@ -111,7 +111,7 @@
             <li class="nav-item nav-profile">
               <a href="javascript:void(0);" class="nav-link">
                 <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="profile image">
+                  <img class="img-xs rounded-circle" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="profile image">
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
@@ -128,7 +128,7 @@
               </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.jsp">动态管理</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../dynamic/findAllTopic.do">动态管理</a></li>
                   <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.jsp">动态推送</a></li>
                 </ul>
               </div>
@@ -154,7 +154,7 @@
               <div class="collapse" id="info_manage">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="pages/forms/basic_elements.jsp">信息推送</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="javascript:void(0);">信息管理</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../info/findAllInfo.do">信息管理</a></li>
                 </ul>
               </div>
             </li>
@@ -188,12 +188,24 @@
                         <input type="text" class="col-10 form-control" id="exampleInputName1" placeholder="标题" required="required" name="t_title">
                       </div>
                       <div class="form-group">
+                        <label for="topic_category"> 话题类别</label>
+                        <div class="col-sm-6" id="topic_category">
+                          <select class="form-control" id="topic">
+                            <option value="榜样的力量">榜样的力量</option>
+                            <option value="热点时事">热点时事</option>
+                            <option value="电影">电影</option>
+                            <option value="书籍">书籍</option>
+                          </select>
+                          <input type="text"  style="display:none" id="type" name="t_type"/>
+                        </div>
+                      </div>
+                      <div class="form-group">
                         <label>简要描述</label>
                         <div class="input-group col-xs-12">
                           <textarea name="content"  placeholder="描述一下你的话题" required="required" class="col-10 form-control"  style=" height:100px"></textarea>
                         </div>
                       </div>
-                      <input type="submit" class="btn btn-primary mr-2"  value="提交">
+                      <input type="submit" class="btn btn-primary mr-2"  value="提交" onclick="change()">
                       <input type="reset" class="btn btn-light" value="重置">
                     </form>
                   </div>

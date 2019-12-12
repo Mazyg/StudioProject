@@ -36,9 +36,16 @@ public interface UserDao {
      * @return
      */
      @Select("SELECT * FROM user where u_type='user' and uname like CONCAT('%',#{uname},'%')")
-    public List<User> findByName(String uname);
+    public User findByName(String uname);
 
 
+    /**
+     * 根据用户名查询所有用户
+     * @param uname
+     * @return
+     */
+    @Select("SELECT * FROM user where  uname like CONCAT('%',#{uname},'%')")
+     public User findByNameAll(String uname);
 
     /**
      * 查找管理员
@@ -56,7 +63,7 @@ public interface UserDao {
     public boolean saveUser(User user);
 
     /*更新用户信息*/
-    @Update("update user set uname= '${uname}' , password = '${password}', sex = '${sex}', email='${email}' where uid = '${uid}'")
+    @Update("update user set uname= '${uname}' , password = '${password}', sex = '${sex}', email='${email}',photo='${photo}' where uid = '${uid}'")
     public boolean updateUser3(User user);
 
 
@@ -67,4 +74,7 @@ public interface UserDao {
     /*解封处理*/
     @Update("update user set u_status= '正常' where uid=#{uid}")
     public boolean updateUser2(String uid);
+
+    @Update("update user set photo=#{photo} where uid=#{uid}")
+    public boolean personPhoto(User user);
 }

@@ -167,6 +167,8 @@ ul, li {
   font-size: 22px; }
 
 .pager input {
+  color: #461B6E;
+  padding: 2px;
   height: 32px;
   line-height: 32px;
   width: 30px;

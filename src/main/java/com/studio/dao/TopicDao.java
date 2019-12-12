@@ -10,13 +10,13 @@ import java.util.List;
 public interface TopicDao {
 
     /*保存用户话题*/
-    @Insert("insert into topic (date,t_title,content,uid) \n" +
-            "VALUES('${date}','${t_title}','${content}','${uid}')")
+    @Insert("insert into topic (date,t_title,content,uname,t_type) \n" +
+            "VALUES('${date}','${t_title}','${content}','${uname}','${t_type}')")
     public boolean saveTopic(Topic topic);
 
     /*保存管理员话题*/
-    @Insert("insert into topic (date,t_title,content,t_tatus,uid) \n" +
-            "VALUES('${date}','${t_title}','${content}','已审核','${uid}')")
+    @Insert("insert into topic (date,t_title,content,t_tatus,uname,t_type) \n" +
+            "VALUES('${date}','${t_title}','${content}','已审核','${uname}','${t_type}')")
     public boolean saveTopicA(Topic topic);
 
     @Delete("delete from topic where tid=#{tid}")
@@ -34,11 +34,19 @@ public interface TopicDao {
     public List<Topic> findAllByUid(Integer uid);
 
     /**
+     * 通过用户名查询用户发布的话题
+     * @param uname
+     * @return
+     */
+    @Select("select * from topic where uname = #{uname}")
+    public List<Topic> findAllByUname(String uname);
+
+    /**
      * 根据title查找话题
      * @param t_title
      * @return
      */
-    @Select("select * from topic where t_title=#{t_title}")
+    @Select("select * from topic where t_title like CONCAT('%',#{t_title},'%')")
     public List<Topic> findByTitle(String t_title);
 
     /**
@@ -46,7 +54,7 @@ public interface TopicDao {
      * @param t_title
      * @return
      */
-    @Select("select * from topic where t_title= #{t_title} and t_tatus='未审核'")
+    @Select("select * from topic where t_title like CONCAT('%',#{t_title},'%') and t_tatus='未审核'")
     public List<Topic> findByTitleNot(String t_title);
 
     /**
@@ -69,7 +77,7 @@ public interface TopicDao {
      * 话题查询，按照时间排序，取N条
      *
      */
-    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uid\n" +
+    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname\n" +
             " from  topic\n" +
             " where t_tatus='已审核'\n" +
             " order by date desc "

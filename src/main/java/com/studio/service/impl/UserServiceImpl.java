@@ -31,8 +31,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findByName(String uname) {
-        System.out.println("name"+userDao.findByName(uname));
+    public User findByName(String uname) {
         return userDao.findByName(uname);
     }
 
@@ -65,5 +64,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUser3(User user) {
         return userDao.updateUser3(user);
+    }
+
+    @Override
+    public User findByNameAll(String uname) {
+        return userDao.findByNameAll(uname);
+    }
+
+    @Override
+    public boolean personPhoto(User user) {
+        return userDao.personPhoto(user);
     }
 }
