@@ -48,7 +48,7 @@ public interface InfoDao {
     @Select("select * from info where info_type='书籍'")
     public List<Info> findBook();
     //增加信息
-    @Insert("insert into info(title,content,info_type,photo,date,introduce) values('${title}','${content}','${info_type}','${photo}','${date}','${introduce}')")
+    @Insert("insert into info(title,content,info_type,photo,date,introduce,video) values('${title}','${content}','${info_type}','${photo}','${date}','${introduce}','${video}')")
     public boolean addInfo(Info info);
 
     public List<Info> findAllByType(Info info);

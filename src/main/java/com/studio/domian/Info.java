@@ -15,6 +15,7 @@ public class Info  implements Serializable {
     private String date;
     private String info_type;
     private String photo;
+    private String video;
 
     public Integer getInfo_id() {
         return info_id;
@@ -68,6 +69,15 @@ public class Info  implements Serializable {
         this.photo = photo;
     }
 
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
     @Override
     public String toString() {
         return "Info{" +
@@ -78,7 +88,7 @@ public class Info  implements Serializable {
                 ", date='" + date + '\'' +
                 ", info_type='" + info_type + '\'' +
                 ", photo='" + photo + '\'' +
-                ", introduce='" + introduce + '\'' +
+                ", video='" + video + '\'' +
                 '}';
     }
 }
