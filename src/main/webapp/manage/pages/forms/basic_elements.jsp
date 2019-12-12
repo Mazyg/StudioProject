@@ -37,6 +37,12 @@
       function selectFile(){
         $("#photo").trigger("click");
       }
+
+
+      function selectFileV(){
+        $("#video").trigger("click");
+      }
+
     </script>
     <script type="text/javascript">
       function msssage () {
@@ -51,7 +57,7 @@
       }
 
       function getImage() {
-        var obj = new FormData();
+       /* var obj = new FormData();
         var file = document.getElementById("photo").files[0];
         obj.append("file", file);
         $.ajax({
@@ -64,9 +70,73 @@
           success : function(data) {
             $("#url").val(data) ;
           }
-        })
+        })*/
+
+        var photo=document.querySelector("#photo");
+        console.log(photo);
+        var file=photo.files[0];
+        var formData=new FormData();
+        formData.append("img",file);
+        var xhr=new XMLHttpRequest();
+        xhr.open("post","http://111.229.25.156:7777/upload/img")
+        xhr.onload=function (ev) {
+          var json;
+          if(xhr.status!==200){
+            failFun('HTTP Error:'+xhr.status);
+            return
+          }
+          json=JSON.parse(this.responseText);
+          if(!json||typeof json.location !='string'){
+            failFun('Invalid JSON:'+xhr.responseText);
+            return;
+          }else{
+            console.log(json.location);
+            $("#url").val(json.location) ;
+            $("#src").attr("src",json.location);
+          }
+
+
+        };
+        xhr.send(formData);
+
+
 
       }
+
+
+      function getvideo() {
+        var photo=document.querySelector("#video");
+        console.log(photo);
+        var file=photo.files[0];
+        var formData=new FormData();
+        formData.append("movie",file);
+        var xhr=new XMLHttpRequest();
+        xhr.open("post","http://111.229.25.156:7777/upload/movie")
+        xhr.onload=function (ev) {
+          var json;
+          if(xhr.status!==200){
+            failFun('HTTP Error:'+xhr.status);
+            return
+          }
+          json=JSON.parse(this.responseText);
+          if(!json||typeof json.location !='string'){
+            failFun('Invalid JSON:'+xhr.responseText);
+            return;
+          }else{
+            console.log(json.location);
+            $("#urlv").val(json.location) ;
+          /*  $("#src").attr("src",json.location);*/
+          }
+
+
+        };
+        xhr.send(formData);
+
+
+
+      }
+
+
 
     </script>
   </head>
@@ -222,6 +292,7 @@
                             <option value="最美中国事">最美中国事</option>
                             <option value="电影">电影</option>
                             <option value="书籍">书籍</option>
+                            <option value="视频">视频</option>
                             <option value=""></option>
                           </select>
                           <input type="text"  style="display:none" id="type" name="info_type"/>
@@ -238,10 +309,25 @@
                           </span>
                         </div>
                       </div>
+
                       <div class="form-group">
-                        <label for="description">内容</label>
-                        <textarea id="description"  name="content"></textarea>
+                        <label>上传视频</label>
+                       <%-- <input type="file" name="img[]" class="file-upload-default">--%>
+                        <div class="input-group col-xs-12">
+                          <input type="text" class="form-control file-upload-info" readonly placeholder="视频地址" id="urlv" name="video" >
+                          <span class="input-group-a ppend">
+                            <input type="file" id="video" style="display:none" multiple="multiple" onchange="getvideo()">
+                            <button class="file-upload-browse btn btn-primary" type="button" onclick="selectFileV()">上传</button>
+                          </span>
+                        </div>
                       </div>
+
+
+
+                      <div class="form-group">
+                      <label for="description">内容</label>
+                      <textarea id="description"  name="content"></textarea>
+                    </div>
                       <input type="reset" class="btn btn-light" value="重置">
                       <input type="submit" class="btn btn-primary mr-2" value="提交" onclick="change()">
                     </form>
@@ -255,13 +341,18 @@
           </div>
           <!--预览-->
           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div  class="modal-dialog" style="width:1000px">
               <div class="modal-content">
                 <div class="modal-header">
                   <h4 class="modal-title" id="view-title">
+                    详情预览
                   </h4>
                 </div>
                 <div class="modal-body" id="view-content">
+                  ${pageContext.request.getAttribute("content")}
+
+
+
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">关闭
