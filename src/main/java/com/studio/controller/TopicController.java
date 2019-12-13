@@ -1,13 +1,7 @@
 package com.studio.controller;
 
-import com.studio.domian.Comment;
-import com.studio.domian.Dynamic;
-import com.studio.domian.Topic;
-import com.studio.domian.User;
-import com.studio.service.CommentService;
-import com.studio.service.DynamicService;
-import com.studio.service.TopicService;
-import com.studio.service.UserService;
+import com.studio.domian.*;
+import com.studio.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +30,9 @@ public class TopicController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private InfoService infoService;
 
     private ModelAndView mv;
 
@@ -235,7 +232,7 @@ public class TopicController {
 
     /*通过id进入话题回复评论页面*/
     @RequestMapping("/findTopicById")
-    public String findTopicById(String tid,Model model){
+    public String findTopicById(String tid,String type,Model model){
         Topic topic = topicService.findTopicById(tid);
         topic.setUser(userService.findByNameAll(topic.getUname()));
         List<Dynamic> dynamics = dynamicService.findByTid(tid);
@@ -243,6 +240,8 @@ public class TopicController {
             dynamic.setComments(commentService.findByWid(dynamic.getWid()));
             dynamic.setUser(userService.findByNameAll(dynamic.getUname()));
         }
+        List<Info> infos = infoService.findInfoBytype(type,0,5);
+        model.addAttribute("infos",infos);
         model.addAttribute("dynamics", dynamics);
         model.addAttribute("topic", topic);
         return "user/main/tiezi";
