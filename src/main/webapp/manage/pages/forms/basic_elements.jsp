@@ -139,6 +139,16 @@
 
 
     </script>
+    <style type="text/css">
+      .child {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    </style>
   </head>
   <body>
     <div class="container-scroller">
@@ -341,15 +351,16 @@
           </div>
           <!--预览-->
           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div  class="modal-dialog" style="width:1000px">
+            <div  class="modal-dialog " >
               <div class="modal-content">
                 <div class="modal-header">
                   <h4 class="modal-title" id="view-title">
                     详情预览
                   </h4>
                 </div>
-                <div class="modal-body" id="view-content">
-                  ${pageContext.request.getAttribute("content")}
+                <div class="modal-body fo" id="view-content">
+
+                  </div>
 
 
 

@@ -21,6 +21,20 @@ public interface UserDao {
     public List<User> findAll(String type);
 
 
+    /**
+     * 查询系统用户数量
+     * @return
+     */
+    @Select("select count(*) from user")
+    public Integer findCount();
+
+    @Select("select count(*) from user where u_type = 'admin'")
+    public Integer findAdm();
+
+    @Select("select count(*) from user where  u_status = '封号'")
+    public Integer findNo();
+
+
     @Select("select * from user where uid=#{uid}")
 
    /* @ResultMap("userMap")*/

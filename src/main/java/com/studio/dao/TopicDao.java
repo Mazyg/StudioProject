@@ -26,6 +26,12 @@ public interface TopicDao {
     @Select("select * from topic")
     public List<Topic> findAllTopic();
 
+    @Select("select count(*) from topic")
+    public Integer findCountTopic();
+
+    @Select("select count(*) from topic where t_tatus")
+    public Integer findCountNo();
+
     /*未审核话题*/
     @Select("select * from topic where t_tatus='未审核'")
     public List<Topic> findAllByStatus();
