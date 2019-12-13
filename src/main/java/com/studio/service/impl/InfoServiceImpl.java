@@ -15,6 +15,16 @@ public class InfoServiceImpl implements InfoService {
     private InfoDao infoDao;
 
     @Override
+    public Integer findCountInfo() {
+        return infoDao.findCountInfo();
+    }
+
+    @Override
+    public Integer findCountInfoByType(String info_type) {
+        return infoDao.findCountInfoByType(info_type);
+    }
+
+    @Override
     public List<Info> findAllInfo(Info info) {
         return null;
     }

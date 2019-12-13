@@ -20,6 +20,16 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public Integer findCountTopic() {
+        return topicDao.findCountTopic();
+    }
+
+    @Override
+    public Integer findCountNo() {
+        return topicDao.findCountNo();
+    }
+
+    @Override
     public boolean saveTopicA(Topic topic) {
         return topicDao.saveTopicA(topic);
     }

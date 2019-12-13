@@ -1,6 +1,8 @@
 package com.studio.controller;
 
 import com.studio.domian.User;
+import com.studio.service.InfoService;
+import com.studio.service.TopicService;
 import com.studio.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TopicService topicService;
+
+    @Autowired
+    private InfoService infoService;
 
     ModelAndView mv;
     User user1;
@@ -120,6 +128,20 @@ public class UserController {
                 //密码正确
                 mv.addObject("user",user1);
                 if (user1.getU_type().equals("admin")){
+                    Integer userCount = userService.findCount();
+                    Integer userAdm = userService.findAdm();
+                    Integer userNo = userService.findNo();
+                    Integer topicCount = topicService.findCountTopic();
+                    Integer topicNo = topicService.findCountNo();
+                    Integer infoCount = infoService.findCountInfo();
+                    Integer infoVideo = infoService.findCountInfoByType("视频");
+                    mv.addObject("infoV",infoVideo);
+                    mv.addObject("infoCount",infoCount);
+                    mv.addObject("topicCount",topicCount);
+                    mv.addObject("topicNo",topicNo);
+                    mv.addObject("userAdm" ,userAdm);
+                    mv.addObject("userNo",userNo);
+                    mv.addObject("userCount",userCount);
                     mv.setViewName("manage/admin");
                 }else {
                     return new ModelAndView("redirect:/info/findInfoBytype.do");
