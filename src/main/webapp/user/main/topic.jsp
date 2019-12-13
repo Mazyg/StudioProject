@@ -71,7 +71,7 @@
             <div class="indexCon_msg">
                 <div class="indexCon_msg_pic"><img src="${topic.user.photo}"></div>
                 <div class="indexCon_msg_detail">
-                    <a href="../topic/findTopicById.do?tid=${topic.tid}">
+                    <a href="../topic/findTopicById.do?tid=${topic.tid}&type=${topic.t_type}">
                         <div class="indexCon_msg_detail_tittle">
                             <span>${topic.t_type}</span>
                             <p>${topic.content}</p>

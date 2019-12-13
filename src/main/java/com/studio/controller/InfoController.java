@@ -368,4 +368,5 @@ public class InfoController {
         mv.setViewName("manage/pages/forms/basic_elements");
         return mv;
     }
+
 }
