@@ -7,6 +7,10 @@ import java.util.List;
 public interface TopicService {
     public boolean saveTopic(Topic topic);
 
+    public Integer findCountTopic();
+
+    public Integer findCountNo();
+
     public boolean saveTopicA(Topic topic);
 
     public boolean deleTopic(String tid);

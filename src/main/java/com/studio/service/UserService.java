@@ -30,4 +30,10 @@ public interface UserService {
     public User findByNameAll(String uname);
 
     public boolean personPhoto(User user);
+
+    public Integer findCount();
+
+    public Integer findAdm();
+
+    public Integer findNo();
 }

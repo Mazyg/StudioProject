@@ -75,4 +75,19 @@ public class UserServiceImpl implements UserService {
     public boolean personPhoto(User user) {
         return userDao.personPhoto(user);
     }
+
+    @Override
+    public Integer findCount() {
+        return userDao.findCount();
+    }
+
+    @Override
+    public Integer findAdm() {
+        return userDao.findAdm();
+    }
+
+    @Override
+    public Integer findNo() {
+        return userDao.findNo();
+    }
 }
