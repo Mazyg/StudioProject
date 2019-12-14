@@ -81,8 +81,6 @@
                         <ul>
                             <li>${topic.uname}</li>
                             <li>${topic.date}</li>
-                            <li>21</li>
-                            <li>28</li>
                         </ul>
                     </div>
                 </div>
@@ -149,8 +147,9 @@
                 </div>
                 <div class="indexPublic_con">
                     <ul class="weekHot">
-                        <li><a href="">本周热议</a><span>29</span></li>
-
+                        <c:forEach items="${topTopics}" var="topTopic">
+                            <li><a href="../topic/findTopicById.do?tid=${topTopic.tid}&type=${topTopic.t_type}">${topTopic.t_title}</a></li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
