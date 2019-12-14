@@ -85,6 +85,11 @@ public class TopicServiceImpl implements TopicService {
         return topicDao.findAllByUname(uname);
     }
 
+    @Override
+    public List<Topic> findCheckTopic() {
+        return topicDao.findCheckTopic();
+    }
+
     /**
      * 话题查询，按照时间排序，取N条
      * @param start

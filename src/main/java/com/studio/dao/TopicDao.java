@@ -39,6 +39,8 @@ public interface TopicDao {
     @Select("select * from topic where uid = #{uid}")
     public List<Topic> findAllByUid(Integer uid);
 
+    @Select("select * from topic where t_tatus= '已审核' ")
+    public List<Topic> findCheckTopic();
     /**
      * 通过用户名查询用户发布的话题
      * @param uname
@@ -83,7 +85,7 @@ public interface TopicDao {
      * 话题查询，按照时间排序，取N条
      *
      */
-    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname\n" +
+    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname,t_type\n" +
             " from  topic\n" +
             " where t_tatus='已审核'\n" +
             " order by date desc "

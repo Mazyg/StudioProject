@@ -221,11 +221,14 @@ public class TopicController {
     @RequestMapping("/showTopic")
     public ModelAndView showTopic(){
         mv = new ModelAndView();
-        List<Topic> topics =  topicService.findAllTopic();
+        List<Topic> topics =  topicService.findCheckTopic();
         for (Topic topic : topics){
             topic.setUser(userService.findByNameAll(topic.getUname()));
         }
+        List<Topic> topTopics = topicService.findTopic(0,3);
+        System.out.println(topTopics);
         mv.addObject("topics", topics);
+        mv.addObject("topTopics",topTopics);
         mv.setViewName("user/main/topic");
         return mv;
     }
@@ -233,6 +236,7 @@ public class TopicController {
     /*通过id进入话题回复评论页面*/
     @RequestMapping("/findTopicById")
     public String findTopicById(String tid,String type,Model model){
+        System.out.println("tid:"+tid+"-type:"+type);
         Topic topic = topicService.findTopicById(tid);
         topic.setUser(userService.findByNameAll(topic.getUname()));
         List<Dynamic> dynamics = dynamicService.findByTid(tid);
@@ -246,4 +250,5 @@ public class TopicController {
         model.addAttribute("topic", topic);
         return "user/main/tiezi";
     }
+
 }

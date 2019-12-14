@@ -196,7 +196,7 @@
             <div class="indexPublic_con">
                 <ul class="weekHot">
                     <c:forEach var="info" items="${infos}" >
-                        <li><a href="">${info.title}</a></li>
+                        <li><a href="../info/findInfoByTitle.do?title=${info.title}">${info.title}</a></li>
                     </c:forEach>
                 </ul>
             </div>

@@ -369,4 +369,11 @@ public class InfoController {
         return mv;
     }
 
+    @RequestMapping("/findInfoByTitle")
+    public String findInfoByTitle(String title,Model model){
+         Info info = infoService.findByTitle(title);
+         model.addAttribute("infos",info);
+         return "user/main/details";
+    }
+
 }
