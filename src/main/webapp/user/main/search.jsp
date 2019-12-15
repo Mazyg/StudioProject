@@ -37,7 +37,7 @@
         <div class="topwraper relative clearfix">
             <div class="search">
                 <input name="query" type="text" id="search" >
-                <a onclick="searchSub()"><i>搜索</i></a>
+                <a onclick="searchSub(${numberPerPage})"><i>搜索</i></a>
             </div>
         </div>
     </section>
@@ -153,9 +153,9 @@
                     </c:otherwise>
                 </c:choose>
                 <!-- 直接跳转 -->
-                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo2(${totalPage},${numberPerPage},${total},${search})" />
+                共${totalPage}页&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo2(${totalPage},${numberPerPage},${total},'${search}')" />
                 <!-- 设置每页显示条数 -->
-                &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change2(${total},${search})" />
+                &nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change2(${total},'${search}')" />
             </div>
         </section>
         <section class="colunm2">
