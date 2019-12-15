@@ -1,5 +1,6 @@
 package com.studio.controller;
 
+import com.studio.domian.Info;
 import com.studio.domian.User;
 import com.studio.service.InfoService;
 import com.studio.service.TopicService;
@@ -132,7 +133,7 @@ public class UserController {
                     Integer userAdm = userService.findAdm();
                     Integer userNo = userService.findNo();
                     Integer topicCount = topicService.findCountTopic();
-                    Integer topicNo = topicService.findCountNo();
+                    Integer topicNo = topicService.findCountNo("未审核");
                     Integer infoCount = infoService.findCountInfo();
                     Integer infoVideo = infoService.findCountInfoByType("视频");
                     mv.addObject("infoV",infoVideo);

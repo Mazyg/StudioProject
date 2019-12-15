@@ -9,7 +9,7 @@ public interface TopicService {
 
     public Integer findCountTopic();
 
-    public Integer findCountNo();
+    public Integer findCountNo(String t_tatus);
 
     public boolean saveTopicA(Topic topic);
 

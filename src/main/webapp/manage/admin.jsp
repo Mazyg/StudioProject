@@ -156,7 +156,7 @@
                 <div class="card card-secondary">
                   <span class="card-body d-lg-flex align-items-center">
                     <p class="mb-lg-0">Hi! ${users.uname},欢迎进入系统</p>
-                    <a href="#" target="_blank" class="btn ml-lg-auto download-button btn-success btn-sm my-1 my-sm-0">开启美好的一天</a>
+                    <a  target="_blank" class="btn ml-lg-auto download-button btn-success btn-sm my-1 my-sm-0">开启美好的一天</a>
                     <button class="close popup-dismiss ml-2">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -219,7 +219,7 @@
                   <div class="card-body">
                     <h4 class="card-title">话题</h4>
                     <input type="text" class="col-10 form-control"   readonly="readonly" value="话题总数：${topicCount}">
-                    <input type="text" class="col-10 form-control"  readonly="readonly" value="">
+                    <input type="text" class="col-10 form-control"  readonly="readonly" value="已审核话题：${topicCount-topicNo}">
                     <input type="text" class="col-10 form-control"   readonly="readonly" value="待审核话题：${topicNo}">
                   </div>
                 </div>

@@ -29,6 +29,14 @@
     <script src="js/owl.carousel.min.js" type="text/javascript"></script>
     <script src="js/comm.js" type="text/javascript"></script>
     <script src="publish/thunews/js/regex-cn.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style type="text/css">
+        .imgs1{
+            width: 100px;
+            height: 80px;
+        }
+    </style>
+</head>
 <body>
 <header class="clearfix">
     <section class="mainWrap">
@@ -142,7 +150,7 @@
                         <div class="contentwraper">
                             <figcaption>
                                 <span class="tips">身边榜样</span>
-                                <a href="../info/findByIdInfo.do?person=${person.info_id}" target="_blank"  class="jiequ">
+                                <a href="../info/findByIdInfo.do?infoId=${person.info_id}" target="_blank"  class="jiequ">
                                    ${person.title}
                                 </a>
                             </figcaption>
@@ -205,19 +213,45 @@
         </section>
         <section class="colunm2">
             <section class="mod withborder">
+                <h2>
+                    <span class="iconwraper"><i class="thunews-play-circle"></i></span>
+                    精彩视频
+                    <a href="#" style="font-size:12px; color:#666; margin-left:30px">
+                        <%--  更多 &#8250;--%>
+                    </a>
+                </h2>
+                <%-- <ul class="promvideolist clearfix" id="thunews_jcsp">
+                    <c:forEach items="${videoInfo}" var="videoList">
+                        <li><a href="../info/findByIdInfo.do?infoId=${videoList.info_id}"><img src="${videoList.photo}">&nbsp;&nbsp;&nbsp;<br>${videoList.title}</a><br></li>
+                    </c:forEach>
+                 </ul>--%>
+
+                <table class="table newslist clearfix">
+                    <c:forEach items="${videoInfo}" var="videoList">
+                        <tr>
+                            <td><a href="../info/findByIdInfo.do?infoId=${videoList.info_id}"><img class="imgs1" src="${videoList.photo}"></a></td>
+                            <td> <a href="../info/findByIdInfo.do?infoId=${videoList.info_id}"><p style="float: left">${videoList.title}</p></a>
+                                <br><small style="float: right">${videoList.date}</small></td>
+                        </tr>
+
+                    </c:forEach>
+
+                </table>
+
+            </section>
+            <section class="mod withborder">
                 <h2 class="red"><span class="iconwraper">
             <i class="thunews-line-chart"></i>
             </span>
                     近期热点
                     <a href="#" style="font-size:12px; color:#666; margin-left:30px">
-                        更多 &#8250;
+                        <%--更多 &#8250;--%>
                     </a>
                 </h2>
                 <ul class="newslist clearfix"  id="resText">
-                    <li>热点一</li>
-                    <li>热点二</li>
-                    <li>热点三</li>
-                    <li>热点四</li>
+                    <c:forEach items="${hotInfo}" var="eventList">
+                        <li><a href="../info/findByIdInfo.do?infoId=${eventList.info_id}">${eventList.title}<small style="float: right">${eventList.date}</small></li>
+                    </c:forEach>
                 </ul>
             </section>
         </section>
