@@ -1,13 +1,7 @@
 package com.studio.controller;
 
-import com.studio.domian.Comment;
-import com.studio.domian.Dynamic;
-import com.studio.domian.Topic;
-import com.studio.domian.User;
-import com.studio.service.CommentService;
-import com.studio.service.DynamicService;
-import com.studio.service.TopicService;
-import com.studio.service.UserService;
+import com.studio.domian.*;
+import com.studio.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +30,9 @@ public class TopicController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private InfoService infoService;
 
     private ModelAndView mv;
 
@@ -187,6 +184,7 @@ public class TopicController {
     public String findByTitle(HttpServletRequest request, Model model){
         String title = request.getParameter("title");
         List<Topic> topicList = topicService.findByTitle(title);
+        System.out.println("tl"+topicList);
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic-table";
     }
@@ -223,18 +221,22 @@ public class TopicController {
     @RequestMapping("/showTopic")
     public ModelAndView showTopic(){
         mv = new ModelAndView();
-        List<Topic> topics =  topicService.findAllTopic();
+        List<Topic> topics =  topicService.findCheckTopic();
         for (Topic topic : topics){
             topic.setUser(userService.findByNameAll(topic.getUname()));
         }
+        List<Topic> topTopics = topicService.findTopic(0,3);
+        System.out.println(topTopics);
         mv.addObject("topics", topics);
+        mv.addObject("topTopics",topTopics);
         mv.setViewName("user/main/topic");
         return mv;
     }
 
     /*通过id进入话题回复评论页面*/
     @RequestMapping("/findTopicById")
-    public String findTopicById(String tid,Model model){
+    public String findTopicById(String tid,String type,Model model){
+        System.out.println("tid:"+tid+"-type:"+type);
         Topic topic = topicService.findTopicById(tid);
         topic.setUser(userService.findByNameAll(topic.getUname()));
         List<Dynamic> dynamics = dynamicService.findByTid(tid);
@@ -242,8 +244,11 @@ public class TopicController {
             dynamic.setComments(commentService.findByWid(dynamic.getWid()));
             dynamic.setUser(userService.findByNameAll(dynamic.getUname()));
         }
+        List<Info> infos = infoService.findInfoBytype(type,0,5);
+        model.addAttribute("infos",infos);
         model.addAttribute("dynamics", dynamics);
         model.addAttribute("topic", topic);
         return "user/main/tiezi";
     }
+
 }

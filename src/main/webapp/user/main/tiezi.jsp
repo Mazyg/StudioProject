@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="css/reset.css"/>
     <link rel="stylesheet" href="css/public.css"/>
     <link rel="stylesheet" href="css/topic.css"/>
+    <style type="text/css">
+        body{
+            background: url("img/bg_02.jpg");
+        }
+    </style>
 </head>
 <body>
 <header class="ltHead">
@@ -186,11 +191,13 @@
         </div>
         <div class="indexPublic">
             <div class="indexPublic_head">
-                本周热议
+                相关热点
             </div>
             <div class="indexPublic_con">
                 <ul class="weekHot">
-                    <li><a href="">${topic.t_title}</a><span>29</span></li>
+                    <c:forEach var="info" items="${infos}" >
+                        <li><a href="../info/findInfoByTitle.do?title=${info.title}">${info.title}</a></li>
+                    </c:forEach>
                 </ul>
             </div>
         </div>

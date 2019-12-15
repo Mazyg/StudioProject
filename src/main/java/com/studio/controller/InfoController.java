@@ -94,7 +94,7 @@ public class InfoController {
 
     //首页显示
     @RequestMapping("/findInfoBytype")
-    public String findInfoBytype(Model model){
+    public String findInfoBytype(Model model,HttpServletRequest request){
         List<Info> rolemodeltop= infoService.findInfoBytype("榜样力量",0,1);
         model.addAttribute("rolemodeltop",rolemodeltop);
         List<Info> rolemodel= infoService.findInfoBytype("榜样力量",1,2);
@@ -103,6 +103,9 @@ public class InfoController {
         model.addAttribute("chinese",chinese);
         List<Info> event= infoService.findInfoBytype("热点时事",0,5);
         model.addAttribute("event",event);
+        request.getSession().setAttribute("hotInfo",event);
+        List<Info> videoList = infoService.findInfoBytype("视频", 0, 4);
+        request.getSession().setAttribute("videoInfo",videoList);
         List<Info> event2= infoService.findInfoBytype("热点时事",2,3);
         model.addAttribute("event2",event2);
         List<Info> movies1= infoService.findInfoBytype("电影",0,2);
@@ -317,7 +320,8 @@ public class InfoController {
 
     @RequestMapping("/findByIdInfo")
     public String findByIdInfo(Model model,HttpServletRequest request){
-        String info_id= request.getParameter("info_id");
+ 
+        String info_id = request.getParameter("infoId");
         String uid=request.getParameter("uid");
         String content= request.getParameter("content");
         model.addAttribute("info_id",info_id);
@@ -329,6 +333,9 @@ public class InfoController {
         model.addAttribute("infos", info);
         List<Discuss> discuss=discussService.findByInfo_id(info_id);
         model.addAttribute("discuss",discuss);
+        if("视频".equals(info.getInfo_type())){
+            return "user/main/video";
+        }
         return "user/main/details";
     }
 
@@ -383,4 +390,12 @@ public class InfoController {
         mv.setViewName("manage/pages/forms/basic_elements");
         return mv;
     }
+
+    @RequestMapping("/findInfoByTitle")
+    public String findInfoByTitle(String title,Model model){
+         Info info = infoService.findByTitle(title);
+         model.addAttribute("infos",info);
+         return "user/main/details";
+    }
+
 }

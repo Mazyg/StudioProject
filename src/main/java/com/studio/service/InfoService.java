@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface InfoService {
 
+    public Integer findCountInfo();
+
+    public Integer findCountInfoByType(String info_type);
+
     public List<Info> findAllInfo(Info info);
 
     public Info findById(String info_id);

@@ -28,7 +28,7 @@
     <script type="text/javascript">
       window.onload = function()
       {
-        CKEDITOR.replace( 'description');
+         CKEDITOR.replace( 'description');
         var message = "${msg}";
         if( message != ""){
           alert(message);
@@ -37,6 +37,12 @@
       function selectFile(){
         $("#photo").trigger("click");
       }
+
+
+      function selectFileV(){
+        $("#video").trigger("click");
+      }
+
     </script>
     <script type="text/javascript">
       function msssage () {
@@ -51,7 +57,7 @@
       }
 
       function getImage() {
-        var obj = new FormData();
+       /* var obj = new FormData();
         var file = document.getElementById("photo").files[0];
         obj.append("file", file);
         $.ajax({
@@ -64,11 +70,85 @@
           success : function(data) {
             $("#url").val(data) ;
           }
-        })
+        })*/
+
+        var photo=document.querySelector("#photo");
+        console.log(photo);
+        var file=photo.files[0];
+        var formData=new FormData();
+        formData.append("img",file);
+        var xhr=new XMLHttpRequest();
+        xhr.open("post","http://111.229.25.156:7777/upload/img")
+        xhr.onload=function (ev) {
+          var json;
+          if(xhr.status!==200){
+            failFun('HTTP Error:'+xhr.status);
+            return
+          }
+          json=JSON.parse(this.responseText);
+          if(!json||typeof json.location !='string'){
+            failFun('Invalid JSON:'+xhr.responseText);
+            return;
+          }else{
+            console.log(json.location);
+            $("#url").val(json.location) ;
+            $("#src").attr("src",json.location);
+          }
+
+
+        };
+        xhr.send(formData);
+
+
 
       }
 
+
+      function getvideo() {
+        var photo=document.querySelector("#video");
+        console.log(photo);
+        var file=photo.files[0];
+        var formData=new FormData();
+        formData.append("movie",file);
+        var xhr=new XMLHttpRequest();
+        xhr.open("post","http://111.229.25.156:7777/upload/movie")
+        xhr.onload=function (ev) {
+          var json;
+          if(xhr.status!==200){
+            failFun('HTTP Error:'+xhr.status);
+            return
+          }
+          json=JSON.parse(this.responseText);
+          if(!json||typeof json.location !='string'){
+            failFun('Invalid JSON:'+xhr.responseText);
+            return;
+          }else{
+            console.log(json.location);
+            $("#urlv").val(json.location) ;
+          /*  $("#src").attr("src",json.location);*/
+          }
+
+
+        };
+        xhr.send(formData);
+
+
+
+      }
+
+
+
     </script>
+    <style type="text/css">
+      .child {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    </style>
   </head>
   <body>
     <div class="container-scroller">
@@ -101,10 +181,10 @@
             </li>
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> ${users.uname} </span></a>
+                <img class="img-xs rounded-circle ml-2" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="Profile image"> <span class="font-weight-normal"> ${users.uname} </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
-                  <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
+                  <img class="img-lg rounded-circle" src="${users.photo}" alt="Profile image">
                   <p class="mb-1 mt-3">${users.uname}</p>
                   <p class="font-weight-light text-muted mb-0">${users.email}</p>
                 </div>
@@ -126,7 +206,7 @@
             <li class="nav-item nav-profile">
               <a href="javascript:void(0);" class="nav-link">
                 <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="profile image">
+                  <img class="img-xs rounded-circle" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="profile image">
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
@@ -144,7 +224,7 @@
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="../dynamic/findAllTopic.do">动态管理</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.jsp">动态推送</a></li>
+
                 </ul>
               </div>
             </li>
@@ -199,8 +279,8 @@
                   <div class="card-body">
                     <form class="forms-sample" action="../info/addInfo.do" method="post">
                       <div class="form-group">
-                        <label for="exampleInputName1">标题</label>
-                        <input type="text" class="form-control" id="exampleInputName1" placeholder="标题" name="title">
+                        <label for="title">标题</label>
+                        <input type="text" class="form-control" id="title" placeholder="标题" name="title">
                       </div>
                       <div class="form-group">
                         <label for="introduction">简介</label>
@@ -222,6 +302,7 @@
                             <option value="最美中国事">最美中国事</option>
                             <option value="电影">电影</option>
                             <option value="书籍">书籍</option>
+                            <option value="视频">视频</option>
                             <option value=""></option>
                           </select>
                           <input type="text"  style="display:none" id="type" name="info_type"/>
@@ -238,17 +319,58 @@
                           </span>
                         </div>
                       </div>
+
                       <div class="form-group">
-                        <label for="description">内容</label>
-                        <textarea id="description"  name="content"></textarea>
+                        <label>上传视频</label>
+                       <%-- <input type="file" name="img[]" class="file-upload-default">--%>
+                        <div class="input-group col-xs-12">
+                          <input type="text" class="form-control file-upload-info" readonly placeholder="视频地址" id="urlv" name="video" >
+                          <span class="input-group-a ppend">
+                            <input type="file" id="video" style="display:none" multiple="multiple" onchange="getvideo()">
+                            <button class="file-upload-browse btn btn-primary" type="button" onclick="selectFileV()">上传</button>
+                          </span>
+                        </div>
                       </div>
-                      <input type="submit" class="btn btn-primary mr-2" value="提交" onclick="change()">
+
+
+
+                      <div class="form-group">
+                      <label for="description">内容</label>
+                      <textarea id="description"  name="content"></textarea>
+                    </div>
                       <input type="reset" class="btn btn-light" value="重置">
+                      <input type="submit" class="btn btn-primary mr-2" value="提交" onclick="change()">
                     </form>
+                    <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#myModal" id="view">
+                      预览
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          <!--预览-->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div  class="modal-dialog " >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="view-title">
+                    详情预览
+                  </h4>
+                </div>
+                <div class="modal-body fo" id="view-content">
+
+                  </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                  </button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:../../partials/_footer.html -->
@@ -278,6 +400,12 @@
     <script src="js/typeahead.js"></script>
     <script src="js/select2.js"></script>
     <!-- End custom js for this page -->
+    <script>
+      $("#view").click(function () {
 
+        $("#view-title").html($("#title").val());
+        $("#view-content").html(CKEDITOR.instances.description.getData());
+      })
+    </script>
   </body>
 </html>

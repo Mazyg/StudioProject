@@ -71,7 +71,7 @@
     }
 
     function getImage() {
-        var obj = new FormData();
+        /*var obj = new FormData();
         var file = document.getElementById("photo").files[0];
         obj.append("file", file);
         $.ajax({
@@ -85,7 +85,36 @@
                 $("#url").val(data) ;
                 $("#src").attr("src",data)
             }
-        })
+        })*/
+
+        console.log("hello")
+        var photo=document.querySelector("#photo");
+        console.log(photo);
+        var file=photo.files[0];
+        var formData=new FormData();
+        formData.append("img",file);
+        var xhr=new XMLHttpRequest();
+        xhr.open("post","http://111.229.25.156:7777/upload/img")
+        xhr.onload=function (ev) {
+            var json;
+            if(xhr.status!==200){
+                failFun('HTTP Error:'+xhr.status);
+                return
+            }
+            json=JSON.parse(this.responseText);
+            if(!json||typeof json.location !='string'){
+                failFun('Invalid JSON:'+xhr.responseText);
+                return;
+            }else{
+                console.log(json.location);
+                $("#url").val(json.location) ;
+                $("#src").attr("src",json.location);
+            }
+
+
+        };
+        xhr.send(formData);
+
 
 
 

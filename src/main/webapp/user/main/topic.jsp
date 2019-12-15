@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="css/reset.css"/>
     <link rel="stylesheet" href="css/public.css"/>
     <link rel="stylesheet" href="css/topic.css"/>
+    <style type="text/css">
+        body{
+            background: url("img/bg_02.jpg");
+        }
+    </style>
 </head>
 <body>
 <header class="ltHead">
@@ -66,7 +71,7 @@
             <div class="indexCon_msg">
                 <div class="indexCon_msg_pic"><img src="${topic.user.photo}"></div>
                 <div class="indexCon_msg_detail">
-                    <a href="../topic/findTopicById.do?tid=${topic.tid}">
+                    <a href="../topic/findTopicById.do?tid=${topic.tid}&type=${topic.t_type}">
                         <div class="indexCon_msg_detail_tittle">
                             <span>${topic.t_type}</span>
                             <p>${topic.content}</p>
@@ -76,8 +81,6 @@
                         <ul>
                             <li>${topic.uname}</li>
                             <li>${topic.date}</li>
-                            <li>21</li>
-                            <li>28</li>
                         </ul>
                     </div>
                 </div>
@@ -144,8 +147,9 @@
                 </div>
                 <div class="indexPublic_con">
                     <ul class="weekHot">
-                        <li><a href="">本周热议</a><span>29</span></li>
-
+                        <c:forEach items="${topTopics}" var="topTopic">
+                            <li><a href="../topic/findTopicById.do?tid=${topTopic.tid}&type=${topTopic.t_type}">${topTopic.t_title}</a></li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>

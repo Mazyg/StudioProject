@@ -26,6 +26,12 @@ public interface TopicDao {
     @Select("select * from topic")
     public List<Topic> findAllTopic();
 
+    @Select("select count(*) from topic")
+    public Integer findCountTopic();
+
+    @Select("select count(*) from topic where t_tatus=#{t_tatus}")
+    public Integer findCountNo(String t_tatus);
+
     /*未审核话题*/
     @Select("select * from topic where t_tatus='未审核'")
     public List<Topic> findAllByStatus();
@@ -33,6 +39,8 @@ public interface TopicDao {
     @Select("select * from topic where uid = #{uid}")
     public List<Topic> findAllByUid(Integer uid);
 
+    @Select("select * from topic where t_tatus= '已审核' ")
+    public List<Topic> findCheckTopic();
     /**
      * 通过用户名查询用户发布的话题
      * @param uname
@@ -46,7 +54,7 @@ public interface TopicDao {
      * @param t_title
      * @return
      */
-    @Select("select * from topic where t_title=#{t_title}")
+    @Select("select * from topic where t_title like CONCAT('%',#{t_title},'%')")
     public List<Topic> findByTitle(String t_title);
 
     /**
@@ -54,7 +62,7 @@ public interface TopicDao {
      * @param t_title
      * @return
      */
-    @Select("select * from topic where t_title= #{t_title} and t_tatus='未审核'")
+    @Select("select * from topic where t_title like CONCAT('%',#{t_title},'%') and t_tatus='未审核'")
     public List<Topic> findByTitleNot(String t_title);
 
     /**
@@ -77,7 +85,7 @@ public interface TopicDao {
      * 话题查询，按照时间排序，取N条
      *
      */
-    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname\n" +
+    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname,t_type\n" +
             " from  topic\n" +
             " where t_tatus='已审核'\n" +
             " order by date desc "

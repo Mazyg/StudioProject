@@ -13,6 +13,21 @@ public interface InfoDao {
     @Select("select * from info ")
     public List<Info> findAllInfo();
 
+    /**
+     * 查询信息总数
+     * @return
+     */
+    @Select("select count(*) from info ")
+    public Integer findCountInfo();
+
+    /**
+     * 查询不同类别信息数量
+     * @param info_type
+     * @return
+     */
+    @Select("select count(*) from info where info_type=#{info_type} ")
+    public Integer findCountInfoByType(String info_type);
+
     //全局模糊查询
     @Select("select *\n" +
             "from info\n" +
@@ -48,7 +63,7 @@ public interface InfoDao {
     @Select("select * from info where info_type='书籍'")
     public List<Info> findBook();
     //增加信息
-    @Insert("insert into info(title,content,info_type,photo,date,introduce) values('${title}','${content}','${info_type}','${photo}','${date}','${introduce}')")
+    @Insert("insert into info(title,content,info_type,photo,date,introduce,video) values('${title}','${content}','${info_type}','${photo}','${date}','${introduce}','${video}')")
     public boolean addInfo(Info info);
 
     public List<Info> findAllByType(Info info);

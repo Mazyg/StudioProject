@@ -20,6 +20,16 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public Integer findCountTopic() {
+        return topicDao.findCountTopic();
+    }
+
+    @Override
+    public Integer findCountNo(String t_tatus) {
+        return topicDao.findCountNo(t_tatus);
+    }
+
+    @Override
     public boolean saveTopicA(Topic topic) {
         return topicDao.saveTopicA(topic);
     }
@@ -73,6 +83,11 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public List<Topic> findAllByUname(String uname) {
         return topicDao.findAllByUname(uname);
+    }
+
+    @Override
+    public List<Topic> findCheckTopic() {
+        return topicDao.findCheckTopic();
     }
 
     /**
