@@ -6,7 +6,7 @@
   Time: 9:50
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"+"user/";
@@ -106,12 +106,16 @@
 <div class="content yahei subchannel">
     <div class="mainWrap clearfix">
         <section class="colunm1">
+            <br>
+            <h2 class="dh2">${infos.title}</h2>
+            <br><br><br>
+            <span class="siz">${infos.content}</span>
             <div class="m">
                 <video id="my-video" class="video-js vjs-big-play-centered" controls preload="auto" width="640" height="270"
                        poster="m.jpg" data-setup="{}">
-                    <source src="http://111.229.25.156:7777/file/movie/movie-e456f08e-52da-4ede-8760-1676a29b2406.mp4" type="video/mp4">
-                    <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
-                    <source src="http://vjs.zencdn.net/v/oceans.ogv" type="video/ogg">
+                    <source src="${infos.video}" type="video/mp4">
+                    <source src=".webm" type="video/webm">
+                    <source src=".ogv" type="video/ogg">
                     <p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a> </p>
                 </video>
             </div>
