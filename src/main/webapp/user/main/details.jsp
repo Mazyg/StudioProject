@@ -151,7 +151,7 @@
                         }
                         else{
                             alert("评论成功！")
-                            window.location.href="../info/findByIdInfo.do?info_id="+info_id+"&uid="+uid+"&content="+content;
+                            window.location.href="../info/findByIdInfo.do?infoId="+info_id+"&uid="+uid+"&content="+content;
                         }
                     }
                 </script>
