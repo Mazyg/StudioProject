@@ -1,7 +1,10 @@
 package com.studio.controller;
 
 
+import com.studio.domian.Discuss;
 import com.studio.domian.Info;
+import com.studio.domian.User;
+import com.studio.service.DiscussService;
 import com.studio.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +25,10 @@ public class InfoController {
 
     @Autowired
     private InfoService infoService;
+
+    @Autowired
+    private DiscussService discussService;
+
     ModelAndView mv;
     boolean result;
     String msg;
@@ -42,6 +49,7 @@ public class InfoController {
     @RequestMapping("/findAll")
     public String findAll(Model model,HttpServletRequest request){
         String search=request.getParameter("search");
+        System.out.println(search);
         model.addAttribute("search",search);
         String keyword="%"+search+"%";
         int total=infoService.countAll(keyword);
@@ -312,11 +320,19 @@ public class InfoController {
 
     @RequestMapping("/findByIdInfo")
     public String findByIdInfo(Model model,HttpServletRequest request){
+ 
         String info_id = request.getParameter("infoId");
-        System.out.println("id"+info_id);
+        String uid=request.getParameter("uid");
+        String content= request.getParameter("content");
+        model.addAttribute("info_id",info_id);
+        model.addAttribute("uid",uid);
+        if(uid!="" && content!=null) {
+            Boolean i = discussService.saveDynamic(uid, content,info_id);
+        }
         Info info = infoService.findById(info_id);
-        System.out.println("info"+info);
         model.addAttribute("infos", info);
+        List<Discuss> discuss=discussService.findByInfo_id(info_id);
+        model.addAttribute("discuss",discuss);
         if("视频".equals(info.getInfo_type())){
             return "user/main/video";
         }

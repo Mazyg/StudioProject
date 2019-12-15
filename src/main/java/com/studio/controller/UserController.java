@@ -162,6 +162,12 @@ public class UserController {
         return mv;
     }
 
+
+    @RequestMapping("/out")
+    public ModelAndView out(/*User user,*/HttpServletRequest request){
+        return null;
+    }
+
     @RequestMapping("/register")
     public ModelAndView register(User user){
         user.setU_type("user");

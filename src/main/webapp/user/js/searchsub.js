@@ -1,5 +1,6 @@
+var search;
 function searchSub(numberPerPage){
-    var search= $("#search").val();
+    search= $("#search").val();
     if (search=='') {
         alert("搜索内容不能为空");
     }
@@ -10,7 +11,6 @@ function searchSub(numberPerPage){
 
 //搜索结果实现分页效果
 function jumpTo2(maxPage,numberPerPage,total,search){
-    alert("hahahah")
     var page = $("#jumpTo").val();
     var start=(page-1)*numberPerPage;
     var rest=total-start;
@@ -21,7 +21,7 @@ function jumpTo2(maxPage,numberPerPage,total,search){
         alert("对不起，无法到达该页")
     }else{
         if(rest>=numberPerPage){
-            window.location.href="../info/findAll.do?page="+page+"&numberPerPage="+numberPerPage+"&start="+start+"&length="+numberPerPage+"&search="+search
+            window.location.href="../info/findAll.do?page="+page+"&numberPerPage="+numberPerPage+"&start="+start+"&length="+numberPerPage+"&search="+search;
         }
         else {
             window.location.href="../info/findAll.do?page="+page+"&numberPerPage="+numberPerPage+"&start="+start+"&length="+rest+"&search="+search;

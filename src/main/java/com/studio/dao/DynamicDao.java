@@ -24,7 +24,4 @@ public interface DynamicDao {
     @Delete("delete from dynamic where wid=#{wid} ")
     public boolean deleteDynamic(Integer wid);
 
- 
-
-
 }

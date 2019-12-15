@@ -150,7 +150,7 @@
                         <div class="contentwraper">
                             <figcaption>
                                 <span class="tips">身边榜样</span>
-                                <a href="../info/findByIdInfo.do?infoId=${person.info_id}" target="_blank"  class="jiequ">
+                                <a href="../info/findByIdInfo.do?infoId=${person.info_id}&uid=${users.uid}" target="_blank"  class="jiequ">
                                    ${person.title}
                                 </a>
                             </figcaption>
