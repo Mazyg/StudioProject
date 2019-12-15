@@ -165,10 +165,11 @@
                                     </div>
                                     <div class="comment-right">
                                         <p>${discuss.uname}</p>
-                                        <p style="margin-top: -10px;">${discuss.date}</p>
-                                        <p>${discuss.content}</p>
+                                        <p style="margin-top: -10px;"><small>${discuss.date}</small></p>
+                                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${discuss.content}</p>
                                     </div>
                                 </div>
+                                <br>
                             </li>
                         </c:forEach>
                     </ul>
