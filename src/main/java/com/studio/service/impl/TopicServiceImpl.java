@@ -25,8 +25,8 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public Integer findCountNo() {
-        return topicDao.findCountNo();
+    public Integer findCountNo(String t_tatus) {
+        return topicDao.findCountNo(t_tatus);
     }
 
     @Override
