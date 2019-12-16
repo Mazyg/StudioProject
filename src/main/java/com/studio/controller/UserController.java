@@ -163,6 +163,27 @@ public class UserController {
     }
 
 
+    @RequestMapping("/backAdmin")
+    public ModelAndView backAdmin(){
+        mv = new ModelAndView();
+        Integer userCount = userService.findCount();
+        Integer userAdm = userService.findAdm();
+        Integer userNo = userService.findNo();
+        Integer topicCount = topicService.findCountTopic();
+        Integer topicNo = topicService.findCountNo("未审核");
+        Integer infoCount = infoService.findCountInfo();
+        Integer infoVideo = infoService.findCountInfoByType("视频");
+        mv.addObject("infoV",infoVideo);
+        mv.addObject("infoCount",infoCount);
+        mv.addObject("topicCount",topicCount);
+        mv.addObject("topicNo",topicNo);
+        mv.addObject("userAdm" ,userAdm);
+        mv.addObject("userNo",userNo);
+        mv.addObject("userCount",userCount);
+        mv.setViewName("manage/admin");
+        return mv;
+    }
+
     @RequestMapping("/out")
     public ModelAndView out(/*User user,*/HttpServletRequest request){
         return null;
