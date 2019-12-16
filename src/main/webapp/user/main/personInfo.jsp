@@ -144,6 +144,9 @@
                     <ul class="last">
                         <li><a href="main/personInfo.jsp">个人信息</a></li>
                         <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
+                        <c:if test="${users.u_type eq'admin'}">
+                            <li><a href="../user/backAdmin.do">管理界面</a></li>
+                        </c:if>
                         <li><a href="../user/exitLogin.do">退出登录</a></li>
                     </ul>
                 </li>

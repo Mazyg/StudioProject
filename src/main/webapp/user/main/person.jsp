@@ -109,6 +109,9 @@
                     <ul class="last">
                         <li><a href="main/personInfo.jsp">个人信息</a></li>
                         <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
+                        <c:if test="${users.u_type eq'admin'}">
+                            <li><a href="../user/backAdmin.do">管理界面</a></li>
+                        </c:if>
                         <li><a href="../user/exitLogin.do">退出登录</a></li>
                     </ul>
                 </li>
@@ -123,7 +126,7 @@
             <br><br><br><br><br><br><br>
             <table>
                 <tr><td>&nbsp;&nbsp;<img class="imgs" src="${users.photo}" alt=""></td>
-                    <td><h4>&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
+                    <td><h4>&nbsp;&nbsp;&nbsp;${users.uname}<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                 </tr>
             </table>
         </div>
