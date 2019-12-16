@@ -249,4 +249,11 @@ public class UserController {
         model.addAttribute("user3", user3);
         return "manage/pages/samples/personInfo";
     }
+
+
+    @RequestMapping("/exitLogin")
+    public String exitLogin(HttpServletRequest request){
+       request.getSession().invalidate();
+       return "redirect:/info/findInfoBytype.do";
+    }
 }

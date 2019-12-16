@@ -54,37 +54,26 @@
     <nav class="navwrap yahei">
         <section class="mainWrap">
             <ul id="nav">
-                <li><a href="main/news.jsp">热点资讯</a>
+                <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
                 </li>
-                <li><a href="#">爱我中华</a>
-                    <ul>
+                <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
+                    <%--<ul>
                         <li><a href="#">最美中国景</a></li>
                         <li><a href="#">最美中国人</a></li>
                         <li><a href="#">最美中国事</a></li>
-                    </ul>
+                    </ul>--%>
                 </li>
-                <li><a href="#" class="">榜样力量</a>
-                    <ul>
-                        <li><a href="#">新时代楷模</a></li>
-                        <li><a href="#">改革先锋</a></li>
-                        <li><a href="#">最美奋斗者</a></li>
-                        <li><a href="#">道德模范</a></li>
-                    </ul>
+                <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
                 </li>
-                <li><a href="#" class="">话题</a>
-                    <ul>
-                        <li><a href="#">话题1</a></li>
-                        <li><a href="#">话题2</a></li>
-                        <li><a href="#">话题3</a></li>
-                    </ul>
+                <li><a href="../topic/showTopic.do" class="">话题</a>
                 </li>
-                <li><a href="../info/findBooks.do" class="">书籍</a></li>
-                <li><a href="../info/findMovies.do">电影</a></li>
-                <li><a href="#" class="">个人中心</a>
+                <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3" class="">书籍</a></li>
+                <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
+                <li><a href="../info/findPersonalMainInfo.do" class="">个人中心</a>
                     <ul class="last">
-                        <li><a href="#">我的收藏</a></li>
-                        <li><a href="#">话题管理</a></li>
-                        <li><a href="#">个人信息</a></li>
+                        <li><a href="main/personInfo.jsp">个人信息</a></li>
+                        <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
+                        <li><a href="../user/exitLogin.do">退出登录</a></li>
                     </ul>
                 </li>
             </ul>
