@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="css/reset.css"/>
     <link rel="stylesheet" href="css/public.css"/>
     <link rel="stylesheet" href="css/topic.css"/>
+    <link href="css/base_news.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jump.js"></script>
     <style type="text/css">
         body{
             background: url("img/bg_02.jpg");
@@ -21,13 +23,48 @@
 <body>
 <header class="ltHead">
     <div class="ltHead_cen">
-        <a href=""><img src="img/logo.png" alt="" class="headPic1"/></a>
-        <ul class="headNav">
-            <li><a href="../info/findInfoBytype.do">首页</a></li>
-        </ul>
+        <nav class="navwrap yahei">
+            <section class="mainWrap">
+                <ul id="nav">
+                    <li><a href="../info/findEvent.do">热点时事</a>
+                    </li>
+                    <li><a href="../info/findChinese.do">爱我中华</a>
+                        <ul>
+                            <li><a href="#">最美中国景</a></li>
+                            <li><a href="#">最美中国人</a></li>
+                            <li><a href="#">最美中国事</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
+                        <ul>
+                            <li><a href="#">新时代楷模</a></li>
+                            <li><a href="#">改革先锋</a></li>
+                            <li><a href="#">最美奋斗者</a></li>
+                            <li><a href="#">道德模范</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" class="">话题</a>
+                        <ul>
+                            <li><a href="#">话题1</a></li>
+                            <li><a href="#">话题2</a></li>
+                            <li><a href="#">话题3</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" class="">书籍</a></li>
+                    <li><a href="../info/findMovies.do">电影</a></li>
+                    <li><a href="#" class="">个人中心</a>
+                        <ul class="last">
+                            <li><a href="#">我的收藏</a></li>
+                            <li><a href="#">话题管理</a></li>
+                            <li><a href="#">个人信息</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </nav>
         <!--未登入开始-->
         <div class="ltForm appear">
-            <a href=""><img src="img/indexForm_bg.png" alt="" class="headPic2"/></a>
+<%--            <a href=""><img src="img/indexForm_bg.png" alt="" class="headPic2"/></a>--%>
             <ul>
                 <c:choose>
                     <c:when test="${users == null}">
@@ -74,7 +111,7 @@
                     <a href="../topic/findTopicById.do?tid=${topic.tid}&type=${topic.t_type}">
                         <div class="indexCon_msg_detail_tittle">
                             <span>${topic.t_type}</span>
-                            <p>${topic.content}</p>
+                            <p>${topic.t_title}</p>
                         </div>
                     </a>
                     <div class="indexCon_msg_detail_other">
@@ -89,12 +126,50 @@
             </c:forEach>
         </div>
         <div class="indexFooter">
-            <div class="indexFooter_con">
-                <a href="javascript:"><</a>
-                <a href="" class="on">1</a>
-                <a href="">2</a>
-                <a href="">3</a>
-                <a href="javascript:">></a>
+            <div class="pager">
+                <!-- 上一页 按钮 -->
+                <c:choose>
+                    <c:when test="${page>1}">
+                        <a href="../topic/showTopic.do?start=${start-numberPerPage}&length=${numberPerPage}&page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a><<</a>
+                    </c:otherwise>
+                </c:choose>
+
+                <!-- 页数列表 -->
+                <c:forEach items="${pageList}" var="item">
+                    <c:choose>
+                        <c:when test="${(total-(item-1)*numberPerPage)>=numberPerPage}">
+                            <a href="../topic/showTopic.do?start=${(item-1)*numberPerPage}&length=${numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="../topic/showTopic.do?start=${(item-1)*numberPerPage}&length=${total-(item-1)*numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+                <!-- 下一页 按钮 -->
+                <c:choose>
+                    <c:when test="${page<totalPage && rest>=numberPerPage}">
+                        <a href="../topic/showTopic.do?start=${start+numberPerPage}&length=${numberPerPage}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                            >>
+                        </a>
+                    </c:when>
+                    <c:when test="${page<totalPage && rest<numberPerPage && rest>0}">
+                        <a href="../topic/showTopic.do?start=${start+numberPerPage}&length=${rest}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                            >>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a>>></a>
+                    </c:otherwise>
+                </c:choose>
+
+                <!-- 直接跳转 -->
+                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage},${total},'../topic/showTopic')" />
+                <!-- 设置每页显示条数 -->
+                &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},'../topic/showTopic')" />
             </div>
         </div>
     </div>
@@ -137,45 +212,46 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-            <div class="indexSearch">
-                <input type="text" placeholder="请输入关键词"/>
-                <input type="submit" value="搜索"/>
-            </div>
-            <div class="indexPublic">
-                <div class="indexPublic_head">
-                    本周热议
+                <div class="indexSearch">
+                    <input type="text" placeholder="请输入关键词"/>
+                    <input type="submit" value="搜索"/>
                 </div>
-                <div class="indexPublic_con">
-                    <ul class="weekHot">
-                        <c:forEach items="${topTopics}" var="topTopic">
-                            <li><a href="../topic/findTopicById.do?tid=${topTopic.tid}&type=${topTopic.t_type}">${topTopic.t_title}</a></li>
-                        </c:forEach>
-                    </ul>
+                <div class="indexPublic">
+                    <div class="indexPublic_head">
+                        本周热议
+                    </div>
+                    <div class="indexPublic_con">
+                        <ul class="weekHot">
+                            <c:forEach items="${topTopics}" var="topTopic">
+                                <li><a href="../topic/findTopicById.do?tid=${topTopic.tid}&type=${topTopic.t_type}">${topTopic.t_title}</a></li>
+                            </c:forEach>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="indexPublic">
-                <div class="indexPublic_head">
-                    友情链接
-                </div>
-                <div class="indexPublic_con">
-                    <ul class="indexLink">
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
-                    </ul>
+                <div class="indexPublic">
+                    <div class="indexPublic_head">
+                        友情链接
+                    </div>
+                    <div class="indexPublic_con">
+                        <ul class="indexLink">
+                            <li><a href=""></a></li>
+                            <li><a href=""></a></li>
+                            <li><a href=""></a></li>
+                            <li><a href=""></a></li>
+                            <li><a href=""></a></li>
+                            <li><a href=""></a></li>
+                            <li><a href=""></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="clear"></div>
+        <div class="clear"></div>
 </div>
 <footer class="publicFooter">
     <p></p>
 </footer>
+</div>
 </body>
 </html>
 <script src="js/jquery-1.8.3.min.js"></script>

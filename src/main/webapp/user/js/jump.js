@@ -10,10 +10,10 @@ function jumpTo(maxPage,numberPerPage,total,name){
         alert("对不起，无法到达该页")
     }else{
         if(rest>=numberPerPage){
-            window.location.href="../info/"+name+".do?page="+page+"&numberPerPage="+numberPerPage+"&start="+start+"&length="+numberPerPage;
+            window.location.href=name+".do?page="+page+"&numberPerPage="+numberPerPage+"&start="+start+"&length="+numberPerPage;
         }
         else {
-            window.location.href="../info/"+name+".do?page="+page+"&numberPerPage="+numberPerPage+"&start="+start+"&length="+rest;
+            window.location.href=name+".do?page="+page+"&numberPerPage="+numberPerPage+"&start="+start+"&length="+rest;
         }
     }
 }
@@ -26,6 +26,6 @@ function change(total,name){
     else if(numberPerPage > total || numberPerPage < 1){
         alert("对不起，无法设置");
     }else{
-        window.location.href="../info/"+name+".do?start=0&page=1"+"&length="+numberPerPage+"&numberPerPage="+numberPerPage;
+        window.location.href=name+".do?start=0&page=1"+"&length="+numberPerPage+"&numberPerPage="+numberPerPage;
     }
 }
