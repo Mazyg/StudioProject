@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 @Controller
 @RequestMapping("/topic")
@@ -219,9 +220,19 @@ public class TopicController {
 
     /*跳转到话题页面*/
     @RequestMapping("/showTopic")
-    public ModelAndView showTopic(){
+    public ModelAndView showTopic(Model model,HttpServletRequest request){
+        int total=topicService.findCountTopic();
+        model.addAttribute("total", total);
+        int start = Integer.parseInt(request.getParameter("start"));
+        model.addAttribute("start",start);
+        int length= Integer.parseInt(request.getParameter("length"));
+        int page = Integer.parseInt(request.getParameter("page"));
+        model.addAttribute("page",page);
+        int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
+        model.addAttribute("numberPerPage",numberPerPage);
         mv = new ModelAndView();
-        List<Topic> topics =  topicService.findCheckTopic();
+//        List<Topic> topics =  topicService.findCheckTopic();
+        List<Topic> topics =  topicService.findTopic(start,length);
         for (Topic topic : topics){
             topic.setUser(userService.findByNameAll(topic.getUname()));
         }
@@ -229,6 +240,27 @@ public class TopicController {
         System.out.println(topTopics);
         mv.addObject("topics", topics);
         mv.addObject("topTopics",topTopics);
+        int rest=total-(start+length);
+        System.out.println("剩余："+rest);
+        model.addAttribute("rest",rest);
+        int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
+        model.addAttribute("totalPage",totalPage);
+        System.out.println("总页数："+totalPage);
+        System.out.println("\n------------------------\n");
+        Vector<Integer> pageArr = new Vector<Integer>();
+        int startx=1;
+        if(page>5){
+            startx= page/5*5;
+        }
+        int num = startx;
+        while(!(num > totalPage || num >=startx +5)){
+            pageArr.add(new Integer(num));
+            ++num;
+        }
+        model.addAttribute("pageList",pageArr);
         mv.setViewName("user/main/topic");
         return mv;
     }
