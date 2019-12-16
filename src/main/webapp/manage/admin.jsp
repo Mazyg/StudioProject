@@ -66,7 +66,7 @@
                   <p class="font-weight-light text-muted mb-0">${users.email}</p>
                 </div>
                 <a class="dropdown-item" href="../user/personalInfo.do?${user.uid}"><i class="dropdown-item-icon icon-user text-primary"></i>个人信息</a>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
+                <a href="../user/exitLogin.do" class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
               </div>
             </li>
           </ul>
