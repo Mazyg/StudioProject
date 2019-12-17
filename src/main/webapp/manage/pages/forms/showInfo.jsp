@@ -3,7 +3,7 @@
 <%
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"manage/";
 %>
-<html>
+<!DOCTYPE html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -23,37 +23,171 @@
     <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
     <link rel="shortcut icon" href="images/favicon.png" />
     <script src="js/jquery-1.8.3.js"></script>
-    <script src="../ckeditor/ckeditor.js"></script>
+    <script src="../tinymce/tinymce.min.js"></script>
     <script type="text/javascript">
+
+
         window.onload = function() {
-            CKEDITOR.replace('description');
             $("#title").val('${info.title}');
             $("#info").val('${info.info_type}');
-            $("#url").val('${info.photo}')
+            $("#url").val('${info.photo}');
+            $("#urlv").val('${info.video}');
         }
+
+
         function selectFile(){
             $("#photo").trigger("click");
         }
+
+
         function change(){
             $("#type").val($("#info").val()) ;
         }
+
+
+        function selectFileV(){
+            $("#video").trigger("click");
+        }
+
+
         function getImage() {
-            var obj = new FormData();
-            var file = document.getElementById("photo").files[0];
-            obj.append("file", file);
-            $.ajax({
-                url : '../load/getImageUrl.do',
-                type : 'POST',
-                data : obj,
-                contentType : false,
-                processData : false,
-                mimeType : 'multipart/form-data',
-                success : function(data) {
-                    $("#url").val(data) ;
+            var photo=document.querySelector("#photo");
+            console.log(photo);
+            var file=photo.files[0];
+            var formData=new FormData();
+            formData.append("img",file);
+            var xhr=new XMLHttpRequest();
+            xhr.open("post","http://111.229.25.156:7777/upload/img")
+            xhr.onload=function (ev) {
+                var json;
+                if(xhr.status!==200){
+                    failFun('HTTP Error:'+xhr.status);
+                    return
                 }
-            })
+                json=JSON.parse(this.responseText);
+                if(!json||typeof json.location !='string'){
+                    failFun('Invalid JSON:'+xhr.responseText);
+                    return;
+                }else{
+                    console.log(json.location);
+                    $("#url").val(json.location) ;
+                    $("#src").attr("src",json.location);
+                }
+            };
+            xhr.send(formData);
 
         }
+
+
+        function getvideo() {
+            var photo=document.querySelector("#video");
+            console.log(photo);
+            var file=photo.files[0];
+            var formData=new FormData();
+            formData.append("movie",file);
+            var xhr=new XMLHttpRequest();
+            xhr.open("post","http://111.229.25.156:7777/upload/movie")
+            xhr.onload=function (ev) {
+                var json;
+                if(xhr.status!==200){
+                    failFun('HTTP Error:'+xhr.status);
+                    return
+                }
+                json=JSON.parse(this.responseText);
+                if(!json||typeof json.location !='string'){
+                    failFun('Invalid JSON:'+xhr.responseText);
+                    return;
+                }else{
+                    console.log(json.location);
+                    $("#urlv").val(json.location) ;
+                    /*  $("#src").attr("src",json.location);*/
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>
+    <script>
+        tinymce.init({
+            selector: '#description',
+            //skin:'oxide-dark',
+            language:'zh_CN',
+            plugins: 'print preview searchreplace autolink directionality visualblocks visualchars  image link media template code codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount imagetools textpattern help emoticons autosave bdmap indent2em autoresize lineheight formatpainter axupimgs',
+            toolbar: 'code undo redo restoredraft | cut copy paste pastetext | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | blockquote subscript superscript removeformat | \
+                     styleselect formatselect fontselect fontsizeselect | bullist numlist |  \
+                     table image media charmap emoticons hr pagebreak insertdatetime print preview  | indent2em lineheight formatpainter axupimgs',
+            height: 650, //编辑器高度
+            min_height: 400,
+            /*content_css: [ //可设置编辑区内容展示的css，谨慎使用
+                '/static/reset.css',
+                '/static/ax.css',
+                '/static/css.css',
+            ],*/
+            fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
+            font_formats: '微软雅黑=Microsoft YaHei,Helvetica Neue,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;Comic Sans MS=comic sans ms,sans-serif;Courier New=courier new,courier;Georgia=georgia,palatino;Helvetica=helvetica;Impact=impact,chicago;Symbol=symbol;Tahoma=tahoma,arial,helvetica,sans-serif;Terminal=terminal,monaco;Times New Roman=times new roman,times;Verdana=verdana,geneva;Webdings=webdings;Wingdings=wingdings,zapf dingbats;知乎配置=BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;小米配置=Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif',
+            link_list: [
+                { title: '预置链接1', value: 'http://www.tinymce.com' },
+                { title: '预置链接2', value: 'http://tinymce.ax-z.cn' }
+            ],
+            image_list: [
+                { title: '预置图片1', value: 'https://www.tiny.cloud/images/glyph-tinymce@2x.png' },
+                { title: '预置图片2', value: 'https://www.baidu.com/img/bd_logo1.png' }
+            ],
+            image_class_list: [
+                { title: 'None', value: '' },
+                { title: 'Some class', value: 'class-name' }
+            ],
+            //importcss_append: true,
+            //自定义文件选择器的回调内容
+            file_picker_callback: function (callback, value, meta) {
+                if (meta.filetype === 'file') {
+                    callback('https://www.baidu.com/img/bd_logo1.png', { text: 'My text' });
+                }
+                if (meta.filetype === 'image') {
+                    callback('https://www.baidu.com/img/bd_logo1.png', { alt: 'My alt text' });
+                }
+                if (meta.filetype === 'media') {
+                    callback('movie.mp4', { source2: 'alt.ogg', poster: 'https://www.baidu.com/img/bd_logo1.png' });
+                }
+            },
+            //为内容模板插件提供预置模板
+            templates: [
+                { title: '模板1', description: '介绍文字1', content: '模板内容' },
+                { title: '模板2', description: '介绍文字2', content: '<div class="mceTmpl"><span class="cdate">CDATE</span>，<span class="mdate">MDATE</span>，我的内容</div>' }
+            ],
+            //
+            template_cdate_format: '[CDATE: %m/%d/%Y : %H:%M:%S]',
+            template_mdate_format: '[MDATE: %m/%d/%Y : %H:%M:%S]',
+            autosave_ask_before_unload: false,
+            toolbar_drawer : false,
+            // images_upload_base_path: '/demo',
+            images_upload_handler: function (blobInfo, succFun, failFun) {
+                var xhr,formData;
+                var art_title=$("art_title").val();
+                var art_author=$("art_author").val();
+                xhr = new XMLHttpRequest();
+                xhr.withCredentials= false;
+                xhr.open("post","http://111.229.25.156:7777/upload/img");
+                formData=new FormData();
+                formData.append("img" , blobInfo.blob());
+                xhr.onload = function (ev) {
+                    var json;
+                    if(xhr.status!==200){
+                        failFun('HTTP Error:'+xhr.status);
+                        return
+                    }
+                    json=JSON.parse(this.responseText);
+                    if(!json||typeof json.location !='string'){
+                        failFun('Invalid JSON:'+xhr.responseText);
+                        return;
+                    }
+                    // 成功回调
+                    succFun(json.location);
+                };
+                xhr.send(formData);
+            }
+
+        });
+
     </script>
 </head>
 <body>
@@ -215,12 +349,23 @@
                                     <div class="form-group">
                                         <label>上传封面</label>
                                         <input type="file" name="img[]" class="file-upload-default">
-                                        <div class="input-group col-xs-12">
+                                            <div class="input-group col-xs-12">
                                             <input type="text" class="form-control file-upload-info" readonly placeholder="上传封面" id="url" name="photo" >
                                             <span class="input-group-append">
-                            <input type="file" id="photo" style="display:none" multiple="multiple" onchange="getImage()">
-                            <button class="file-upload-browse btn btn-primary" type="button" onclick="selectFile()">上传</button>
-                          </span>
+                                            <input type="file" id="photo" style="display:none" multiple="multiple" onchange="getImage()">
+                                                <button class="file-upload-browse btn btn-primary" type="button" onclick="selectFile()">上传</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>上传视频</label>
+                                        <%-- <input type="file" name="img[]" class="file-upload-default">--%>
+                                        <div class="input-group col-xs-12">
+                                            <input type="text" class="form-control file-upload-info" readonly placeholder="视频地址" id="urlv" name="video" >
+                                            <span class="input-group-a ppend">
+                                                <input type="file" id="video" style="display:none" multiple="multiple" onchange="getvideo()">
+                                                <button class="file-upload-browse btn btn-primary" type="button" onclick="selectFileV()">上传</button>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="form-group">

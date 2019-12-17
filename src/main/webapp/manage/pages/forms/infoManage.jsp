@@ -88,7 +88,7 @@
                 <li class="nav-item nav-profile">
                     <a href="javascript:void(0);" class="nav-link">
                         <div class="profile-image">
-                            <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="profile image">
+                            <img class="img-xs rounded-circle" src="${users.photo}" alt="profile image">
                             <div class="dot-indicator bg-success"></div>
                         </div>
                         <div class="text-wrapper">
