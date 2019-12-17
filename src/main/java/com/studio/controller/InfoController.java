@@ -371,6 +371,7 @@ public class InfoController {
     @RequestMapping("/updateInfo")
     public String updateInfo(Info info,RedirectAttributes attr){
         result = infoService.updateInfo(info);
+        System.out.println(info);
         if (result){
             attr.addAttribute("msg","修改成功");
         }else {

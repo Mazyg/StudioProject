@@ -9,7 +9,7 @@
 <head lang="en">
     <base href="<%=basePath%>">
     <meta charset="UTF-8">
-    <title>发表帖子</title>
+    <title>发起话题</title>
     <link rel="stylesheet" href="css/reset.css"/>
     <link rel="stylesheet" href="css/public.css"/>
     <link rel="stylesheet" href="css/write.css"/>
@@ -38,7 +38,8 @@
     <div class="ltHead_cen">
         <a href=""><img src="img/logo.png" alt="" class="headPic1"/></a>
         <ul class="headNav">
-            <li><a href="">首页</a></li>
+            <li><a href="../info/findInfoBytype.do">首页</a></li>
+            <li><a href="javascript:;" onClick="javascript:history.back(-1);">返回上一页</a></li>
         </ul>
         <!--未登入开始-->
         <!--<div class="ltForm">-->

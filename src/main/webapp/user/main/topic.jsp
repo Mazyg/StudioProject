@@ -83,7 +83,7 @@
             <!--未登入开始-->
             <!--<a href="" class="navLogin">登录</a>-->
             <!--未登入结束-->
-            <a href="main/write.jsp" class="navWrite">发新帖</a>
+            <a href="main/write.jsp" class="navWrite">发起话题</a>
         </div>
     </div>
 </header>
@@ -167,7 +167,7 @@
     </div>
     <div class="indexMain_right">
         <div class="indexMain_rightCon">
-            <a href="main/write.jsp " class="newMsg">发新帖</a>
+            <a href="main/write.jsp " class="newMsg">发起话题</a>
             <div class="indexMain_right">
                 <div class="myMsg">
                     <div class="myMsg_con">
