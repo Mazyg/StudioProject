@@ -78,6 +78,15 @@
              width: 100px;
              height: 80px;
          }
+        #tip{
+            position: relative;
+            top:20px;
+            left:450px;
+        }
+        #tip a{
+            color:white;
+            font-size: 14px;
+        }
     </style>
 <body>
 <header class="clearfix">
@@ -91,6 +100,15 @@
                     <a href="javascript:;" onclick="searchSub();"><i>搜索</i></a>
                 </form>
             </div>
+<c:choose>
+    <c:when test="${users == null}">
+            <div id="tip">
+                <a href="../manage/pages/samples/login.jsp">登录</a>&nbsp;<a>|</a>&nbsp;
+                 <a href="../manage/pages/samples/register.jsp">注册</a>
+            </div>
+    </c:when>
+    <c:otherwise></c:otherwise>
+</c:choose>
         </div>
     </section>
     <nav class="navwrap yahei">

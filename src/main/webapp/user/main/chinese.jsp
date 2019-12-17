@@ -247,16 +247,6 @@
         </section>
     </div>
 </div>
-<footer>
-    <div class="mainWrap clearfix">
-        <section>
-            <div class="thulogo"><img src="publish/thunews/images/thulogo.png"></div>
-            <div class="copyright"><span><a href="publish/thunews/10274/index.html">网站地图</a>　│　<a href="publish/thunews/10225/index.html">关于我们</a>　│　<a href="publish/thunews/10217/index.html">友情链接</a>　│　<a href="http://www.tsinghua.edu.cn/publish/newthu/newthu_cnt/intothu/picture/map.png" target="_blank">清华地图</a></span>
-                清华大学新闻中心版权所有，清华大学新闻网编辑部维护，电子信箱:news@tsinghua.edu.cn<br>
-                Copyright 2001-2020 news.tsinghua.edu.cn. All rights reserved.
-            </div>
-        </section>
-    </div></footer>
 </body>
 </html>
 

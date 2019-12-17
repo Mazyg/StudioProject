@@ -300,66 +300,50 @@
                 </div>
                 <div class="dataitem">
                     <ul>
-
-                        <li><div class="wrapper"><img src="" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                        <c:forEach items="${books1}" var="books1">
+                            <li>
+                                <div class="wrapper">
+                                    <img src="${books1.photo}">
+                                    <div class="txtwrapper">
+                                        <br/>
+                                        <br/>
+                                        <h4>${books1.title}</h4>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
                 <div class="dataitem">
                     <ul>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                        <c:forEach items="${books2}" var="books2">
+                            <li>
+                                <div class="wrapper">
+                                    <img src="${books2.photo}">
+                                    <div class="txtwrapper">
+                                        <br/>
+                                        <br/>
+                                        <h4>${books2.title}</h4>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li><div class="wrapper"><img src="" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
-
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
                 <div class="dataitem">
                     <ul>
-                        <li>
-                            <div class="wrapper">
-                                <img src="" alt="">
-                                <div class="txtwrapper">
-                                    <h4>名称</h4>
-                                    <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                        <c:forEach items="${books3}" var="books3">
+                            <li>
+                                <div class="wrapper">
+                                    <img src="${books3.photo}">
+                                    <div class="txtwrapper">
+                                        <br/>
+                                        <br/>
+                                        <h4>${books3.title}</h4>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-
-                        <li><div class="wrapper"><img src="" alt="">
-                            <div class="txtwrapper">
-                                <h4>名称</h4>
-                                <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                            </div>
-                        </div>
-                        </li>
-
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>

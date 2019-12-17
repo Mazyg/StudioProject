@@ -114,6 +114,12 @@ public class InfoController {
         model.addAttribute("movies2",movies2);
         List<Info> movies3= infoService.findInfoBytype("电影",4,2);
         model.addAttribute("movies3",movies3);
+        List<Info> books1= infoService.findInfoBytype("书籍",0,2);
+        model.addAttribute("books1",books1);
+        List<Info> books2= infoService.findInfoBytype("书籍",2,2);
+        model.addAttribute("books2",books2);
+        List<Info> books3= infoService.findInfoBytype("书籍",4,2);
+        model.addAttribute("books3",books3);
         return  "user/main/main";
     }
 
