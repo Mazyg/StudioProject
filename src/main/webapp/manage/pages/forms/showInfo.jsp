@@ -32,6 +32,7 @@
             $("#info").val('${info.info_type}');
             $("#url").val('${info.photo}');
             $("#urlv").val('${info.video}');
+            $("#info_id").val('${info.info_id}');
         }
 
 
@@ -324,6 +325,10 @@
                                         <input type="text" class="form-control" id="title" placeholder="标题" name="title">
                                     </div>
                                     <div class="form-group">
+                                        <label for="title">ID</label>
+                                        <input type="text" class="form-control" id="info_id" placeholder="ID" name="info_id" readonly>
+                                    </div>
+                                    <div class="form-group">
                                     <label for="introduction">简介</label>
                                     <div class="input-group col-xs-12">
                                         <textarea name="introduce" id="introduction" placeholder="简介" required="required" class="col-10 form-control"  style=" height:80px">
@@ -370,7 +375,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="description">内容</label>
-                                        <textarea id="description"  name="content">${info.content}</textarea>
+                                        <textarea id="description" name="content">${info.content}</textarea>
                                     </div>
                                     <input type="submit" class="btn btn-primary mr-2" value="确认修改" onclick="change()">
                                 </form>
