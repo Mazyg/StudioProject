@@ -30,6 +30,7 @@
     <mvc:resources mapping="/vendors/**" location="/manage/vendors/"/>
     <mvc:resources mapping="/images/**" location="/manage/images/"/>
     <mvc:resources mapping="/gulp-tasks/**" location="/manage/gulp-tasks/"/>
+    <mvc:resources mapping="/tinymce/**" location="/tinymce/"/>
 
     <!-- 用户-->
     <mvc:resources mapping="/css/**" location="/user/css/"/>
