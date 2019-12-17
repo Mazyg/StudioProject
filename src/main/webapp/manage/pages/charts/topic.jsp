@@ -22,16 +22,8 @@
   <!-- Layout styles -->
   <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
   <link rel="shortcut icon" href="images/favicon.png" />
-  <script type="text/javascript">
-    function msssage () {
-      var message = "${msg}";
-      if( message != ""){
-        alert(message);
-      }
-    }
-  </script>
 </head>
-<body onload="msssage()">
+<body>
 <div class="container-scroller">
   <!-- partial:../../partials/_navbar.html -->
   <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">

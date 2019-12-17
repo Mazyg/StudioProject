@@ -330,7 +330,7 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <form class="forms-sample" action="../info/updateInfo.do" method="post">
+                    <form class="forms-sample" id="info_form">
                       <div class="form-group">
                         <label for="title">标题</label>
                         <input type="text" class="form-control" id="title" placeholder="标题" name="title">
@@ -383,7 +383,7 @@
                         <textarea id="description"  name="content"></textarea>
                       </div>
                       <input type="reset" class="btn btn-light" value="重置">
-                      <input type="submit" class="btn btn-primary mr-2" value="提交" onclick="change()">
+                      <input type="button" class="btn btn-primary mr-2" value="提交" id="subBtn">
                     </form>
                   </div>
                 </div>
@@ -419,10 +419,30 @@
     <script src="js/select2.js"></script>
     <!-- End custom js for this page -->
     <script>
-      $("#view").click(function () {
-
-        $("#view-title").html($("#title").val());
-        $("#view-content").html(CKEDITOR.instances.description.getData());
+      $(function () {
+        $("#subBtn").click(function () {
+          var $type = $("#info").val();
+          var $title = $("#title").val();
+          var $introduce = $("#introduction").val();
+          var $photo = $("#url").val();
+          var $video = $("#urlv").val();
+          var content = tinyMCE.activeEditor.getContent();
+          $.ajax({
+            url:"../info/addInfo.do",
+            data:"title="+$title+"&introduce="+$introduce+"&info_type="+$type+"&photo="+$photo+"&video="+$video+"&content="+content,
+            type:"post",
+            success:function (result) {
+              if (result == "success"){
+                alert("发布成功");
+                window.location.href = "pages/forms/basic_elements.jsp";
+              }else {
+                alert("发布失败");
+              }
+            },error:function (result) {
+              alert("传参不成功");
+            }
+          })
+        })
       })
     </script>
   </body>
