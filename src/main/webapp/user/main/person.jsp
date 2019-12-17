@@ -112,7 +112,9 @@
                         <c:if test="${users.u_type eq'admin'}">
                             <li><a href="../user/backAdmin.do">管理界面</a></li>
                         </c:if>
-                        <li><a href="../user/exitLogin.do">退出登录</a></li>
+                        <c:if test="${users.uid !=null}">
+                            <li><a href="../user/exitLogin.do">退出登录</a></li>
+                        </c:if>
                     </ul>
                 </li>
             </ul>
@@ -125,8 +127,14 @@
         <div>
             <br><br><br><br><br><br><br>
             <table>
-                <tr><td>&nbsp;&nbsp;<img class="imgs" src="${users.photo}" alt=""></td>
-                    <td><h4>&nbsp;&nbsp;&nbsp;${users.uname}<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
+                <tr><td>&nbsp;&nbsp; <c:if test="${users.uname == null}">
+                    <img class="imgs" src="img/png.png" alt=""></td>
+                    <td><h4>&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
+                    </c:if>
+                    <c:if test="${users.uname != null}">
+                        <img class="imgs" src="${users.photo}" alt="头像" />
+                        <td><h4>&nbsp;&nbsp;&nbsp;${users.uname}<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
+                    </c:if>
                 </tr>
             </table>
         </div>

@@ -140,32 +140,8 @@
                 </div>
             </div>
         </form>
-        <%--div class="writeMsg">
-            <input type="text" placeholder="请输入标题"/>
-        </div>--%>
-        <%--<div class="chooseDevide">
-            <div class="chooseDevide_left">
-                所在分类
-            </div>
-            &lt;%&ndash;<div class="chooseDevide_right">
-                <div class="nice-select" name="nice-select">
-                    <input type="text" value="请选择">
-                    <ul>
-                        <li class="click" data-val="">沪牌竞拍</li>
-                        <li class="click" data-val="">拍王助手</li>
-                        <li class="click" data-val="">深圳竞价摇号</li>
-                        <li class="click" data-val="">广州竞价摇号</li>
-                        <li class="click" data-val="">杭州竞价摇号</li>
-                        <li class="click" data-val="">天津竞价摇号</li>
-                        <li class="click" data-val="">增值服务</li>
-                    </ul>
-                </div>
-            </div>&ndash;%&gt;
-        </div>--%>
-    <%--    <div class="writeDown"></div>--%>
-       <%-- <input type="submit" class="reform" value="发布"/>--%>
-
-<%--</div>--%>
+    </div>
+</div>
 </body>
 </html>
 <script src="js/jquery-1.8.3.min.js"></script>

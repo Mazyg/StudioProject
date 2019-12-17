@@ -74,7 +74,9 @@
                         <c:if test="${users.u_type eq'admin'}">
                             <li><a href="../user/backAdmin.do">管理界面</a></li>
                         </c:if>
-                        <li><a href="../user/exitLogin.do">退出登录</a></li>
+                        <c:if test="${users.uid !=null}">
+                            <li><a href="../user/exitLogin.do">退出登录</a></li>
+                        </c:if>
                     </ul>
                 </li>
             </ul>
