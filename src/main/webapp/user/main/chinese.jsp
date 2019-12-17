@@ -67,7 +67,7 @@
                 </li>
                 <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
                 </li>
-                <li><a href="../topic/showTopic.do" class="">话题</a>
+                <li><a href="../topic/showTopic.do?page=1&numberPerPage=3&start=0&length=3" class="">话题</a>
                 </li>
                 <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3" class="">书籍</a></li>
                 <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
@@ -247,16 +247,6 @@
         </section>
     </div>
 </div>
-<footer>
-    <div class="mainWrap clearfix">
-        <section>
-            <div class="thulogo"><img src="publish/thunews/images/thulogo.png"></div>
-            <div class="copyright"><span><a href="publish/thunews/10274/index.html">网站地图</a>　│　<a href="publish/thunews/10225/index.html">关于我们</a>　│　<a href="publish/thunews/10217/index.html">友情链接</a>　│　<a href="http://www.tsinghua.edu.cn/publish/newthu/newthu_cnt/intothu/picture/map.png" target="_blank">清华地图</a></span>
-                清华大学新闻中心版权所有，清华大学新闻网编辑部维护，电子信箱:news@tsinghua.edu.cn<br>
-                Copyright 2001-2020 news.tsinghua.edu.cn. All rights reserved.
-            </div>
-        </section>
-    </div></footer>
 </body>
 </html>
 
