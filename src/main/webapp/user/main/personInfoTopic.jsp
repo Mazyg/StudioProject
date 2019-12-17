@@ -50,9 +50,9 @@
 
 </style>
 <script type="text/javascript">
-    function message() {
+    /*function message() {
 
-        var mes = ${topicDel};
+        var mes = <%--${topicDel}--%>;
         alert(mes)
         if(mes == true){
             alert("删除成功！")
@@ -60,7 +60,29 @@
             if(mes == false){
                 alert("出错了！")
             }
-    }
+    }*/
+
+    $(function () {
+        $(".del").click(function () {
+            var $tid = $(this).parent().parent().children('td').eq(0).text();
+            $.ajax({
+                type:'post',
+                url:"../topic/deleTopic2.do",
+                data:"tid="+$tid,
+                success:function (msg) {
+                    if(msg === "success"){
+                        alert("删除成功！")
+                    }else{
+                        alert("删除失败！")
+                    }
+                    window.location.href="../topic/findByUid.do?uid="+${users.uid};
+                },
+                error:function () {
+                    alert("出错了！")
+                }
+            });
+        });
+    })
 </script>
 <body onload="message()">
 <header class="clearfix">
@@ -169,7 +191,7 @@
                                 <td>${topicInfo.date}</td>
                                 <td>${topicInfo.t_tatus}</td>
                                 <td><a href="../topic/findTopicById.do?tid=${topicInfo.tid}">详情</a> </td>
-                                <td><a href="../topic/deleTopic2.do?tid=${topicInfo.tid}">删除</a></td>
+                                <td><a href="javascript:void(0)" class="del">删除</a></td>
                             </tr>
                         </c:forEach>
                                 </tbody>

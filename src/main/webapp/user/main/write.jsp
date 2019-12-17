@@ -23,15 +23,47 @@
     }
 </style>
 <script type="text/javascript">
-    function msssage () {
-        var top = "${top}";
+   /* function msssage () {
+        var top = "<%--${top}--%>";
         if( top == "true"){
             alert("审核通过后，您的话题将会被发布！");
         }else
         if( top == "false"){
             alert("请登录后发布话题！");
         }
-    }
+    }*/
+
+    $(function () {
+        $("#put").click(function () {
+            var $t_title = $("#title").val();
+            var $content = $("#content").val();
+            var $type = $("#type").val();
+            if(${users.uid == null}){
+                alert("请登录后发布话题1！");
+                return;
+            }
+            if($t_title==""|| $t_title == null){
+                alert("标题不能为空！");
+                return;
+            }
+            $.ajax({
+                type:'post',
+                url:"../topic/saveTopicUser.do",
+                data:"t_title="+$t_title+"&content="+$content+"&t_type="+$type,
+                success:function (msg) {
+                    if(msg === "success"){
+                        alert("审核通过后，您的话题将会被发布！")
+                    }else{
+                        alert("发布失败！")
+                    }
+                    window.location.href="main/write.jsp";
+                },
+                error:function () {
+                    alert("出错了！")
+                }
+            })
+        })
+    })
 </script>
 <body onload="msssage()">
 <header class="ltHead">
@@ -63,7 +95,7 @@
         <div class="lt_login">
         <ul>
         <li><a href="">${users.uname}</a></li>
-        <li><a href="">退出</a></li>
+        <li><a href="../user/exitLogin.do">退出</a></li>
         </ul>
         </div>
         </c:if>
@@ -76,24 +108,24 @@
     </div>
     <div class="writeCon_cen">
         <br><br><br><br>
-        <form class="form-horizontal" role="form" action="../topic/saveTopicUser.do"  method="post" >
+        <form class="form-horizontal" role="form" <%--action="../topic/saveTopicUser.do" --%> method="post" >
             <div class="form-group">
                 <label  class="col-sm-2 control-label">话题标题</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" name="t_title" placeholder="请输入标题" required="required">
+                    <input type="text" class="form-control" name="t_title" id="title" placeholder="请输入标题" required="required">
                 </div>
             </div>
             <div class="form-group">
                 <label  class="col-sm-2 control-label">概述</label>
                 <div class="col-sm-8">
-                    <textarea type="text" rows="10" name="content" placeholder="请描述话题"  required="required" class="col-10 form-control" ></textarea>
+                    <textarea type="text" rows="10" name="content" placeholder="请描述话题" id="content" required="required" class="col-10 form-control" ></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label  class="col-sm-2 control-label">话题类别</label>
                 <input type="hidden" id ="selectRefundReason" value="{t_type}"/>
                 <div class="col-sm-8">
-                    <select class="form-control" name="t_type" <%--value="${users.sex}"--%>>
+                    <select class="form-control" name="t_type" <%--value="${users.sex}"--%> id="type">
                         <option value="榜样的力量" <%--<c:if test="${'男'.equals(users.sex)}">selected</c:if>--%>>榜样的力量</option>
                         <option value="热点时事" <%--<c:if test="${'女'.equals(users.sex)}">selected</c:if>--%>>热点时事</option>
                         <option value="电影" <%--<c:if test="${'女'.equals(users.sex)}">selected</c:if>--%>>电影</option>
@@ -103,7 +135,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-8">
-                    <button type="submit" class="btn btn-primary col-md-4 ">发表</button>
+                    <button type="button" class="btn btn-primary col-md-4 " id="put">发表</button>
                     <button type="reset" class="btn btn-danger col-md-4 col-md-offset-1">重置</button>
                 </div>
             </div>

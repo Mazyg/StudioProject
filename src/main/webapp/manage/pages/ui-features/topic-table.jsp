@@ -20,20 +20,65 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
+    <script src="js/jquery-1.8.3.js"></script>
     <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
     <link rel="shortcut icon" href="images/favicon.png" />
     <script type="text/javascript">
-        function status() {
-            var sta= "${topicdel}";
+       /* function status() {
+           /!* var sta= "<%--${topicdel}--%>";
             if(sta == "true"){
                 alert("操作成功！");
             }else if(sta == "false"){
                 alert("操作错误！");
-            }
-        }
+            }*!/*/
+       $(function () {
+           $(".status").click(function () {
+               var $tid = $(this).parent().parent().children('td').eq(0).text();
+               $.ajax({
+                   type:'post',
+                   url:"../topic/updateStatus1.do",
+                   data:"tid="+$tid,
+                   success:function (msg) {
+                       if(msg === "success"){
+                           alert("操作成功！")
+                       }else{
+                           alert("已是当前状态！")
+                       }
+                       window.location.href="../topic/findAll.do";
+                   },
+                   error:function () {
+                       alert("出错了！")
+                   }
+               });
+           })
+
+        $(".del").click(function () {
+            var $tid = $(this).parent().parent().children('td').eq(0).text();
+            $.ajax({
+                type:'post',
+                url:"../topic/deleTopic1.do",
+                data: "tid="+$tid,
+                success:function (msg) {
+                    if(msg === "success"){
+                        alert("删除成功！")
+                    }else{
+                        alert("删除失败！")
+                    }
+                    window.location.href="../topic/findAll.do";
+                },
+                error:function () {
+                    alert("出错了！")
+                }
+            })
+        })
+
+
+
+
+       })
     </script>
 </head>
-<body onload="status()">
+<body>
 <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -199,9 +244,9 @@
                                             <td>${topic1.t_title}</td>
                                             <td>${topic1.date}</td>
                                             <td><a href="../topic/findById.do?tid=${topic1.tid}">查看详情</a> </td>
-                                            <td>${topic1.t_tatus}</td>
-                                            <td><a href="../topic/updateStatus1.do?tid=${topic1.tid}" style="color: #1d6b1f">通过审核</a></td>
-                                            <td><a href="../topic/deleTopic1.do?tid=${topic1.tid}" style="color: #a01a1f">删除</a></td>
+                                            <td>${topic1.t_tatus}</td><%--../topic/updateStatus1.do?tid=${topic1.tid}--%>
+                                            <td><a href="javascript:void(0)" style="color: #1d6b1f" class="status">通过审核</a></td>
+                                            <td><a href="javascript:void(0)" style="color: #a01a1f" class="del">删除</a></td>
                                             <td><td>
                                         </tr>
                                     </c:forEach>

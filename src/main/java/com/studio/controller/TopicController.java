@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,25 +39,36 @@ public class TopicController {
     private ModelAndView mv;
 
     @RequestMapping("/saveTopic")
-    public ModelAndView saveTopic(Topic topic, HttpServletRequest request){
-        mv = new ModelAndView();
+    @ResponseBody
+    public String saveTopic(Topic topic, HttpServletRequest request){
         Date now = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = ft.format(now);
         topic.setDate(time);
+        System.out.println("top"+topic);
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("users");
         topic.setUname(user.getUname());
         if("admin".equals(user.getU_type())){
-            boolean top = topicService.saveTopicA(topic);
-            mv.addObject("top", top);
+            boolean result = topicService.saveTopicA(topic);
+          /*  mv.addObject("top", top);
             mv.setViewName("manage/pages/ui-features/topicput");
-            return mv;
+            return mv;*/
+          if(result == true){
+              return "success";
+          }else{
+              return "false";
+          }
         }
         boolean top =topicService.saveTopic(topic);
-        mv.addObject("top", top);
+       /* mv.addObject("top", top);
         mv.setViewName("manage/pages/ui-features/topicput");
-        return mv;
+        return mv;*/
+        if(top == true){
+            return "success";
+        }else{
+            return "false";
+        }
     }
 
     /**
@@ -66,8 +78,8 @@ public class TopicController {
      * @return
      */
     @RequestMapping("/saveTopicUser")
-    public ModelAndView saveTopicUser(Topic topic,HttpServletRequest request){
-        mv = new ModelAndView();
+    public @ResponseBody String saveTopicUser(Topic topic,HttpServletRequest request){
+        /*mv = new ModelAndView();*/
         Date now = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = ft.format(now);
@@ -76,63 +88,100 @@ public class TopicController {
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("users");
         System.out.println("user"+user);
-        if(user == null){
-            System.out.println("false");
+       /* if(user == null){
+           *//* System.out.println("false");
             mv.addObject("top", false);
-            mv.setViewName("user/main/write");
-        }else{
+            mv.setViewName("user/main/write");*//*
+           return "false";*/
+       /* }else{*/
         topic.setUname(user.getUname());
         boolean top =topicService.saveTopic(topic);
-            System.out.println("top"+top);
+          /*  System.out.println("top"+top);
         mv.addObject("top",top);
-        mv.setViewName("user/main/write");
-        }
-        return mv;
+        mv.setViewName("user/main/write");*/
+          if(top == true){
+              return "success";
+          }else{
+              return "false";
+          }
+
     }
 
     /*删除话题*/
     @RequestMapping("/deleTopic")
-    public String deleTopic(HttpServletRequest request){
+    public @ResponseBody String deleTopic(HttpServletRequest request){
         String tid = request.getParameter("tid");
         boolean topicdel = topicService.deleTopic(tid);
-        return "redirect:/topic/findAllTopicByStatus.do?topicdel="+topicdel;
+       /* return "redirect:/topic/findAllTopicByStatus.do?topicdel="+topicdel;*/
+        if(topicdel == true){
+            return "success";
+        }else{
+         return "false";
+        }
     }
 
     /*全部话题界面删除*/
     @RequestMapping("/deleTopic1")
-    public String deleTopic1(HttpServletRequest request){
+    public @ResponseBody String deleTopic1(HttpServletRequest request){
         String tid = request.getParameter("tid");
         boolean topicdel = topicService.deleTopic(tid);
-        return "redirect:/topic/findAll.do?topicdel="+topicdel;
+       /* return "redirect:/topic/findAll.do?topicdel="+topicdel;*/
+        if(topicdel == true){
+            return "success";
+        }else{
+            return "false";
+        }
     }
 
+    /**
+     * 用户界面删除个人话题
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping("/deleTopic2")
-    public String deleTopic2(HttpServletRequest request,Model model){
+    public @ResponseBody String deleTopic2(HttpServletRequest request,Model model){
        String tid = request.getParameter("tid");
         boolean topicDele = topicService.deleTopic(tid);
-        model.addAttribute("topicDel", topicDele);
-        return "user/main/personInfoTopic";
+        /*model.addAttribute("topicDel", topicDele);
+        return "user/main/personInfoTopic";*/
+        if(topicDele==true){
+            return "success";
+        }else {
+            return "false";
+        }
     }
 
     /*未审核审核*/
     @RequestMapping("/updateStatus")
-    public String updateStatus(HttpServletRequest request){
+    public @ResponseBody String updateStatus(HttpServletRequest request){
         String tid = request.getParameter("tid");
         boolean topicStatus = topicService.updateStatus(tid);
-        return "redirect:/topic/findAllTopicByStatus.do?topicdel="+topicStatus;
+      /*  return "redirect:/topic/findAllTopicByStatus.do?topicdel="+topicStatus;*/
+        if(topicStatus == true){
+            return "success";
+        }else{
+            return "false";
+        }
     }
 
     /*全部话题审核功能*/
     @RequestMapping("/updateStatus1")
-    public String updateStatus1(HttpServletRequest request){
+    public @ResponseBody String updateStatus1(HttpServletRequest request){
         String tid = request.getParameter("tid");
         Topic topics = topicService.findTopicById(tid);
         if("已审核".equals(topics.getT_tatus())){
-            boolean topicStatus = false;
-            return "redirect:/topic/findAll.do?topicdel="+topicStatus;
+            /*boolean topicStatus = false;*/
+           /* return "redirect:/topic/findAll.do?topicdel="+topicStatus;*/
+            return "false";
         }
         boolean topicStatus = topicService.updateStatus(tid);
-        return "redirect:/topic/findAll.do?topicdel="+topicStatus;
+       /* return "redirect:/topic/findAll.do?topicdel="+topicStatus;*/
+        if(topicStatus == true){
+            return "success";
+        }else{
+            return "false";
+        }
     }
 
 

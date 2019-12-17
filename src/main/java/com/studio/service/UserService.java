@@ -12,7 +12,7 @@ public interface UserService {
 
     public User findById1(String uid);
 
-    public User findByName(String uname);
+    public List<User> findByName(String uname);
 
     public boolean deleUser(User user);
 
