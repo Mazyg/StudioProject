@@ -319,7 +319,7 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <form class="forms-sample" action="../info/updateInfo.do" method="post">
+                                <form class="forms-sample" id="info_form">
                                     <div class="form-group">
                                         <label for="title">标题</label>
                                         <input type="text" class="form-control" id="title" placeholder="标题" name="title">
@@ -377,7 +377,7 @@
                                         <label for="description">内容</label>
                                         <textarea id="description" name="content">${info.content}</textarea>
                                     </div>
-                                    <input type="submit" class="btn btn-primary mr-2" value="确认修改" onclick="change()">
+                                    <input type="button" class="btn btn-primary mr-2" value="确认修改" id="subBtn">
                                 </form>
 
                             </div>
@@ -410,5 +410,31 @@
 <!-- endinject -->
 <!-- Custom js for this page -->
 <!-- End custom js for this page -->
+<script>
+    $(function () {
+        $("#subBtn").click(function () {
+            var $type = $("#info").val();
+            var $title = $("#title").val();
+            var $introduce = $("#introduction").val();
+            var $photo = $("#url").val();
+            var $video = $("#urlv").val();
+            var $id = $("#info_id").val();
+            var content = tinyMCE.activeEditor.getContent();
+            $.ajax({
+                url:"../info/updateInfo.do",
+                data:"title="+$title+"&introduce="+$introduce+"&info_type="+$type+"&photo="+$photo+"&video="+$video+"&content="+content+"&info_id="+$id,
+                type:"post",
+                success:function (result) {
+                    if (result == "success"){
+                        alert("修改成功");
+                        window.location.href = "../info/findAllInfo.do";
+                    }else {
+                        alert("修改失败");
+                    }
+                }
+            })
+        })
+    })
+</script>
 </body>
 </html>

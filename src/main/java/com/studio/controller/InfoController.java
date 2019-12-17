@@ -9,7 +9,9 @@ import com.studio.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -352,44 +354,38 @@ public class InfoController {
     }
 
     @RequestMapping("/deleteInfo")
-    public String deleteInfo(String info_id,RedirectAttributes attr){
+    public @ResponseBody String deleteInfo(String info_id,RedirectAttributes attr){
         result = infoService.deleteInfo(info_id);
         if (result){
-            attr.addAttribute("msg","删除成功");
-        }else {
-            attr.addAttribute("msg","删除失败");
+           return "success";
         }
-        return "redirect:findAllInfo.do";
+        return "false";
     }
 
     @RequestMapping("/updateInfo")
-    public String updateInfo(Info info,RedirectAttributes attr){
+    public @ResponseBody String updateInfo(Info info){
         result = infoService.updateInfo(info);
-        System.out.println(info);
+        System.out.println("info="+info);
+        System.out.println("修改结果"+result);
         if (result){
-            attr.addAttribute("msg","修改成功");
-        }else {
-            attr.addAttribute("msg","修改失败");
+            System.out.println("返回success");
+           return "success";
         }
-        return "redirect:findAllInfo.do";
+        return "false";
     }
 
     @RequestMapping("/addInfo")
-    public ModelAndView addInfo(Info info) {
-        mv = new ModelAndView();
+    public @ResponseBody String addInfo(Info info) {
         Date now = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = ft.format(now);
         info.setDate(time);
+        System.out.println("info="+info);
         result =infoService.addInfo(info);
         if (result){
-            msg = "添加成功";
-        }else {
-            msg = "添加失败";
+           return "success";
         }
-        mv.addObject("msg",msg);
-        mv.setViewName("manage/pages/forms/basic_elements");
-        return mv;
+        return "false";
     }
 
     @RequestMapping("/findInfoByTitle")

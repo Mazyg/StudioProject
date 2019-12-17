@@ -22,16 +22,8 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
     <link rel="shortcut icon" href="images/favicon.png" />
-    <script type="text/javascript">
-        function msssage () {
-            var message = "${msg}";
-            if( message != ""){
-                alert(message);
-            }
-        }
-    </script>
 </head>
-<body onload="msssage()">
+<body>
 <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -176,13 +168,13 @@
 
                                     <c:forEach var="dynamic" items="${dynamics}">
                                         <tr>
-                                            <td><p id="wid">${dynamic.wid}</p></td>
+                                            <td>${dynamic.wid}</td>
                                             <td>${dynamic.date}</td>
                                             <td><textarea readonly>${dynamic.content}</textarea></td>
                                             <td>${dynamic.uname}</td>
                                             <td><a href="../dynamic/findAllReplyByWid.do?wid=${dynamic.wid}" style="color: dodgerblue">查看相关评论</a></td>
                                             <td><a href="javascript:void(0)" style="color: orangered" class="deleteReply">删除回复</a></td>
-                                            <p id="tid" style="display: none">${dynamic.tid}</p>
+                                            <td style="display:none;">${dynamic.tid}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -218,8 +210,8 @@
 <script>
     $(function () {
         $(".deleteReply").click(function () {
-            var $tid = $("#tid").text();
-            var $wid = $("#wid").text();
+            var $tid = $(this).parent().parent().children('td').eq(6).text();
+            var $wid = $(this).parent().parent().children('td').eq(0).text();
             $.ajax({
                 url:"../dynamic/deleteDynamic.do",
                 data:"wid="+$wid,

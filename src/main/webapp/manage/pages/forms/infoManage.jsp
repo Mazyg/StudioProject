@@ -180,8 +180,7 @@
                                             <td>${info.date}</td>
                                             <td>${info.info_type}</td>
                                             <td><a href="../info/findById.do?info_id=${info.info_id}" style="color: dodgerblue">查看详细</a></td>
-                                            <td><a href="../info/deleteInfo.do?info_id=${info.info_id}" style="color: red">删除</a></td>
-
+                                            <td><a href="javascript:;" style="color: red" class="deleteInfo">删除</a></td>
                                         </tr>
                                     </c:forEach>
 
@@ -217,5 +216,26 @@
 <!-- endinject -->
 <!-- Custom js for this page -->
 <!-- End custom js for this page -->
+<script>
+    $(function () {
+        $(".deleteInfo").click(function () {
+            var $id = $(this).parent().parent().children('td').eq(0).text();
+            $.ajax({
+                url:"../info/deleteInfo.do",
+                data:"info_id="+$id,
+                type:"post",
+                success:function (result) {
+                    if (result == "success"){
+                        alert("删除成功");
+                    }else {
+                        alert("删除失败")
+                    }
+                    window.location.href = "../info/findAllInfo.do";
+                }
+            });
+        });
+
+    })
+</script>
 </body>
 </html>
