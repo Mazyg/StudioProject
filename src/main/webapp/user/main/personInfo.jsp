@@ -147,7 +147,9 @@
                         <c:if test="${users.u_type eq'admin'}">
                             <li><a href="../user/backAdmin.do">管理界面</a></li>
                         </c:if>
-                        <li><a href="../user/exitLogin.do">退出登录</a></li>
+                        <c:if test="${users.uid !=null}">
+                            <li><a href="../user/exitLogin.do">退出登录</a></li>
+                        </c:if>
                     </ul>
                 </li>
             </ul>
@@ -161,8 +163,12 @@
             <br><br><br><br><br><br><br>
             <table>
                 <tr><td>
+                    <c:if test="${users.uid == null}">
+                        <img class="imgs" src="img/png.png" alt="头像">
+                    </c:if>
+                    <c:if test="${users.uid != null}">
                     <img class="imgs" src="${users.photo}" alt="头像" data-toggle="modal" data-target="#myModal"/>
-
+                    </c:if>
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
