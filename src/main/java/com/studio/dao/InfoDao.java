@@ -96,6 +96,6 @@ public interface InfoDao {
     @Delete("delete from info where info_id=#{info_id}")
     public boolean deleteInfo(String info_id);
 
-    @Update("update info set title=#{title} , content=#{content} , info_type=#{info_type} , photo=#{photo} , introduce=#{introduce} where info_id=#{info_id}")
+    @Update("update info set title=#{title} , content=#{content} , info_type=#{info_type} , photo=#{photo} , introduce=#{introduce} , video=#{video} where info_id=#{info_id}")
     public boolean updateInfo(Info info);
 }

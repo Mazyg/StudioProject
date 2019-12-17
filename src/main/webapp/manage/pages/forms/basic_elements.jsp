@@ -382,7 +382,8 @@
                         <label for="description">内容</label>
                         <textarea id="description"  name="content"></textarea>
                       </div>
-                      <input type="submit" class="btn btn-primary mr-2" value="确认修改" onclick="change()">
+                      <input type="reset" class="btn btn-light" value="重置">
+                      <input type="submit" class="btn btn-primary mr-2" value="提交" onclick="change()">
                     </form>
                   </div>
                 </div>
