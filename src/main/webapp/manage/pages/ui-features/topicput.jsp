@@ -48,6 +48,51 @@
           alert("无法提交！");
         }
       }
+
+        function put()
+        {
+            var $title = $("#title").val();
+            var $type = $("#topic").val();
+            var $content = $("#content").val();
+            if($title==""|| $title == null){
+              alert("标题不能为空！");
+              return;
+            }
+
+            $.ajax({
+                type:'post',
+                url:"../topic/saveTopic.do",
+                data:"t_title="+$title+"&t_type="+$type+"&content="+$content,  //重点必须为一个变量如：data
+                async:true,
+                success:function(msg){
+                    if(msg === "success"){
+                        alert('发布成功！');
+                        window.location.href ="pages/ui-features/topicput.jsp";
+                    }else{
+                      alert("提交失败！");
+                      window.location.href ="pages/ui-features/topicput.jsp";
+                    }
+
+                },
+                error:function(result){
+                    alert("无法提交！")
+                }
+            })
+
+
+        /*  $.post(
+              "../topic/saveTopic.do",
+              "t_title="+$title+"&t_type="+$type+"&content="+$content,
+             function (top) {
+                  if(top == "success"){
+                      alert("注册成功");
+                  }else{
+                      alert("注册失败");
+                  }
+              },
+              "text"
+          );*/
+      }
     </script>
     <script type="text/javascript">
               $('select').change(function(){
@@ -183,10 +228,10 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <form class="forms-sample" action="../topic/saveTopic.do" method="post">
+                    <form class="forms-sample" <%--action="../topic/saveTopic.do"--%> method="post">
                       <div class="form-group">
-                        <label for="exampleInputName1">标题</label>
-                        <input type="text" class="col-10 form-control" id="exampleInputName1" placeholder="标题" required="required" name="t_title">
+                        <label for="title">标题</label>
+                        <input type="text" class="col-10 form-control" id="title" placeholder="标题" required="required" name="t_title">
                       </div>
                       <div class="form-group">
                         <label for="topic_category"> 话题类别</label>
@@ -203,10 +248,10 @@
                       <div class="form-group">
                         <label>简要描述</label>
                         <div class="input-group col-xs-12">
-                          <textarea name="content"  placeholder="描述一下你的话题" required="required" class="col-10 form-control"  style=" height:100px"></textarea>
+                          <textarea name="content" id="content" placeholder="描述一下你的话题" required="required" class="col-10 form-control"  style=" height:100px"></textarea>
                         </div>
                       </div>
-                      <input type="submit" class="btn btn-primary mr-2"  value="提交" onclick="change()">
+                      <input type="button" class="btn btn-primary mr-2"   value="提交" onclick="put()" >
                       <input type="reset" class="btn btn-light" value="重置">
                     </form>
                   </div>

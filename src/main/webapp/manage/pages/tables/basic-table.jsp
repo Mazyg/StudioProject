@@ -22,20 +22,65 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
+    <script src="js/jquery-1.8.3.js"></script>
     <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
     <link rel="shortcut icon" href="images/favicon.png" />
     <script type="text/javascript">
-      function status() {
+    /*  function status() {
        var sta= "${status}";
        if(sta == "true"){
          alert("更改成功！");
        }else if(sta == "false"){
          alert("已是该状态，请勿重复操作！");
        }
-      }
+      }*/
+
+      $(function () {
+        $(".update1").click(function () {
+          var $uid = $(this).parent().parent().children('td').eq(0).text();
+          $.ajax({
+            type:'post',
+            url:"../user/updateUser1.do",
+            data:"uid="+$uid,
+            success:function (msg) {
+              if(msg === "success"){
+                alert("操作成功！")
+              }else{
+                alert("已是当前状态！")
+              }
+              window.location.href="../user/findAllUser.do";
+            },
+            error:function () {
+              alert("出错了！")
+            }
+          });
+        })
+
+
+        $(".update2").click(function () {
+          var $uid = $(this).parent().parent().children('td').eq(0).text();
+          $.ajax({
+            type:'post',
+            url:"../user/updateUser2.do",
+            data:"uid="+$uid,
+            success:function (msg) {
+              if(msg === "success"){
+                alert("操作成功！")
+              }else{
+                alert("已是当前状态！")
+              }
+              window.location.href="../user/findAllUser.do";
+            },
+            error:function () {
+              alert("出错了！")
+            }
+          });
+        })
+
+      })
     </script>
   </head>
-  <body onload="status()">
+  <body >
     <div class="container-scroller">
       <!-- partial:../../partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -185,8 +230,8 @@
                             <td>${user.sex}</td>
                             <td>${user.email}</td>
                             <td>${user.u_status}</td>
-                            <td><a href="../user/updateUser1.do?uid=${user.uid}" style="color: #a01a1f">封号</a></td>
-                            <td><a href="../user/updateUser2.do?uid=${user.uid}" style="color: #1d6b1f">解封</a></td>
+                            <td><a href="javascript:void(0)" style="color: #a01a1f" class="update1">封号</a></td>
+                            <td><a href="javascript:void(0)" style="color: #1d6b1f" class="update2">解封</a></td>
                             <td><td>
                         </tr>
                       </c:forEach>

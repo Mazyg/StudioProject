@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -70,7 +67,8 @@ public class UserController {
     @RequestMapping("/findByName")
     public String findByName(Model model, HttpServletRequest request){
         System.out.println("uname"+request.getParameter("uname"));
-        User users = userService.findByName(request.getParameter("uname"));
+        List<User> users =  userService.findByName(request.getParameter("uname"));
+        System.out.println("user"+users);
         model.addAttribute("user", users);
         return "manage/pages/tables/basic-table";
     }
@@ -82,30 +80,56 @@ public class UserController {
         return "manage/pages/tables/admin-table";
     }
 
+    /**
+     * 封号
+     * @param
+     * @param request
+     * @param
+     * @return
+     */
     @RequestMapping("/updateUser1")
-    public String updateUser1(Integer uid,  HttpServletRequest request,HttpServletResponse response){
+    public @ResponseBody String updateUser1( HttpServletRequest request){
         mv = new ModelAndView();
         String id =  request.getParameter("uid");
         User users =  userService.findById1(id);
         if("封号".equals(users.getU_status())){
-            return "redirect:/user/findAllUser.do?status="+false;
+           /* return "redirect:/user/findAllUser.do?status="+false;*/
+            return "false";
         }else{
             boolean user = userService.updateUser1(request.getParameter("uid"));
+            if(user ==true){
+                return "success";
+            }else{
+                return "false";
+            }
         }
-        return "redirect:/user/findAllUser.do?status="+true;
+        /*return "redirect:/user/findAllUser.do?status="+true;*/
     }
 
+    /**
+     * 解封
+     * @param uid 用户ID
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping("/updateUser2")
-    public String updateUser2(Integer uid, Model model,HttpServletRequest request){
+    public @ResponseBody String updateUser2(Integer uid, Model model,HttpServletRequest request){
         mv = new ModelAndView();
         String id =  request.getParameter("uid");
         User users =  userService.findById1(id);
         if("正常".equals(users.getU_status())){
-            return "forward:/user/findAllUser.do?status="+false;
+            /*return "forward:/user/findAllUser.do?status="+false;*/
+            return "false";
         }else{
             boolean user = userService.updateUser2(request.getParameter("uid"));
+            if(user == true){
+                return "success";
+            }else{
+                return "false";
+            }
         }
-        return "forward:/user/findAllUser.do?status="+true;
+        /*return "forward:/user/findAllUser.do?status="+true;*/
     }
 
 

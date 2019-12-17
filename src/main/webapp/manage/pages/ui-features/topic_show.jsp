@@ -218,7 +218,7 @@
                  话题状态：${topics.t_status}
                   &lt;%&ndash;  <p>发布时间：${topics.date}</p>&ndash;%&gt;
                   </div>--%>
-
+                  <button type="button" class="btn btn-primary mr-2"><a  href="javascript:history.back(-1)" style="color: white">返回</a></button>
                 </form>
 
 

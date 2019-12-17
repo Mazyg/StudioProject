@@ -181,8 +181,7 @@
                         <div class="inner-card-text">
                           <span class="report-title">用户总数</span>
                           <h6 style="text-align: center">${userCount}</h6>
-                          <br>
-                          <span class="report-count"> <%--2 Reports--%>&nbsp;</span>
+                          <span class="report-count"> &nbsp;<%--2 Reports--%>&nbsp;</span>
                         </div>
                         <div class="inner-card-icon bg-success">
                           <i class="icon-people"></i>
