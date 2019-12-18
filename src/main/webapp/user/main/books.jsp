@@ -30,6 +30,7 @@
     <script src="js/owl.carousel.min.js" type="text/javascript"></script>
     <script src="js/comm.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/jump.js"></script>
+    <script type="text/javascript" src="js/searchsub.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style type="text/css">
         .imgs1{
@@ -42,12 +43,8 @@
     <section class="mainWrap">
         <div class="topwraper relative clearfix">
             <div class="search">
-                <form id="searchForm" target="_blank">
-                    <input name="query" type="text" >
-                    <input name="ie" type="hidden" value="utf8">
-                    <input name="cid" type="hidden" value="3">
-                    <a href="javascript:;" onclick="searchSub();"><i>搜索</i></a>
-                </form>
+                <input type="text" id="search"/>
+                <a onclick="searchSub(${numberPerPage})"><i>搜索</i></a>
             </div>
         </div>
     </section>

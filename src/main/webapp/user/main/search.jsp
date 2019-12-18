@@ -83,34 +83,37 @@
 <div class="content yahei subchannel">
     <div class="mainWrap clearfix">
         <section class="colunm1">
-            <ul class="picnewslist people">
-                <c:forEach items="${infos}" var="infos">
-                    <li class="clearfix">
-                        <figure>
-                            <a class="picwraper" href="#" target="_blank">
-                                <img src="${infos.photo}">
-                            </a>
-                            <div class="contentwraper">
-                                <figcaption>
-                                    <span class="tips">${infos.info_type}</span>
-                                    <a href="#" target="_blank"  class="jiequ">
-                                        【${infos.info_type}】${infos.title}
+            <c:if test="${total==0}">
+                <div style="margin-left: 200px;margin-top: 50px;color: red;">对不起，没有找到您要查询的内容！</div>
+            </c:if>
+                    <ul class="picnewslist people">
+                        <c:forEach items="${infos}" var="infos">
+                            <li class="clearfix">
+                                <figure>
+                                    <a class="picwraper" href="#" target="_blank">
+                                        <img src="${infos.photo}">
                                     </a>
-                                </figcaption>
-                                <p>${infos.introduce}</p>
-                                <div class="thumb">
-                                    <i class="thunews-clock-o"></i>
-                                        ${infos.date}
-                                    <i class="thunews-eye"></i>
-                                    <font  >
-                                        <span  ></span>
-                                    </font>
-                                </div>
-                            </div>
-                        </figure>
-                    </li>
-                </c:forEach>
-            </ul>
+                                    <div class="contentwraper">
+                                        <figcaption>
+                                            <span class="tips">${infos.info_type}</span>
+                                            <a href="#" target="_blank"  class="jiequ">
+                                                【${infos.info_type}】${infos.title}
+                                            </a>
+                                        </figcaption>
+                                        <p>${infos.introduce}</p>
+                                        <div class="thumb">
+                                            <i class="thunews-clock-o"></i>
+                                                ${infos.date}
+                                            <i class="thunews-eye"></i>
+                                            <font  >
+                                                <span  ></span>
+                                            </font>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </li>
+                        </c:forEach>
+                    </ul>
             <br>
             <div class="pager">
                 <!-- 上一页 按钮 -->
