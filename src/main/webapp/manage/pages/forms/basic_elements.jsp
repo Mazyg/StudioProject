@@ -26,13 +26,7 @@
     <script src="js/jquery-1.8.3.js"></script>
     <script src="../tinymce/tinymce.min.js"></script>
     <script type="text/javascript">
-      window.onload = function()
-      {
-        var message = "${msg}";
-        if( message != ""){
-          alert(message);
-        }
-      };
+
       function selectFile(){
         $("#photo").trigger("click");
       }
@@ -427,9 +421,15 @@
           var $photo = $("#url").val();
           var $video = $("#urlv").val();
           var content = tinyMCE.activeEditor.getContent();
+          content = content.replace('/&/g','%26');
+          alert(content);
+          console.log(content);
           $.ajax({
             url:"../info/addInfo.do",
-            data:"title="+$title+"&introduce="+$introduce+"&info_type="+$type+"&photo="+$photo+"&video="+$video+"&content="+content,
+            contentType:"application/json;charset=UTF-8",
+            data:JSON.stringify({"title":$title,"introduce":$introduce,"info_type":$type,"&photo":$photo,"video":$video,"content":content}),
+            dataType:"text",
+            //data:"title"+$title+"&introduce="+$introduce+"&info_type="+$type+"&photo="+$photo+"&video="+$video+"&content="+content,
             type:"post",
             success:function (result) {
               if (result == "success"){

@@ -69,10 +69,6 @@
                 ${topic.content}
             </div>
             <div class="tzCon_foot">
-                <div class="tzCollect">
-                    <div class="tzCollect_left">收藏</div>
-                    <div class="tzCollect_right">131</div>
-                </div>
             </div>
         </div>
         <div class="newPending">
@@ -101,7 +97,7 @@
                                     <p><span>${comment.uname} 回复 ${comment.rname}：${comment.content}
                                         <button class="replayBtn" id="comment">回复</button></span></p>
                                     <div class="pendDetail_action">
-                                        <input type="text" placeholder="回复${comment.uname}:"/>
+                                        <input type="text" placeholder="回复${comment.uname}:(请不要超过40个字)" maxlength="40"/>
                                         <input type="text" style="display: none" value="${comment.uname}" >
                                         <input type="text" style="display: none" value="${dynamic.wid}" >
                                         <button class="replyTopic">回复</button>
@@ -113,7 +109,7 @@
                     </c:choose>
                     <div class="pendDetail_btn">
                         <ul>
-                            <li>361</li>
+                            <li></li>
                             <li class="replayBtn">278</li>
                             <c:choose>
                                 <c:when test="${dynamic.uname == users.uname}">
@@ -125,7 +121,7 @@
                         </ul >
                     </div>
                     <div class="pendDetail_action">
-                        <input type="text" placeholder=" 回复 ${dynamic.uname} :" />
+                        <input type="text" placeholder=" 回复 ${dynamic.uname} :(请不要超过40个字)" maxlength="40" />
                         <input type="text" style="display: none" value="${dynamic.uname}" >
                         <input type="text" style="display: none" value="${dynamic.wid}" >
                         <button class="replyTopic">回复</button>
@@ -152,7 +148,7 @@
                 <div class="newPending_head_tittle">评论</div>
             </div>
             <div class="writePending_con">
-                <input type="text" placeholder="写下你的评论..." class="commentText"/>
+                <input type="text" placeholder="写下你的评论...(请不要超过50个字)"class="commentText" maxlength="50"/>
                 <input type="submit" value="评论" id="postMsg"/>
             </div>
         </div>
