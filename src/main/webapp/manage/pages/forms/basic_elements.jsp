@@ -430,7 +430,7 @@
           $.ajax({
             url:"../info/addInfo.do",
             contentType:"application/json;charset=UTF-8",
-            data:JSON.stringify({"title":$title,"introduce":$introduce,"info_type":$type,"&photo":$photo,"video":$video,"content":content}),
+            data:JSON.stringify({"title":$title,"introduce":$introduce,"info_type":$type,"photo":$photo,"video":$video,"content":content}),
             dataType:"text",
             //data:"title"+$title+"&introduce="+$introduce+"&info_type="+$type+"&photo="+$photo+"&video="+$video+"&content="+content,
             type:"post",
