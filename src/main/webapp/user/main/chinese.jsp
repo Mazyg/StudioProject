@@ -99,10 +99,10 @@
                     <ul class="biggallerylist">
                     <c:forEach items="${chineseScenery}" var="chineseScenery">
                         <li>
-                            <a href="#" target="_blank"><img src="${chineseScenery.photo}"></a>
+                            <a href="../info/findByIdInfo.do?infoId=${chineseScenery.info_id}&uid=${users.uid}" target="_blank"><img src="${chineseScenery.photo}"></a>
                             <div class="imgintro">
                             <b></b>
-                            <h3><a href="#" target="_blank" class="jiequ">【${chineseScenery.info_type}】${chineseScenery.title}</a></h3>
+                            <h3><a href="../info/findByIdInfo.do?infoId=${chineseScenery.info_id}&uid=${users.uid}" target="_blank" class="jiequ">【${chineseScenery.info_type}】${chineseScenery.title}</a></h3>
                             <p> ${chineseScenery.introduce}</p>
                             </div>
                         </li>
@@ -146,8 +146,8 @@
             <c:forEach items="${chineseAll}" var="chineseAll">
                 <li>
                     <figure>
-                        <a href="#" target="_blank"><img src="${chineseAll.photo}"></a>
-                        <figcaption><a target="_blank" href="#" class="jiequ">【${chineseAll.info_type}】${chineseAll.title}</a></figcaption>
+                        <a href="../info/findByIdInfo.do?infoId=${chineseAll.info_id}&uid=${users.uid}" target="_blank"><img src="${chineseAll.photo}"></a>
+                        <figcaption><a target="_blank" href="../info/findByIdInfo.do?infoId=${chineseAll.info_id}&uid=${users.uid}" class="jiequ">【${chineseAll.info_type}】${chineseAll.title}</a></figcaption>
                         <div class="thumb"><i class="thunews-clock-o"></i>${chineseAll.date}<i class="thunews-eye"></i> <font id="font_itemlist_total_20191115111315714796419"><span id="itemlist_total_20191115111315714796419"></span></font></div>
                     </figure>
                 </li>
