@@ -93,13 +93,13 @@
             <div class="biggallery">
                 <div class="biggallerywraper">
                     <ul class="biggallerylist clearfix">
-                        <li><a href="#" target="_blank"><img src="${personone.get(0).photo}"></a></li>
+                        <li><a href="../info/findByIdInfo.do?infoId=${personone.get(0).info_id}&uid=${users.uid}" target="_blank"><img src="${personone.get(0).photo}"></a></li>
                     </ul>
                     <div class="imgintro1">
                         <b></b>
                         <h3>
                             <span class="tips" id="keyword1-1">人物</span>
-                            <a href="#" target="_blank"  id="title1-1" class="jiequ">${personone.get(0).title}</a>
+                            <a href="../info/findByIdInfo.do?infoId=${personone.get(0).info_id}&uid=${users.uid}" target="_blank"  id="title1-1" class="jiequ">${personone.get(0).title}</a>
                         </h3>
                         <p> ${personone.get(0).introduce}
                         </p>
@@ -111,13 +111,13 @@
                 <c:forEach items="${rolemodeltop}" var="role">
                 <li class="clearfix">
                     <figure>
-                        <a class="picwraper" href="#" target="_blank">
+                        <a class="picwraper" href="../info/findByIdInfo.do?infoId=${role.info_id}&uid=${users.uid}" target="_blank">
                             <img src="${role.photo}">
                         </a>
                         <div class="contentwraper">
                             <figcaption>
                                 <span class="tips">榜样力量</span>
-                                <a href="#" target="_blank"  class="jiequ">
+                                <a href="../info/findByIdInfo.do?infoId=${role.info_id}&uid=${users.uid}" target="_blank"  class="jiequ">
                                    ${role.title}
                                 </a>
                             </figcaption>
@@ -140,7 +140,7 @@
                 <c:forEach items="${person}" var="person">
                 <li class="clearfix">
                     <figure>
-                        <a class="picwraper" href="#" target="_blank">
+                        <a class="picwraper" href="../info/findByIdInfo.do?infoId=${person.info_id}&uid=${users.uid}" target="_blank">
                             <img src="${person.photo}">
                         </a>
                         <div class="contentwraper">
@@ -169,13 +169,13 @@
                 <c:forEach items="${persontip}" var="persontip">
                 <li class="clearfix">
                     <figure>
-                        <a class="picwraper" href="#" target="_blank">
+                        <a class="picwraper" href="../info/findByIdInfo.do?infoId=${persontip.info_id}&uid=${users.uid}" target="_blank">
                             <img src="${persontip.photo}">
                         </a>
                         <div class="contentwraper">
                             <figcaption>
                                 <span class="tips">新时代楷模</span>
-                                <a href="#" target="_blank"  class="jiequ">
+                                <a href="../info/findByIdInfo.do?infoId=${persontip.info_id}&uid=${users.uid}" target="_blank"  class="jiequ">
                                     ${persontip.title}
                                 </a>
                             </figcaption>

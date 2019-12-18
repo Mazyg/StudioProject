@@ -35,7 +35,7 @@
                 <p><!--[-->对不起，你要找的这个页面突然不见了。不过，放心，一切都在我的掌控之中，不会跑多远！<!--]--></p>
             </div>
         </div>
-        <nav>
+        <nav><%--href="javascript:;" onClick="javascript:history.back(-1);"--%>
             <ul>
                 <li><a href="../info/findInfoBytype.do">首页</a></li>
                 <!--<li><a href="#elements">Elements</a></li>-->
