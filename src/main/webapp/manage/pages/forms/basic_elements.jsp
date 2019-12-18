@@ -421,7 +421,6 @@
           var $photo = $("#url").val();
           var $video = $("#urlv").val();
           var content = tinyMCE.activeEditor.getContent();
-          content = content.replace('/&/g','%26');
           alert(content);
           console.log(content);
           $.ajax({

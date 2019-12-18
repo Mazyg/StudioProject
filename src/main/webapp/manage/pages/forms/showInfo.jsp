@@ -422,7 +422,9 @@
             var content = tinyMCE.activeEditor.getContent();
             $.ajax({
                 url:"../info/updateInfo.do",
-                data:"title="+$title+"&introduce="+$introduce+"&info_type="+$type+"&photo="+$photo+"&video="+$video+"&content="+content+"&info_id="+$id,
+                contentType:"application/json;charset=UTF-8",
+                data:JSON.stringify({"title":$title,"introduce":$introduce,"info_type":$type,"&photo":$photo,"video":$video,"content":content,"info_id":$id}),
+                dataType:"text",
                 type:"post",
                 success:function (result) {
                     if (result == "success"){

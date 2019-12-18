@@ -405,7 +405,7 @@ public class InfoController {
     }
 
     @RequestMapping("/updateInfo")
-    public @ResponseBody String updateInfo(Info info){
+    public @ResponseBody String updateInfo(@RequestBody Info info){
         result = infoService.updateInfo(info);
         System.out.println("info="+info);
         System.out.println("修改结果"+result);
