@@ -92,13 +92,13 @@
                         <c:forEach items="${infos}" var="infos">
                             <li class="clearfix">
                                 <figure>
-                                    <a class="picwraper" href="#" target="_blank">
+                                    <a class="picwraper" href="../info/findByIdInfo.do?infoId=${infos.info_id}&uid=${users.uid}" target="_blank">
                                         <img src="${infos.photo}">
                                     </a>
                                     <div class="contentwraper">
                                         <figcaption>
                                             <span class="tips">${infos.info_type}</span>
-                                            <a href="#" target="_blank"  class="jiequ">
+                                            <a href="../info/findByIdInfo.do?infoId=${infos.info_id}&uid=${users.uid}" target="_blank"  class="jiequ">
                                                 【${infos.info_type}】${infos.title}
                                             </a>
                                         </figcaption>
