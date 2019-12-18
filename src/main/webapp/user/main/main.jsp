@@ -44,7 +44,7 @@
                     </li>
                     <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
                     </li>
-                    <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
+                    <li><a href="../info/findPersonInfo.do?page=1&numberPerPage=3&start=0&length=3" class="">榜样力量</a>
                     </li>
                     <li><a href="../topic/showTopic.do?page=1&numberPerPage=3&start=0&length=3" class="">话题</a>
                     </li>
