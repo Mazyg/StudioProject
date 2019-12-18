@@ -54,10 +54,10 @@
     <location>/error/404.jsp</location>
   </error-page>
 
-  <!--<error-page>
+  <error-page>
     <error-code>500</error-code>
     <location>/error/error.jsp</location>
-  </error-page>-->
+  </error-page>
 
 <!--  <servlet-mapping>-->
 <!--    <servlet-name>dispatcherServlet</servlet-name>-->

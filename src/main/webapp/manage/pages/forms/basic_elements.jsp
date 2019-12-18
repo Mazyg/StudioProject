@@ -350,6 +350,7 @@
                             <option value="书籍">书籍</option>
                             <option value="近期政策">近期政策</option>
                             <option value="视频">视频</option>
+                            <option value="人物">人物</option>
                           </select>
                           <input type="text"  style="display:none" id="type" name="info_type"/>
                         </div>
