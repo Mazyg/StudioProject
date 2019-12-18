@@ -74,7 +74,7 @@
         <div class="newPending">
             <div class="newPending_head">
                 <div class="tzHeng"></div>
-                <div class="newPending_head_tittle">最新回复(52)</div>
+                <div class="newPending_head_tittle">相关回复</div>
             </div>
             <!--楼主可以删除评论、自己可以删除自己的评论删除按钮酌情出现-->
             <!--回复后的情况-->
@@ -110,7 +110,7 @@
                     <div class="pendDetail_btn">
                         <ul>
                             <li></li>
-                            <li class="replayBtn">278</li>
+                            <li class="replayBtn">+</li>
                             <c:choose>
                                 <c:when test="${dynamic.uname == users.uname}">
                                     <input type="text" style="display: none" value="${dynamic.wid}" >
@@ -198,7 +198,10 @@
             </div>
         </div>
     </div>
-    <div class="clear"><input type="text" style="display: none" id="topicId" value="${topic.tid}"></div>
+    <div class="clear">
+        <input type="text" style="display: none" id="topicId" value="${topic.tid}">
+        <input type="text" style="display: none" id="t_type" value="${topic.t_type}">
+    </div>
 </div>
 <footer class="publicFooter">
     <p></p>
@@ -218,6 +221,7 @@
                 var $content = $(this).parent().children('input').eq(0).val();
                 var $rname = $(this).parent().children('input').eq(1).val();
                 var $wid = $(this).parent().children('input').eq(2).val();
+                var $t_type = $("#t_type").val();
                 if ($uname == null) {
                     alert("请先登录!");
                     return ;
@@ -236,7 +240,7 @@
                         if (data == null){
                             alert("回复失败")
                         }else {
-                            window.location.href = "../topic/findTopicById.do?tid="+$tid;
+                            window.location.href = "../topic/findTopicById.do?tid="+$tid+"&type="+$t_type;
                         }
                     }
                 });
@@ -247,6 +251,7 @@
                 var $content = $(".commentText").val();
                 var $user = $("#user").text();
                 var $tid = $("#topicId").val();
+                var $t_type = $("#t_type").val();
                 if ($user == null) {
                     alert("请先登录!");
                     return ;
@@ -265,7 +270,7 @@
                         if (data == null){
                             alert("评论失败")
                         }else {
-                            window.location.href = "../topic/findTopicById.do?tid="+$tid;
+                            window.location.href = "../topic/findTopicById.do?tid="+$tid+"&type="+$t_type;
                         }
                     }
                 });
@@ -275,6 +280,7 @@
             $(".delateBtn").click(function () {
                 var $wid = $(this).prev().val();
                 var $tid = $("#topicId").val();
+                var $t_type = $("#t_type").val();
                 $.ajax({
                     url:"../dynamic/deleteDynamic.do",
                     data:"wid="+$wid,
@@ -283,7 +289,7 @@
                         if (result == "false"){
                             alert("删除回复失败");
                         }else {
-                            window.location.href = "../topic/findTopicById.do?tid="+$tid;
+                            window.location.href = "../topic/findTopicById.do?tid="+$tid+"&type="+$t_type;
                         }
                     }
                 });

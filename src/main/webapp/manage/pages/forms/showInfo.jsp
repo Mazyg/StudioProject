@@ -424,10 +424,11 @@
             var $video = $("#urlv").val();
             var $id = $("#info_id").val();
             var content = tinyMCE.activeEditor.getContent();
+            alert($photo);
             $.ajax({
                 url:"../info/updateInfo.do",
                 contentType:"application/json;charset=UTF-8",
-                data:JSON.stringify({"title":$title,"introduce":$introduce,"info_type":$type,"&photo":$photo,"video":$video,"content":content,"info_id":$id}),
+                data:JSON.stringify({"title":$title,"introduce":$introduce,"info_type":$type,"photo":$photo,"video":$video,"content":content,"info_id":$id}),
                 dataType:"text",
                 type:"post",
                 success:function (result) {
