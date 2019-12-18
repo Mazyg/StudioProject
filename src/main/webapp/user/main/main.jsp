@@ -86,7 +86,7 @@
         <ul>
             <c:forEach items="${event}" var="event">
             <li style="background-image: url('${event.photo}')">
-                <a href="#">
+                <a href="../info/findByIdInfo.do?infoId=${event.info_id}&uid=${users.uid}">
                     <h3>${event.title}</h3>
                 </a>
             </li>
@@ -120,12 +120,12 @@
             }
         }]
     });
-    var mr=document.createElement("a");
+    /*var mr=document.createElement("a");
     mr.text="更多热点时事>";
-    mr.href="#";
+    mr.href="";
     mr.target="_blank";
     mr.className="moreimg";
-    $(".topimg .slick-dots").append(mr);
+    $(".topimg .slick-dots").append(mr);*/
 </script>
 <div class="content">
     <div class="section_1">
@@ -136,7 +136,7 @@
                 <ul>
                 <c:forEach items="${rolemodeltop}" var="rolemodeltop">
                     <li  class="fi" >
-                        <a href="#" target="_blank">
+                        <a href="../info/findByIdInfo.do?infoId=${rolemodeltop.info_id}&uid=${users.uid}" target="_blank">
                             <img src="${rolemodeltop.photo}" alt="">
                             <div class="txtwrapper">
                                 <div class="time">
@@ -150,7 +150,7 @@
                 </c:forEach>
                     <c:forEach items="${rolemodel}" var="rolemodel">
                     <li >
-                        <a href="#" target="_blank">
+                        <a href="../info/findByIdInfo.do?infoId=${rolemodel.info_id}&uid=${users.uid}" target="_blank">
                             <img src="${rolemodel.photo}" alt="">
                             <div class="txtwrapper">
                                 <div class="time"><i class="icon-clock"></i>${rolemodel.date}
@@ -168,7 +168,7 @@
                 <ul class="clearfix">
                 <c:forEach items="${event2}" var="event2">
                     <li>
-                        <a href="#" target="_blank">
+                        <a href="../info/findByIdInfo.do?infoId=${event2.info_id}&uid=${users.uid}" target="_blank">
                             <div class="time">
                                 <span></span>${event2.date}
                             </div>
@@ -181,18 +181,18 @@
                 </c:forEach>
                 </ul>
             </div>
-            <a href="#" target="_blank" class="newsmore">更多热点时事</a>
+            <a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3" target="_blank" class="newsmore">更多热点时事</a>
         </div>
     </div>
     <div class="section_2">
         <div class="mainWrap relative">
-            <h2><span>爱我中华</span><a href="#" class="more">更多 ></a></h2>
+            <h2><span>爱我中华</span><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3" class="more">更多 ></a></h2>
             <div class="focus">
                 <div class="bigpic">
                     <ul>
                     <c:forEach items="${chinese}" var="chinese">
                         <li>
-                            <a href="#" target="_blank">
+                            <a href="../info/findByIdInfo.do?infoId=${chinese.info_id}&uid=${users.uid}" target="_blank">
                                 <img src="${chinese.photo}"alt=""><div class="txtwrapper">
                                 <div class="cata">${chinese.info_type}</div>
                                 <h3> ${chinese.title}</h3>
@@ -207,7 +207,7 @@
                     <ul>
                     <c:forEach items="${chinese}" var="chinese">
                         <li>
-                            <a href="#" target="_blank">
+                            <a href="../info/findByIdInfo.do?infoId=${chinese.info_id}&uid=${users.uid}" target="_blank">
                                 <img src="${chinese.photo}" alt=""><div class="txtwrapper">
                                 <div class="cata">${chinese.info_type}</div>
                                 <h3>${chinese.title}</h3>

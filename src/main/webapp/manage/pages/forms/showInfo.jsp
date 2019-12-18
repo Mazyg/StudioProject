@@ -341,12 +341,16 @@
                                         <div class="col-sm-6" id="info_category">
                                             <select class="form-control" id="info">
                                                 <option value="榜样的力量">榜样的力量</option>
+                                                <option value="身边榜样">身边榜样</option>
+                                                <option value="新时代楷模">新时代楷模</option>
                                                 <option value="热点时事">热点时事</option>
                                                 <option value="最美中国人">最美中国人</option>
                                                 <option value="最美中国景">最美中国景</option>
                                                 <option value="最美中国事">最美中国事</option>
                                                 <option value="电影">电影</option>
                                                 <option value="书籍">书籍</option>
+                                                <option value="近期政策">近期政策</option>
+                                                <option value="视频">视频</option>
                                             </select>
                                             <input type="text"  style="display:none" id="type" name="info_type"/>
                                         </div>

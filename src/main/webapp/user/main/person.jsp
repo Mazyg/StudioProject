@@ -161,7 +161,7 @@
                    <br>
                 <ul>
                     <c:forEach items="${personalMainInfo}" var="personalMainInfo">
-                        <li><h4>&nbsp;&nbsp;&nbsp;<a href="#">${personalMainInfo.title}</a><small>&nbsp;&nbsp;&nbsp;&nbsp;${personalMainInfo.date}
+                        <li><h4>&nbsp;&nbsp;&nbsp;<a href="../info/findByIdInfo.do?infoId=${personalMainInfo.info_id}&uid=${users.uid}">${personalMainInfo.title}</a><small>&nbsp;&nbsp;&nbsp;&nbsp;${personalMainInfo.date}
                         <br>&nbsp;&nbsp;&nbsp;&nbsp;${personalMainInfo.introduce}</small></h4></li>
                         <br>
                     </c:forEach>

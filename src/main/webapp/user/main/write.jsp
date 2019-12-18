@@ -23,15 +23,6 @@
     }
 </style>
 <script type="text/javascript">
-   /* function msssage () {
-        var top = "<%--${top}--%>";
-        if( top == "true"){
-            alert("审核通过后，您的话题将会被发布！");
-        }else
-        if( top == "false"){
-            alert("请登录后发布话题！");
-        }
-    }*/
 
     $(function () {
         $("#put").click(function () {
@@ -39,7 +30,7 @@
             var $content = $("#content").val();
             var $type = $("#type").val();
             if(${users.uid == null}){
-                alert("请登录后发布话题1！");
+                alert("请登录后发布话题！");
                 return;
             }
             if($t_title==""|| $t_title == null){
