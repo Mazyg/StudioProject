@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -381,13 +382,14 @@ public class InfoController {
     }
 
     @RequestMapping("/addInfo")
-    public @ResponseBody String addInfo(Info info) {
+    public @ResponseBody String addInfo(@RequestBody Info info) {
         Date now = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = ft.format(now);
         info.setDate(time);
         System.out.println("info="+info);
         result =infoService.addInfo(info);
+        System.out.println("插入结果"+result);
         if (result){
            return "success";
         }

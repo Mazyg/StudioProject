@@ -576,7 +576,7 @@ body{
     font-size: 14px;
 }
 .pendDetail_action button{
-    background-color: #e43e20;
+    background-color: red;
     color: #fff;
 }
 .pendDetail_btn li:nth-child(1){
