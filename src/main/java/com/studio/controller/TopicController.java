@@ -270,7 +270,7 @@ public class TopicController {
     /*跳转到话题页面*/
     @RequestMapping("/showTopic")
     public ModelAndView showTopic(Model model,HttpServletRequest request){
-        int total=topicService.findCountTopic();
+        int total=topicService.findCountNo("已审核");
         model.addAttribute("total", total);
         int start = Integer.parseInt(request.getParameter("start"));
         model.addAttribute("start",start);
