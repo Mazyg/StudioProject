@@ -110,7 +110,7 @@ public class InfoController {
         request.getSession().setAttribute("hotInfo",event);
         List<Info> videoList = infoService.findInfoBytype("视频", 0, 4);
         request.getSession().setAttribute("videoInfo",videoList);
-        List<Info> event2= infoService.findInfoBytype("热点时事",2,3);
+        List<Info> event2= infoService.findInfoBytype("热点时事",5,3);
         model.addAttribute("event2",event2);
         List<Info> movies1= infoService.findInfoBytype("电影",0,2);
         model.addAttribute("movies1",movies1);
