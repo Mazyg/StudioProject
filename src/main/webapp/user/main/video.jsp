@@ -31,7 +31,9 @@
     <script src="publish/thunews/js/regex-cn.js" type="text/javascript"></script>
     <script src="js/video.min.js"></script>
     <link href="css/video-js.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="js/comm.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
     <style type="text/css">
         .dh2{
             font-size: 25px;
@@ -52,6 +54,54 @@
             width: 100px;
             height: 80px;
         }
+        .comment .commentbox .textarea{
+            width: 630px;
+            height: 100px;
+            border: #e6e6e6 2px;
+        }
+        .comment .commentbox .submit{
+            margin-left:580px;
+            margin-top:15px;
+            width: 50px;
+            height: 30px;
+            line-height: 16px;
+            font-size: 16px;
+            border: #e6e6e6 2px;
+            background:#A7def6;
+        }
+        .comment-list{
+            width: 600px;
+            margin: 20px auto;
+            clear: both;
+            padding-top: 20px;
+        }
+        .comment-list .comment-left{
+            float: left;
+            position: relative;
+            left:-18px;
+        }
+        .comment-list .comment-left img{
+            width: 40px;
+            height: 40px;
+        }
+        .comment-list .comment-right{
+            position: relative;
+            left:0px;
+            top: -5px;
+        }
+        .imgs1{
+            width: 100px;
+            height: 80px;
+        }
+        #tip{
+            position: relative;
+            top:20px;
+            left:450px;
+        }
+        #tip a{
+            color:white;
+            font-size: 14px;
+        }
 
     </style>
 <body>
@@ -66,6 +116,15 @@
                     <a href="javascript:;" onclick="searchSub();"><i>搜索</i></a>
                 </form>
             </div>
+            <c:choose>
+                <c:when test="${users == null}">
+                    <div id="tip">
+                        <a href="../manage/pages/samples/login.jsp">登录</a>&nbsp;<a>|</a>&nbsp;
+                        <a href="../manage/pages/samples/register.jsp">注册</a>
+                    </div>
+                </c:when>
+                <c:otherwise></c:otherwise>
+            </c:choose>
         </div>
     </section>
     <nav class="navwrap yahei">
@@ -118,6 +177,47 @@
                     <p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a> </p>
                 </video>
             </div>
+            <div class="comment">
+                <div class="commentbox">
+                    <textarea class="textarea" placeholder="来说几句吧......" id="content" ></textarea>
+                    <input class="submit" type="button" value="评论" onclick="check('${uid}','${info_id}')">
+                </div>
+                <script type="text/javascript">
+                    function check(uid,info_id){
+                        var content=$("#content").val();
+                        if(uid==''){
+                            alert("请先登录！");
+                        }
+                        else if(content==''){
+                            alert("评论不能为空！");
+                        }
+                        else{
+                            alert("评论成功！")
+                            window.location.href="../info/findByIdInfo.do?infoId="+info_id+"&uid="+uid+"&content="+content;
+                        }
+                    }
+                </script>
+                <div class="comment-list">
+                    <ul>
+                        <c:forEach items="${discuss}" var="discuss">
+                            <li>
+                                <div>
+                                    <div class="comment-left">
+                                        <img src="${discuss.photo}">
+                                    </div>
+                                    <div class="comment-right">
+                                        <p>${discuss.uname}</p>
+                                        <p style="margin-top: -10px;"><small>${discuss.date}</small></p>
+                                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${discuss.content}</p>
+                                    </div>
+                                </div>
+                                <br>
+                            </li>
+                        </c:forEach>
+                    </ul>
+
+                </div>
+            </div>
         </section>
 
 
@@ -148,6 +248,7 @@
                     </c:forEach>
 
                 </table>
+
 
             </section>
             <section class="mod withborder">

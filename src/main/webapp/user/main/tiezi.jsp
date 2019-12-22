@@ -71,6 +71,17 @@
             <div class="tzCon_foot">
             </div>
         </div>
+
+        <div class="writePending">
+            <div class="newPending_head">
+                <div class="tzHeng"></div>
+                <div class="newPending_head_tittle">评论</div>
+            </div>
+            <div class="writePending_con">
+                <input type="text" placeholder="写下你的评论...(请不要超过50个字)"class="commentText" maxlength="50"/>
+                <input type="submit" value="评论" id="postMsg"/>
+            </div>
+        </div>
         <div class="newPending">
             <div class="newPending_head">
                 <div class="tzHeng"></div>
@@ -133,25 +144,7 @@
             </c:forEach>
             <!--测试内容结束、十条内容分页-->
         </div>
-        <div class="indexFooter">
-            <div class="indexFooter_con">
-                <a href="javascript:"><</a>
-                <a href="" class="on">1</a>
-                <a href="">2</a>
-                <a href="">3</a>
-                <a href="javascript:">></a>
-            </div>
-        </div>
-        <div class="writePending">
-            <div class="newPending_head">
-                <div class="tzHeng"></div>
-                <div class="newPending_head_tittle">评论</div>
-            </div>
-            <div class="writePending_con">
-                <input type="text" placeholder="写下你的评论...(请不要超过50个字)"class="commentText" maxlength="50"/>
-                <input type="submit" value="评论" id="postMsg"/>
-            </div>
-        </div>
+
     </div>
     <div class="indexMain_right">
         <div class="myMsg">
