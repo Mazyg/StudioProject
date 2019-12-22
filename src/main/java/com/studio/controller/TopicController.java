@@ -280,6 +280,7 @@ public class TopicController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         model.addAttribute("numberPerPage",numberPerPage);
         mv = new ModelAndView();
+
 //        List<Topic> topics =  topicService.findCheckTopic();
         List<Topic> topics =  topicService.findTopic(start,length);
         for (Topic topic : topics){

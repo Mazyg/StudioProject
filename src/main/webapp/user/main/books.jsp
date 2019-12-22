@@ -90,7 +90,7 @@
                     <li class="clearfix">
                         <figure>
                             <a class="picwraper"  target="_blank">
-                                <img src="${book.photo}">
+                                <img src="${book.photo}" width="50%">
                             </a>
                             <div class="contentwraper">
                                 <figcaption>
