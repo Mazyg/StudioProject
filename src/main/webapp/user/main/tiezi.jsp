@@ -159,22 +159,6 @@
                         <div class="myMsg_conPic"><img src="${users.photo}"></div>
                         <p id="user">${users.uname}</p>
                     </div>
-                    <div  class="myMsg_footer">
-                        <ul>
-                            <li><a href="">
-                                <p>主题数</p>
-                                <p>23</p>
-                            </a></li>
-                            <li><a href="">
-                                <p>精华数</p>
-                                <p>23</p>
-                            </a></li>
-                            <li><a href="">
-                                <p>注册排名</p>
-                                <p>23</p>
-                            </a></li>
-                        </ul>
-                    </div>
                 </c:otherwise>
             </c:choose>
         </div>
