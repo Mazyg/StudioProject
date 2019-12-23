@@ -139,9 +139,9 @@
                         <a href="../info/findByIdInfo.do?infoId=${rolemodeltop.info_id}&uid=${users.uid}" target="_blank">
                             <img src="${rolemodeltop.photo}" alt="">
                             <div class="txtwrapper">
-                                <div class="time">
+                                <%--<div class="time">
                                     <i class="icon-clock"></i> ${rolemodeltop.date}
-                                </div>
+                                </div>--%>
                                 <p><b>${rolemodeltop.title}</b><br/>
                                 ${rolemodeltop.introduce}</p>
                             </div>
@@ -153,10 +153,10 @@
                         <a href="../info/findByIdInfo.do?infoId=${rolemodel.info_id}&uid=${users.uid}" target="_blank">
                             <img src="${rolemodel.photo}" alt="">
                             <div class="txtwrapper">
-                                <div class="time"><i class="icon-clock"></i>${rolemodel.date}
-                                </div>
+                                <%--<div class="time"><i class="icon-clock"></i>${rolemodel.date}
+                                </div>--%>
                                 <p><b>${rolemodel.title}</b><br/>
-                                ${rolemodel.introduce}</p>
+                                        ${rolemodel.introduce}</p>
                             </div>
                         </a>
                     </li>
