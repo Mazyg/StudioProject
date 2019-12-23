@@ -171,6 +171,7 @@
             <div class="m">
                 <video id="my-video" class="video-js vjs-big-play-centered" controls preload="auto" width="640" height="270"
                        poster="m.jpg" data-setup="{}">
+                    <source src="${infos.video}" type="video/flv">
                     <source src="${infos.video}" type="video/mp4">
                     <source src=".webm" type="video/webm">
                     <source src=".ogv" type="video/ogg">
@@ -360,6 +361,9 @@
         var myPlayer = this;
         myPlayer.play();
     });
+</script>
+<script>
+    videojs.options.flash.swf = "video-js.swf";
 </script>
 </html>
 
