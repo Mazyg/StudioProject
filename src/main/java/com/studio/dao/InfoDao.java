@@ -43,7 +43,6 @@ public interface InfoDao {
             "where title like #{keyword}\n" +
             "or info_type like #{keyword}\n" +
             "or introduce like #{keyword}\n" +
-            "or content like #{keyword}\n"+
             "order by date desc\n"+"limit #{start},#{length}")
     public List<Info> showAll( @Param("keyword") String keyword,@Param("start") int start,@Param("length") int length);
 
