@@ -259,9 +259,10 @@
                             <div class="wrapper">
                                 <img src="${movies1.photo}">
                                 <div class="txtwrapper">
-
+                                    <br/>
+                                    <br/>
                                     <h4>${movies1.title}</h4>
-                                    <p>${movies1.introduce}</p>
+
                                 </div>
                             </div>
                         </li>
@@ -275,9 +276,10 @@
                             <div class="wrapper">
                                 <img src="${movies2.photo}">
                                 <div class="txtwrapper">
-
+                                    <br/>
+                                    <br/>
                                     <h4>${movies2.title}</h4>
-                                    <p>${movies2.introduce}</p>
+
                                 </div>
                             </div>
                         </li>
@@ -291,9 +293,10 @@
                             <div class="wrapper">
                                 <img src="${movies3.photo}">
                                 <div class="txtwrapper">
-
+                                    <br/>
+                                    <br/>
                                     <h4>${movies3.title}</h4>
-                                    <p>${movies3.introduce}</p>
+
                                 </div>
                             </div>
                         </li>
@@ -307,9 +310,10 @@
                                 <div class="wrapper">
                                     <img src="${books1.photo}">
                                     <div class="txtwrapper">
-
+                                        <br/>
+                                        <br/>
                                         <h4>${books1.title}</h4>
-                                        <p>${books1.introduce}</p>
+
                                     </div>
                                 </div>
                             </li>
@@ -323,9 +327,10 @@
                                 <div class="wrapper">
                                     <img src="${books2.photo}">
                                     <div class="txtwrapper">
-
+                                        <br/>
+                                        <br/>
                                         <h4>${books2.title}</h4>
-                                        <p>${books2.introduce}</p>
+
                                     </div>
                                 </div>
                             </li>
@@ -339,8 +344,10 @@
                                 <div class="wrapper">
                                     <img src="${books3.photo}">
                                     <div class="txtwrapper" >
+                                        <br/>
+                                        <br/>
                                         <h4>${books3.title}</h4>
-                                        <p>${books3.introduce}</p>
+
                                     </div>
                                 </div>
                             </li>
