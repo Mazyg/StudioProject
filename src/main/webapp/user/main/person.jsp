@@ -129,17 +129,16 @@
             <table>
                 <tr><td>&nbsp;&nbsp; <c:if test="${users.uname == null}">
                     <img class="imgs" src="img/png.png" alt=""></td>
-                    <td><h4>&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
+                    <td><h4 style="color: white">&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                     </c:if>
                     <c:if test="${users.uname != null}">
                         <img class="imgs" src="${users.photo}" alt="头像" />
-                        <td><h4>&nbsp;&nbsp;&nbsp;${users.uname}<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
+                        <td><h4 style="color: white">&nbsp;&nbsp;&nbsp;${users.uname}<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                     </c:if>
                 </tr>
             </table>
         </div>
     </div>
-
     <div class="col-md-12 back2">
         <br>
         <h4>Hi! ${users.uname} 这里是你的主页，用来展示你的生活和发现，也是别人认识你的地方。<br><br>
@@ -148,7 +147,7 @@
         <c:if test="${users.uname == null}">
             还未登录，<a href="../manage/pages/samples/login.jsp">登录</a>了解更多
         </c:if>
-        <br><br>
+
         <ul class="nav nav-tabs">
             <li class="active"><a href="#main" data-toggle="tab">主页</a></li>
             <li><a href="main/personInfo.jsp" >个人信息</a></li>

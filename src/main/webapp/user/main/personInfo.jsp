@@ -163,7 +163,7 @@
             <br><br><br><br><br><br><br>
             <table>
                 <tr><td>
-                    <c:if test="${users.uid == null}">
+                    &nbsp;&nbsp;<c:if test="${users.uid == null}">
                         <img class="imgs" src="img/png.png" alt="头像">
                     </c:if>
                     <c:if test="${users.uid != null}">
@@ -203,10 +203,10 @@
         </div>
                     </td>
                     <c:if test="${users.uname == null}">
-                    <td><h4>&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
+                    <td><h4 style="color: white">&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                     </c:if>
                     <c:if test="${users.uname != null}">
-                        <td><h4>&nbsp;&nbsp;&nbsp;${users.uname}<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
+                        <td><h4 style="color: white">&nbsp;&nbsp;&nbsp;${users.uname}<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                     </c:if>
                 </tr>
             </table>

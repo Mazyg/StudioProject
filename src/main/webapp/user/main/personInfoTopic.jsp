@@ -141,11 +141,11 @@
                 <tr><td>&nbsp;&nbsp;
                    <c:if test="${users.uname == null}">
                     <img class="imgs" src="img/png.png" alt=""></td>
-                    <td><h4>&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
+                    <td><h4 style="color: white">&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                     </c:if>
                     <c:if test="${users.uname != null}">
                         <img class="imgs" src="${users.photo}" alt="头像" />
-                        <td><h4>&nbsp;&nbsp;&nbsp;${users.uname}<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
+                        <td><h4 style="color: white">&nbsp;&nbsp;&nbsp;${users.uname}<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                     </c:if>
                 </tr>
             </table>
