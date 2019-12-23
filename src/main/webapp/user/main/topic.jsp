@@ -192,10 +192,10 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-                <div class="indexSearch">
+               <%-- <div class="indexSearch">
                     <input type="text" placeholder="请输入关键词"/>
                     <input type="submit" value="搜索"/>
-                </div>
+                </div>--%>
                 <div class="indexPublic">
                     <div class="indexPublic_head">
                         本周热议

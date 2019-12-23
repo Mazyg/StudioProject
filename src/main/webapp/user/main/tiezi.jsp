@@ -29,7 +29,7 @@
         </ul>
         <!--未登入开始-->
         <div class="ltForm">
-            <a href=""><img src="img/indexForm_bg.png" alt="" class="headPic2"/></a>
+            <a href="../info/findPersonalMainInfo.do"><img src="img/indexForm_bg.png" alt="" class="headPic2"/></a>
             <ul>
                 <c:choose>
                     <c:when test="${users == null}">

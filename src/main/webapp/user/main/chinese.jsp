@@ -56,11 +56,11 @@
                 <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
                 </li>
                 <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
-                    <ul>
+                   <%-- <ul>
                         <li><a href="#">最美中国景</a></li>
                         <li><a href="#">最美中国人</a></li>
                         <li><a href="#">最美中国事</a></li>
-                    </ul>
+                    </ul>--%>
                 </li>
                 <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
                 </li>
