@@ -390,16 +390,16 @@
         <div class="ulink clearfix">
             <div class="plink">
                 <h2>常用链接</h2>
-                <ul class="plink_1 clearfix">
+               <%-- <ul class="plink_1 clearfix">
                     <li><a href="#" target="_blank">Campus Map</a></li>
                     <li><a href="#" target="_blank">Campus Tour</a></li>
                     <li><a href="#" target="_blank">Services</a></li>
                     <li><a href="#" target="_blank">Giving to Tsinghua</a></li>
-                </ul>
+                </ul>--%>
                 <ul class="plink_2 clearfix">
-                    <li><a href="#" target="_blank">Academic Calendar</a></li>
-                    <li><a href="#" target="_blank">Online Learning</a></li>
-                    <li><a href="#" target="_blank">Contact</a></li>
+                    <li><a href="https://www.xuexi.cn/" target="_blank">学习强国</a></li>
+                    <li><a href="http://agzy.youth.cn/" target="_blank">中国青年网</a></li>
+                    <li><a href="http://www.moe.gov.cn/" target="_blank">中国人民共和国教育部</a></li>
                 </ul>
             </div>
         </div>
