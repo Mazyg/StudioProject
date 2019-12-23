@@ -169,7 +169,7 @@
     </div>
     <div class="indexMain_right">
         <div class="indexMain_rightCon">
-            <a href="main/write.jsp " class="newMsg">发起话题</a>
+            <a href="main/write.jsp " class="newMsg" style="color: white">发起话题</a>
             <div class="indexMain_right">
                 <div class="myMsg">
                     <div class="myMsg_con">

@@ -59,7 +59,7 @@
 <body onload="msssage()">
 <header class="ltHead">
     <div class="ltHead_cen">
-        <a href=""><img src="img/logo.png" alt="" class="headPic1"/></a>
+        <%--<a href=""><img src="img/logo.png" alt="" class="headPic1"/></a>--%>
         <ul class="headNav">
             <li><a href="../info/findInfoBytype.do">首页</a></li>
             <li><a href="javascript:;" onClick="javascript:history.back(-1);">返回上一页</a></li>
