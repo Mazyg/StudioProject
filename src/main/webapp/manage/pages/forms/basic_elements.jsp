@@ -339,6 +339,7 @@
                         <label for="info_category"> 信息类别</label>
                         <div class="col-sm-6" id="info_category">
                           <select class="form-control" id="info">
+                            <option value="全球战疫">全球战疫</option>
                             <option value="榜样力量">榜样力量</option>
                             <option value="身边榜样">身边榜样</option>
                             <option value="新时代楷模">新时代楷模</option>
