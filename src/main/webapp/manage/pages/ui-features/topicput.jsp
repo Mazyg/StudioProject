@@ -237,6 +237,7 @@
                         <label for="topic_category"> 话题类别</label>
                         <div class="col-sm-6" id="topic_category">
                           <select class="form-control" id="topic">
+                            <option value="全球战疫">全球战疫</option>
                             <option value="榜样的力量">榜样的力量</option>
                             <option value="热点时事">热点时事</option>
                             <option value="电影">电影</option>
