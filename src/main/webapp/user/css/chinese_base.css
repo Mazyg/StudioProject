@@ -338,14 +338,14 @@ header .navwrap li
 	position:relative\9;
 	z-index:10\9;
 }
-
+/*修改*/
 header .navwrap li a
 {
 	display:block;
 	padding:0 12px;
 	line-height:60px;
 	height:60px;
-	color: #fff;
+	color: #0f1531;
 }
 
 header .navwrap li a.current
@@ -663,12 +663,12 @@ footer .copyright span a:hover
 	{
 		float: none;
 	}
-
+/*修改*/
 	header .navwrap #nav li a
 	{
 		line-height: 40px;
-		padding: 0 0 0 35px;
-		color: #fff;
+		padding: 0 0 0 30px;
+		color: #0f1531;
 		font-size: 14px;
 		height:auto;
 	}

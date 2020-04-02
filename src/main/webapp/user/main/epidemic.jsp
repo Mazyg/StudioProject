@@ -16,7 +16,7 @@
 <head>
     <base href="<%=basePath%>">
     <meta charset="utf-8">
-    <title>新闻资讯</title>
+    <title>全球战疫</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="css/base_news.css" rel="stylesheet" type="text/css">
     <link href="font/font.css" rel="stylesheet" type="text/css">
