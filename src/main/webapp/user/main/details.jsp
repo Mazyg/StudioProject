@@ -114,6 +114,8 @@
     <nav class="navwrap yahei">
         <section class="mainWrap">
             <ul id="nav">
+                <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">全球战役</a>
+                </li>
                 <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
                 </li>
                 <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
