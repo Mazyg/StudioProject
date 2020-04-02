@@ -51,7 +51,7 @@
     <nav class="navwrap yahei">
         <section class="mainWrap">
             <ul id="nav">
-                <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">全球战役</a>
+                <li><a href="../info//epidemic.do?page=1&numberPerPage=3&start=0&length=3">全球战疫</a>
                 </li>
                 <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
                 </li>
@@ -140,7 +140,7 @@
                 <!-- 上一页 按钮 -->
                 <c:choose>
                     <c:when test="${page>1}">
-                        <a href="../info/findEvent.do?start=${start-numberPerPage}&length=${numberPerPage}&page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
+                        <a href="../info/epidemic.do?start=${start-numberPerPage}&length=${numberPerPage}&page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
                     </c:when>
                     <c:otherwise>
                         <a><<</a>
@@ -151,10 +151,10 @@
                 <c:forEach items="${pageList}" var="item">
                     <c:choose>
                         <c:when test="${(total-(item-1)*numberPerPage)>=numberPerPage}">
-                            <a href="../info/findEvent.do?start=${(item-1)*numberPerPage}&length=${numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
+                            <a href="../info/epidemic.do?start=${(item-1)*numberPerPage}&length=${numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="../info/findEvent.do?start=${(item-1)*numberPerPage}&length=${total-(item-1)*numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
+                            <a href="../info/epidemic.do?start=${(item-1)*numberPerPage}&length=${total-(item-1)*numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
@@ -162,12 +162,12 @@
                 <!-- 下一页 按钮 -->
                 <c:choose>
                     <c:when test="${page<totalPage && rest>=numberPerPage}">
-                        <a href="../info/findEvent.do?start=${start+numberPerPage}&length=${numberPerPage}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                        <a href="../info/epidemic.do?start=${start+numberPerPage}&length=${numberPerPage}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
                             >>
                         </a>
                     </c:when>
                     <c:when test="${page<totalPage && rest<numberPerPage && rest>0}">
-                        <a href="../info/findEvent.do?start=${start+numberPerPage}&length=${rest}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                        <a href="../info/epidemic.do?start=${start+numberPerPage}&length=${rest}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
                             >>
                         </a>
                     </c:when>
@@ -177,9 +177,9 @@
                 </c:choose>
 
                 <!-- 直接跳转 -->
-                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage},${total},'../info/findEvent')" />
+                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage},${total},'../info/epidemic')" />
                 <!-- 设置每页显示条数 -->
-                    &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},'../info/findEvent')" />
+                    &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},'../info/epidemic')" />
             </div>
         </section>
         <section class="colunm2">

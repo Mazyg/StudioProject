@@ -128,8 +128,9 @@ public class InfoController {
     @RequestMapping("/epidemic")
     public String epidemic(Model model,HttpServletRequest request){
         List<Info> eventTop= infoService.findInfoBytype("全球战疫",0,1);
+        System.out.println(eventTop);
         model.addAttribute("eventTop",eventTop);
-        int total=infoService.countBytype("全球战役");
+        int total=infoService.countBytype("全球战疫");
         model.addAttribute("total", total);
         int start = Integer.parseInt(request.getParameter("start"));
         model.addAttribute("start",start);
@@ -138,7 +139,7 @@ public class InfoController {
         model.addAttribute("page",page);
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         model.addAttribute("numberPerPage",numberPerPage);
-        List<Info> eventList= infoService.findInfoBytype("全球战役",start,length);
+        List<Info> eventList= infoService.findInfoBytype("全球战疫",start,length);
         model.addAttribute("eventList",eventList);
         System.out.println("开始的位置："+start);
         System.out.println("当前页数："+page);
