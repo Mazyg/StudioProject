@@ -190,7 +190,6 @@ public class TopicController {
         mv = new ModelAndView();
         String topicdel = request.getParameter("topicdel");
         List<Topic> topic =  topicService.findAllTopic();
-        System.out.println("top"+topic);
         mv.addObject("topicdel", topicdel);
         mv.addObject("topics", topic);
         mv.setViewName("manage/pages/ui-features/topic-table");
@@ -257,10 +256,10 @@ public class TopicController {
     @RequestMapping("/findById")
     public String findById(Model model,HttpServletRequest request){
         String tid = request.getParameter("tid");
-       Topic topicList = topicService.findTopicById(tid);
+        Topic topicList = topicService.findTopicById(tid);
         System.out.println("topic"+topicList);
         User usersTopic = userService.findByNameAll(topicList.getUname());
-        System.out.println("usert"+usersTopic);
+        System.out.println("user"+usersTopic);
 
         model.addAttribute("usersTopic", usersTopic);
         model.addAttribute("topics", topicList);
@@ -270,6 +269,14 @@ public class TopicController {
     /*跳转到话题页面*/
     @RequestMapping("/showTopic")
     public ModelAndView showTopic(Model model,HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("users");
+        if(user != null){
+            int topicCount = topicService.countUserTopic(user.getUname());
+            int commentCount = topicService.countUserReply(user.getUname());
+            commentCount = commentCount + commentService.countUserReply(user.getUname());
+            model.addAttribute("topicCount",topicCount);
+            model.addAttribute("commentCount",commentCount);
+        }
         int total=topicService.findCountNo("已审核");
         model.addAttribute("total", total);
         int start = Integer.parseInt(request.getParameter("start"));
@@ -287,19 +294,19 @@ public class TopicController {
             topic.setUser(userService.findByNameAll(topic.getUname()));
         }
         List<Topic> topTopics = topicService.findTopic(0,3);
-        System.out.println(topTopics);
+        //System.out.println(topTopics);
         mv.addObject("topics", topics);
         mv.addObject("topTopics",topTopics);
         int rest=total-(start+length);
-        System.out.println("剩余："+rest);
+        //System.out.println("剩余："+rest);
         model.addAttribute("rest",rest);
         int totalPage = total/numberPerPage;
         if(total % numberPerPage != 0){
             totalPage += 1;
         }
         model.addAttribute("totalPage",totalPage);
-        System.out.println("总页数："+totalPage);
-        System.out.println("\n------------------------\n");
+        //System.out.println("总页数："+totalPage);
+        //System.out.println("\n------------------------\n");
         Vector<Integer> pageArr = new Vector<Integer>();
         int startx=1;
         if(page>5){
@@ -317,16 +324,26 @@ public class TopicController {
 
     /*通过id进入话题回复评论页面*/
     @RequestMapping("/findTopicById")
-    public String findTopicById(String tid,String type,Model model){
+    public String findTopicById(HttpServletRequest request,String tid,String type,Model model){
         System.out.println("tid:"+tid+"-type:"+type);
         Topic topic = topicService.findTopicById(tid);
         topic.setUser(userService.findByNameAll(topic.getUname()));
+        topic.setView_count(topic.getView_count()+1);
+        topicService.updateCount(topic);
         List<Dynamic> dynamics = dynamicService.findByTid(tid);
         for (Dynamic dynamic: dynamics){
             dynamic.setComments(commentService.findByWid(dynamic.getWid()));
             dynamic.setUser(userService.findByNameAll(dynamic.getUname()));
         }
         List<Info> infos = infoService.findInfoBytype(type,0,5);
+        User user = (User) request.getSession().getAttribute("users");
+        if(user != null){
+            int topicCount = topicService.countUserTopic(user.getUname());
+            int commentCount = topicService.countUserReply(user.getUname());
+            commentCount = commentCount + commentService.countUserReply(user.getUname());
+            model.addAttribute("topicCount",topicCount);
+            model.addAttribute("commentCount",commentCount);
+        }
         model.addAttribute("infos",infos);
         model.addAttribute("dynamics", dynamics);
         model.addAttribute("topic", topic);

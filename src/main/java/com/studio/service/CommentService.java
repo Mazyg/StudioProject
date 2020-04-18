@@ -10,5 +10,9 @@ public interface CommentService {
     public boolean deleteComment(Integer cid);
 
     public List<Comment> findByWid(Integer wid);
+
+    public int countUserReply(String uname);
+
+    public List<Comment> findByUname(String uname);
 }
 

@@ -224,6 +224,7 @@
             <li ><a href="../info/findPersonalMainInfo.do">主页</a></li>
             <li class="active"><a href="#bulletin" data-toggle="tab">个人信息</a></li>
             <li><a href="../topic/findByUid.do?uid="+${users.uid}>我的话题</a></li>
+            <li><a href="../dynamic/findAllCommentByName.do?uname=${users.uname}" >我的消息</a></li>
         </ul>
         <div id="mytab-content" class="tab-content">
             <div class="tab-pane fade in active" id="bulletin">

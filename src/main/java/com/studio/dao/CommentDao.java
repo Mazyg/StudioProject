@@ -21,5 +21,9 @@ public interface CommentDao {
     @Select("select * from comment where wid=#{wid}")
     public List<Comment> findByWid(Integer wid);
 
+    @Select("select count(1) from comment where rname =#{uname}")
+    public int countUserComment(String uname);
 
+    @Select("select * from comment where rname=#{uname}")
+    public List<Comment> findByUname(String uname);
 }

@@ -98,41 +98,41 @@
             </div>
         </div>
     </section>--%>
-        <nav class="navwrap yahei">
-            <section class="mainWrap">
-                <ul id="nav">
-                    <li><a href="../info//epidemic.do?page=1&numberPerPage=3&start=0&length=3">全球战疫</a>
-                    </li>
-                    <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
-                    </li>
-                    <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
-                        <%--<ul>
-                            <li><a href="#">最美中国景</a></li>
-                            <li><a href="#">最美中国人</a></li>
-                            <li><a href="#">最美中国事</a></li>
-                        </ul>--%>
-                    </li>
-                    <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
-                    </li>
-                    <li><a href="../topic/showTopic.do?page=1&numberPerPage=3&start=0&length=3" class="">话题</a>
-                    </li>
-                    <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3" class="">书籍</a></li>
-                    <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
-                    <li><a class="">个人中心</a>
-                        <ul class="last">
-                            <li><a href="main/personInfo.jsp">个人信息</a></li>
-                            <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
-                            <c:if test="${users.u_type eq'admin'}">
-                                <li><a href="../user/backAdmin.do">管理界面</a></li>
-                            </c:if>
-                            <c:if test="${users.uid !=null}">
-                                <li><a href="../user/exitLogin.do">退出登录</a></li>
-                            </c:if>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
-        </nav>
+    <nav class="navwrap yahei">
+        <section class="mainWrap">
+            <ul id="nav">
+                <li><a href="../info//epidemic.do?page=1&numberPerPage=3&start=0&length=3">全球战疫</a>
+                </li>
+                <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
+                </li>
+                <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
+                    <%--<ul>
+                        <li><a href="#">最美中国景</a></li>
+                        <li><a href="#">最美中国人</a></li>
+                        <li><a href="#">最美中国事</a></li>
+                    </ul>--%>
+                </li>
+                <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
+                </li>
+                <li><a href="../topic/showTopic.do?page=1&numberPerPage=3&start=0&length=3" class="">话题</a>
+                </li>
+                <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3" class="">书籍</a></li>
+                <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
+                <li><a class="">个人中心</a>
+                    <ul class="last">
+                        <li><a href="main/personInfo.jsp">个人信息</a></li>
+                        <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
+                        <c:if test="${users.u_type eq'admin'}">
+                            <li><a href="../user/backAdmin.do">管理界面</a></li>
+                        </c:if>
+                        <c:if test="${users.uid !=null}">
+                            <li><a href="../user/exitLogin.do">退出登录</a></li>
+                        </c:if>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </nav>
 </header>
 <br><br>
 <div class="col-md-8 col-md-offset-2">
@@ -141,7 +141,7 @@
             <br><br><br><br><br><br><br>
             <table>
                 <tr><td>&nbsp;&nbsp;
-                   <c:if test="${users.uname == null}">
+                    <c:if test="${users.uname == null}">
                     <img class="imgs" src="img/png.png" alt=""></td>
                     <td><h4 style="color: white">&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                     </c:if>
@@ -162,8 +162,8 @@
         <ul class="nav nav-tabs">
             <li ><a href="../info/findPersonalMainInfo.do">主页</a></li>
             <li ><a href="main/personInfo.jsp" >个人信息</a></li>
-            <li class="active"><a href="#rule" data-toggle="tab">我的话题</a></li>
-            <li><a href="../dynamic/findAllCommentByName.do?uname=${users.uname}" >我的消息</a></li>
+            <li ><a href="../topic/findByUid.do?uid="+${users.uid}>我的话题</a></li>
+            <li class="active"><a href="#rule" data-toggle="tab">我的消息</a></li>
         </ul>
         <div id="mytab-content" class="tab-content">
             <div class="tab-pane fade in active" id="rule">
@@ -173,35 +173,39 @@
                     <br>
                 </c:if>
                 <c:if test="${users.uname != null}">
-                    <c:if test="${topicInfo.size()== 0}">
-                        还没有发布话题，去<a href="main/write.jsp">发布话题</a>
+                    <c:if test="${dynamics.size()== 0} && ${commentDTOs.size()==0}">
+                        没有收到消息
                         <br>
                     </c:if>
-                    <c:if test="${topicInfo.size()!= 0}">
+                    <c:if test="${dynamics.size()!= 0}">
 
-                            <table class="table  table-hover">
-                                <thead>
-                                <tr>
-                                    <th>话题</th>
-                                    <th>发布时间</th>
-                                    <th>状态</th>
-                                    <th>内容</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                        <c:forEach items="${topicInfo}" var="topicInfo">
+                        <table class="table  table-hover">
+                            <thead>
                             <tr>
-                                <td>${topicInfo.t_title}</td>
-                                <td>${topicInfo.date}</td>
-                                <td>${topicInfo.t_tatus}</td>
-                                <td><a href="../topic/findTopicById.do?tid=${topicInfo.tid}">详情</a> </td>
-                                <td><a href="javascript:void(0)" class="del">删除</a></td>
+                                <th>用户</th>
+                                <th>内容</th>
                             </tr>
-                        </c:forEach>
-                                </tbody>
-                            </table>
-                          <br>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${dynamics}" var="dynamic">
+                                <tr>
+                                    <td>${dynamic.uname}</td>
+                                    <td>${dynamic.content}</td>
+                                    <td><a href="../topic/findTopicById.do?tid=${dynamic.tid}">详情</a> </td>
+                                </tr>
+                            </c:forEach>
+                            <c:if test="${commentDTOs.size()!=0}">
+                                <c:forEach items="${commentDTOs}" var="commentDTO">
+                                    <tr>
+                                        <td>${commentDTO.uname}</td>
+                                        <td>${commentDTO.content}</td>
+                                        <td><a href="../topic/findTopicById.do?tid=${commentDTO.tid}">详情</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </c:if>
+                            </tbody>
+                        </table>
+                        <br>
                     </c:if>
                 </c:if>
             </div>

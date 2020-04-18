@@ -8,10 +8,11 @@ import java.util.List;
 public interface DynamicService {
     public List<Dynamic> findByTid(String tid);
 
-    public List<Dynamic> findByUid(Dynamic dynamic);
+    public List<Dynamic> findByUname(String uname);
 
     public boolean saveDynamic(Dynamic dynamic);
 
     public boolean deleteDynamic(Integer wid);
 
+    Integer findTidByWid(Integer wid);
 }

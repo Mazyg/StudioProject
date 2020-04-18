@@ -14,7 +14,8 @@ public interface DynamicDao {
     @Select("select * from dynamic where tid = #{tid}")
     public List<Dynamic> findByTid(String tid);
 
-    public List<Dynamic> findByUid(Dynamic dynamic);
+    @Select("select * from dynamic where tid in(select tid from topic where uname=#{uname}) and uname!=#{uname}")
+    public List<Dynamic> findByUname(String uname);
 
 
     @Insert("insert into dynamic(date,content,uname,tid) values('${date}','${content}','${uname}','${tid}')")
@@ -24,4 +25,6 @@ public interface DynamicDao {
     @Delete("delete from dynamic where wid=#{wid} ")
     public boolean deleteDynamic(Integer wid);
 
+    @Select("select tid from dynamic where wid = #{wid}")
+    Integer findTidByWid(Integer wid);
 }

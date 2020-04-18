@@ -59,8 +59,9 @@
                 <div class="tzCon_head_right">
                     <h1>${topic.t_title}</h1>
                     <ul>
-                        <li>${topic.uname}</li>
-                        <li>${topic.date}</li>
+                        <li>发布人：${topic.uname}</li>
+                        <li>发布时间：${topic.date}</li>
+                        <li>浏览数：${topic.view_count}</li>
                     </ul>
                 </div>
                 <div class="clear"></div>
@@ -158,6 +159,17 @@
                     <div class="myMsg_con">
                         <div class="myMsg_conPic"><img src="${users.photo}"></div>
                         <p id="user">${users.uname}</p>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${users == null}"></c:when>
+                <c:otherwise>
+                    <div  class="myMsg_footer">
+                        <ul class="nav nav-pills" role="tablist">
+                            <li role="presentation"><a href="../topic/findByUid.do?uid="+${users.uid}">话题数<span class="badge"><h4>${topicCount}</h4></span></a></li>
+                            <li role="presentation"><a href="../dynamic/findAllCommentByName.do?uname=${users.uname}">消息数<span class="badge"><h4>${commentCount}</h4></span></a></li>
+                        </ul>
                     </div>
                 </c:otherwise>
             </c:choose>
