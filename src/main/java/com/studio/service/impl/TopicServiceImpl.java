@@ -100,4 +100,19 @@ public class TopicServiceImpl implements TopicService {
     public List<Topic> findTopic(int start, int length) {
         return topicDao.findTopic(start,length);
     }
+
+    @Override
+    public boolean updateCount(Topic topic) {
+        return topicDao.updateCount(topic);
+    }
+
+    @Override
+    public int countUserTopic(String uname) {
+        return topicDao.countUserTopic(uname);
+    }
+
+    @Override
+    public int countUserReply(String uname) {
+        return topicDao.countUserReply(uname);
+    }
 }

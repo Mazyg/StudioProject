@@ -28,5 +28,15 @@ public class CommentServiceImpl implements CommentService {
         return commentDao.findByWid(wid);
     }
 
+    @Override
+    public int countUserReply(String uname) {
+        return commentDao.countUserComment(uname);
+    }
+
+    @Override
+    public List<Comment> findByUname(String uname) {
+        return commentDao.findByUname(uname);
+    }
+
 
 }

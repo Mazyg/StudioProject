@@ -1,5 +1,4 @@
 package com.studio.dao;
-
 import com.studio.domian.Topic;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -10,8 +9,8 @@ import java.util.List;
 public interface TopicDao {
 
     /*保存用户话题*/
-    @Insert("insert into topic (date,t_title,content,uname,t_type) \n" +
-            "VALUES('${date}','${t_title}','${content}','${uname}','${t_type}')")
+    @Insert("insert into topic (date,t_title,content,uname,t_type,view_count) \n" +
+            "VALUES('${date}','${t_title}','${content}','${uname}','${t_type}','${view_count}')")
     public boolean saveTopic(Topic topic);
 
     /*保存管理员话题*/
@@ -21,6 +20,9 @@ public interface TopicDao {
 
     @Delete("delete from topic where tid=#{tid}")
     public boolean deleTopic(String tid);
+
+    @Update("update topic set view_count=#{view_count} where tid=#{tid}")
+    public boolean updateCount(Topic topic);
 
     /*查看全部话题*/
     @Select("select * from topic")
@@ -78,17 +80,25 @@ public interface TopicDao {
      * @param tid
      * @return
      */
-    @Select("select * from topic where tid=#{tid}")
+    @Select("select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname,t_type,view_count from topic where tid=#{tid}")
     public Topic findTopicById(String tid);
 
     /**
      * 话题查询，按照时间排序，取N条
      *
      */
-    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname,t_type\n" +
+    @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname,t_type,view_count\n" +
             " from  topic\n" +
             " where t_tatus='已审核'\n" +
             " order by date desc "
             +"limit #{start},#{length}")
     public List<Topic> findTopic(@Param("start") int start, @Param("length") int length);
+
+    @Select("select count(1) from topic where uname=#{uname} ")
+    int countUserTopic(String uname);
+
+   @Select("select count(1) FROM dynamic where tid in(\n" +
+           "     select tid FROM topic WHERE uname=#{uname})\n" +
+           "     and uname!=#{uname}")
+    int countUserReply(String uname);
 }

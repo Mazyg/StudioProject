@@ -21,8 +21,8 @@ public class DynamicServiceImpl implements DynamicService {
     }
 
     @Override
-    public List<Dynamic> findByUid(Dynamic dynamic) {
-        return null;
+    public List<Dynamic> findByUname(String uname) {
+        return dynamicDao.findByUname(uname);
     }
 
     @Override
@@ -33,5 +33,10 @@ public class DynamicServiceImpl implements DynamicService {
     @Override
     public boolean deleteDynamic(Integer wid) {
         return dynamicDao.deleteDynamic(wid);
+    }
+
+    @Override
+    public Integer findTidByWid(Integer wid) {
+        return dynamicDao.findTidByWid(wid);
     }
 }

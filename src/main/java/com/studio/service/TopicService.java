@@ -35,4 +35,10 @@ public interface TopicService {
 
     //话题查询，按照时间排序，取N条
     public List<Topic> findTopic(int start, int length);
+
+    boolean updateCount(Topic topic);
+
+    int countUserTopic(String uname);
+
+    int countUserReply(String uname);
 }
