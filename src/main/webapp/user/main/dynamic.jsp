@@ -23,6 +23,7 @@
     <link href="css/base_news.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+
     <title>论坛</title>
 </head>
 <body>
