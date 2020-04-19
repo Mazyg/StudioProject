@@ -1,6 +1,8 @@
 package com.studio.dao;
 
 import com.studio.domian.Info;
+import com.studio.domian.Reply;
+import com.studio.domian.Words;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -97,4 +99,46 @@ public interface InfoDao {
 
     @Update("update info set title=#{title} , content=#{content} , info_type=#{info_type} , photo=#{photo} , introduce=#{introduce} , video=#{video} where info_id=#{info_id}")
     public boolean updateInfo(Info info);
+//保存留言信息
+    @Insert("insert into words(\n" +
+            "          lw_name,\n" +
+            "          lw_date,\n" +
+            "          lw_content,\n" +
+            "          lw_for_name,\n" +
+            "          lw_for_article_id\n" +
+            "        )\n" +
+            "        values(\n" +
+            "          #{lw_name},\n" +
+            "          #{lw_date},\n" +
+            "          #{lw_content},\n" +
+            "          #{lw_for_name},\n" +
+            "          #{lw_for_article_id}\n" +
+            "        )")
+    void saveWords(Words words);
+//保存回复信息
+    @Insert("  insert into reply(\n" +
+            "          lr_name,\n" +
+            "          lr_date,\n" +
+            "          lr_content,\n" +
+            "          lr_for_name,\n" +
+            "          lr_for_words,\n" +
+            "          lr_for_reply,\n" +
+            "          lr_for_article_id\n" +
+            "        )\n" +
+            "        values(\n" +
+            "          #{lr_name},\n" +
+            "          #{lr_date},\n" +
+            "          #{lr_content},\n" +
+            "          #{lr_for_name},\n" +
+            "          #{lr_for_words},\n" +
+            "          #{lr_for_reply},\n" +
+            "          #{lr_for_article_id}\n" +
+            "        )")
+    void saveReply(Reply reply);
+//查询所有留言信息
+    @Select("select * from words")
+    List<Words> findByWords();
+//查询所有回复信息
+@Select("select * from reply")
+    List<Reply> findByReply();
 }

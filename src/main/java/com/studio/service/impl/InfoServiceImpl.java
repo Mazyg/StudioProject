@@ -2,6 +2,8 @@ package com.studio.service.impl;
 
 import com.studio.dao.InfoDao;
 import com.studio.domian.Info;
+import com.studio.domian.Reply;
+import com.studio.domian.Words;
 import com.studio.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,5 +104,37 @@ public class InfoServiceImpl implements InfoService {
     @Override
     public List<Info> findBooks() {
         return infoDao.findBook();
+    }
+
+    /**
+     * 保存留言信息功能
+     * @param words 保存的信息
+     */
+    public void saveWords(Words words) {
+        infoDao.saveWords(words);
+    }
+
+    /**
+     * 保存回复信息内容
+     * @param reply 回复信息
+     */
+    public void saveReply(Reply reply) {
+        infoDao.saveReply(reply);
+    }
+
+    /**
+     * 查询所有留言信息
+     * @return 返回查询查询到的留言信息并存放到List集合中
+     */
+    public List<Words> findByWords() {
+        return infoDao.findByWords();
+    }
+
+    /**
+     * 查询所有的回复信息
+     * @return 返回查询到的回复信息并存放到List集合中
+     */
+    public List<Reply> findByReply() {
+        return infoDao.findByReply();
     }
 }
