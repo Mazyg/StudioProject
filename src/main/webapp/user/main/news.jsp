@@ -23,6 +23,9 @@
     <link href="css/inner.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" type="text/css" href="dist/css/search-suggest.min.css" >
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="dist/js/search-suggest.js"></script>
     <script src="js/slick.min.js" type="text/javascript"></script>
     <script src="js/regexcut.js" type="text/javascript"></script>
     <link rel="stylesheet" href="css/owl.carousel.css">
