@@ -1,8 +1,7 @@
 package com.studio.controller;
 
 
-import com.studio.domian.Discuss;
-import com.studio.domian.Info;
+import com.studio.domian.*;
 import com.studio.service.DiscussService;
 import com.studio.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -400,30 +400,6 @@ public class InfoController {
         mv.setViewName("manage/pages/forms/showInfo");
         return mv;
     }
-
-
-
-    @RequestMapping("/findByIdInfo")
-    public String findByIdInfo(Model model,HttpServletRequest request){
- 
-        String info_id = request.getParameter("infoId");
-        String uid=request.getParameter("uid");
-        String content= request.getParameter("content");
-        model.addAttribute("info_id",info_id);
-        model.addAttribute("uid",uid);
-        if(uid!="" && content!=null) {
-            Boolean i = discussService.saveDynamic(uid, content,info_id);
-        }
-        Info info = infoService.findById(info_id);
-        model.addAttribute("infos", info);
-        List<Discuss> discuss=discussService.findByInfo_id(info_id);
-        model.addAttribute("discuss",discuss);
-        if("视频".equals(info.getInfo_type())){
-            return "user/main/video";
-        }
-        return "user/main/details";
-    }
-
     @RequestMapping("/findByTitle")
     public String findByTitle(Model model,String title){
         Info info = infoService.findByTitle(title);
@@ -479,4 +455,82 @@ public class InfoController {
          return "user/main/details";
     }
 
+    /**
+     * 保存留言信息
+     */
+    @RequestMapping(value="/saveWords")
+    public String saveWords(Words words,HttpServletRequest request){
+        if(words != null){
+            String info_id = words.getLw_for_article_id();
+            infoService.saveWords(words);
+            User users= (User) request.getSession().getAttribute("users");
+            return "redirect:findByIdInfo.do?infoId="+info_id+"&uid="+users.getUid();
+        }else{
+            return null;
+        }
+    }
+    /**
+     * 保存回复信息
+     */
+    @RequestMapping(value="/saveReply")
+    public String saveReply(Reply reply,HttpServletRequest request){
+        if(reply != null){
+            infoService.saveReply(reply);
+            String info_id = reply.getLr_for_article_id();
+            User users= (User) request.getSession().getAttribute("users");
+            return "redirect:findByIdInfo.do?infoId="+info_id+"&uid="+users.getUid();
+        }else{
+            return null;
+        }
+    }
+//
+//    @RequestMapping("/findByIdInfo")
+//    public String findByIdInfo(Model model,HttpServletRequest request){
+//
+//        String info_id = request.getParameter("infoId");
+//        String uid=request.getParameter("uid");
+//        String content= request.getParameter("content");
+//        model.addAttribute("info_id",info_id);
+//        model.addAttribute("uid",uid);
+//        if(uid!="" && content!=null) {
+//            Boolean i = discussService.saveDynamic(uid, content,info_id);
+//        }
+//        Info info = infoService.findById(info_id);
+//        model.addAttribute("infos", info);
+//        List<Discuss> discuss=discussService.findByInfo_id(info_id);
+//        model.addAttribute("discuss",discuss);
+//        if("视频".equals(info.getInfo_type())){
+//            return "user/main/video";
+//        }
+//        return "user/main/details";
+//    }
+    /**
+     * 跳转到查看文章内容页面
+     */
+    //声明用于存放留言回复信息的List集合
+    private List<Words> lw_list;
+    private List<Reply> lr_list;
+    @RequestMapping(value="/findByIdInfo")
+    public String toArticleView(Model model,HttpServletRequest request){
+        String info_id = request.getParameter("infoId");
+        Info info = infoService.findById(info_id);
+        model.addAttribute("infos", info);
+        String uid=request.getParameter("uid");
+        model.addAttribute("uid",uid);
+        //封装留言信息(查出所有)
+        lw_list = infoService.findByWords();
+        model.addAttribute("lw_list",lw_list);
+        //封装回复信息（查出所有）
+        lr_list = infoService.findByReply();
+        model.addAttribute("lr_list",lr_list);
+        //查询文章信息
+        Info article = infoService.findById(info_id);
+        System.out.println("查询到当前文章的ID值："+article.getInfo_id());
+        if (article != null) {
+            model.addAttribute("article", article);
+            return "user/main/details";
+        } else {
+            return null;
+        }
+    }
 }

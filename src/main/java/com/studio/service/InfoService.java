@@ -1,6 +1,8 @@
 package com.studio.service;
 
 import com.studio.domian.Info;
+import com.studio.domian.Reply;
+import com.studio.domian.Words;
 
 import java.util.List;
 
@@ -42,6 +44,14 @@ public interface InfoService {
     public List<Info> findMovies();
 
     public List<Info> findBooks();
+
+    void saveWords(Words words);
+
+    void saveReply(Reply reply);
+
+    List<Words> findByWords();
+
+    List<Reply> findByReply();
  
  
 }
