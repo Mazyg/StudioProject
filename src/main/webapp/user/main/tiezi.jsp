@@ -211,7 +211,7 @@
                 var $rname = $(this).parent().children('input').eq(1).val();
                 var $wid = $(this).parent().children('input').eq(2).val();
                 var $t_type = $("#t_type").val();
-                if ($uname == null) {
+                if ($uname == "") {
                     alert("请先登录!");
                     return ;
                 }
@@ -241,7 +241,8 @@
                 var $user = $("#user").text();
                 var $tid = $("#topicId").val();
                 var $t_type = $("#t_type").val();
-                if ($user == null) {
+                var username = "<%=session.getAttribute("users")%>"
+                if ($user == "") {
                     alert("请先登录!");
                     return ;
                 }
