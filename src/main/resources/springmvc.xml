@@ -35,6 +35,7 @@
     <!-- 用户-->
     <mvc:resources mapping="/css/**" location="/user/css/"/>
     <mvc:resources mapping="/fonts/**" location="/user/font/"/>
+    <mvc:resources mapping="/dist/**" location="/user/dist/"/>
     <mvc:resources mapping="/js/**" location="/user/js/"/>
     <mvc:resources mapping="/images/**" location="/user/img/"/>
 

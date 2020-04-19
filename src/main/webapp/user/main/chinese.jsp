@@ -32,6 +32,10 @@
     <link rel="stylesheet" href="font/ie7/ie7.css">
     <script type="text/javascript" src="js/jump.js"></script>
     <script type="text/javascript" src="js/searchsub.js"></script>
+    <link href="css/search-suggest.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/search-suggest.js"></script>
+    <script type="text/javascript" src="js/demo.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style type="text/css">
         .imgs1{
@@ -45,7 +49,7 @@
     <section class="mainWrap">
         <div class="topwraper relative clearfix">
             <div class="search">
-                <input type="text" id="search"/>
+                <input type="text" id="baidu_line" autocomplete="off"/>
                 <a onclick="searchSub(${numberPerPage})"><i>搜索</i></a>
             </div>
         </div>

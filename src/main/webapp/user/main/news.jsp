@@ -23,9 +23,6 @@
     <link href="css/inner.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="css/slick.css">
-    <link rel="stylesheet" type="text/css" href="dist/css/search-suggest.min.css" >
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="dist/js/search-suggest.js"></script>
     <script src="js/slick.min.js" type="text/javascript"></script>
     <script src="js/regexcut.js" type="text/javascript"></script>
     <link rel="stylesheet" href="css/owl.carousel.css">
@@ -33,6 +30,10 @@
     <script src="js/comm.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/jump.js"></script>
     <script type="text/javascript" src="js/searchsub.js"></script>
+    <link href="css/search-suggest.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/search-suggest.js"></script>
+    <script type="text/javascript" src="js/demo.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style type="text/css">
         .imgs1{
@@ -46,7 +47,7 @@
     <section class="mainWrap">
         <div class="topwraper relative clearfix">
             <div class="search">
-                    <input type="text" id="search"/>
+                    <input type="text" id="baidu_line" autocomplete="off"/>
                     <a onclick="searchSub(${numberPerPage})"><i>搜索</i></a>
             </div>
         </div>
@@ -232,6 +233,8 @@
     </div>
 </div>
 </body>
+
+
 </html>
 
 

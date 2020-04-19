@@ -31,6 +31,7 @@
     <script src="js/owl.carousel.min.js" type="text/javascript"></script>
     <script src="js/comm.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
     <style type="text/css">
         .dh2{
             font-size: 25px;
