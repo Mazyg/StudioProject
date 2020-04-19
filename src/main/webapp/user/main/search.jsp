@@ -16,7 +16,7 @@
 <head>
     <base href="<%=basePath%>">
     <meta charset="utf-8">
-    <title>新闻资讯</title>
+    <title>搜索结果</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="css/base_news.css" rel="stylesheet" type="text/css">
     <link href="font/font.css" rel="stylesheet" type="text/css">
@@ -47,7 +47,7 @@
     <section class="mainWrap">
         <div class="topwraper relative clearfix">
             <div class="search">
-                <input name="query" type="text" id="baidu_line" autocomplete="off" >
+                <input name="query" type="text" id="search" autocomplete="off" >
                 <a onclick="searchSub(${numberPerPage})"><i>搜索</i></a>
             </div>
         </div>

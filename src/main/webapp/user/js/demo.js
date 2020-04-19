@@ -279,7 +279,7 @@ $(function() {
     });
 
     //百度搜索建议
-    $("#baidu_line").searchSuggest({
+    $("#search").searchSuggest({
         url: 'http://unionsug.baidu.com/su?p=3&t=' + (new Date()).getTime() + '&wd=',
         /*优先从url ajax 请求 json 帮助数据，注意最后一个参数为关键字请求参数*/
         jsonp: 'cb',
