@@ -1,10 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"+"user/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <base href="<%=basePath%>">
@@ -37,13 +37,46 @@
     <script type="text/javascript" src="js/search-suggest.js"></script>
     <script type="text/javascript" src="js/demo.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <style type="text/css">
-        .imgs1{
-            width: 100px;
-            height: 80px;
-        }
-    </style>
+    <script src="https://code.jquery.com/jquery-1.8.3.js" integrity="sha256-dW19+sSjW7V1Q/Z3KD1saC6NcE5TUIhLJzJbrdKzxKc=" crossorigin="anonymous"></script>
+    <script src="js/jquery.lazyload.js"></script>
+
 </head>
+<style type="text/css">
+    .imgs1{
+        width: 100px;
+        height: 80px;
+    }
+</style>
+
+<script>
+    function checkbrowse() {
+        var ua = navigator.userAgent.toLowerCase();
+        var is = (ua.match(/\b(chrome|opera|safari|msie|firefox)\b/) || ['', 'mozilla'])[1];
+        var r = '(?:' + is + '|version)[\\/: ]([\\d.]+)';
+        var v = (ua.match(new RegExp(r)) || [])[1];
+        jQuery.browser.is = is;
+        jQuery.browser.ver = v;
+        return {
+            'is': jQuery.browser.is,
+            'ver': jQuery.browser.ver
+        }
+    }
+    var public = checkbrowse();
+    var showeffect = "";
+    if ((public['is'] == 'msie' == public['ver'] < 8.0)) {
+        showeffect = "show"
+    } else {
+        showeffect = "fadeIn"
+    }
+
+    $(function(){
+        $("img").lazyload({
+            threshold : 200,
+            effect : showeffect
+        });
+    });
+</script>
+
 <body>
 <header class="clearfix">
     <section class="mainWrap">
@@ -105,7 +138,7 @@
                     <ul class="biggallerylist">
                     <c:forEach items="${chineseScenery}" var="chineseScenery">
                         <li>
-                            <a href="../info/findByIdInfo.do?infoId=${chineseScenery.info_id}&uid=${users.uid}" target="_blank"><img src="${chineseScenery.photo}"></a>
+                            <a href="../info/findByIdInfo.do?infoId=${chineseScenery.info_id}&uid=${users.uid}" target="_blank"><img data-original="${chineseScenery.photo}" src="img/loading.gif"></a>
                             <div class="imgintro">
                             <b></b>
                             <h3><a href="../info/findByIdInfo.do?infoId=${chineseScenery.info_id}&uid=${users.uid}" target="_blank" class="jiequ">【${chineseScenery.info_type}】${chineseScenery.title}</a></h3>
@@ -119,7 +152,7 @@
                     <ul>
                     <c:forEach items="${chineseScenery}" var="chineseScenery">
 <%--                        <li class="active"><a><img src=""></a></li>--%>
-                        <li><a><img src="${chineseScenery.photo}"></a></li>
+                        <li><a><img data-original="${chineseScenery.photo}" src="img/loading.gif"></a></li>
                     </c:forEach>
                     </ul>
                 </div>
@@ -152,7 +185,7 @@
             <c:forEach items="${chineseAll}" var="chineseAll">
                 <li>
                     <figure>
-                        <a href="../info/findByIdInfo.do?infoId=${chineseAll.info_id}&uid=${users.uid}" target="_blank"><img src="${chineseAll.photo}"></a>
+                        <a href="../info/findByIdInfo.do?infoId=${chineseAll.info_id}&uid=${users.uid}" target="_blank"><img data-original="${chineseAll.photo}" src="img/loading.gif"></a>
                         <figcaption><a target="_blank" href="../info/findByIdInfo.do?infoId=${chineseAll.info_id}&uid=${users.uid}" class="jiequ">【${chineseAll.info_type}】${chineseAll.title}</a></figcaption>
                         <div class="thumb"><i class="thunews-clock-o"></i>${chineseAll.date}<i class="thunews-eye"></i> <font id="font_itemlist_total_20191115111315714796419"><span id="itemlist_total_20191115111315714796419"></span></font></div>
                     </figure>
@@ -224,7 +257,7 @@
                 <table class="table newslist clearfix">
                     <c:forEach items="${videoInfo}" var="videoList">
                         <tr>
-                            <td><a href="../info/findByIdInfo.do?infoId=${videoList.info_id}&uid=${users.uid}"><img class="imgs1" src="${videoList.photo}"></a></td>
+                            <td><a href="../info/findByIdInfo.do?infoId=${videoList.info_id}&uid=${users.uid}"><img class="imgs1" data-original="${videoList.photo}" src="img/loading.gif"></a></td>
                             <td> <a href="../info/findByIdInfo.do?infoId=${videoList.info_id}&uid=${users.uid}"><p style="float: left">${videoList.title}</p></a>
                                 <br><small style="float: right">${videoList.date}</small></td>
                         </tr>
