@@ -95,6 +95,9 @@ public class DynamicController {
     public String findAllCommentByName(String uname,Model model){
         System.out.println("用户"+uname);
         List<Dynamic> dynamics = dynamicService.findByUname(uname);
+        for (Dynamic dynamic : dynamics){
+            dynamic.setType(topicService.findTypeById(dynamic.getTid()));
+        }
         model.addAttribute("dynamics",dynamics);
         System.out.println("回复"+dynamics);
         List<Comment> comments = commentService.findByUname(uname);
@@ -104,6 +107,7 @@ public class DynamicController {
             commentDTO.setUname(comment.getUname());
             commentDTO.setContent(comment.getContent());
             commentDTO.setTid(dynamicService.findTidByWid(comment.getWid()));
+            commentDTO.setType(topicService.findTypeById(commentDTO.getTid()));
             commentDTOS.add(commentDTO);
         }
         System.out.println("评论"+commentDTOS);

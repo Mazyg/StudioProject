@@ -191,7 +191,7 @@
                                 <tr>
                                     <td>${dynamic.uname}</td>
                                     <td>${dynamic.content}</td>
-                                    <td><a href="../topic/findTopicById.do?tid=${dynamic.tid}">详情</a> </td>
+                                    <td><a href="../topic/findTopicById.do?tid=${dynamic.tid}&type=${dynamic.type}">详情</a> </td>
                                 </tr>
                             </c:forEach>
                             <c:if test="${commentDTOs.size()!=0}">
@@ -199,7 +199,7 @@
                                     <tr>
                                         <td>${commentDTO.uname}</td>
                                         <td>${commentDTO.content}</td>
-                                        <td><a href="../topic/findTopicById.do?tid=${commentDTO.tid}">详情</a></td>
+                                        <td><a href="../topic/findTopicById.do?tid=${commentDTO.tid}&type=${commentDTO.type}">详情</a></td>
                                     </tr>
                                 </c:forEach>
                             </c:if>

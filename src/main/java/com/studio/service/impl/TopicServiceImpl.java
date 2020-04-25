@@ -115,4 +115,9 @@ public class TopicServiceImpl implements TopicService {
     public int countUserReply(String uname) {
         return topicDao.countUserReply(uname);
     }
+
+    @Override
+    public String findTypeById(Integer tid) {
+        return topicDao.findTypeById(tid);
+    }
 }

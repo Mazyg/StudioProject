@@ -1,10 +1,9 @@
 package com.studio.controller;
 
-
-import com.studio.domian.Discuss;
-import com.studio.domian.Info;
+import com.studio.domian.*;
 import com.studio.service.DiscussService;
 import com.studio.service.InfoService;
+import com.studio.utils.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,46 +48,41 @@ public class InfoController {
     @RequestMapping("/findAll")
     public String findAll(Model model,HttpServletRequest request){
         String search=request.getParameter("search");
-        System.out.println(search);
-        model.addAttribute("search",search);
         String keyword="%"+search+"%";
-        int total=infoService.countAll(keyword);
-        model.addAttribute("total", total);
-        System.out.println("total="+total);
-        int start = Integer.parseInt(request.getParameter("start"));
-        model.addAttribute("start",start);
-        int length= Integer.parseInt(request.getParameter("length"));
-        int page = Integer.parseInt(request.getParameter("page"));
-        model.addAttribute("page",page);
-        int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
-        model.addAttribute("numberPerPage",numberPerPage);
+        int total=infoService.countAll(keyword);//模糊查询查到的文章数目
+        int start = Integer.parseInt(request.getParameter("start"));//起始位置
+        int length= Integer.parseInt(request.getParameter("length"));//实际显示条数
+        int page = Integer.parseInt(request.getParameter("page"));//当前页数
+        int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));//设置每页显示条数
+        int rest=total-(start+length);//剩余条数
+        int totalPage = total/numberPerPage;//总页数
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
+
         List<Info>  infos=infoService.showAll(keyword,start,length);
-        model.addAttribute("infos",infos);
+        PageUtil pageutil=new PageUtil();
+        Vector<Integer> pageArr=pageutil.paging(total,totalPage,numberPerPage,page);
+
+        System.out.println("输入："+search);
+        System.out.println("模糊查询结果："+total);
         System.out.println("开始的位置："+start);
         System.out.println("当前页数："+page);
         System.out.println("设置每页显示条数 ："+numberPerPage);
         System.out.println("实际显示条数："+length);
-        int rest=total-(start+length);
         System.out.println("剩余："+rest);
-        model.addAttribute("rest",rest);
-        int totalPage = total/numberPerPage;
-        if(total % numberPerPage != 0){
-            totalPage += 1;
-        }
-        model.addAttribute("totalPage",totalPage);
         System.out.println("总页数："+totalPage);
-        System.out.println("\n------------------------\n");
-        Vector<Integer> pageArr = new Vector<Integer>();
-        int startx=1;
-        if(page>5){
-            startx= page/5*5;
-        }
-        int num = startx;
-        while(!(num > totalPage || num >=startx +5)){
-            pageArr.add(new Integer(num));
-            ++num;
-        }
+
+        model.addAttribute("search",search);
+        model.addAttribute("total", total);
+        model.addAttribute("start",start);
+        model.addAttribute("page",page);
+        model.addAttribute("numberPerPage",numberPerPage);
+        model.addAttribute("totalPage",totalPage);
+        model.addAttribute("infos",infos);
+        model.addAttribute("rest",rest);
         model.addAttribute("pageList",pageArr);
+
         return "user/main/search";
     }
 
@@ -127,139 +120,101 @@ public class InfoController {
     //全球抗疫页面信息显示
     @RequestMapping("/epidemic")
     public String epidemic(Model model,HttpServletRequest request){
-        List<Info> eventTop= infoService.findInfoBytype("全球战疫",0,1);
-        System.out.println(eventTop);
-        model.addAttribute("eventTop",eventTop);
         int total=infoService.countBytype("全球战疫");
-        model.addAttribute("total", total);
         int start = Integer.parseInt(request.getParameter("start"));
-        model.addAttribute("start",start);
         int length= Integer.parseInt(request.getParameter("length"));
         int page = Integer.parseInt(request.getParameter("page"));
-        model.addAttribute("page",page);
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
-        model.addAttribute("numberPerPage",numberPerPage);
-        List<Info> eventList= infoService.findInfoBytype("全球战疫",start,length);
-        model.addAttribute("eventList",eventList);
-        System.out.println("开始的位置："+start);
-        System.out.println("当前页数："+page);
-        System.out.println("设置每页显示条数 ："+numberPerPage);
-        System.out.println("实际显示条数："+length);
         int rest=total-(start+length);
-        System.out.println("剩余："+rest);
-        model.addAttribute("rest",rest);
         int totalPage = total/numberPerPage;
         if(total % numberPerPage != 0){
             totalPage += 1;
         }
+
+        List<Info> eventTop= infoService.findInfoBytype("全球战疫",0,1);
+        List<Info> eventList= infoService.findInfoBytype("全球战疫",start,length);
+        PageUtil pageutil=new PageUtil();
+        Vector<Integer> pageArr=pageutil.paging(total,totalPage,numberPerPage,page);
+
+        model.addAttribute("total", total);
+        model.addAttribute("start",start);
+        model.addAttribute("page",page);
+        model.addAttribute("numberPerPage",numberPerPage);
+        model.addAttribute("eventList",eventList);
         model.addAttribute("totalPage",totalPage);
-        System.out.println("总页数："+totalPage);
-        System.out.println("\n------------------------\n");
-        Vector<Integer> pageArr = new Vector<Integer>();
-        int startx=1;
-        if(page>5){
-            startx= page/5*5;
-        }
-        int num = startx;
-        while(!(num > totalPage || num >=startx +5)){
-            pageArr.add(new Integer(num));
-            ++num;
-        }
+        model.addAttribute("rest",rest);
         model.addAttribute("pageList",pageArr);
+        model.addAttribute("eventTop",eventTop);
+
         return  "user/main/epidemic";
     }
 
     //热点资讯页面信息显示
     @RequestMapping("/findEvent")
     public String findEvent(Model model,HttpServletRequest request){
-        List<Info> eventTop= infoService.findInfoBytype("热点时事",0,1);
-        model.addAttribute("eventTop",eventTop);
         int total=infoService.countBytype("热点时事");
-        model.addAttribute("total", total);
         int start = Integer.parseInt(request.getParameter("start"));
-        model.addAttribute("start",start);
         int length= Integer.parseInt(request.getParameter("length"));
         int page = Integer.parseInt(request.getParameter("page"));
-        model.addAttribute("page",page);
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
-        model.addAttribute("numberPerPage",numberPerPage);
-        List<Info> eventList= infoService.findInfoBytype("热点时事",start,length);
-        model.addAttribute("eventList",eventList);
-        System.out.println("开始的位置："+start);
-        System.out.println("当前页数："+page);
-        System.out.println("设置每页显示条数 ："+numberPerPage);
-        System.out.println("实际显示条数："+length);
         int rest=total-(start+length);
-        System.out.println("剩余："+rest);
-        model.addAttribute("rest",rest);
         int totalPage = total/numberPerPage;
         if(total % numberPerPage != 0){
             totalPage += 1;
         }
+
+        List<Info> eventTop= infoService.findInfoBytype("热点时事",0,1);
+        List<Info> eventList= infoService.findInfoBytype("热点时事",start,length);
+        PageUtil pageutil=new PageUtil();
+        Vector<Integer> pageArr=pageutil.paging(total,totalPage,numberPerPage,page);
+
+        model.addAttribute("total", total);
+        model.addAttribute("start",start);
+        model.addAttribute("page",page);
+        model.addAttribute("numberPerPage",numberPerPage);
+        model.addAttribute("eventList",eventList);
+        model.addAttribute("rest",rest);
         model.addAttribute("totalPage",totalPage);
-        System.out.println("总页数："+totalPage);
-        System.out.println("\n------------------------\n");
-        Vector<Integer> pageArr = new Vector<Integer>();
-        int startx=1;
-        if(page>5){
-            startx= page/5*5;
-        }
-        int num = startx;
-        while(!(num > totalPage || num >=startx +5)){
-            pageArr.add(new Integer(num));
-            ++num;
-        }
         model.addAttribute("pageList",pageArr);
+        model.addAttribute("eventTop",eventTop);
+
         return  "user/main/news";
     }
 
     //爱我中华页面信息显示
     @RequestMapping("/findChinese")
     public String findChinese(Model model,HttpServletRequest request) {
-        List<Info> chineseScenery = infoService.findInfoBytype("最美中国景", 0, 4);
-        model.addAttribute("chineseScenery", chineseScenery);
-        List<Info> chinesePeople = infoService.findInfoBytype("最美中国人", 0, 5);
-        model.addAttribute("chinesePeople", chinesePeople);
-        List<Info> chineseEvent = infoService.findInfoBytype("最美中国事", 0, 5);
-        model.addAttribute("chineseEvent", chineseEvent);
         int total=infoService.countBytype("最美%");
-        model.addAttribute("total", total);
         int start = Integer.parseInt(request.getParameter("start"));
-        model.addAttribute("start",start);
         int length= Integer.parseInt(request.getParameter("length"));
         int page = Integer.parseInt(request.getParameter("page"));
-        model.addAttribute("page",page);
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
-        model.addAttribute("numberPerPage",numberPerPage);
-        List<Info> chineseAll= infoService.findInfoBytype("最美%",start,length);
-        model.addAttribute("chineseAll",chineseAll);
-        System.out.println("开始的位置："+start);
-        System.out.println("当前页数："+page);
-        System.out.println("设置每页显示条数 ："+numberPerPage);
-        System.out.println("实际显示条数："+length);
         int rest=total-(start+length);
-        System.out.println("剩余："+rest);
-        model.addAttribute("rest",rest);
         int totalPage = total/numberPerPage;
         if(total % numberPerPage != 0){
             totalPage += 1;
         }
-        model.addAttribute("totalPage",totalPage);
-        System.out.println("总页数："+totalPage);
-        System.out.println("\n------------------------\n");
-        Vector<Integer> pageArr = new Vector<Integer>();
-        int startx=1;
-        if(page>5){
-            startx= page/5*5;
-        }
-        int num = startx;
-        while(!(num > totalPage || num >=startx +5)){
-            pageArr.add(new Integer(num));
-            ++num;
-        }
-        model.addAttribute("pageList",pageArr);
-        return "user/main/chinese";
 
+        List<Info> chineseScenery = infoService.findInfoBytype("最美中国景", 0, 4);
+        List<Info> chinesePeople = infoService.findInfoBytype("最美中国人", 0, 5);
+        List<Info> chineseEvent = infoService.findInfoBytype("最美中国事", 0, 5);
+        List<Info> chineseAll= infoService.findInfoBytype("最美%",start,length);
+        PageUtil pageutil=new PageUtil();
+        Vector<Integer> pageArr=pageutil.paging(total,totalPage,numberPerPage,page);
+
+        model.addAttribute("total", total);
+        model.addAttribute("start",start);
+        model.addAttribute("page",page);
+        model.addAttribute("numberPerPage",numberPerPage);
+        model.addAttribute("totalPage",totalPage);
+        model.addAttribute("rest",rest);
+        model.addAttribute("chineseScenery", chineseScenery);
+        model.addAttribute("chinesePeople", chinesePeople);
+        model.addAttribute("chineseEvent", chineseEvent);
+        model.addAttribute("chineseAll",chineseAll);
+        model.addAttribute("pageList",pageArr);
+
+        return "user/main/chinese";
     }
     /**
      * 榜样页面信息
@@ -288,41 +243,29 @@ public class InfoController {
     @RequestMapping("/findMovies")
     public String findMovie(Model model,HttpServletRequest request){
         int total=infoService.countBytype("电影");
-        model.addAttribute("total", total);
         int start = Integer.parseInt(request.getParameter("start"));
-        model.addAttribute("start",start);
         int length= Integer.parseInt(request.getParameter("length"));
         int page = Integer.parseInt(request.getParameter("page"));
-        model.addAttribute("page",page);
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
-        model.addAttribute("numberPerPage",numberPerPage);
-        List<Info> movies= infoService.findInfoBytype("电影",start,length);
-        model.addAttribute("movies",movies);
-        System.out.println("开始的位置："+start);
-        System.out.println("当前页数："+page);
-        System.out.println("设置每页显示条数 ："+numberPerPage);
-        System.out.println("实际显示条数："+length);
         int rest=total-(start+length);
-        System.out.println("剩余："+rest);
-        model.addAttribute("rest",rest);
         int totalPage = total/numberPerPage;
         if(total % numberPerPage != 0){
             totalPage += 1;
         }
+
+        List<Info> movies= infoService.findInfoBytype("电影",start,length);
+        PageUtil pageutil=new PageUtil();
+        Vector<Integer> pageArr=pageutil.paging(total,totalPage,numberPerPage,page);
+
+        model.addAttribute("total", total);
+        model.addAttribute("start",start);
+        model.addAttribute("page",page);
+        model.addAttribute("numberPerPage",numberPerPage);
         model.addAttribute("totalPage",totalPage);
-        System.out.println("总页数："+totalPage);
-        System.out.println("\n------------------------\n");
-        Vector<Integer> pageArr = new Vector<Integer>();
-        int startx=1;
-        if(page>5){
-            startx= page/5*5;
-        }
-        int num = startx;
-        while(!(num > totalPage || num >=startx +5)){
-            pageArr.add(new Integer(num));
-            ++num;
-        }
+        model.addAttribute("rest",rest);
         model.addAttribute("pageList",pageArr);
+        model.addAttribute("movies",movies);
+
         return "user/main/movies";
     }
 
@@ -334,41 +277,29 @@ public class InfoController {
     @RequestMapping("/findBooks")
     public String findBook(Model model,HttpServletRequest request) {
         int total=infoService.countBytype("书籍");
-        model.addAttribute("total", total);
         int start = Integer.parseInt(request.getParameter("start"));
-        model.addAttribute("start",start);
         int length= Integer.parseInt(request.getParameter("length"));
         int page = Integer.parseInt(request.getParameter("page"));
-        model.addAttribute("page",page);
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
-        model.addAttribute("numberPerPage",numberPerPage);
-        List<Info> books= infoService.findInfoBytype("书籍",start,length);
-        model.addAttribute("books",books);
-        System.out.println("开始的位置："+start);
-        System.out.println("当前页数："+page);
-        System.out.println("设置每页显示条数 ："+numberPerPage);
-        System.out.println("实际显示条数："+length);
         int rest=total-(start+length);
-        System.out.println("剩余："+rest);
-        model.addAttribute("rest",rest);
         int totalPage = total/numberPerPage;
         if(total % numberPerPage != 0){
             totalPage += 1;
         }
+
+        List<Info> books= infoService.findInfoBytype("书籍",start,length);
+        PageUtil pageutil=new PageUtil();
+        Vector<Integer> pageArr=pageutil.paging(total,totalPage,numberPerPage,page);
+
+        model.addAttribute("total", total);
+        model.addAttribute("start",start);
+        model.addAttribute("page",page);
+        model.addAttribute("numberPerPage",numberPerPage);
         model.addAttribute("totalPage",totalPage);
-        System.out.println("总页数："+totalPage);
-        System.out.println("\n------------------------\n");
-        Vector<Integer> pageArr = new Vector<Integer>();
-        int startx=1;
-        if(page>5){
-            startx= page/5*5;
-        }
-        int num = startx;
-        while(!(num > totalPage || num >=startx +5)){
-            pageArr.add(new Integer(num));
-            ++num;
-        }
+        model.addAttribute("rest",rest);
+        model.addAttribute("books",books);
         model.addAttribute("pageList",pageArr);
+
         return "user/main/books";
     }
 
@@ -400,30 +331,6 @@ public class InfoController {
         mv.setViewName("manage/pages/forms/showInfo");
         return mv;
     }
-
-
-
-    @RequestMapping("/findByIdInfo")
-    public String findByIdInfo(Model model,HttpServletRequest request){
- 
-        String info_id = request.getParameter("infoId");
-        String uid=request.getParameter("uid");
-        String content= request.getParameter("content");
-        model.addAttribute("info_id",info_id);
-        model.addAttribute("uid",uid);
-        if(uid!="" && content!=null) {
-            Boolean i = discussService.saveDynamic(uid, content,info_id);
-        }
-        Info info = infoService.findById(info_id);
-        model.addAttribute("infos", info);
-        List<Discuss> discuss=discussService.findByInfo_id(info_id);
-        model.addAttribute("discuss",discuss);
-        if("视频".equals(info.getInfo_type())){
-            return "user/main/video";
-        }
-        return "user/main/details";
-    }
-
     @RequestMapping("/findByTitle")
     public String findByTitle(Model model,String title){
         Info info = infoService.findByTitle(title);
@@ -479,4 +386,82 @@ public class InfoController {
          return "user/main/details";
     }
 
+    /**
+     * 保存留言信息
+     */
+    @RequestMapping(value="/saveWords")
+    public String saveWords(Words words,HttpServletRequest request){
+        if(words != null){
+            String info_id = words.getLw_for_article_id();
+            infoService.saveWords(words);
+            User users= (User) request.getSession().getAttribute("users");
+            return "redirect:findByIdInfo.do?infoId="+info_id+"&uid="+users.getUid();
+        }else{
+            return null;
+        }
+    }
+    /**
+     * 保存回复信息
+     */
+    @RequestMapping(value="/saveReply")
+    public String saveReply(Reply reply,HttpServletRequest request){
+        if(reply != null){
+            infoService.saveReply(reply);
+            String info_id = reply.getLr_for_article_id();
+            User users= (User) request.getSession().getAttribute("users");
+            return "redirect:findByIdInfo.do?infoId="+info_id+"&uid="+users.getUid();
+        }else{
+            return null;
+        }
+    }
+//
+//    @RequestMapping("/findByIdInfo")
+//    public String findByIdInfo(Model model,HttpServletRequest request){
+//
+//        String info_id = request.getParameter("infoId");
+//        String uid=request.getParameter("uid");
+//        String content= request.getParameter("content");
+//        model.addAttribute("info_id",info_id);
+//        model.addAttribute("uid",uid);
+//        if(uid!="" && content!=null) {
+//            Boolean i = discussService.saveDynamic(uid, content,info_id);
+//        }
+//        Info info = infoService.findById(info_id);
+//        model.addAttribute("infos", info);
+//        List<Discuss> discuss=discussService.findByInfo_id(info_id);
+//        model.addAttribute("discuss",discuss);
+//        if("视频".equals(info.getInfo_type())){
+//            return "user/main/video";
+//        }
+//        return "user/main/details";
+//    }
+    /**
+     * 跳转到查看文章内容页面
+     */
+    //声明用于存放留言回复信息的List集合
+    private List<Words> lw_list;
+    private List<Reply> lr_list;
+    @RequestMapping(value="/findByIdInfo")
+    public String toArticleView(Model model,HttpServletRequest request){
+        String info_id = request.getParameter("infoId");
+        Info info = infoService.findById(info_id);
+        model.addAttribute("infos", info);
+        String uid=request.getParameter("uid");
+        model.addAttribute("uid",uid);
+        //封装留言信息(查出所有)
+        lw_list = infoService.findByWords();
+        model.addAttribute("lw_list",lw_list);
+        //封装回复信息（查出所有）
+        lr_list = infoService.findByReply();
+        model.addAttribute("lr_list",lr_list);
+        //查询文章信息
+        Info article = infoService.findById(info_id);
+        System.out.println("查询到当前文章的ID值："+article.getInfo_id());
+        if (article != null) {
+            model.addAttribute("article", article);
+            return "user/main/details";
+        } else {
+            return null;
+        }
+    }
 }
