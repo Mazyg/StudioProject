@@ -41,4 +41,6 @@ public interface TopicService {
     int countUserTopic(String uname);
 
     int countUserReply(String uname);
+
+    String findTypeById(Integer tid);
 }

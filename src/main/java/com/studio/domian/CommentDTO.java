@@ -4,6 +4,15 @@ public class CommentDTO {
     private String uname;
     private Integer tid;
     private String content;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getUname() {
         return uname;
@@ -35,6 +44,7 @@ public class CommentDTO {
                 "uname='" + uname + '\'' +
                 ", tid=" + tid +
                 ", content='" + content + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 }
