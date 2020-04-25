@@ -45,7 +45,7 @@
     <section class="mainWrap">
         <div class="topwraper relative clearfix">
             <div class="search">
-                <input name="query" id="baidu_line"autocomplete="off"/>
+                <input name="query" id="search" autocomplete="off"/>
                 <a onclick="searchSub(${numberPerPage})"><i>搜索</i></a>
             </div>
         </div>

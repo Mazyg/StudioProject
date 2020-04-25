@@ -164,7 +164,7 @@ public class UserController {
                 }
             }else {
                 //密码错误
-                msg = "密码错误";
+                msg = "用户名或者密码错误";
                 mv.addObject("msg",msg);
                 mv.setViewName("manage/pages/samples/login");
             }
