@@ -3,8 +3,7 @@ package com.studio.domian;
 import java.io.Serializable;
 
 /**
- * @author TyCoding
- * @date 2018/5/15 下午4:44
+ * 文章留言回复
  */
 public class Reply implements Serializable {
 
