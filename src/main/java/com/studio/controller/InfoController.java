@@ -56,6 +56,9 @@ public class InfoController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));//设置每页显示条数
         int rest=total-(start+length);//剩余条数
         int totalPage = total/numberPerPage;//总页数
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
 
         List<Info>  infos=infoService.showAll(keyword,start,length);
         PageUtil pageutil=new PageUtil();
@@ -88,17 +91,17 @@ public class InfoController {
     @RequestMapping("/findInfoBytype")
     public String findInfoBytype(Model model,HttpServletRequest request){
         List<Info> rolemodeltop= infoService.findInfoBytype("榜样力量",0,1);
-        model.addAttribute("rolemodeltop",rolemodeltop);
         List<Info> rolemodel= infoService.findInfoBytype("榜样力量",1,2);
-        model.addAttribute("rolemodel",rolemodel);
         List<Info> chinese= infoService.findInfoBytype("最美%",0,3);
-        model.addAttribute("chinese",chinese);
         List<Info> event= infoService.findInfoBytype("热点时事",0,5);
-        model.addAttribute("event",event);
         request.getSession().setAttribute("hotInfo",event);
         List<Info> videoList = infoService.findInfoBytype("视频", 0, 4);
         request.getSession().setAttribute("videoInfo",videoList);
         List<Info> event2= infoService.findInfoBytype("热点时事",5,3);
+        model.addAttribute("rolemodeltop",rolemodeltop);
+        model.addAttribute("rolemodel",rolemodel);
+        model.addAttribute("chinese",chinese);
+        model.addAttribute("event",event);
         model.addAttribute("event2",event2);
         List<Info> movies1= infoService.findInfoBytype("电影",0,2);
         model.addAttribute("movies1",movies1);
@@ -124,6 +127,9 @@ public class InfoController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         int rest=total-(start+length);
         int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
 
         List<Info> eventTop= infoService.findInfoBytype("全球战疫",0,1);
         List<Info> eventList= infoService.findInfoBytype("全球战疫",start,length);
@@ -153,6 +159,9 @@ public class InfoController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         int rest=total-(start+length);
         int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
 
         List<Info> eventTop= infoService.findInfoBytype("热点时事",0,1);
         List<Info> eventList= infoService.findInfoBytype("热点时事",start,length);
@@ -182,6 +191,9 @@ public class InfoController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         int rest=total-(start+length);
         int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
 
         List<Info> chineseScenery = infoService.findInfoBytype("最美中国景", 0, 4);
         List<Info> chinesePeople = infoService.findInfoBytype("最美中国人", 0, 5);
@@ -237,6 +249,9 @@ public class InfoController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         int rest=total-(start+length);
         int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
 
         List<Info> movies= infoService.findInfoBytype("电影",start,length);
         PageUtil pageutil=new PageUtil();
@@ -268,6 +283,9 @@ public class InfoController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         int rest=total-(start+length);
         int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
 
         List<Info> books= infoService.findInfoBytype("书籍",start,length);
         PageUtil pageutil=new PageUtil();
