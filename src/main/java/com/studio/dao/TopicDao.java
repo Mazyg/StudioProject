@@ -101,4 +101,7 @@ public interface TopicDao {
            "     select tid FROM topic WHERE uname=#{uname})\n" +
            "     and uname!=#{uname}")
     int countUserReply(String uname);
+
+   @Select("select t_type from topic where tid = #{tid} ")
+   String findTypeById(Integer tid);
 }

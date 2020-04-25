@@ -17,6 +17,15 @@ public class Dynamic implements Serializable {
     private Integer tid;
     List<Comment> comments;
     private User user;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public User getUser() {
         return user;
@@ -80,9 +89,11 @@ public class Dynamic implements Serializable {
                 "wid=" + wid +
                 ", date='" + date + '\'' +
                 ", content='" + content + '\'' +
-                ", uname=" + uname +
+                ", uname='" + uname + '\'' +
                 ", tid=" + tid +
                 ", comments=" + comments +
+                ", user=" + user +
+                ", type='" + type + '\'' +
                 '}';
     }
 }
