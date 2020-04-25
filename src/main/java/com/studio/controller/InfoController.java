@@ -56,6 +56,9 @@ public class InfoController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));//设置每页显示条数
         int rest=total-(start+length);//剩余条数
         int totalPage = total/numberPerPage;//总页数
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
 
         List<Info>  infos=infoService.showAll(keyword,start,length);
         PageUtil pageutil=new PageUtil();
@@ -124,6 +127,9 @@ public class InfoController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         int rest=total-(start+length);
         int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
 
         List<Info> eventTop= infoService.findInfoBytype("全球战疫",0,1);
         List<Info> eventList= infoService.findInfoBytype("全球战疫",start,length);
@@ -153,6 +159,9 @@ public class InfoController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         int rest=total-(start+length);
         int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
 
         List<Info> eventTop= infoService.findInfoBytype("热点时事",0,1);
         List<Info> eventList= infoService.findInfoBytype("热点时事",start,length);
@@ -182,6 +191,9 @@ public class InfoController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         int rest=total-(start+length);
         int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
 
         List<Info> chineseScenery = infoService.findInfoBytype("最美中国景", 0, 4);
         List<Info> chinesePeople = infoService.findInfoBytype("最美中国人", 0, 5);
@@ -237,6 +249,9 @@ public class InfoController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         int rest=total-(start+length);
         int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
 
         List<Info> movies= infoService.findInfoBytype("电影",start,length);
         PageUtil pageutil=new PageUtil();
@@ -268,6 +283,9 @@ public class InfoController {
         int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
         int rest=total-(start+length);
         int totalPage = total/numberPerPage;
+        if(total % numberPerPage != 0){
+            totalPage += 1;
+        }
 
         List<Info> books= infoService.findInfoBytype("书籍",start,length);
         PageUtil pageutil=new PageUtil();
