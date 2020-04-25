@@ -3,9 +3,7 @@ package com.studio.domian;
 import java.io.Serializable;
 
 /**
- * 留言信息
- * @author TyCoding
- * @date 2018/5/6 上午10:56
+ * 文章留言信息
  */
 public class Words implements Serializable {
 
