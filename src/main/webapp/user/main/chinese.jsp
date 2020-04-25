@@ -32,10 +32,6 @@
     <link rel="stylesheet" href="font/ie7/ie7.css">
     <script type="text/javascript" src="js/jump.js"></script>
     <script type="text/javascript" src="js/searchsub.js"></script>
-    <link href="css/search-suggest.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/search-suggest.js"></script>
-    <script type="text/javascript" src="js/demo.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style type="text/css">
         .imgs1{
@@ -49,7 +45,7 @@
     <section class="mainWrap">
         <div class="topwraper relative clearfix">
             <div class="search">
-                <input type="text" id="baidu_line" autocomplete="off"/>
+                <input type="text" id="search"/>
                 <a onclick="searchSub(${numberPerPage})"><i>搜索</i></a>
             </div>
         </div>
@@ -57,16 +53,16 @@
     <nav class="navwrap yahei">
         <section class="mainWrap">
             <ul id="nav">
-                <li><a href="../info//epidemic.do?page=1&numberPerPage=3&start=0&length=3">全球战疫</a>
+                <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">全球战役</a>
                 </li>
                 <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
                 </li>
                 <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
-                   <%-- <ul>
-                        <li><a href="#">最美中国景</a></li>
-                        <li><a href="#">最美中国人</a></li>
-                        <li><a href="#">最美中国事</a></li>
-                    </ul>--%>
+                    <%-- <ul>
+                         <li><a href="#">最美中国景</a></li>
+                         <li><a href="#">最美中国人</a></li>
+                         <li><a href="#">最美中国事</a></li>
+                     </ul>--%>
                 </li>
                 <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
                 </li>
@@ -103,24 +99,24 @@
             <div class="biggallery">
                 <div class="biggallerywraper">
                     <ul class="biggallerylist">
-                    <c:forEach items="${chineseScenery}" var="chineseScenery">
-                        <li>
-                            <a href="../info/findByIdInfo.do?infoId=${chineseScenery.info_id}&uid=${users.uid}" target="_blank"><img src="${chineseScenery.photo}"></a>
-                            <div class="imgintro">
-                            <b></b>
-                            <h3><a href="../info/findByIdInfo.do?infoId=${chineseScenery.info_id}&uid=${users.uid}" target="_blank" class="jiequ">【${chineseScenery.info_type}】${chineseScenery.title}</a></h3>
-                            <p> ${chineseScenery.introduce}</p>
-                            </div>
-                        </li>
-                    </c:forEach>
+                        <c:forEach items="${chineseScenery}" var="chineseScenery">
+                            <li>
+                                <a href="../info/findByIdInfo.do?infoId=${chineseScenery.info_id}&uid=${users.uid}" target="_blank"><img src="${chineseScenery.photo}"></a>
+                                <div class="imgintro">
+                                    <b></b>
+                                    <h3><a href="../info/findByIdInfo.do?infoId=${chineseScenery.info_id}&uid=${users.uid}" target="_blank" class="jiequ">【${chineseScenery.info_type}】${chineseScenery.title}</a></h3>
+                                    <p> ${chineseScenery.introduce}</p>
+                                </div>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
                 <div class="imgthumb clearfix">
                     <ul>
-                    <c:forEach items="${chineseScenery}" var="chineseScenery">
-<%--                        <li class="active"><a><img src=""></a></li>--%>
-                        <li><a><img src="${chineseScenery.photo}"></a></li>
-                    </c:forEach>
+                        <c:forEach items="${chineseScenery}" var="chineseScenery">
+                            <%--                        <li class="active"><a><img src=""></a></li>--%>
+                            <li><a><img src="${chineseScenery.photo}"></a></li>
+                        </c:forEach>
                     </ul>
                 </div>
                 <script type="text/javascript">
@@ -149,15 +145,15 @@
                 </script>
             </div>
             <ul class="picwhitenewslist clearfix">
-            <c:forEach items="${chineseAll}" var="chineseAll">
-                <li>
-                    <figure>
-                        <a href="../info/findByIdInfo.do?infoId=${chineseAll.info_id}&uid=${users.uid}" target="_blank"><img src="${chineseAll.photo}"></a>
-                        <figcaption><a target="_blank" href="../info/findByIdInfo.do?infoId=${chineseAll.info_id}&uid=${users.uid}" class="jiequ">【${chineseAll.info_type}】${chineseAll.title}</a></figcaption>
-                        <div class="thumb"><i class="thunews-clock-o"></i>${chineseAll.date}<i class="thunews-eye"></i> <font id="font_itemlist_total_20191115111315714796419"><span id="itemlist_total_20191115111315714796419"></span></font></div>
-                    </figure>
-                </li>
-            </c:forEach>
+                <c:forEach items="${chineseAll}" var="chineseAll">
+                    <li>
+                        <figure>
+                            <a href="../info/findByIdInfo.do?infoId=${chineseAll.info_id}&uid=${users.uid}" target="_blank"><img src="${chineseAll.photo}"></a>
+                            <figcaption><a target="_blank" href="../info/findByIdInfo.do?infoId=${chineseAll.info_id}&uid=${users.uid}" class="jiequ">【${chineseAll.info_type}】${chineseAll.title}</a></figcaption>
+                            <div class="thumb"><i class="thunews-clock-o"></i>${chineseAll.date}<i class="thunews-eye"></i> <font id="font_itemlist_total_20191115111315714796419"><span id="itemlist_total_20191115111315714796419"></span></font></div>
+                        </figure>
+                    </li>
+                </c:forEach>
             </ul>
             <br>
             <div class="pager">
@@ -205,7 +201,7 @@
                 <!-- 设置每页显示条数 -->
                 &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},'../info/findChinese')" />
             </div>
-</section>
+        </section>
         <section class="colunm2">
             <section class="mod withborder">
                 <h2>
