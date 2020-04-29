@@ -55,4 +55,6 @@
     <aop:config>
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.studio.service.impl.*.*(..))"/>
     </aop:config>
+
+    <aop:aspectj-autoproxy/>
 </beans>
