@@ -13,7 +13,8 @@ public class Logger {
 
 
 
-        @Pointcut("execution(* com.studio.controller.UserController.*(..))")
+    /*所有xonreoller下的方法*/
+        @Pointcut("execution(* com.studio.controller..*.*(..))")
         public void myPointCut(){}
 
 
@@ -21,13 +22,13 @@ public class Logger {
         public Object logging(ProceedingJoinPoint joinPoint) throws Throwable {
             Class<?> clazz = joinPoint.getTarget().getClass();
             org.slf4j.Logger logger = LoggerFactory.getLogger(clazz);
-            logger.info("===start===");
+            //logger.info("===start===");
             long startTime = System.currentTimeMillis();
             Object obj = joinPoint.proceed();
             long endTime = System.currentTimeMillis();
             logger.error("test error!");
             logger.debug("costTime:[{}ms]", endTime - startTime);
-            logger.info("===end===");
+            //logger.info("===end===");
             return  obj;
         }
         @Before("myPointCut()")

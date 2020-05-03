@@ -46,6 +46,26 @@
        });
      })
 
+     $(".status1").click(function () {
+       var $tid = $(this).parent().parent().children('td').eq(0).text();
+       $.ajax({
+         type:'post',
+         url:"../topic/updateStatusNot1.do",
+         data:"tid="+$tid,
+         success:function (msg) {
+           if(msg === "success"){
+             alert("操作成功！")
+           }else{
+             alert("该话题已审核！")
+           }
+           window.location.href="../topic/findAllTopicByStatus.do";
+         },
+         error:function () {
+           alert("出错了！")
+         }
+       });
+     })
+
      $(".del").click(function () {
        var $tid = $(this).parent().parent().children('td').eq(0).text();
        $.ajax({
@@ -238,6 +258,7 @@
                     <th><h4>状态</h4></th>
                     <th><h4>操作1</h4></th>
                     <th><h4>操作2</h4></th>
+                    <th><h4>操作3</h4></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -248,8 +269,12 @@
                       <td>${topic1.t_title}</td>
                       <td>${topic1.date}</td>
                       <td><a href="../topic/findById.do?tid=${topic1.tid}">查看详情</a> </td>
-                      <td>${topic1.t_tatus}</td>
+                     <%-- <c:if test="${'已审核' eq topic1.t_tatus}">
+                      <td>${topic1.t_tatus}/${topic1.tid}</td>
+                      </c:if>--%>
+                      <td>未审核</td>
                       <td><a href="javascript:void(0)" style="color: #1d6b1f" class="status">通过审核</a></td>
+                      <td><a href="javascript:void(0)" style="color: #c2a957" class="status1">不通过</a> </td>
                       <td><a href="javascript:void(0)" style="color: #a01a1f" class="del">删除</a></td>
                       <td><td>
                     </tr>
