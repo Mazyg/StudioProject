@@ -106,6 +106,17 @@
               </div>
             </li>
             <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#feedback" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">用户反馈</span>
+                <i class="icon-layers menu-icon"></i>
+              </a>
+              <div class="collapse" id="feedback">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="../feedback/findAllFeedback.do">用户反馈</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#ui-topic" aria-expanded="false" aria-controls="ui-topic">
                 <span class="menu-title">话题管理</span>
                 <i class="icon-globe menu-icon"></i>

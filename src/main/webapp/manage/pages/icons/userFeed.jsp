@@ -8,7 +8,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>话题管理</title>
+  <title>用户反馈管理</title>
   <base href="<%=basePath%>">
   <!-- plugins:css -->
   <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
@@ -20,59 +20,10 @@
   <!-- inject:css -->
   <!-- endinject -->
   <!-- Layout styles -->
-  <script src="js/jquery-1.8.3.js"></script>
   <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
   <link rel="shortcut icon" href="images/favicon.png" />
-  <script type="text/javascript">
-
-   $(function () {
-     $(".status").click(function () {
-       var $tid = $(this).parent().parent().children('td').eq(0).text();
-       $.ajax({
-         type:'post',
-         url:"../topic/updateStatus.do",
-         data:"tid="+$tid,
-         success:function (msg) {
-           if(msg === "success"){
-             alert("操作成功！")
-           }else{
-             alert("已是当前状态！")
-           }
-           window.location.href="../topic/findAllTopicByStatus.do";
-         },
-         error:function () {
-           alert("出错了！")
-         }
-       });
-     })
-
-     $(".del").click(function () {
-       var $tid = $(this).parent().parent().children('td').eq(0).text();
-       $.ajax({
-         type:'post',
-         url:"../topic/deleTopic.do",
-         data: "tid="+$tid,
-         success:function (msg) {
-           if(msg === "success"){
-             alert("删除成功！")
-           }else{
-             alert("删除失败！")
-           }
-           window.location.href="../topic/findAllTopicByStatus.do";
-         },
-         error:function () {
-           alert("出错了！")
-         }
-       })
-     })
-
-
-
-
-   })
-  </script>
 </head>
-<body onload="status()">
+<body>
 <div class="container-scroller">
   <!-- partial:../../partials/_navbar.html -->
   <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -85,9 +36,9 @@
     <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
       <h5 class="mb-0 font-weight-medium d-none d-lg-flex">后台管理系统</h5>
       <ul class="navbar-nav navbar-nav-right ml-auto">
-        <form class="search-form d-none d-md-block" action="../topic/findByTitleNot.do">
+        <form class="search-form d-none d-md-block" action="#">
           <i class="icon-magnifier"></i>
-          <input type="search" class="form-control" placeholder="查找" title="Search here" name="title">
+          <input type="search" class="form-control" placeholder="查找" title="Search here">
         </form>
         <li class="nav-item dropdown language-dropdown d-none d-sm-flex align-items-center">
           <a class="nav-link d-flex align-items-center dropdown-toggle" id="LanguageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -106,13 +57,13 @@
             <img class="img-xs rounded-circle ml-2" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="Profile image"> <span class="font-weight-normal"> ${users.uname} </span></a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
             <div class="dropdown-header text-center">
-              <img class="img-lg rounded-circle" src="<%--images/faces/face8.jpg--%> ${users.photo}" alt="Profile image">
+              <img class="img-lg rounded-circle" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="Profile image">
               <p class="mb-1 mt-3">${users.uname}</p>
               <p class="font-weight-light text-muted mb-0">${users.email}</p>
             </div>
-            <a class="dropdown-item" href="../user/personalInfo.do?${user.uid}"><i class="dropdown-item-icon icon-user text-primary"></i>个人信息</a>
+            <a class="dropdown-item" href="../user/personalInfo.do?uid=${users.uid}"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
             <a href="../info/findInfoBytype.do" class="dropdown-item"><i class="dropdown-item-icon  icon-cursor text-primary"></i>用户界面</a>
-            <a  href="../user/exitLogin.do" class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
+            <a class="dropdown-item" href="../user/exitLogin.do"><i class="dropdown-item-icon icon-power text-primary"></i>退出登录</a>
           </div>
         </li>
       </ul>
@@ -148,17 +99,6 @@
             <ul class="nav flex-column sub-menu">
               <li class="nav-item"> <a class="nav-link" href="../dynamic/findAllTopic.do">动态管理</a></li>
 
-            </ul>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="collapse" href="#feedback" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">用户反馈</span>
-            <i class="icon-layers menu-icon"></i>
-          </a>
-          <div class="collapse" id="feedback">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="../feedback/findAllFeedback.do">用户反馈</a></li>
             </ul>
           </div>
         </li>
@@ -199,62 +139,39 @@
             </ul>
           </div>
         </li>
-        <%--<li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-            <span class="menu-title">General Pages</span>
-            <i class="icon-doc menu-icon"></i>
-          </a>
-          <div class="collapse" id="auth">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/login.jsp"> Login </a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/register.jsp"> Register </a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.jsp"> 404 </a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.jsp"> 500 </a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.jsp"> Blank Page </a></li>
-            </ul>
-          </div>
-        </li>--%>
       </ul>
     </nav>
     <!-- partial -->
     <div class="main-panel">
       <div class="content-wrapper">
         <div class="page-header">
-          <h2 class="page-title"> 话题管理 </h2>
+          <h2 class="page-title"> 用户反馈管理 </h2>
         </div>
         <div class="row">
           <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <p class="card-description"> 话题列表</p>
+                <p class="card-description"> 用户反馈列表</p>
                 <table class="table table-hover">
                   <thead>
                   <tr>
-                    <th><h4>话题ID</h4></th>
-                    <th><h4>话题标题</h4></th>
-                    <th><h4>时间</h4></th>
-                    <th><h4>内容</h4></th>
-                    <th><h4>状态</h4></th>
-                    <th><h4>操作1</h4></th>
-                    <th><h4>操作2</h4></th>
+                    <th><h4>反馈ID</h4></th>
+                    <th><h4>反馈内容</h4></th>
+                    <th><h4>用户ID</h4></th>
+                    <th><h4>用户联系方式</h4></th>
+                    <th><h4><a href="javascript:;" onClick="javascript:history.back(-1);">返回上一页</a></h4></th>
                   </tr>
                   </thead>
                   <tbody>
 
-                  <c:forEach var="topic1" items="${topics}">
+                  <c:forEach var="feedback" items="${feedbacks}">
                     <tr>
-                      <td>${topic1.tid}</td>
-                      <td>${topic1.t_title}</td>
-                      <td>${topic1.date}</td>
-                      <td><a href="../topic/findById.do?tid=${topic1.tid}">查看详情</a> </td>
-                      <td>${topic1.t_tatus}</td>
-                      <td><a href="javascript:void(0)" style="color: #1d6b1f" class="status">通过审核</a></td>
-                      <td><a href="javascript:void(0)" style="color: #a01a1f" class="del">删除</a></td>
-                      <td><td>
+                      <td>${feedback.fid}</td>
+                      <td><textarea readonly>${feedback.content}</textarea></td>
+                      <td>${feedback.uid}</td>
+                      <td>${feedback.address}</td>
                     </tr>
                   </c:forEach>
-
                   </tbody>
                 </table>
               </div>
@@ -284,8 +201,27 @@
 <!-- inject:js -->
 <script src="js/off-canvas.js"></script>
 <script src="js/misc.js"></script>
-<!-- endinject -->
-<!-- Custom js for this page -->
-<!-- End custom js for this page -->
+<script src="js/jquery-1.8.3.js"></script>
+<script>
+  $(function () {
+    $(".deleteReply").click(function () {
+      var $tid = $(this).parent().parent().children('td').eq(6).text();
+      var $wid = $(this).parent().parent().children('td').eq(0).text();
+      $.ajax({
+        url:"../dynamic/deleteDynamic.do",
+        data:"wid="+$wid,
+        type:"post",
+        success:function (result) {
+          if (result == "success"){
+            alert("删除成功");
+            window.location.href = "../dynamic/findAllDynamicByTid.do?tid="+$tid;
+          }else {
+            alert("删除失败");
+          }
+        }
+      });
+    })
+  })
+</script>
 </body>
 </html>
