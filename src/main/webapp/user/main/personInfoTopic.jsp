@@ -195,7 +195,7 @@
                             <tr>
                                 <td>${topicInfo.t_title}</td>
                                 <td>${topicInfo.date}</td>
-                                <td>${topicInfo.t_tatus}</td>
+                                <td>${topicInfo.t_tatus}/${topicInfo.t_result}</td>
                                 <td><a href="../topic/findTopicById.do?tid=${topicInfo.tid}">详情</a> </td>
                                 <td><a href="javascript:void(0)" class="del">删除</a></td>
                             </tr>

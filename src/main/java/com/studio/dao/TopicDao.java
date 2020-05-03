@@ -9,8 +9,8 @@ import java.util.List;
 public interface TopicDao {
 
     /*保存用户话题*/
-    @Insert("insert into topic (date,t_title,content,uname,t_type,view_count) \n" +
-            "VALUES('${date}','${t_title}','${content}','${uname}','${t_type}','${view_count}')")
+    @Insert("insert into topic (date,t_title,content,uname,t_type) \n" +
+            "VALUES('${date}','${t_title}','${content}','${uname}','${t_type}')")
     public boolean saveTopic(Topic topic);
 
     /*保存管理员话题*/
@@ -72,8 +72,16 @@ public interface TopicDao {
      * @param tid
      * @return
      */
-    @Update("update topic set t_tatus= '已审核' where tid=#{tid}")
+    @Update("update topic set t_tatus= '已审核',t_result= '已通过' where tid=#{tid}")
     public boolean updateStatus(String tid);
+
+    /**
+     * 审核话题，但不通过
+     * @param tid
+     * @return
+     */
+    @Update("update topic set t_tatus= '已审核' where tid=#{tid}")
+    public boolean updateStatusNot(String tid);
 
     /**
      * 通过id寻找话题
