@@ -91,17 +91,17 @@ public class InfoController {
     @RequestMapping("/findInfoBytype")
     public String findInfoBytype(Model model,HttpServletRequest request){
         List<Info> rolemodeltop= infoService.findInfoBytype("榜样力量",0,1);
-        model.addAttribute("rolemodeltop",rolemodeltop);
         List<Info> rolemodel= infoService.findInfoBytype("榜样力量",1,2);
-        model.addAttribute("rolemodel",rolemodel);
         List<Info> chinese= infoService.findInfoBytype("最美%",0,3);
-        model.addAttribute("chinese",chinese);
         List<Info> event= infoService.findInfoBytype("热点时事",0,5);
-        model.addAttribute("event",event);
         request.getSession().setAttribute("hotInfo",event);
         List<Info> videoList = infoService.findInfoBytype("视频", 0, 4);
         request.getSession().setAttribute("videoInfo",videoList);
         List<Info> event2= infoService.findInfoBytype("热点时事",5,3);
+        model.addAttribute("rolemodeltop",rolemodeltop);
+        model.addAttribute("rolemodel",rolemodel);
+        model.addAttribute("chinese",chinese);
+        model.addAttribute("event",event);
         model.addAttribute("event2",event2);
         List<Info> movies1= infoService.findInfoBytype("电影",0,2);
         model.addAttribute("movies1",movies1);
@@ -443,11 +443,25 @@ public class InfoController {
     private List<Reply> lr_list;
     @RequestMapping(value="/findByIdInfo")
     public String toArticleView(Model model,HttpServletRequest request){
-        String info_id = request.getParameter("infoId");
-        Info info = infoService.findById(info_id);
+        String infoId = request.getParameter("infoId");
+        request.getSession().setAttribute("infoId",infoId);
+        User user= (User) request.getSession().getAttribute("users");
+        String uid;
+        if(user==null){uid=null;}
+      else{ uid=Integer.toString(user.getUid());}
+        //根据id找到文章
+        Info info = infoService.findById(infoId);
+        NiceDetail niceDetail=infoService.findNiceDetail(uid,infoId);
+        if (niceDetail!=null){
+            request.getSession().setAttribute("color","like");
+        }else{
+            request.getSession().setAttribute("color","unlike");
+        }
+        int result=info.getNice();
+        model.addAttribute("result",result);
         model.addAttribute("infos", info);
-        String uid=request.getParameter("uid");
         model.addAttribute("uid",uid);
+        request.getSession().setAttribute("uid",uid);
         //封装留言信息(查出所有)
         lw_list = infoService.findByWords();
         model.addAttribute("lw_list",lw_list);
@@ -455,7 +469,7 @@ public class InfoController {
         lr_list = infoService.findByReply();
         model.addAttribute("lr_list",lr_list);
         //查询文章信息
-        Info article = infoService.findById(info_id);
+        Info article = infoService.findById(infoId);
         System.out.println("查询到当前文章的ID值："+article.getInfo_id());
         if (article != null) {
             model.addAttribute("article", article);
@@ -463,5 +477,40 @@ public class InfoController {
         } else {
             return null;
         }
+    }
+
+    /***
+     * 实现点赞服务
+     */
+    @RequestMapping("/niceDetail")
+    public String niceDetail(Model model,HttpServletRequest request){
+        String infoId = (String) request.getSession().getAttribute("infoId");
+        System.out.println("文章Id："+infoId);
+        User user= (User) request.getSession().getAttribute("users");
+        String uid=Integer.toString(user.getUid());
+        System.out.println("用户Id："+uid);
+        //查询是否有该用户的点赞记录
+        NiceDetail niceDetail=infoService.findNiceDetail(uid,infoId);
+        System.out.println("点赞记录："+niceDetail);
+        //根据点赞id找到文章
+        Info info=infoService.findById(infoId);
+        if (niceDetail!=null){
+            //如果找到这条记录，删除该记录，同时文章的点赞数减一
+            //删除记录
+            infoService.deleteNiceDetail(niceDetail.getId());
+            //文章点赞数减一
+            info.setNice(info.getNice()-1);
+           request.getSession().setAttribute("color","like");
+        }else{
+            //如果没有找到这条记录，则添加这条记录，同时文章数加一；
+            //添加记录
+            infoService.insertNiceDetail(uid,infoId);
+            //文章点赞数加一
+            info.setNice(info.getNice()+1);
+            request.getSession().setAttribute("color","unlike");
+            System.out.println("11111111111111111111111");
+        }
+        infoService.updateInfo(info);
+        return "redirect:findByIdInfo.do?infoId="+infoId +"&uid="+uid;
     }
 }

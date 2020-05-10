@@ -56,7 +56,7 @@
                       <label class="form-check-label text-muted">
                         <input type="checkbox" class="form-check-input"> 记住密码 </label>
                     </div>
-                    <a href="#" class="auth-link text-black">忘记密码?</a>
+                    <a href="pages/samples/findPsw.jsp" class="auth-link text-black">忘记密码?</a>
                   </div>
                   <div class="text-center mt-4 font-weight-light"> 没有账号? <a href="pages/samples/register.jsp" class="text-primary">立即注册</a>
                   </div>

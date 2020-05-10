@@ -1,6 +1,7 @@
 package com.studio.dao;
 
 import com.studio.domian.Info;
+import com.studio.domian.NiceDetail;
 import com.studio.domian.Reply;
 import com.studio.domian.Words;
 import org.apache.ibatis.annotations.*;
@@ -97,7 +98,7 @@ public interface InfoDao {
     @Delete("delete from info where info_id=#{info_id}")
     public boolean deleteInfo(String info_id);
 
-    @Update("update info set title=#{title} , content=#{content} , info_type=#{info_type} , photo=#{photo} , introduce=#{introduce} , video=#{video} where info_id=#{info_id}")
+    @Update("update info set title=#{title} , content=#{content} , info_type=#{info_type} , photo=#{photo} , introduce=#{introduce} , video=#{video},nice=#{nice} where info_id=#{info_id}")
     public boolean updateInfo(Info info);
 //保存留言信息
     @Insert("insert into words(\n" +
@@ -141,4 +142,32 @@ public interface InfoDao {
 //查询所有回复信息
 @Select("select * from reply")
     List<Reply> findByReply();
+
+    /**
+     * 插入点赞记录
+     */
+    @Insert("insert into nicedetail(userId,contentId,createTime)\n" +
+            "VALUES(#{userId},#{contentId},NOW())")
+    Integer insertNiceDetail( @Param("userId") String uid,@Param("contentId") String infoId);
+
+    /**
+     * 删除点赞记录
+     *
+     * @param id
+     * @return
+     */
+    @Delete("DELETE from nicedetail\n" +
+            "where id=#{id}")
+    Integer deleteNiceDetail(String id);
+    /**
+     * 根据用户id和文章id信息查询点赞记录
+     *
+     * @param
+     * @return
+     */
+    @Select("select *\n" +
+            "from nicedetail\n" +
+            "where userID=#{uid}" +
+            " and contentId=#{infoId}")
+    NiceDetail findNiceDetail( @Param("uid") String uid,@Param("infoId") String infoId);
 }

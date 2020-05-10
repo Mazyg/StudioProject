@@ -2,6 +2,7 @@ package com.studio.service.impl;
 
 import com.studio.dao.InfoDao;
 import com.studio.domian.Info;
+import com.studio.domian.NiceDetail;
 import com.studio.domian.Reply;
 import com.studio.domian.Words;
 import com.studio.service.InfoService;
@@ -136,5 +137,20 @@ public class InfoServiceImpl implements InfoService {
      */
     public List<Reply> findByReply() {
         return infoDao.findByReply();
+    }
+
+    @Override
+    public Integer insertNiceDetail(String uid,String infoId) {
+        return infoDao.insertNiceDetail(uid,infoId);
+    }
+
+    @Override
+    public Integer deleteNiceDetail(String id) {
+        return infoDao.deleteNiceDetail(id);
+    }
+
+    @Override
+    public NiceDetail findNiceDetail(String uid,String infoId) {
+        return  infoDao.findNiceDetail(uid,infoId);
     }
 }
