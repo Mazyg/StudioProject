@@ -3,6 +3,7 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:http="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
@@ -49,6 +50,8 @@
     <mvc:resources mapping="components/**" location="/error/assets/sass/components"/>
     <mvc:resources mapping="layout/**" location="/error/assets/sass/layout"/>
     <mvc:resources mapping="libs/**" location="/error/assets/sass/libs"/>
+
+
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize">
