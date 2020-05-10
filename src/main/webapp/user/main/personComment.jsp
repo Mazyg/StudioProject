@@ -165,6 +165,7 @@
             <li ><a href="main/personInfo.jsp" >个人信息</a></li>
             <li ><a href="../topic/findByUid.do?uid="+${users.uid}>我的话题</a></li>
             <li class="active"><a href="#rule" data-toggle="tab">我的消息</a></li>
+            <li ><a href="../feedback/findUserNotify.do">系统消息</a></li>
         </ul>
         <div id="mytab-content" class="tab-content">
             <div class="tab-pane fade in active" id="rule">

@@ -49,42 +49,7 @@
     }*/
 
 </style>
-<script type="text/javascript">
-    /*function message() {
-
-        var mes = <%--${topicDel}--%>;
-        alert(mes)
-        if(mes == true){
-            alert("删除成功！")
-        }else
-            if(mes == false){
-                alert("出错了！")
-            }
-    }*/
-
-    $(function () {
-        $(".del").click(function () {
-            var $tid = $(this).parent().parent().children('td').eq(0).text();
-            $.ajax({
-                type:'post',
-                url:"../topic/deleTopic2.do",
-                data:"tid="+$tid,
-                success:function (msg) {
-                    if(msg === "success"){
-                        alert("删除成功！")
-                    }else{
-                        alert("删除失败！")
-                    }
-                    window.location.href="../topic/findByUid.do?uid="+${users.uid};
-                },
-                error:function () {
-                    alert("出错了！")
-                }
-            });
-        });
-    })
-</script>
-<body onload="message()">
+<body>
 <header class="clearfix">
     <%--<section class="mainWrap">
         <div class="topwraper relative clearfix">
@@ -190,7 +155,7 @@
                             <tbody>
                             <c:forEach items="${notifies}" var="notify">
                                 <tr>
-                                    <td>${notify.content}</td>
+                                    <td>对于您 <span style="color: blue; display: inline">"${notify.feedback.content}"</span> 的反馈，${notify.content}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>

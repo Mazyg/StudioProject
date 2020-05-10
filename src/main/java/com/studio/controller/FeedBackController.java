@@ -66,7 +66,6 @@ public class FeedBackController {
     @RequestMapping("/addNotify")
     @ResponseBody
     public String addNotify(Notify notify){
-        System.out.println(notify);
         boolean result = notifyService.addNotify(notify);
         if(result == true){
             return "success";
@@ -84,6 +83,9 @@ public class FeedBackController {
     public String findUserNotify(Model model , HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("users");
         List<Notify> notifies = notifyService.getUserNotify(user.getUid());
+        for (Notify notify : notifies){
+            notify.setFeedback(feedbackService.findById(notify.getFid()));
+        }
         model.addAttribute("notifies", notifies);
         return "user/main/systemInfo";
     }

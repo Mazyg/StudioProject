@@ -23,4 +23,9 @@ public class FeedbackServiceImpl implements FeedbackService {
     public List<Feedback> getAllFeedback() {
         return feedbackDao.getAllFeedback();
     }
+
+    @Override
+    public Feedback findById(Integer fid) {
+        return feedbackDao.findById(fid);
+    }
 }

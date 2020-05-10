@@ -11,10 +11,13 @@ import java.util.List;
 public interface FeedbackDao {
 
     @Insert("insert into feedback(uid,content,address) values( '${uid}' , '${content}' , '${address}' )")
-    public boolean addFeedBack(Feedback feedback);
+    boolean addFeedBack(Feedback feedback);
 
     @Select("select * from feedback")
     List<Feedback> getAllFeedback();
+
+    @Select("select * from feedback where fid = #{fid}")
+    Feedback findById(Integer fid);
 
 
 }

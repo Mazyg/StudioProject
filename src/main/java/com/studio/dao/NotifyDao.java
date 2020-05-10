@@ -10,9 +10,9 @@ import java.util.List;
 @Repository
 public interface NotifyDao {
 
-    @Insert("insert into notify(content,receiver) values('${content}', '${receiver}')")
+    @Insert("insert into notify(content,receiver,fid) values('${content}', '${receiver}' , '${fid}')")
     public boolean addNotify(Notify notify);
 
-    @Select("select content from notify where receiver = #{uid} ")
+    @Select("select * from notify where receiver = #{uid} ")
     public List<Notify> getUserNotify(Integer uid);
 }

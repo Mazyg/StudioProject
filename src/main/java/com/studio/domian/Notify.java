@@ -3,6 +3,24 @@ package com.studio.domian;
 public class Notify {
     private String content;
     private Integer receiver;
+    private Integer fid;
+    private Feedback feedback;
+
+    public Integer getFid() {
+        return fid;
+    }
+
+    public void setFid(Integer fid) {
+        this.fid = fid;
+    }
+
+    public Feedback getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
+    }
 
     public String getContent() {
         return content;
