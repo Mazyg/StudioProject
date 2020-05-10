@@ -185,6 +185,48 @@ public class TopicController {
     }
 
 
+    /**
+     * 全部话题页面不通过审核
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updateStatusNot")
+    public @ResponseBody String updateStatusNot(HttpServletRequest request){
+        String tid = request.getParameter("tid");
+        Topic topics = topicService.findTopicById(tid);
+        if("已审核".equals(topics.getT_tatus())){
+            /*boolean topicStatus = false;*/
+            /* return "redirect:/topic/findAll.do?topicdel="+topicStatus;*/
+            return "false";
+        }
+        boolean topicStatus = topicService.updateStatusNot(tid);
+        /* return "redirect:/topic/findAll.do?topicdel="+topicStatus;*/
+        if(topicStatus == true){
+            return "success";
+        }else{
+            return "false";
+        }
+    }
+
+    /**
+     * 未审核界面审核但不通过
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updateStatusNot1")
+    public @ResponseBody String updateStatusNot1(HttpServletRequest request){
+        String tid = request.getParameter("tid");
+        boolean topicStatus = topicService.updateStatusNot(tid);
+        /*  return "redirect:/topic/findAllTopicByStatus.do?topicdel="+topicStatus;*/
+        if(topicStatus == true){
+            return "success";
+        }else{
+            return "false";
+        }
+    }
+
+
+
     @RequestMapping("/findAll")
     public ModelAndView  findAll(HttpServletRequest request){
         mv = new ModelAndView();

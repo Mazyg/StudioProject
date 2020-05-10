@@ -122,6 +122,7 @@
                         <ul class="last">
                             <li><a href="main/personInfo.jsp">个人信息</a></li>
                             <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
+                            <li><a href="main/feedback.jsp">反馈</a></li>
                             <c:if test="${users.u_type eq'admin'}">
                                 <li><a href="../user/backAdmin.do">管理界面</a></li>
                             </c:if>
@@ -194,7 +195,7 @@
                             <tr>
                                 <td>${topicInfo.t_title}</td>
                                 <td>${topicInfo.date}</td>
-                                <td>${topicInfo.t_tatus}</td>
+                                <td>${topicInfo.t_tatus}/${topicInfo.t_result}</td>
                                 <td><a href="../topic/findTopicById.do?tid=${topicInfo.tid}">详情</a> </td>
                                 <td><a href="javascript:void(0)" class="del">删除</a></td>
                             </tr>

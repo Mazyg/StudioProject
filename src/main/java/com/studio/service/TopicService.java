@@ -27,6 +27,8 @@ public interface TopicService {
 
     public boolean updateStatus(String tid);
 
+    public boolean updateStatusNot(String tid);
+
     public Topic findTopicById(String tid);
 
     public List<Topic> findAllByUname(String uname);

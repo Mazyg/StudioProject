@@ -24,13 +24,7 @@
     <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
     <link rel="shortcut icon" href="images/favicon.png" />
     <script type="text/javascript">
-       /* function status() {
-           /!* var sta= "<%--${topicdel}--%>";
-            if(sta == "true"){
-                alert("操作成功！");
-            }else if(sta == "false"){
-                alert("操作错误！");
-            }*!/*/
+
        $(function () {
            $(".status").click(function () {
                var $tid = $(this).parent().parent().children('td').eq(0).text();
@@ -43,6 +37,27 @@
                            alert("操作成功！")
                        }else{
                            alert("已是当前状态！")
+                       }
+                       window.location.href="../topic/findAll.do";
+                   },
+                   error:function () {
+                       alert("出错了！")
+                   }
+               });
+           })
+
+
+           $(".status1").click(function () {
+               var $tid = $(this).parent().parent().children('td').eq(0).text();
+               $.ajax({
+                   type:'post',
+                   url:"../topic/updateStatusNot.do",
+                   data:"tid="+$tid,
+                   success:function (msg) {
+                       if(msg === "success"){
+                           alert("操作成功！")
+                       }else{
+                           alert("该话题已审核！")
                        }
                        window.location.href="../topic/findAll.do";
                    },
@@ -158,6 +173,17 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#feedback" aria-expanded="false" aria-controls="ui-basic">
+                        <span class="menu-title">用户反馈</span>
+                        <i class="icon-layers menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="feedback">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="../feedback/findAllFeedback.do">用户反馈</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#ui-topic" aria-expanded="false" aria-controls="ui-topic">
                         <span class="menu-title">话题管理</span>
                         <i class="icon-globe menu-icon"></i>
@@ -235,6 +261,7 @@
                                         <th><h4>状态</h4></th>
                                         <th><h4>操作1</h4></th>
                                         <th><h4>操作2</h4></th>
+                                        <th><h4>操作3</h4></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -244,8 +271,14 @@
                                             <td>${topic1.t_title}</td>
                                             <td>${topic1.date}</td>
                                             <td><a href="../topic/findById.do?tid=${topic1.tid}">查看详情</a> </td>
-                                            <td>${topic1.t_tatus}</td><%--../topic/updateStatus1.do?tid=${topic1.tid}--%>
+                                            <c:if test="${'已审核' eq topic1.t_tatus}">
+                                                <td>${topic1.t_tatus}/${topic1.t_result}</td>
+                                            </c:if>
+                                            <c:if test="${'未审核' eq topic1.t_tatus}">
+                                            <td>未审核</td>
+                                            </c:if>
                                             <td><a href="javascript:void(0)" style="color: #1d6b1f" class="status">通过审核</a></td>
+                                            <td><a href="javascript:void(0)" style="color: #c2a957" class="status1">不通过</a> </td>
                                             <td><a href="javascript:void(0)" style="color: #a01a1f" class="del">删除</a></td>
                                             <td><td>
                                         </tr>

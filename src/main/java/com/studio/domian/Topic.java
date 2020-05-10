@@ -16,8 +16,17 @@ public class Topic implements Serializable {
     private String t_title;
     private String t_type;
     private Integer view_count;
+    private String t_result;
     private User user;
 
+
+    public String getT_result() {
+        return t_result;
+    }
+
+    public void setT_result(String t_result) {
+        this.t_result = t_result;
+    }
 
     public Integer getView_count() {
         return view_count;
@@ -102,6 +111,7 @@ public class Topic implements Serializable {
                 ", t_title='" + t_title + '\'' +
                 ", t_type='" + t_type + '\'' +
                 ", view_count=" + view_count +
+                ", t_result='" + t_result + '\'' +
                 ", user=" + user +
                 '}';
     }

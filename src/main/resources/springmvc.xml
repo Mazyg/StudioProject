@@ -2,19 +2,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:http="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--开启注解扫描，只包含controller-->
     <context:component-scan base-package="com.studio">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+
+    <aop:aspectj-autoproxy/>
 
     <!--配置视图解析器-->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -35,7 +37,6 @@
     <!-- 用户-->
     <mvc:resources mapping="/css/**" location="/user/css/"/>
     <mvc:resources mapping="/fonts/**" location="/user/font/"/>
-    <mvc:resources mapping="/dist/**" location="/user/dist/"/>
     <mvc:resources mapping="/js/**" location="/user/js/"/>
     <mvc:resources mapping="/images/**" location="/user/img/"/>
 
@@ -49,6 +50,8 @@
     <mvc:resources mapping="components/**" location="/error/assets/sass/components"/>
     <mvc:resources mapping="layout/**" location="/error/assets/sass/layout"/>
     <mvc:resources mapping="libs/**" location="/error/assets/sass/libs"/>
+
+
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize">

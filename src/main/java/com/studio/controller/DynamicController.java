@@ -93,13 +93,11 @@ public class DynamicController {
 
     @RequestMapping("/findAllCommentByName")
     public String findAllCommentByName(String uname,Model model){
-        System.out.println("用户"+uname);
         List<Dynamic> dynamics = dynamicService.findByUname(uname);
         for (Dynamic dynamic : dynamics){
             dynamic.setType(topicService.findTypeById(dynamic.getTid()));
         }
         model.addAttribute("dynamics",dynamics);
-        System.out.println("回复"+dynamics);
         List<Comment> comments = commentService.findByUname(uname);
         List<CommentDTO> commentDTOS =new ArrayList<>();
         CommentDTO commentDTO = new CommentDTO();
@@ -110,7 +108,6 @@ public class DynamicController {
             commentDTO.setType(topicService.findTypeById(commentDTO.getTid()));
             commentDTOS.add(commentDTO);
         }
-        System.out.println("评论"+commentDTOS);
         model.addAttribute("commentDTOs",commentDTOS);
         return "user/main/personComment";
     }

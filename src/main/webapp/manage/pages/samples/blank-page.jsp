@@ -158,7 +158,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../icons/simple-line-icons.jsp">
+              <a class="nav-link" href="../icons/userFeed.jsp">
                 <span class="menu-title">Icons</span>
                 <i class="icon-globe menu-icon"></i>
               </a>

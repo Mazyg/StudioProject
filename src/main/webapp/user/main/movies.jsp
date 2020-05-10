@@ -34,12 +34,46 @@
     <script type="text/javascript" src="js/search-suggest.js"></script>
     <script type="text/javascript" src="js/demo.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.8.3.js" integrity="sha256-dW19+sSjW7V1Q/Z3KD1saC6NcE5TUIhLJzJbrdKzxKc=" crossorigin="anonymous"></script>
+    <script src="js/jquery.lazyload.js"></script>
+</head>
     <style type="text/css">
         .imgs1{
             width: 100px;
             height: 80px;
         }
     </style>
+
+<script>
+    function checkbrowse() {
+        var ua = navigator.userAgent.toLowerCase();
+        var is = (ua.match(/\b(chrome|opera|safari|msie|firefox)\b/) || ['', 'mozilla'])[1];
+        var r = '(?:' + is + '|version)[\\/: ]([\\d.]+)';
+        var v = (ua.match(new RegExp(r)) || [])[1];
+        jQuery.browser.is = is;
+        jQuery.browser.ver = v;
+        return {
+            'is': jQuery.browser.is,
+            'ver': jQuery.browser.ver
+        }
+    }
+    var public = checkbrowse();
+    var showeffect = "";
+    if ((public['is'] == 'msie' && public['ver'] < 8.0)) {
+        showeffect = "show"
+    } else {
+        showeffect = "fadeIn"
+    }
+
+    $(function(){
+        $("img").lazyload({
+            threshold : 200,
+            effect : showeffect
+        });
+    });
+</script>
+
+
 <body>
 <header class="clearfix">
     <section class="mainWrap">
@@ -74,6 +108,7 @@
                     <ul class="last">
                         <li><a href="main/personInfo.jsp">个人信息</a></li>
                         <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
+                        <li><a href="main/feedback.jsp">反馈</a></li>
                         <c:if test="${users.u_type eq'admin'}">
                             <li><a href="../user/backAdmin.do">管理界面</a></li>
                         </c:if>
@@ -94,7 +129,7 @@
                 <li class="clearfix">
                     <figure>
                         <a class="picwraper"  target="_blank">
-                            <img src="${movie.photo}">
+                            <img data-original="${movie.photo}" src="img/loading.gif">
                         </a>
                         <div class="contentwraper">
                             <figcaption>
@@ -169,7 +204,7 @@
                 <table class="table newslist clearfix">
                     <c:forEach items="${videoInfo}" var="videoList">
                         <tr>
-                            <td><a href="../info/findByIdInfo.do?infoId=${videoList.info_id}"><img class="imgs1" src="${videoList.photo}"></a></td>
+                            <td><a href="../info/findByIdInfo.do?infoId=${videoList.info_id}"><img class="imgs1" data-original="${videoList.photo}" src="img/loading.gif"></a></td>
                             <td> <a href="../info/findByIdInfo.do?infoId=${videoList.info_id}"><p style="float: left">${videoList.title}</p></a>
                                 <br><small style="float: right">${videoList.date}</small></td>
                         </tr>
