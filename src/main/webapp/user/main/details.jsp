@@ -53,6 +53,51 @@
             color:white;
             font-size: 14px;
         }
+        .heart {
+            background: url(img/web_heart_animation.png);
+            background-position: left;
+            background-repeat: no-repeat;
+            height: 100px;
+            width: 100px;
+            cursor: pointer;
+            position: absolute;
+            left:700px;
+            background-size:2900%;
+        }
+        .heart:hover, .heart:focus{
+            background-position: right;
+        }
+        @-webkit-keyframes heartBlast {
+            0% {
+                background-position: left;
+            }
+            100% {
+                background-position: right;
+            }
+        }
+
+        @keyframes heartBlast {
+            0% {
+                background-position: left;
+            }
+            100% {
+                background-position: right;
+            }
+        }
+
+        .heartAnimation {
+            display: inline-block;
+            -webkit-animation-name: heartBlast;
+            animation-name: heartBlast;
+            -webkit-animation-duration: .8s;
+            animation-duration: .8s;
+            -webkit-animation-iteration-count: 1;
+            animation-iteration-count: 1;
+            -webkit-animation-timing-function: steps(28);
+            animation-timing-function: steps(28);
+            background-position: right;
+        }
+        .likeCount{font-family: 'Georgia', Times, Times New Roman, serif; margin-top:30px;margin-left: 600px;font-size: 25px;color: #999999}
     </style>
 <body>
 <header class="clearfix">
@@ -120,6 +165,9 @@
             <h2 class="dh2">${infos.title}</h2>
             <br><br><br>
             <span class="siz">${infos.content}</span>
+<%--            点赞--%>
+            <div class="heart " id="like1" rel="like"></div> <div class="likeCount" id="likeCount1">${result}</div>
+            <br/>
             <div style="margin:0 4% 0 4%;">
                 <br/>
                 <!-- 留言的表单 -->
@@ -286,6 +334,49 @@
 <script src="js/flowchart.min.js"></script>
 <script src="js/jquery.flowchart.min.js"></script>
 <script src="js/editormd.min.js"></script>
+<%--<script src="js/jquery-1.11.0.min.js"></script>--%>
+<script>
+    $(document).ready(function()
+    {
+
+        var color='<%=request.getSession().getAttribute("color")%>';
+        if(color=="like"){
+            $(".heart").addClass("heartAnimation");
+        }
+        else {
+            $(".heart").removeClass("heartAnimation");
+        }
+        $('body').on("click",'.heart',function()
+        {
+            var uid='<%=request.getSession().getAttribute("uid")%>';
+            // alert(uid);
+            if(uid=="null"){
+               alert("请先去登录！");
+            }
+            else{
+                var A=$(this).attr("id");
+                var B=A.split("like");
+                var messageID=B[1];
+                $(this).css("background-position","")
+                var D=$(this).attr("rel");
+                if(D=== 'like')
+                {
+                    $(this).addClass("heartAnimation").attr("rel","unlike");
+
+                }
+                else
+                {
+                    $(this).removeClass("heartAnimation").attr("rel","like");
+                    $(this).css("background-position","left");
+                }
+
+                window.location.href="../info/niceDetail.do"
+             }
+        });
+
+
+    });
+</script>
 <script type="text/javascript">
     layui.use('element', function () {
         var element = layui.element;

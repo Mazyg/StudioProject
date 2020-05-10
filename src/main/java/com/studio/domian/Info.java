@@ -16,6 +16,15 @@ public class Info  implements Serializable {
     private String info_type;
     private String photo;
     private String video;
+    public int nice;
+
+    public int getNice() {
+        return nice;
+    }
+
+    public void setNice(int nice) {
+        this.nice = nice;
+    }
 
     public Integer getInfo_id() {
         return info_id;

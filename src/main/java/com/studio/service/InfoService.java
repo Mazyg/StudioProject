@@ -1,6 +1,7 @@
 package com.studio.service;
 
 import com.studio.domian.Info;
+import com.studio.domian.NiceDetail;
 import com.studio.domian.Reply;
 import com.studio.domian.Words;
 
@@ -25,13 +26,13 @@ public interface InfoService {
     public boolean addInfo(Info info);
 
     public List<Info> findAllInfo();
- 
+
     //首页信息显示，对info表的操作
-    public List<Info> findInfoBytype(String info_type,int start,int length);
+    public List<Info> findInfoBytype(String info_type, int start, int length);
 
     //全局模糊查询分页显示
-    public List<Info> showAll(String keyword,int start,int length);
- 
+    public List<Info> showAll(String keyword, int start, int length);
+
     //根据类别查询信息数量
     public int countBytype(String info_type);
 
@@ -52,6 +53,30 @@ public interface InfoService {
     List<Words> findByWords();
 
     List<Reply> findByReply();
- 
- 
+
+    /**
+     * 插入点赞记录
+     *
+     * @param niceDetail
+     * @return
+     */
+    public Integer insertNiceDetail(String uid,String infoId);
+
+    /**
+     * 删除点赞记录
+     *
+     * @param id
+     * @return
+     */
+    public Integer deleteNiceDetail(String id);
+
+
+    /**
+     * 根据用户id和文章id信息查询点赞记录
+     *
+     * @param
+     * @return
+     */
+   public NiceDetail findNiceDetail(String uid,String infoId);
+
 }
