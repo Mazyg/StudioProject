@@ -10,6 +10,7 @@
     <base href="<%=basePath%>">
     <meta charset="UTF-8">
     <title>帖子</title>
+    <link rel="shortcut icon" href="img/title.ico" />
     <link rel="stylesheet" href="css/reset.css"/>
     <link rel="stylesheet" href="css/public.css"/>
     <link rel="stylesheet" href="css/topic.css"/>

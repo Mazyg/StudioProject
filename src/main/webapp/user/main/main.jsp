@@ -21,6 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover">
     <meta name="format-detection" content="telephone=no" />
     <title>首页</title>
+    <link rel="shortcut icon" href="img/title.ico" />
     <link rel="stylesheet" href="css/slick.css">
     <link href="css/index.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>

@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <title>论坛</title>
+    <link rel="shortcut icon" href="img/title.ico" />
 </head>
 <body>
 <header class="clearfix">

@@ -21,7 +21,7 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
-    <link rel="shortcut icon" href="images/favicon.png" />
+    <link rel="shortcut icon" href="images/title.ico" />
     <script type="text/javascript">
       function status() {
        var sta= "${status}";
