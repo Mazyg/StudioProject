@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <base href="<%=basePath%>">
     <title>Stellar Admin</title>
+    <link rel="shortcut icon" href="images/title.ico" />
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
@@ -23,7 +24,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="images/favicon.png" />
+    <link rel="shortcut icon" href="images/title.ico" />
   </head>
 <body>
 

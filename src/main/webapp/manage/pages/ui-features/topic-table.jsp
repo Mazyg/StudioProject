@@ -22,7 +22,7 @@
     <!-- Layout styles -->
     <script src="js/jquery-1.8.3.js"></script>
     <link rel="stylesheet" href="css/style.css"/> <!-- End layout styles -->
-    <link rel="shortcut icon" href="images/favicon.png" />
+    <link rel="shortcut icon" href="images/title.ico" />
     <script type="text/javascript">
 
        $(function () {

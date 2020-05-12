@@ -10,7 +10,7 @@
     <link href="css/img_smooth_check.css" type="text/css" rel="stylesheet"/>
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/img_smooth_check.js"></script>
-
+    <link rel="shortcut icon" href="images/title.ico" />
     <style>
 
         * {

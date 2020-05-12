@@ -12,6 +12,7 @@
     <base target="<%=basePath%>"/>
     <meta charset="utf-8">
     <title>爱我中华</title>
+    <link rel="shortcut icon" href="img/title.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="css/chinese_base.css" rel="stylesheet" type="text/css">
     <link href="css/base_news.css" rel="stylesheet" type="text/css">
