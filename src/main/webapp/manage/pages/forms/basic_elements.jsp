@@ -54,8 +54,10 @@
         var photo=document.querySelector("#photo");
         console.log(photo);
         var file=photo.files[0];
+        var type = $("#info").val();
         var formData=new FormData();
         formData.append("img",file);
+        formData.append("type",type);
         var xhr=new XMLHttpRequest();
         xhr.open("post","http://111.229.25.156:7777/upload/img")
         xhr.onload=function (ev) {

@@ -93,7 +93,9 @@
         console.log(photo);
         var file=photo.files[0];
         var formData=new FormData();
+        var type = $("#uname").val();
         formData.append("img",file);
+        formData.append("type",type);
         var xhr=new XMLHttpRequest();
         xhr.open("post","http://111.229.25.156:7777/upload/img")
         xhr.onload=function (ev) {
@@ -254,7 +256,7 @@
                         <div class="form-group">
                             <label  class="col-sm-2 control-label">昵称</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="uname" placeholder="请输入名字" value="${users.uname}">
+                                <input type="text" class="form-control" id="uname" name="uname" placeholder="请输入名字" value="${users.uname}">
                             </div>
                         </div>
                         <div class="form-group">
