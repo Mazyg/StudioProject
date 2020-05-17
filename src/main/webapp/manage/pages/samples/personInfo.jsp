@@ -128,7 +128,7 @@
                         <div class="dropdown-header text-center">
                             <img class="img-lg rounded-circle" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="Profile image">
                             <p class="mb-1 mt-3">${users.uname}</p>
-                            <p class="font-weight-light text-muted mb-0">${users.email}</p>
+                            <p class="font-weight-light text-muted mb-0">${users.phone}</p>
                         </div>
                         <a class="dropdown-item" href=""><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
                         <a href="../info/findInfoBytype.do" class="dropdown-item"><i class="dropdown-item-icon  icon-cursor text-primary"></i>用户界面</a>
@@ -314,9 +314,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label  class="col-sm-2 control-label">email</label>
+                                        <label  class="col-sm-2 control-label">phone</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control"  name="email" placeholder="请输入email" value="${users.email}">
+                                            <input type="text" class="form-control" name="phone" placeholder="请输入手机号" value="${users.phone}">
                                         </div>
                                     </div>
                                     <div class="form-group">

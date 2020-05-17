@@ -24,6 +24,20 @@ public class Reply implements Serializable {
     //在哪篇文章下的回复
     private String lr_for_article_id;
 
+    @Override
+    public String toString() {
+        return "Reply{" +
+                "lr_id=" + lr_id +
+                ", lr_name='" + lr_name + '\'' +
+                ", lr_date='" + lr_date + '\'' +
+                ", lr_content='" + lr_content + '\'' +
+                ", lr_for_name='" + lr_for_name + '\'' +
+                ", lr_for_words='" + lr_for_words + '\'' +
+                ", lr_for_reply='" + lr_for_reply + '\'' +
+                ", lr_for_article_id='" + lr_for_article_id + '\'' +
+                '}';
+    }
+
     public int getLr_id() {
         return lr_id;
     }

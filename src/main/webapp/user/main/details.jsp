@@ -173,7 +173,7 @@
             <div style="margin:0 4% 0 4%;">
                 <br/>
                 <!-- 留言的表单 -->
-                <form class="layui-form" action="../info/saveWords.do" method="post">
+                <form class="layui-form" action="../info/saveWords.do" method="post" onsubmit="return check()">
                     <input name="lw_name" value="${users.uname}" hidden="hidden"/>
                     <input name="lw_date" value="<%=nowDate%>" hidden="hidden"/>
                     <input name="lw_for_article_id" value="${article.info_id}" hidden="hidden"/>
@@ -212,64 +212,65 @@
                                         </div>
                                         <!-- 回复表单默认隐藏 -->
                                         <div class="replycontainer layui-hide" style="margin-left: 61px;">
-                                            <form action="../info/saveReply.do" method="post" class="layui-form">
-                                                <input name="lr_for_article_id" id="lr_for_article_id" value="${article.info_id}" hidden="hidden"/>
-                                                <input name="lr_name" id="lr_name" value="${users.uname}" hidden="hidden"/>
-                                                <input name="lr_date" id="lr_date" value="<%=nowDate%>" hidden="hidden"/>
-                                                <input name="lr_for_name" id="lr_for_name" value="${words.lw_name}" hidden="hidden"/>
-                                                <input name="lr_for_words" id="lr_for_words" value="${words.lw_id}" hidden="hidden"/>
-                                                <input name="lr_for_reply" id="lr_for_reply" value="${reply.lr_id}" hidden="hidden"/>
+                                            <form class="layui-form" action="../info/saveReply.do" method="post">
+                                                <input name="lr_for_article_id" class="lr_for_article_id" value="${article.info_id}" hidden="hidden"/>
+                                                <input name="lr_name" class="lr_name" value="${users.uname}" hidden="hidden"/>
+                                                <input name="lr_date" class="lr_date" value="<%=nowDate%>" hidden="hidden"/>
+                                                <input name="lr_for_name" class="lr_for_name" value="${words.lw_name}" hidden="hidden"/>
+                                                <input name="lr_for_words" class="lr_for_words" value="${words.lw_id}" hidden="hidden"/>
+                                                <input name="lr_for_reply" class="lr_for_reply" value="${reply.lr_id}" hidden="hidden"/>
+                                                <input value="${reply.lr_name}" hidden="hidden"/>
                                                 <div class="layui-form-item">
-                                                    <textarea name="lr_content" id="lr_content" lay-verify="replyContent" placeholder="请输入回复内容" class="layui-textarea" style="min-height:80px;"></textarea>
+                                                    <textarea name="lr_content" class="layui-textarea lr_content" lay-verify="replyContent" placeholder="请输入回复内容"style="min-height:80px;"></textarea>
                                                 </div>
                                                 <div class="layui-form-item">
-                                                    <button id="replyBtn" class="layui-btn layui-btn-mini" lay-submit="formReply" lay-filter="formReply">提交</button>
+                                                    <button class="layui-btn layui-btn-mini replyBtn" lay-submit="formReply" lay-filter="formReply">提交</button>
                                                 </div>
                                             </form>
+                                            <!-- 以下是回复信息 -->
+                                            <c:forEach items="${requestScope.lr_list}" var="reply">
+                                                <!-- 每次遍历出来的留言下存在回复信息才展示（本条回复信息是本条留言下的就显示在当前留言下） -->
+                                                <c:if test="${reply.lr_for_article_id eq article.info_id && reply.lr_for_words eq words.lw_id}">
+                                                    <div style="text-align: left;margin-left:61px;color: #444">
+                                                        <div>
+                                                            <span style="color:#5FB878">${reply.lr_name}&nbsp;&nbsp;</span>
+                                                        </div>
+                                                        <div>@${reply.lr_for_name}:&nbsp;&nbsp; ${reply.lr_content}</div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="comment-parent" style="text-align:left;margin-top:7px;margin-left:61px;color:#444">
+                                                            <span>${reply.lr_date}</span>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <p>
+                                                                <a href="javascript:;" style="text-decoration: none;" onclick="btnReplyClick(this)">回复</a>
+                                                            </p>
+                                                            <hr style="margin-top: 7px;"/>
+                                                        </div>
+                                                        <!-- 回复表单默认隐藏 -->
+                                                        <div class="replycontainer layui-hide" style="margin-left: 61px;">
+<%--                                                            action="../info/saveReply.do" method="post"--%>
+                                                            <form class="layui-form" action="../info/saveReply.do" method="post">
+                                                                <input name="lr_for_article_id" class="lr_for_article_id" value="${article.info_id}" hidden="hidden"/>
+                                                                <input name="lr_name" class="lr_name" value="${users.uname}" hidden="hidden"/>
+                                                                <input name="lr_date" class="lr_date" value="<%=nowDate%>" hidden="hidden"/>
+                                                                <input name="lr_for_name" class="lr_for_name" value="${words.lw_name}" hidden="hidden"/>
+                                                                <input name="lr_for_words" class="lr_for_words" value="${words.lw_id}" hidden="hidden"/>
+                                                                <input name="lr_for_reply" class="lr_for_reply" value="${reply.lr_id}" hidden="hidden"/>
+                                                                <input value="${reply.lr_name}" hidden="hidden"/>
+                                                                <div class="layui-form-item">
+                                                    <textarea name="lr_content" class="layui-textarea lr_content" lay-verify="replyContent" placeholder="请输入回复内容"  style="min-height:80px;">@${reply.lr_name}:&nbsp;&nbsp;</textarea>
+                                                                </div>
+                                                                <div class="layui-form-item">
+                                                                    <button  class="layui-btn layui-btn-mini replyBtn" lay-submit="formReply" lay-filter="formReply">提交</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </c:if>
+                                            </c:forEach>
                                         </div>
                                     </div>
-
-                                    <!-- 以下是回复信息 -->
-                                    <c:forEach items="${requestScope.lr_list}" var="reply">
-                                        <!-- 每次遍历出来的留言下存在回复信息才展示（本条回复信息是本条留言下的就显示在当前留言下） -->
-                                        <c:if test="${reply.lr_for_article_id eq article.info_id && reply.lr_for_words eq words.lw_id}">
-                                            <div style="text-align: left;margin-left:61px;color: #444">
-                                                <div>
-                                                    <span style="color:#5FB878">${reply.lr_name}&nbsp;&nbsp;</span>
-                                                </div>
-                                                <div>@${reply.lr_for_name}:&nbsp;&nbsp; ${reply.lr_content}</div>
-                                            </div>
-                                            <div>
-                                                <div class="comment-parent" style="text-align:left;margin-top:7px;margin-left:61px;color:#444">
-                                                    <span>${reply.lr_date}</span>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <p>
-                                                        <a href="javascript:;" style="text-decoration: none;" onclick="btnReplyClick(this)">回复</a>
-                                                    </p>
-                                                    <hr style="margin-top: 7px;"/>
-                                                </div>
-                                                <!-- 回复表单默认隐藏 -->
-                                                <div class="replycontainer layui-hide" style="margin-left: 61px;">
-                                                    <form action="../info/saveReply.do" method="post" class="layui-form">
-                                                        <input name="lr_for_article_id" id="lr_for_article_id" value="${article.info_id}" hidden="hidden"/>
-                                                        <input name="lr_name" id="lr_name" value="${users.uname}" hidden="hidden"/>
-                                                        <input name="lr_date" id="lr_date" value="<%=nowDate%>" hidden="hidden"/>
-                                                        <input name="lr_for_name" id="lr_for_name" value="${words.lw_name}" hidden="hidden"/>
-                                                        <input name="lr_for_words" id="lr_for_words" value="${words.lw_id}" hidden="hidden"/>
-                                                        <input name="lr_for_reply" id="lr_for_reply" value="${reply.lr_id}" hidden="hidden"/>
-                                                        <div class="layui-form-item">
-                                                    <textarea name="lr_content" id="lr_content" lay-verify="replyContent" placeholder="请输入回复内容" class="layui-textarea" style="min-height:80px;">
-                                                      @${words.lw_name}:&nbsp;&nbsp;
-                                                  </textarea>
-                                                        </div>
-                                                        <div class="layui-form-item">
-                                                            <button id="replyBtn" class="layui-btn layui-btn-mini" lay-submit="formReply" lay-filter="formReply">提交</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
+<!--------------以下是回复信息---------------->
                                 </li>
                             </c:if>
                         </c:forEach>
@@ -327,16 +328,7 @@
 </body>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/layui.js"></script>
-<!-- Markdwon富文本 -->
-<script src="js/marked.min.js"></script>
-<script src="js/prettify.min.js"></script>
-<script src="js/raphael.min.js"></script>
-<script src="js/underscore.min.js"></script>
-<script src="js/sequence-diagram.min.js"></script>
-<script src="js/flowchart.min.js"></script>
-<script src="js/jquery.flowchart.min.js"></script>
-<script src="js/editormd.min.js"></script>
-<%--<script src="js/jquery-1.11.0.min.js"></script>--%>
+<!-----------------------点赞js------------------------------------------------------------>
 <script>
     $(document).ready(function()
     {
@@ -384,23 +376,23 @@
         var element = layui.element;
     });
 </script>
-<!-- Markdown富文本 -->
 <script type="text/javascript">
-    var markdown;
-    $(function(){
-        markdown = editormd.markdownToHTML('content',{
-            htmlDecode: "style,script,iframe",
-            syncScrolling: 'single',
-            emoji: true,
-            taskList: true,
-            tex: true,
-            flowChart: true,
-            sequenceDiagram: true,
-            codeFold: true
-        });
-    });
-</script>
-<script type="text/javascript">
+  // 用户是否登录检测----------------------------------------------------------------------------------------------------
+    function check(){
+        var uid='<%=request.getSession().getAttribute("uid")%>';
+        var lw_content = $("#lw_content").val();
+        if(uid == "null" || uid == ''){
+            alert("请先登录！");
+            return false;
+        }
+        if(lw_content==''){
+            alert("留言内容不能为空！");
+            return false;
+        }
+        return true;
+    }
+
+    // 将回复框和回复列表显示收起----------------------------------------------------------------------------------------
     function btnReplyClick(elem) {
         var $ = layui.jquery;
         if($(this)){
@@ -414,42 +406,77 @@
             $(elem).text('回复')
         }
     }
-    $("#replyBtn").click(function(){
-        var lr_for_article_id = $("#lr_for_article_id").val();
-        var lr_name = $("#lr_name").val();
-        var lr_date = $("#lr_date").val();
-        var lr_for_name = $("#lr_for_name").val();
-        var lr_content = $("#lr_content").val();
-        var lr_for_words = $("#lr_for_words").val();
-        $.ajax({
-            url: '../info/saveWords.do',
-            type: 'POST',
-            data: [{
-                lr_for_article_id: lr_for_article_id,
-                lr_name: lr_name,
-                lr_date: lr_date,
-                lr_for_name: lr_for_name,
-                lr_content: lr_content,
-                lr_for_words: lr_for_words
-            }],
-            success: function(data){
-                layer.open({
-                    title: '提示信息',
-                    content: '留言成功',
-                    btn: ['确定'],
-                    btn1: function(index){
-                        $("body").html(data);
+    // 回复留言------------------------------------------------------------------------------------------------------
+    $(".replyBtn").click(function(){
+        var uid='<%=request.getSession().getAttribute("uid")%>';
+      var lr_for_article_id = $(this).parent().parent().children('input').eq(0).val();//回复的文章id
+      var lr_name = $(this).parent().parent().children('input').eq(1).val();//谁回复
+      var lr_date = $(this).parent().parent().children('input').eq(2).val();//回复时间
+      var lr_for_name = $(this).parent().parent().children('input').eq(3).val();//哪一个留言人的回复
+      var lr_for_words = $(this).parent().parent().children('input').eq(4).val();//给哪一个id的留言的回复
+      var lr_for_reply=$(this).parent().parent().children('input').eq(5).val();//给哪一个id的回复的回复
+      var reply_lr_name=$(this).parent().parent().children('input').eq(6).val();//回复给谁(回复人)
+      var lr_content = $(this).parent().parent().children().children('textarea').eq(0).val();//回复内容
+      // alert(lr_for_article_id);
+      // alert(lr_name);
+      // alert(lr_date);
+      // alert(lr_for_name);
+      // alert(lr_for_words);
+      // alert(lr_for_reply);
+      // alert(reply_lr_name);
+      // alert(lr_content);
+        if(uid == "null" || uid == '') {
+            alert("请先登录！");
+            return false;
+        }
+        if(lr_content ==''){
+            alert("回复内容不能为空！");
+            return false;
+            }
+        if(typeof(reply_lr_name)=="undefined"){
+            if(lr_name==lr_for_name){
+                alert("用户不能给自己留言！");
+                return false;
+            }
+        }
+       else if(reply_lr_name==lr_name){
+            alert("用户不能给自己留言！");
+            return false;
+        }
+        else{
+                $.ajax({
+                    url: '../info/saveReply.do',
+                    type: 'POST',
+                    data: [{
+                        lr_for_article_id: lr_for_article_id,
+                        lr_name: lr_name,
+                        lr_date: lr_date,
+                        lr_for_name: lr_for_name,
+                        lr_content: lr_content,
+                        lr_for_words: lr_for_words,
+                        lr_for_reply:lr_for_reply
+                    }],
+                    success: function(data){
+                        layer.open({
+                            title: '提示信息',
+                            content: '留言成功',
+                            btn: ['确定'],
+                            btn1: function(index){
+                                $("body").html(data);
+                            }
+                        });
+                    },
+                    error: function(){
+                        layer.open({
+                            title: '提示信息',
+                            content: '出现未知错误'
+                        });
                     }
                 });
-            },
-            error: function(){
-                layer.open({
-                    title: '提示信息',
-                    content: '出现未知错误'
-                });
+                return true;
             }
-        });
-    });
+
+  });
 </script>
 </html>
 

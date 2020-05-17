@@ -71,13 +71,13 @@ public interface UserDao {
 
     public boolean deleUser(User user);
 
-    @Insert("insert into user(uid,uname,password,sex,email,u_type) values('${uid}','${uname}','${password}'," +
-            "'${sex}','${email}','${u_type}')")
+    @Insert("insert into user(uid,uname,password,sex,phone,u_type) values('${uid}','${uname}','${password}'," +
+            "'${sex}','${phone}','${u_type}')")
     /*@ResultMap("userMap")*/
     public boolean saveUser(User user);
 
     /*更新用户信息*/
-    @Update("update user set uname= '${uname}' , password = '${password}', sex = '${sex}', email='${email}',photo='${photo}' where uid = '${uid}'")
+    @Update("update user set uname= '${uname}' , password = '${password}', sex = '${sex}', phone='${phone}',photo='${photo}' where uid = '${uid}'")
     public boolean updateUser3(User user);
 
 

@@ -12,7 +12,7 @@ public class User implements Serializable {
     private String uname;
     private String password;
     private String sex;
-    private String email;
+    private String phone;
     private String photo;
     private String u_type;
     private String u_status;
@@ -49,12 +49,12 @@ public class User implements Serializable {
         this.sex = sex;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPhoto() {
@@ -88,7 +88,7 @@ public class User implements Serializable {
                 ", uname='" + uname + '\'' +
                 ", password='" + password + '\'' +
                 ", sex='" + sex + '\'' +
-                ", email='" + email + '\'' +
+                ", email='" + phone + '\'' +
                 ", photo='" + photo + '\'' +
                 ", u_type='" + u_type + '\'' +
                 ", u_status='" + u_status + '\'' +

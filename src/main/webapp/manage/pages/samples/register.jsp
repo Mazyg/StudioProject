@@ -52,7 +52,8 @@
                     <input type="text" class="form-control form-control-lg" id="Username" placeholder="昵称" name="uname" required>
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-lg" id="Email1" placeholder="Email" name="email" required>
+                    <input type="text" class="form-control form-control-lg" id="phone" placeholder="手机号" name="phone"
+                           required>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group row">
