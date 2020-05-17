@@ -273,9 +273,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label  class="col-sm-2 control-label">email</label>
+                            <label  class="col-sm-2 control-label">手机号</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control"  name="email" placeholder="请输入email" value="${users.email}">
+                                <input type="text" class="form-control" name="phone" placeholder="请输入手机号" value="${users.phone}">
                             </div>
                         </div>
                         <div class="form-group">

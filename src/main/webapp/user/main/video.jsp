@@ -181,47 +181,47 @@
                     <p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a> </p>
                 </video>
             </div>
-            <div class="comment">
-                <div class="commentbox">
-                    <textarea class="textarea" placeholder="来说几句吧......" id="content" ></textarea>
-                    <input class="submit" type="button" value="评论" onclick="check('${uid}','${info_id}')">
-                </div>
-                <script type="text/javascript">
-                    function check(uid,info_id){
-                        var content=$("#content").val();
-                        if(uid==''){
-                            alert("请先登录！");
-                        }
-                        else if(content==''){
-                            alert("评论不能为空！");
-                        }
-                        else{
-                            alert("评论成功！")
-                            window.location.href="../info/findByIdInfo.do?infoId="+info_id+"&uid="+uid+"&content="+content;
-                        }
-                    }
-                </script>
-                <div class="comment-list">
-                    <ul>
-                        <c:forEach items="${discuss}" var="discuss">
-                            <li>
-                                <div>
-                                    <div class="comment-left">
-                                        <img src="${discuss.photo}">
-                                    </div>
-                                    <div class="comment-right">
-                                        <p>${discuss.uname}</p>
-                                        <p style="margin-top: -10px;"><small>${discuss.date}</small></p>
-                                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${discuss.content}</p>
-                                    </div>
-                                </div>
-                                <br>
-                            </li>
-                        </c:forEach>
-                    </ul>
+<%--            <div class="comment">--%>
+<%--                <div class="commentbox">--%>
+<%--                    <textarea class="textarea" placeholder="来说几句吧......" id="content" ></textarea>--%>
+<%--                    <input class="submit" type="button" value="评论" onclick="check('${uid}','${info_id}')">--%>
+<%--                </div>--%>
+<%--                <script type="text/javascript">--%>
+<%--                    function check(uid,info_id){--%>
+<%--                        var content=$("#content").val();--%>
+<%--                        if(uid==''){--%>
+<%--                            alert("请先登录！");--%>
+<%--                        }--%>
+<%--                        else if(content==''){--%>
+<%--                            alert("评论不能为空！");--%>
+<%--                        }--%>
+<%--                        else{--%>
+<%--                            alert("评论成功！")--%>
+<%--                            window.location.href="../info/findByIdInfo.do?infoId="+info_id+"&uid="+uid+"&content="+content;--%>
+<%--                        }--%>
+<%--                    }--%>
+<%--                </script>--%>
+<%--                <div class="comment-list">--%>
+<%--                    <ul>--%>
+<%--                        <c:forEach items="${discuss}" var="discuss">--%>
+<%--                            <li>--%>
+<%--                                <div>--%>
+<%--                                    <div class="comment-left">--%>
+<%--                                        <img src="${discuss.photo}">--%>
+<%--                                    </div>--%>
+<%--                                    <div class="comment-right">--%>
+<%--                                        <p>${discuss.uname}</p>--%>
+<%--                                        <p style="margin-top: -10px;"><small>${discuss.date}</small></p>--%>
+<%--                                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${discuss.content}</p>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <br>--%>
+<%--                            </li>--%>
+<%--                        </c:forEach>--%>
+<%--                    </ul>--%>
 
-                </div>
-            </div>
+<%--                </div>--%>
+<%--            </div>--%>
         </section>
 
 

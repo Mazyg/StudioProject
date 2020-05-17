@@ -34,7 +34,6 @@
     <script type="text/javascript" src="js/jump.js"></script>
     <script type="text/javascript" src="js/searchsub.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-1.8.3.js" integrity="sha256-dW19+sSjW7V1Q/Z3KD1saC6NcE5TUIhLJzJbrdKzxKc=" crossorigin="anonymous"></script>
     <script src="js/jquery.lazyload.js"></script>
 
 </head>
@@ -134,10 +133,10 @@
             <div class="biggallery">
                 <div class="biggallerywraper">
                     <ul class="biggallerylist">
-
                     <c:forEach items="${chineseScenery}" var="chineseScenery">
                         <li>
-                            <a href="../info/findByIdInfo.do?infoId=${chineseScenery.info_id}&uid=${users.uid}" target="_blank"><img data-original="${chineseScenery.photo}" src="img/loading.gif"></a>
+                            <a href="../info/findByIdInfo.do?infoId=${chineseScenery.info_id}&uid=${users.uid}" target="_blank"><img src="${chineseScenery.photo}"></a>
+<%--                            <img data-original="${chineseScenery.photo}" src="img/loading.gif">--%>
                             <div class="imgintro">
                             <b></b>
                             <h3><a href="../info/findByIdInfo.do?infoId=${chineseScenery.info_id}&uid=${users.uid}" target="_blank" class="jiequ">【${chineseScenery.info_type}】${chineseScenery.title}</a></h3>
@@ -145,16 +144,14 @@
                             </div>
                         </li>
                     </c:forEach>
-
                     </ul>
                 </div>
-                <div class="imgthumb clearfix">
+                <div class="imgthumb clearfix" style="margin-top:-10px">
                     <ul>
                     <c:forEach items="${chineseScenery}" var="chineseScenery">
-<%--                        <li class="active"><a><img src=""></a></li>--%>
-                        <li><a><img data-original="${chineseScenery.photo}" src="img/loading.gif"></a></li>
+<%--                        <li class="active"><a><img src="${chineseScenery.photo}"></a></li>--%>
+                        <li class="active"><a><img data-original="${chineseScenery.photo}" src="img/loading.gif"></a></li>
                     </c:forEach>
-
                     </ul>
                 </div>
                 <script type="text/javascript">

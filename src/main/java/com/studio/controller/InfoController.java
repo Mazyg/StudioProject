@@ -406,6 +406,7 @@ public class InfoController {
     @RequestMapping(value="/saveReply")
     public String saveReply(Reply reply,HttpServletRequest request){
         if(reply != null){
+//            System.out.println(reply);
             infoService.saveReply(reply);
             String info_id = reply.getLr_for_article_id();
             User users= (User) request.getSession().getAttribute("users");
@@ -413,6 +414,7 @@ public class InfoController {
         }else{
             return null;
         }
+
     }
 //
 //    @RequestMapping("/findByIdInfo")
@@ -469,11 +471,16 @@ public class InfoController {
         lr_list = infoService.findByReply();
         model.addAttribute("lr_list",lr_list);
         //查询文章信息
-        Info article = infoService.findById(infoId);
-        System.out.println("查询到当前文章的ID值："+article.getInfo_id());
-        if (article != null) {
-            model.addAttribute("article", article);
-            return "user/main/details";
+//        Info article = infoService.findById(infoId);
+//        System.out.println("查询到当前文章的ID值："+article.getInfo_id());
+        if (info != null) {
+            model.addAttribute("article", info);
+            if("视频".equals(info.getInfo_type())){
+            return "user/main/video";
+            }
+            else{
+                return "user/main/details";
+            }
         } else {
             return null;
         }

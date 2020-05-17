@@ -116,7 +116,7 @@
                 <div class="dropdown-header text-center">
                   <img class="img-lg rounded-circle" src="<%--images/faces/face8.jpg--%>${users.photo}" alt="Profile image">
                   <p class="mb-1 mt-3">${users.uname}</p>
-                  <p class="font-weight-light text-muted mb-0">${users.email}</p>
+                  <p class="font-weight-light text-muted mb-0">${users.phone}</p>
                 </div>
                 <a class="dropdown-item" href="../user/personalInfo.do?uid=${users.uid}"><i class="dropdown-item-icon icon-user text-primary"></i> 个人信息</a>
                 <a href="../info/findInfoBytype.do" class="dropdown-item"><i class="dropdown-item-icon  icon-cursor text-primary"></i>用户界面</a>
@@ -226,7 +226,7 @@
                           <th><h4>用户ID</h4></th>
                           <th><h4>用户昵称</h4></th>
                             <th><h4>性别</h4></th>
-                            <th><h4>email</h4></th>
+                            <th><h4>手机号</h4></th>
                             <th><h4>状态</h4></th>
                             <th><h4>操作1</h4></th>
                             <th><h4>操作2</h4></th>
@@ -239,7 +239,7 @@
                             <td>${user.uid}</td>
                             <td>${user.uname}</td>
                             <td>${user.sex}</td>
-                            <td>${user.email}</td>
+                            <td>${user.phone}</td>
                             <td>${user.u_status}</td>
                             <td><a href="javascript:void(0)" style="color: #a01a1f" class="update1">封号</a></td>
                             <td><a href="javascript:void(0)" style="color: #1d6b1f" class="update2">解封</a></td>
