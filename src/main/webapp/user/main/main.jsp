@@ -5,7 +5,7 @@
   Time: 9:10
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
@@ -49,7 +49,7 @@
                     </li>
                     <li><a href="../info/findPersonInfo.do?page=1&numberPerPage=3&start=0&length=3" class="">榜样力量</a>
                     </li>
-                    <li><a href="../topic/showTopic.do?page=1&numberPerPage=3&start=0&length=3" class="">话题</a>
+                    <li><a href="../topic/showTopic.do" class="">话题</a>
                     </li>
 
                     <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3">书籍</a></li>

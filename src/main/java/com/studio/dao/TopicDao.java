@@ -41,7 +41,7 @@ public interface TopicDao {
     @Select("select * from topic where uid = #{uid}")
     public List<Topic> findAllByUid(Integer uid);
 
-    @Select("select * from topic where t_tatus= '已审核' ")
+    @Select("select * from topic where t_tatus= '已审核' order by date desc ")
     public List<Topic> findCheckTopic();
     /**
      * 通过用户名查询用户发布的话题

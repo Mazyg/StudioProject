@@ -1,7 +1,10 @@
 package com.studio.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.studio.domian.*;
 import com.studio.service.*;
+import net.sf.jsqlparser.statement.select.Top;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +48,6 @@ public class TopicController {
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = ft.format(now);
         topic.setDate(time);
-        System.out.println("top"+topic);
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("users");
         topic.setUname(user.getUname());
@@ -84,7 +86,6 @@ public class TopicController {
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = ft.format(now);
         topic.setDate(time);
-        System.out.println("top"+topic);
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("users");
         System.out.println("user"+user);
@@ -299,10 +300,7 @@ public class TopicController {
     public String findById(Model model,HttpServletRequest request){
         String tid = request.getParameter("tid");
         Topic topicList = topicService.findTopicById(tid);
-        System.out.println("topic"+topicList);
         User usersTopic = userService.findByNameAll(topicList.getUname());
-        System.out.println("user"+usersTopic);
-
         model.addAttribute("usersTopic", usersTopic);
         model.addAttribute("topics", topicList);
         return "manage/pages/ui-features/topic_show";
@@ -310,7 +308,8 @@ public class TopicController {
 
     /*跳转到话题页面*/
     @RequestMapping("/showTopic")
-    public ModelAndView showTopic(Model model,HttpServletRequest request){
+    public String showTopic(Model model,HttpServletRequest request,
+                                  @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
         User user = (User) request.getSession().getAttribute("users");
         if(user != null){
             int topicCount = topicService.countUserTopic(user.getUname());
@@ -319,55 +318,23 @@ public class TopicController {
             model.addAttribute("topicCount",topicCount);
             model.addAttribute("commentCount",commentCount);
         }
-        int total=topicService.findCountNo("已审核");
-        model.addAttribute("total", total);
-        int start = Integer.parseInt(request.getParameter("start"));
-        model.addAttribute("start",start);
-        int length= Integer.parseInt(request.getParameter("length"));
-        int page = Integer.parseInt(request.getParameter("page"));
-        model.addAttribute("page",page);
-        int numberPerPage= Integer.parseInt(request.getParameter("numberPerPage"));
-        model.addAttribute("numberPerPage",numberPerPage);
-        mv = new ModelAndView();
 
-//        List<Topic> topics =  topicService.findCheckTopic();
-        List<Topic> topics =  topicService.findTopic(start,length);
+        List<Topic> topTopics = topicService.findTopic(0,3);
+        model.addAttribute("topTopics",topTopics);
+
+        PageHelper.startPage(pageNum,3);
+        List<Topic> topics = topicService.findCheckTopic();
         for (Topic topic : topics){
             topic.setUser(userService.findByNameAll(topic.getUname()));
         }
-        List<Topic> topTopics = topicService.findTopic(0,3);
-        //System.out.println(topTopics);
-        mv.addObject("topics", topics);
-        mv.addObject("topTopics",topTopics);
-        int rest=total-(start+length);
-        //System.out.println("剩余："+rest);
-        model.addAttribute("rest",rest);
-        int totalPage = total/numberPerPage;
-        if(total % numberPerPage != 0){
-            totalPage += 1;
-        }
-        model.addAttribute("totalPage",totalPage);
-        //System.out.println("总页数："+totalPage);
-        //System.out.println("\n------------------------\n");
-        Vector<Integer> pageArr = new Vector<Integer>();
-        int startx=1;
-        if(page>5){
-            startx= page/5*5;
-        }
-        int num = startx;
-        while(!(num > totalPage || num >=startx +5)){
-            pageArr.add(new Integer(num));
-            ++num;
-        }
-        model.addAttribute("pageList",pageArr);
-        mv.setViewName("user/main/topic");
-        return mv;
+        PageInfo<Topic> pageInfo = new PageInfo<Topic>(topics,3);
+        model.addAttribute("pageInfo",pageInfo);
+        return "user/main/topic";
     }
 
     /*通过id进入话题回复评论页面*/
     @RequestMapping("/findTopicById")
-    public String findTopicById(HttpServletRequest request,String tid,String type,Model model){
-        System.out.println("tid:"+tid+"-type:"+type);
+    public String findTopicById(String tid,String type,Model model){
         Topic topic = topicService.findTopicById(tid);
         topic.setUser(userService.findByNameAll(topic.getUname()));
         topic.setView_count(topic.getView_count()+1);
@@ -378,14 +345,6 @@ public class TopicController {
             dynamic.setUser(userService.findByNameAll(dynamic.getUname()));
         }
         List<Info> infos = infoService.findInfoBytype(type,0,5);
-        User user = (User) request.getSession().getAttribute("users");
-        if(user != null){
-            int topicCount = topicService.countUserTopic(user.getUname());
-            int commentCount = topicService.countUserReply(user.getUname());
-            commentCount = commentCount + commentService.countUserReply(user.getUname());
-            model.addAttribute("topicCount",topicCount);
-            model.addAttribute("commentCount",commentCount);
-        }
         model.addAttribute("infos",infos);
         model.addAttribute("dynamics", dynamics);
         model.addAttribute("topic", topic);

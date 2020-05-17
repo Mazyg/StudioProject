@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"+"user/";
@@ -35,7 +35,7 @@
                     </li>
                     <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
                     </li>
-                    <li><a href="../topic/showTopic.do?page=1&numberPerPage=3&start=0&length=3" class="">话题</a>
+                    <li><a href="../topic/showTopic.do" class="">话题</a>
                     </li>
 
                     <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3">书籍</a></li>
@@ -102,7 +102,7 @@
         </div>
         <div class="indexMain_left_con">
             <!--有主题图循环开始-->
-            <c:forEach items="${topics}" var="topic">
+            <c:forEach items="${pageInfo.list}" var="topic">
             <div class="indexCon_msg">
                 <div class="indexCon_msg_pic"><img src="${topic.user.photo}"></div>
                 <div class="indexCon_msg_detail">
@@ -124,12 +124,13 @@
             </div>
             </c:forEach>
         </div>
+
         <div class="indexFooter">
             <div class="pager">
                 <!-- 上一页 按钮 -->
                 <c:choose>
-                    <c:when test="${page>1}">
-                        <a href="../topic/showTopic.do?start=${start-numberPerPage}&length=${numberPerPage}&page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
+                    <c:when test="${pageInfo.pageNum>1}">
+                        <a href="../topic/showTopic.do?pageNum=${pageInfo.prePage}" rel="external nofollow" ><<</a>
                     </c:when>
                     <c:otherwise>
                         <a><<</a>
@@ -137,26 +138,16 @@
                 </c:choose>
 
                 <!-- 页数列表 -->
-                <c:forEach items="${pageList}" var="item">
-                    <c:choose>
-                        <c:when test="${(total-(item-1)*numberPerPage)>=numberPerPage}">
-                            <a href="../topic/showTopic.do?start=${(item-1)*numberPerPage}&length=${numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="../topic/showTopic.do?start=${(item-1)*numberPerPage}&length=${total-(item-1)*numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
-                        </c:otherwise>
-                    </c:choose>
+                <c:forEach items="${pageInfo.navigatepageNums}" var="page">
+
+                    <a href="../topic/showTopic.do?pageNum=${page}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${page}</a>
+
                 </c:forEach>
 
                 <!-- 下一页 按钮 -->
                 <c:choose>
-                    <c:when test="${page<totalPage && rest>=numberPerPage}">
-                        <a href="../topic/showTopic.do?start=${start+numberPerPage}&length=${numberPerPage}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
-                            >>
-                        </a>
-                    </c:when>
-                    <c:when test="${page<totalPage && rest<numberPerPage && rest>0}">
-                        <a href="../topic/showTopic.do?start=${start+numberPerPage}&length=${rest}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                    <c:when test="${pageInfo.hasNextPage}">
+                        <a href="../topic/showTopic.do?pageNum=${pageInfo.nextPage}" rel="external nofollow">
                             >>
                         </a>
                     </c:when>
@@ -165,13 +156,12 @@
                     </c:otherwise>
                 </c:choose>
 
-                <!-- 直接跳转 -->
-                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage},${total},'../topic/showTopic')" />
-                <!-- 设置每页显示条数 -->
-                &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},'../topic/showTopic')" />
             </div>
         </div>
     </div>
+
+
+
     <div class="indexMain_right">
         <div class="indexMain_rightCon">
             <a href="main/write.jsp " class="newMsg" style="color: white">发起话题</a>
@@ -238,9 +228,9 @@
         </div>
         <div class="clear"></div>
 </div>
-<footer class="publicFooter">
+    <footer class="publicFooter">
     <p></p>
-</footer>
+    </footer>
 </div>
 </body>
 </html>
