@@ -101,7 +101,7 @@
                 </li>
                 <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
                 </li>
-                <li><a href="../topic/showTopic.do?page=1&numberPerPage=3&start=0&length=3" class="">话题</a>
+                <li><a href="../topic/showTopic.do" class="">话题</a>
                 </li>
                 <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3" class="">书籍</a></li>
                 <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
