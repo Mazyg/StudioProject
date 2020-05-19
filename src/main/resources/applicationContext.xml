@@ -18,14 +18,32 @@
         <!--只处理service和dao，controller不进行处理-->
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+    <bean class="com.studio.utils.EncryptPropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="UTF-8"/>
+    </bean>
+    <!--<context:property-placeholder location="classpath:jdbc.properties"/>-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <!-- 配置连接池属性 -->
+    <property name="driverClass" value="${jdbc.driver}"/>
+    <property name="jdbcUrl" value="${jdbc.url}"/>
+    <property name="user" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+
 
     <!--配置连接池-->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://111.229.25.156:3306/web?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8"/>
         <property name="user" value="root"/>
         <property name="password" value="Mn&amp;123456"/>
-    </bean>
+    </bean>-->
 
     <!--配置SqlSessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
