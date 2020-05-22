@@ -36,4 +36,6 @@ public interface UserService {
     public Integer findAdm();
 
     public Integer findNo();
+
+    public User findByPhone(String phone);
 }

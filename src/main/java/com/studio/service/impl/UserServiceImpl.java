@@ -90,4 +90,7 @@ public class UserServiceImpl implements UserService {
     public Integer findNo() {
         return userDao.findNo();
     }
+
+    @Override
+    public User findByPhone(String phone){return userDao.findByPhone(phone);}
 }

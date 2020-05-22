@@ -40,7 +40,7 @@
                 <div class="brand-logo">
                   <img src="images/logo.svg">
                 </div>
-                <h4>账号登录</h4>
+                <h4>账号登录${tip}</h4>
                 <form class="pt-3" action="../user/login.do" method="post">
                   <div class="form-group">
                     <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="账号" name="uid" required>
