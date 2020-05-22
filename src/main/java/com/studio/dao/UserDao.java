@@ -91,4 +91,8 @@ public interface UserDao {
 
     @Update("update user set photo=#{photo} where uid=#{uid}")
     public boolean personPhoto(User user);
+
+//    根据手机号查询用户
+    @Select("select * from user where phone=#{phone}")
+    public User findByPhone(String phone);
 }

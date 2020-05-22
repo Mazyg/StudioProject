@@ -233,13 +233,14 @@
             <div class="widgets__smooth_circle"></div>
         </div>
     </div>
-    <div id="navigation">暂时空着.</div>
+    <form action="../rep/rePassword.do" method="post">
+    <div id="navigation"><span id="tip">111111111111</span></div>
     <div id="telephone">
         <div id="tel_start">中国 0086</div>
         <input id="tel_end" type="text" placeholder="建议使用常用手机号" name="telephone" >
     </div>
     <div id="verify">
-        <input onclick="$('#select').removeClass('hide');" id="verifyBtn" type="button" value="点击按钮进行验证">
+        <input onclick="checkphone();" id="verifyBtn" type="button" value="点击按钮进行验证">
     </div>
     <div id="code">
         <label id="codeTip">手机验证码</label>
@@ -247,18 +248,44 @@
     </div>
     <div id="password">
         <label id="passwordTip">新密码</label>
-        <input name="password" type="password">
+        <input class="password" name="password" type="password">
     </div>
     <div id="repassword">
         <label id="repasswordTip">确认密码</label>
-        <input name="repassword" type="password">
+        <input class="repassword" name="repassword" type="password">
     </div>
     <div  id="res" style="display: none"></div>
-    <div id="next"> <a onclick="nextStep();" id="nextBtn" href="javascript:;">下一步</a></div>
+    <div id="next" class="hide"> <a onclick="nextStep();" id="nextBtn" href="javascript:;">下一步</a></div>
     <div id="register"></div>
+    </form>
 </div>
 
 <script type="text/javascript">
+    function checkphone(){
+        var number = $("#tel_end").val();
+        if(number==''){
+            alert("手机号不能为空！");
+            return false;
+        }else{
+            var $reg=/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/;
+            if(!$reg.test(number)){
+                alert("手机号格式错误！");
+                return false;
+            }
+            // $.get(URL,data,function(data,status,xhr),dataType)
+            //URL规定您需要请求的 URL。Data规定连同请求发送到服务器的数据。function(data,status,xhr)规定当请求成功时运行的函数(data - 包含来自请求的结果数据status - 包含请求的状态（"success"、"notmodified"、"error"、"timeout"、"parsererror"）xhr - 包含 XMLHttpRequest 对象)。datatype规定预期的服务器响应的数据类型。
+            $.get("../rep/checkPhone.do?telephone="+number,null,function test(res){
+                if(res=="no"){
+                    alert("该手机号还未注册，请先去注册用户！");
+                    return false;
+                }
+                else{
+                    $('#select').removeClass('hide');
+                    return true;
+                }
+            },"text");
+        }
+    }
     var s = WIDGETS.imgSmoothCheck({
         selector: "#select",
         data: ["images/t1.png", "images/t2.png", "images/t3.png"],
@@ -277,6 +304,7 @@
     function sendMessage() {
         // 取到要发送的手机号码
         var number = $("#tel_end").val();
+        //验证手机号
         // alert(number);
         // 请求后台控制器服务
         var s = 59;
@@ -285,6 +313,7 @@
             alert(code);
             $("#res").text(code);
             $("#select").addClass("hide");
+            $('#next').removeClass('hide');
             $("#verify").hide();
             $("#code").show();
             // 倒计时
@@ -303,7 +332,6 @@
             }, 1000);
         },"text");
     }
-    alert(text);
     // var s = 59;
     // function second() {
     //     var text = s + "秒后重新获取";
@@ -333,8 +361,30 @@
             $("#nextBtn").removeAttr("onclick");
             // 添加新的点击事件
             $("#nextBtn").click(function(){
+                //验证密码
+                if($(".password").val()==""){
+                    $("#tip").show().text("密码不能为空");
+                    return false;
+                }else{
+                    var $reg=/^\w{6,}$/;
+                    if(!$reg.test($(".password").val())){
+                        $("#tip").show().text("密码至少6位");
+                        return false;
+                    }
+                }
+                //确认密码是否为空
+                if($(".repassword").val()==""){
+                    $("#tip").show().text("请确认密码");
+                    return false;
+                }
+                //验证两次密码是否一致
+                if($(".password").val()!=$(".repassword").val()){
+                    $("#tip").show().text("两次密码不一致");
+                    return false;
+                }
                 // 提交表单,把数据提交给后台
                 $("form").submit();
+                // window.location.href="../rep/rePassword.do?telephone="+number+"&";
             });
         } else {
             alert("验证码错误,请重试...");
