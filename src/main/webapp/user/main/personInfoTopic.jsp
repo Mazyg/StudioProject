@@ -43,26 +43,8 @@
         height: 70px;
     }
 
-
-    /*.back2{
-        background-color: white;
-        border-radius: 1%;
-    }*/
-
 </style>
 <script type="text/javascript">
-    /*function message() {
-
-        var mes = <%--${topicDel}--%>;
-        alert(mes)
-        if(mes == true){
-            alert("删除成功！")
-        }else
-            if(mes == false){
-                alert("出错了！")
-            }
-    }*/
-
     $(function () {
         $(".del").click(function () {
             var $tid = $(this).parent().parent().children('td').eq(0).text();
@@ -87,38 +69,21 @@
 </script>
 <body onload="message()">
 <header class="clearfix">
-    <%--<section class="mainWrap">
-        <div class="topwraper relative clearfix">
-            <div class="search">
-                <form id="searchForm" target="_blank">
-                    <input name="query" type="text" >
-                    <input name="ie" type="hidden" value="utf8">
-                    <input name="cid" type="hidden" value="3">
-                    <a href="javascript:;" onclick="searchSub();"><i>搜索</i></a>
-                </form>
-            </div>
-        </div>
-    </section>--%>
         <nav class="navwrap yahei">
             <section class="mainWrap">
                 <ul id="nav">
-                    <li><a href="../info//epidemic.do?page=1&numberPerPage=3&start=0&length=3">全球战疫</a>
+                    <li><a href="../info/epidemic.do">全球战疫</a>
                     </li>
-                    <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
+                    <li><a href="../info/findEvent.do">热点资讯</a>
                     </li>
-                    <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
-                        <%--<ul>
-                            <li><a href="#">最美中国景</a></li>
-                            <li><a href="#">最美中国人</a></li>
-                            <li><a href="#">最美中国事</a></li>
-                        </ul>--%>
+                    <li><a href="../info/findChinese.do">爱我中华</a>
                     </li>
-                    <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
+                    <li><a href="../info/findPersonInfo.do" >榜样力量</a>
                     </li>
-                    <li><a href="../topic/showTopic.do" class="">话题</a>
+                    <li><a href="../topic/showTopic.do" >话题</a>
                     </li>
-                    <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3" class="">书籍</a></li>
-                    <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
+                    <li><a href="../info/findBooks.do" >书籍</a></li>
+                    <li><a href="../info/findMovies.do">电影</a></li>
                     <li><a class="">个人中心</a>
                         <ul class="last">
                             <li><a href="main/personInfo.jsp">个人信息</a></li>

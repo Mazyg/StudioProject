@@ -77,8 +77,8 @@ public class InfoServiceImpl implements InfoService {
     }
 
     @Override
-    public List<Info> showAll(String keyword, int start, int length) {
-        return infoDao.showAll(keyword,start,length);
+    public List<Info> showAll(String keyword) {
+        return infoDao.showAll(keyword);
     }
 
     @Override
@@ -86,6 +86,11 @@ public class InfoServiceImpl implements InfoService {
     public int countBytype(String info_type) {
         return infoDao.countByType(info_type);
 }
+
+    @Override
+    public List<Info> queryInfoByType(String type) {
+        return infoDao.findAllByType(type);
+    }
 
     @Override
     public int countAll(String keyword) {
