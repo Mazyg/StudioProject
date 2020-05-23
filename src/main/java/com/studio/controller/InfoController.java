@@ -367,35 +367,35 @@ public class InfoController {
     /***
      * 实现点赞服务
      */
-    @RequestMapping("/niceDetail")
-    public String niceDetail(Model model,HttpServletRequest request){
-        String infoId = (String) request.getSession().getAttribute("infoId");
-        System.out.println("文章Id："+infoId);
-        User user= (User) request.getSession().getAttribute("users");
-        String uid=Integer.toString(user.getUid());
-        System.out.println("用户Id："+uid);
-        //查询是否有该用户的点赞记录
-        NiceDetail niceDetail=infoService.findNiceDetail(uid,infoId);
-        System.out.println("点赞记录："+niceDetail);
-        //根据点赞id找到文章
-        Info info=infoService.findById(infoId);
-        if (niceDetail!=null){
-            //如果找到这条记录，删除该记录，同时文章的点赞数减一
-            //删除记录
-            infoService.deleteNiceDetail(niceDetail.getId());
-            //文章点赞数减一
-            info.setNice(info.getNice()-1);
-           request.getSession().setAttribute("color","like");
-        }else{
-            //如果没有找到这条记录，则添加这条记录，同时文章数加一；
-            //添加记录
-            infoService.insertNiceDetail(uid,infoId);
-            //文章点赞数加一
-            info.setNice(info.getNice()+1);
-            request.getSession().setAttribute("color","unlike");
-            System.out.println("11111111111111111111111");
-        }
-        infoService.updateInfo(info);
-        return "redirect:findByIdInfo.do?infoId="+infoId +"&uid="+uid;
-    }
+//    @RequestMapping("/niceDetail")
+//    public String niceDetail(Model model,HttpServletRequest request){
+//        String infoId = (String) request.getSession().getAttribute("infoId");
+//        System.out.println("文章Id："+infoId);
+//        User user= (User) request.getSession().getAttribute("users");
+//        String uid=Integer.toString(user.getUid());
+//        System.out.println("用户Id："+uid);
+//        //查询是否有该用户的点赞记录
+//        NiceDetail niceDetail=infoService.findNiceDetail(uid,infoId);
+//        System.out.println("点赞记录："+niceDetail);
+//        //根据点赞id找到文章
+//        Info info=infoService.findById(infoId);
+//        if (niceDetail!=null){
+//            //如果找到这条记录，删除该记录，同时文章的点赞数减一
+//            //删除记录
+//            infoService.deleteNiceDetail(niceDetail.getId());
+//            //文章点赞数减一
+//            info.setNice(info.getNice()-1);
+//           request.getSession().setAttribute("color","like");
+//        }else{
+//            //如果没有找到这条记录，则添加这条记录，同时文章数加一；
+//            //添加记录
+//            infoService.insertNiceDetail(uid,infoId);
+//            //文章点赞数加一
+//            info.setNice(info.getNice()+1);
+//            request.getSession().setAttribute("color","unlike");
+//            System.out.println("11111111111111111111111");
+//        }
+//        infoService.updateInfo(info);
+//        return "redirect:findByIdInfo.do?infoId="+infoId +"&uid="+uid;
+//    }
 }
