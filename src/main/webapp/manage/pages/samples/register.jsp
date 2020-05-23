@@ -22,14 +22,53 @@
     <link rel="stylesheet" href="css/style.css" /><!-- End layout styles -->
     <link rel="shortcut icon" href="images/title.ico" />
     <script type="text/javascript">
-      function check() {
+      function checkForm() {
+        if($("#UserId").val()==''){
+          alert("账号不能为空!");
+          return false;
+        }
+        if($("#Username").val()==''){
+          alert("昵称不能为空!");
+          return false;
+        }
+        var number = $("#phone").val();
+        if(number==''){
+          alert("手机号不能为空");
+          return false;
+        }
+        var $reg=/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/;
+        if(!$reg.test(number)){
+          alert("手机号格式错误！");
+          return false;
+        }
+        if(form1.Password1.value==""){
+          alert("密码不能为空！");
+          return false;
+        }
+        var $reg1=/^\w{6,}$/;
+        if(!$reg1.test($("#Password1").val())){
+          alert("密码至少6位");
+          return false;
+        }
+        if(form1.Password2.value==""){
+          alert("请确认密码！");
+          return false;
+        }
         if (form1.Password1.value!=form1.Password2.value){
           alert("两次密码输入不一致请重新输入");
           form1.Password1.value="";
           form1.Password2.value="";
           return false;
         }
-        return true;
+          $.get("../rep/checkPhone.do?telephone="+number,null,function(res){
+            if(res=="yes"){
+              alert("该手机号已注册过，请换个手机号！");
+            }
+            else if(res=="no"){
+              $("form").submit();
+            }
+          },"text");
+
       }
     </script>
   </head>
@@ -44,7 +83,7 @@
                   <img src="images/logo.svg">
                 </div>
                 <h4>注册账号</h4>
-                <form class="pt-3" action="../user/register.do" onsubmit="return check();" method="post" id="form1">
+                <form class="pt-3" action="../user/register.do" method="post" id="form1">
                   <div class="form-group">
                     <input type="text" class="form-control form-control-lg" id="UserId" placeholder="账号" name="uid" required>
                   </div>
@@ -79,7 +118,7 @@
                     <input type="password" class="form-control form-control-lg" id="Password2" placeholder="确认密码" name="repassword" required>
                   </div>
                   <div class="mt-3">
-                    <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="注册" >
+                    <input type="button" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="注册" onclick="checkForm()">
                   </div>
                   <div class="text-center mt-4 font-weight-light"> 已经注册了账号? <a href="login.jsp" class="text-primary">登录</a>
                   </div>
