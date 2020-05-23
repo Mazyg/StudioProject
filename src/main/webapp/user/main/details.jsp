@@ -363,8 +363,19 @@
                     $(this).removeClass("heartAnimation").attr("rel","like");
                     $(this).css("background-position","left");
                 }
-
-                window.location.href="../info/niceDetail.do"
+                $.get("../nice/niceDetail.do",null,function(res){
+                    var count=parseInt($("#likeCount1").text());//将取出的点赞数转化为整型
+                    if(res=="up"){
+                        count=count+1;
+                        $(".heart").addClass("heartAnimation");//加上红心效果
+                    }
+                    else if(res=="down"){
+                        count=count-1;
+                        $(".heart").removeClass("heartAnimation");//去除红心效果
+                    }
+                    $("#likeCount1").text(count);
+                },"text");
+                // window.location.href="../info/niceDetail.do"
              }
         });
 
