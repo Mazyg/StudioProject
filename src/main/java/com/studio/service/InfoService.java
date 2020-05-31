@@ -1,9 +1,6 @@
 package com.studio.service;
 
-import com.studio.domian.Info;
-import com.studio.domian.NiceDetail;
-import com.studio.domian.Reply;
-import com.studio.domian.Words;
+import com.studio.domian.*;
 
 import java.util.List;
 
@@ -84,5 +81,30 @@ public interface InfoService {
     public boolean delReply(String lr_for_words);
 
     public boolean delReply2(String lr_id);
+
+    /**
+     * 插入点赞记录
+     *
+     * @param
+     * @return
+     */
+    public Integer insertCollect(String uid,String infoId);
+
+    /**
+     * 删除点赞记录
+     *
+     * @param id
+     * @return
+     */
+    public Integer deleteCollect(String id);
+
+
+    /**
+     * 根据用户id和文章id信息查询点赞记录
+     *
+     * @param
+     * @return
+     */
+    public Collect findCollect(String uid, String infoId);
 
 }

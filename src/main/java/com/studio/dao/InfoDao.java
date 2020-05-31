@@ -1,9 +1,6 @@
 package com.studio.dao;
 
-import com.studio.domian.Info;
-import com.studio.domian.NiceDetail;
-import com.studio.domian.Reply;
-import com.studio.domian.Words;
+import com.studio.domian.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -182,4 +179,32 @@ public interface InfoDao {
             "where userID=#{uid}" +
             " and contentId=#{infoId}")
     NiceDetail findNiceDetail( @Param("uid") String uid,@Param("infoId") String infoId);
+
+    /**
+     * 插入收藏记录
+     */
+    @Insert("insert into collect(uid,info_id,creat_time)\n" +
+            "VALUES(#{userId},#{infoId},NOW())")
+    Integer insertCollect( @Param("userId") String uid,@Param("infoId") String infoId);
+
+    /**
+     * 删除收藏记录
+     *
+     * @param id
+     * @return
+     */
+    @Delete("DELETE from collect\n" +
+            "where cid=#{id}")
+    Integer deleteCollect(String id);
+    /**
+     * 根据用户id和文章id信息查询收藏记录
+     *
+     * @param
+     * @return
+     */
+    @Select("select *\n" +
+            "from collect\n" +
+            "where uid=#{uid}" +
+            " and info_id=#{infoId}")
+    Collect findCollect(@Param("uid") String uid, @Param("infoId") String infoId);
 }

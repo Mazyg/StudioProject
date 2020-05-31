@@ -54,6 +54,20 @@
             color:white;
             font-size: 14px;
         }
+        .collect{
+            position: relative;
+            left: 70%;
+            font-size: 45px;
+            color: #AAB8C2;
+            width: 50px;
+            height: 50px;
+        }
+        .color{
+            color: #B4BF42;
+        }
+        .collect:hover, .collect:focus{
+            color: #B4BF42;
+        }
         .heart {
             background: url(img/web_heart_animation.png);
             background-position: left;
@@ -64,7 +78,8 @@
             /*position: absolute;*/
             /*left:700px;*/
             position: relative;
-            left: 500px;
+            top:-70px;
+            left: 75%;
             background-size:2900%;
         }
         .heart:hover, .heart:focus{
@@ -100,7 +115,7 @@
             animation-timing-function: steps(28);
             background-position: right;
         }
-        .likeCount{font-family: 'Georgia', Times, Times New Roman, serif;font-size: 25px;color: #999999;position: relative;top: -60px;left: 580px;}
+        .likeCount{font-family: 'Georgia', Times, Times New Roman, serif;font-size: 25px;color: #999999;position: relative;top: -140px;left: 88%;}
     </style>
 <body>
 <header class="clearfix">
@@ -169,7 +184,8 @@
             <h2 class="dh2">${infos.title}</h2>
             <br><br><br>
             <span class="siz">${infos.content}</span>
-<%--            点赞--%>
+<%--------------------------------------------------点赞，收藏--------------------------------------------------------------%>
+            <div class="collect">&#9733</div>
             <div class="heart " id="like1" rel="like"></div> <div class="likeCount" id="likeCount1">${result}</div>
             <br/>
             <div style="margin:0 4% 0 4%;">
@@ -179,7 +195,7 @@
                     <input name="lw_name" value="${users.uname}" hidden="hidden"/>
                     <input name="lw_date" value="<%=nowDate%>" hidden="hidden"/>
                     <input name="lw_for_article_id" value="${article.info_id}" hidden="hidden"/>
-                    <div class="layui-input-block" style="margin-left: 0;margin-top: -50px;">
+                    <div class="layui-input-block" style="margin-left: 0;margin-top: -90px;">
                         <textarea id="lw_content" name="lw_content" placeholder="请输入你的留言" class="layui-textarea" style="height: 150px;"></textarea>
                     </div>
                     <br/>
@@ -336,11 +352,11 @@
 </body>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/layui.js"></script>
-<!-----------------------点赞js------------------------------------------------------------>
+
 <script>
     $(document).ready(function()
     {
-
+    // -----------------------点赞----------------------------------------------------------
         var color='<%=request.getSession().getAttribute("color")%>';
         if(color=="like"){
             $(".heart").addClass("heartAnimation");
@@ -387,7 +403,32 @@
              }
         });
 
-
+        // -----------------------收藏----------------------------------------------------------
+        var color1='<%=request.getSession().getAttribute("color1")%>';
+        if(color1=="yellow"){
+            $(".collect").addClass("color");
+        }
+        else {
+            $(".collect").removeClass("color");
+        }
+        $('body').on("click",'.collect',function(){
+            var uid='<%=request.getSession().getAttribute("uid")%>';
+            if(uid=="null"){
+                alert("请先去登录！");
+            }
+            else{
+                $.get("../nice/collect.do",null,function(res){
+                    if(res=="insert"){
+                        $(".collect").addClass("color");//星星变成黄色
+                        alert("收藏成功！")
+                    }
+                    else if(res=="del"){
+                        $(".collect").removeClass("color");//去除星星效果
+                        alert("取消收藏！");
+                    }
+                },"text");
+            }
+        });
     });
 </script>
 <script type="text/javascript">

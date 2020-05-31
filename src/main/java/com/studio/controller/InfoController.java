@@ -459,6 +459,12 @@ public class InfoController {
         }else{
             request.getSession().setAttribute("color","unlike");
         }
+        Collect collect=infoService.findCollect(uid,infoId);
+        if (collect!=null){
+            request.getSession().setAttribute("color1","yellow");
+        }else{
+            request.getSession().setAttribute("color1","gray");
+        }
         int result=info.getNice();
         model.addAttribute("result",result);
         model.addAttribute("infos", info);
