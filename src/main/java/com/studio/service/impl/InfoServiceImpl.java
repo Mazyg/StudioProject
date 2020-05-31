@@ -1,10 +1,7 @@
 package com.studio.service.impl;
 
 import com.studio.dao.InfoDao;
-import com.studio.domian.Info;
-import com.studio.domian.NiceDetail;
-import com.studio.domian.Reply;
-import com.studio.domian.Words;
+import com.studio.domian.*;
 import com.studio.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -170,5 +167,20 @@ public class InfoServiceImpl implements InfoService {
     @Override
     public boolean delReply2(String lr_id) {
         return infoDao.delReply2(lr_id);
+    }
+
+    @Override
+    public Integer insertCollect(String uid, String infoId) {
+        return infoDao.insertCollect(uid,infoId);
+    }
+
+    @Override
+    public Integer deleteCollect(String id) {
+        return infoDao.deleteCollect(id);
+    }
+
+    @Override
+    public Collect findCollect(String uid, String infoId) {
+        return infoDao.findCollect(uid,infoId);
     }
 }
