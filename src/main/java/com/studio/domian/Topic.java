@@ -17,8 +17,17 @@ public class Topic implements Serializable {
     private String t_type;
     private Integer view_count;
     private String t_result;
+    private String t_reason;
     private User user;
 
+
+    public String getT_reason() {
+        return t_reason;
+    }
+
+    public void setT_reason(String t_reason) {
+        this.t_reason = t_reason;
+    }
 
     public String getT_result() {
         return t_result;
@@ -100,6 +109,7 @@ public class Topic implements Serializable {
         this.t_type = t_type;
     }
 
+
     @Override
     public String toString() {
         return "Topic{" +
@@ -112,6 +122,7 @@ public class Topic implements Serializable {
                 ", t_type='" + t_type + '\'' +
                 ", view_count=" + view_count +
                 ", t_result='" + t_result + '\'' +
+                ", t_reason='" + t_reason + '\'' +
                 ", user=" + user +
                 '}';
     }
