@@ -107,17 +107,29 @@ public interface InfoDao {
             "          lw_name,\n" +
             "          lw_date,\n" +
             "          lw_content,\n" +
-            "          lw_for_name,\n" +
             "          lw_for_article_id\n" +
             "        )\n" +
             "        values(\n" +
             "          #{lw_name},\n" +
             "          #{lw_date},\n" +
             "          #{lw_content},\n" +
-            "          #{lw_for_name},\n" +
             "          #{lw_for_article_id}\n" +
             "        )")
     void saveWords(Words words);
+
+//    删除留言信息
+    @Delete("DELETE from words\n" +
+            "where lw_id=#{lw_id}")
+    public boolean delWords(String lw_id);
+    //    删除某一留言下回复信息
+    @Delete("DELETE from reply\n" +
+            "where lr_for_words=#{lr_for_words}")
+    public boolean delReply(String lr_for_words);
+
+    //    删除某一回复信息
+    @Delete("DELETE from reply\n" +
+            "where lr_id=#{lr_id}")
+    public boolean delReply2(String lr_id);
 //保存回复信息
     @Insert("  insert into reply(\n" +
             "          lr_name,\n" +

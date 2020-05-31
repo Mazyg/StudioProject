@@ -158,4 +158,17 @@ public class InfoServiceImpl implements InfoService {
     public NiceDetail findNiceDetail(String uid,String infoId) {
         return  infoDao.findNiceDetail(uid,infoId);
     }
+
+    @Override
+    public boolean delWords(String lw_id){return infoDao.delWords(lw_id);}
+
+    @Override
+    public boolean delReply(String lr_for_words) {
+        return infoDao.delReply(lr_for_words);
+    }
+
+    @Override
+    public boolean delReply2(String lr_id) {
+        return infoDao.delReply2(lr_id);
+    }
 }
