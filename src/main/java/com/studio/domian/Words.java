@@ -15,8 +15,6 @@ public class Words implements Serializable {
     private String lw_date;
     //留言内容
     private String lw_content;
-    //给谁留言
-    private String lw_for_name;
     //在哪篇文章留言(id)
     private String lw_for_article_id;
 
@@ -50,14 +48,6 @@ public class Words implements Serializable {
 
     public void setLw_content(String lw_content) {
         this.lw_content = lw_content;
-    }
-
-    public String getLw_for_name() {
-        return lw_for_name;
-    }
-
-    public void setLw_for_name(String lw_for_name) {
-        this.lw_for_name = lw_for_name;
     }
 
     public String getLw_for_article_id() {

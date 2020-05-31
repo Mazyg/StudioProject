@@ -207,6 +207,9 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             <p>
                                                 <a href="javascript:;" style="text-decoration: none;" onclick="btnReplyClick(this)">回复</a>
+                                                 <c:if test="${users.uid !=null && words.lw_name eq users.uname}">
+                                                    <a href="javascript:;" style="text-decoration: none;" onclick="delClick(${words.lw_id})">删除</a>
+                                                 </c:if>
                                             </p>
                                             <hr style="margin-top: 7px;"/>
                                         </div>
@@ -243,6 +246,9 @@
                                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                                             <p>
                                                                 <a href="javascript:;" style="text-decoration: none;" onclick="btnReplyClick(this)">回复</a>
+                                                                <c:if test="${users.uid !=null && reply.lr_name eq users.uname}">
+                                                                    <a href="javascript:;" style="text-decoration: none;" onclick="delReplyClick(${reply.lr_id})">删除</a>
+                                                                </c:if>
                                                             </p>
                                                             <hr style="margin-top: 7px;"/>
                                                         </div>
@@ -488,6 +494,30 @@
             }
 
   });
+    // -----------------------------删除留言-----------------------------------------------------------------------------
+    function delClick(lw_id){
+        $.get("../del/delWords.do?lw_id="+lw_id,null,function(res){
+            if (res=="true"){
+                alert("删除成功！");
+                window.location.reload();
+            }
+            else{
+                alert("删除失败！");
+            }
+        },"text");
+    }
+  // -----------------------------删除回复-----------------------------------------------------------------------------
+    function delReplyClick(lr_id) {
+        $.get("../del/delReply.do?lr_id="+lr_id,null,function(res){
+            if (res=="true"){
+                alert("删除成功！");
+                window.location.reload();
+            }
+            else{
+                alert("删除失败！");
+            }
+        },"text");
+    }
 </script>
 </html>
 

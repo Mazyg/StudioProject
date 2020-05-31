@@ -79,4 +79,10 @@ public interface InfoService {
      */
    public NiceDetail findNiceDetail(String uid,String infoId);
 
+    public boolean delWords(String lw_id);
+
+    public boolean delReply(String lr_for_words);
+
+    public boolean delReply2(String lr_id);
+
 }
