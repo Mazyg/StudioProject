@@ -184,7 +184,7 @@
                                     </thead>
                                     <tbody>
 
-                                    <c:forEach var="info" items="${infos}">
+                                    <c:forEach var="info" items="${pageInfo.list}">
                                         <tr>
                                             <td>${info.info_id}</td>
                                             <td>${info.title}</td>
@@ -198,6 +198,16 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="template-demo" style="margin: 0 auto">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <c:forEach items="${pageInfo.navigatepageNums}" var="page">
+                                        <a type="button" class="btn btn-outline-secondary"
+                                           href="../info/findAllInfo.do?pageNum=${page}">${page}</a>
+                                    </c:forEach>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>

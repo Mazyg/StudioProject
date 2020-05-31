@@ -31,10 +31,13 @@ public interface InfoService {
     public List<Info> findInfoBytype(String info_type, int start, int length);
 
     //全局模糊查询分页显示
-    public List<Info> showAll(String keyword, int start, int length);
+    public List<Info> showAll(String keyword);
 
     //根据类别查询信息数量
     public int countBytype(String info_type);
+
+    //根据类别查询信息数量
+    public List<Info> queryInfoByType(String type);
 
     //全局模糊查询信息数量
     public int countAll(String keyword);
@@ -78,5 +81,11 @@ public interface InfoService {
      * @return
      */
    public NiceDetail findNiceDetail(String uid,String infoId);
+
+    public boolean delWords(String lw_id);
+
+    public boolean delReply(String lr_for_words);
+
+    public boolean delReply2(String lr_id);
 
 }

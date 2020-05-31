@@ -61,8 +61,10 @@
             height: 100px;
             width: 100px;
             cursor: pointer;
-            position: absolute;
-            left:700px;
+            /*position: absolute;*/
+            /*left:700px;*/
+            position: relative;
+            left: 500px;
             background-size:2900%;
         }
         .heart:hover, .heart:focus{
@@ -98,7 +100,7 @@
             animation-timing-function: steps(28);
             background-position: right;
         }
-        .likeCount{font-family: 'Georgia', Times, Times New Roman, serif; margin-top:30px;margin-left: 600px;font-size: 25px;color: #999999}
+        .likeCount{font-family: 'Georgia', Times, Times New Roman, serif;font-size: 25px;color: #999999;position: relative;top: -60px;left: 580px;}
     </style>
 <body>
 <header class="clearfix">
@@ -126,24 +128,19 @@
     <nav class="navwrap yahei">
         <section class="mainWrap">
             <ul id="nav">
-                <li><a href="../info/epidemic.do?page=1&numberPerPage=3&start=0&length=3">全球战疫</a>
+                <li><a href="../info/epidemic.do">全球战疫</a>
                 </li>
-                <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
+                <li><a href="../info/findEvent.do">热点资讯</a>
                 </li>
-                <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
-                    <%--<ul>
-                        <li><a href="#">最美中国景</a></li>
-                        <li><a href="#">最美中国人</a></li>
-                        <li><a href="#">最美中国事</a></li>
-                    </ul>--%>
+                <li><a href="../info/findChinese.do">爱我中华</a>
                 </li>
-                <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
+                <li><a href="../info/findPersonInfo.do">榜样力量</a>
                 </li>
-                <li><a href="../topic/showTopic.do" class="">话题</a>
+                <li><a href="../topic/showTopic.do">话题</a>
                 </li>
-                <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3" class="">书籍</a></li>
-                <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
-                <li><a href="../info/findPersonalMainInfo.do" class="">个人中心</a>
+                <li><a href="../info/findBooks.do" >书籍</a></li>
+                <li><a href="../info/findMovies.do">电影</a></li>
+                <li><a href="../info/findPersonalMainInfo.do">个人中心</a>
                     <ul class="last">
                         <li><a href="main/personInfo.jsp">个人信息</a></li>
                         <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
@@ -177,7 +174,7 @@
                     <input name="lw_name" value="${users.uname}" hidden="hidden"/>
                     <input name="lw_date" value="<%=nowDate%>" hidden="hidden"/>
                     <input name="lw_for_article_id" value="${article.info_id}" hidden="hidden"/>
-                    <div class="layui-input-block" style="margin-left: 0;">
+                    <div class="layui-input-block" style="margin-left: 0;margin-top: -50px;">
                         <textarea id="lw_content" name="lw_content" placeholder="请输入你的留言" class="layui-textarea" style="height: 150px;"></textarea>
                     </div>
                     <br/>
@@ -207,6 +204,9 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             <p>
                                                 <a href="javascript:;" style="text-decoration: none;" onclick="btnReplyClick(this)">回复</a>
+                                                 <c:if test="${users.uid !=null && words.lw_name eq users.uname}">
+                                                    <a href="javascript:;" style="text-decoration: none;" onclick="delClick(${words.lw_id})">删除</a>
+                                                 </c:if>
                                             </p>
                                             <hr style="margin-top: 7px;"/>
                                         </div>
@@ -243,6 +243,9 @@
                                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                                             <p>
                                                                 <a href="javascript:;" style="text-decoration: none;" onclick="btnReplyClick(this)">回复</a>
+                                                                <c:if test="${users.uid !=null && reply.lr_name eq users.uname}">
+                                                                    <a href="javascript:;" style="text-decoration: none;" onclick="delReplyClick(${reply.lr_id})">删除</a>
+                                                                </c:if>
                                                             </p>
                                                             <hr style="margin-top: 7px;"/>
                                                         </div>
@@ -363,8 +366,19 @@
                     $(this).removeClass("heartAnimation").attr("rel","like");
                     $(this).css("background-position","left");
                 }
-
-                window.location.href="../info/niceDetail.do"
+                $.get("../nice/niceDetail.do",null,function(res){
+                    var count=parseInt($("#likeCount1").text());//将取出的点赞数转化为整型
+                    if(res=="up"){
+                        count=count+1;
+                        $(".heart").addClass("heartAnimation");//加上红心效果
+                    }
+                    else if(res=="down"){
+                        count=count-1;
+                        $(".heart").removeClass("heartAnimation");//去除红心效果
+                    }
+                    $("#likeCount1").text(count);
+                },"text");
+                // window.location.href="../info/niceDetail.do"
              }
         });
 
@@ -477,6 +491,30 @@
             }
 
   });
+    // -----------------------------删除留言-----------------------------------------------------------------------------
+    function delClick(lw_id){
+        $.get("../del/delWords.do?lw_id="+lw_id,null,function(res){
+            if (res=="true"){
+                alert("删除成功！");
+                window.location.reload();
+            }
+            else{
+                alert("删除失败！");
+            }
+        },"text");
+    }
+  // -----------------------------删除回复-----------------------------------------------------------------------------
+    function delReplyClick(lr_id) {
+        $.get("../del/delReply.do?lr_id="+lr_id,null,function(res){
+            if (res=="true"){
+                alert("删除成功！");
+                window.location.reload();
+            }
+            else{
+                alert("删除失败！");
+            }
+        },"text");
+    }
 </script>
 </html>
 

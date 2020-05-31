@@ -27,19 +27,19 @@
         <nav class="navwrap yahei">
             <section class="mainWrap">
                 <ul id="nav">
-                    <li><a href="../info//epidemic.do?page=1&numberPerPage=3&start=0&length=3">全球战疫</a>
+                    <li><a href="../info/epidemic.do">全球战疫</a>
                     </li>
-                    <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点时事</a>
+                    <li><a href="../info/findEvent.do">热点时事</a>
                     </li>
-                    <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
+                    <li><a href="../info/findChinese.do">爱我中华</a>
                     </li>
-                    <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
+                    <li><a href="../info/findPersonInfo.do" >榜样力量</a>
                     </li>
-                    <li><a href="../topic/showTopic.do" class="">话题</a>
+                    <li><a href="../topic/showTopic.do" >话题</a>
                     </li>
 
-                    <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3">书籍</a></li>
-                    <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
+                    <li><a href="../info/findBooks.do">书籍</a></li>
+                    <li><a href="../info/findMovies.do">电影</a></li>
 
                     <c:if test="${users.uname!=null}">
                         <li><a href="../info/findPersonalMainInfo.do" class="">个人中心</a>
@@ -62,7 +62,6 @@
         </nav>
         <!--未登入开始-->
         <div class="ltForm appear">
-<%--            <a href=""><img src="img/indexForm_bg.png" alt="" class="headPic2"/></a>--%>
             <ul>
                 <c:choose>
                     <c:when test="${users == null}">
@@ -73,22 +72,8 @@
                 </c:choose>
             </ul>
         </div>
-        <!-- 未登入结束-->
-        <!-- 登入开始，未登入时以下隐藏-->
-        <!--<div class="lt_login appear">-->
-        <!--<ul>-->
-        <!--<li><a href="">花开花落</a></li>-->
-        <!--<li><a href="">退出</a></li>-->
-        <!--</ul>-->
-        <!--</div>-->
-        <!-- 登入结束-->
         <div class="navFix">
-            <!--登入开始-->
             <a class="navMe">${users.uname}</a>
-            <!--登入结束-->
-            <!--未登入开始-->
-            <!--<a href="" class="navLogin">登录</a>-->
-            <!--未登入结束-->
             <a href="main/write.jsp" class="navWrite">发起话题</a>
         </div>
     </div>

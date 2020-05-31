@@ -60,15 +60,6 @@ public class DynamicController {
         }
         return "false";
     }
-    /**
-     * 用户发动态页面显示
-     */
-    @RequestMapping("/myDynamic")
-    public String findEvent(Model model){
-        List<Topic> topic=topicService.findTopic(0,5);
-        model.addAttribute("topic",topic);
-        return  "user/main/dynamic";
-    }
 
     @RequestMapping("/findAllTopic")
     public String findAllTopic(Model model){

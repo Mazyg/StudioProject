@@ -97,7 +97,7 @@
             outline: none; /*去除外边框*/
         }
 
-        #telephone {
+        #phone {
             height: 80px;
         }
         #navigation {
@@ -235,7 +235,7 @@
     </div>
     <form action="../rep/rePassword.do" method="post">
     <div id="navigation"><span id="tip">111111111111</span></div>
-    <div id="telephone">
+    <div id="phone">
         <div id="tel_start">中国 0086</div>
         <input id="tel_end" type="text" placeholder="建议使用常用手机号" name="telephone" >
     </div>
@@ -274,14 +274,12 @@
             }
             // $.get(URL,data,function(data,status,xhr),dataType)
             //URL规定您需要请求的 URL。Data规定连同请求发送到服务器的数据。function(data,status,xhr)规定当请求成功时运行的函数(data - 包含来自请求的结果数据status - 包含请求的状态（"success"、"notmodified"、"error"、"timeout"、"parsererror"）xhr - 包含 XMLHttpRequest 对象)。datatype规定预期的服务器响应的数据类型。
-            $.get("../rep/checkPhone.do?telephone="+number,null,function test(res){
+            $.get("../rep/checkPhone.do?telephone="+number,null,function(res){
                 if(res=="no"){
                     alert("该手机号还未注册，请先去注册用户！");
-                    return false;
                 }
                 else{
                     $('#select').removeClass('hide');
-                    return true;
                 }
             },"text");
         }
@@ -353,7 +351,7 @@
         // 和系统发送短信的验证码匹配
         var code=$("#res").text();
         if(userCode == code) {
-            $("#telephone,#code").hide();
+            $("#phone,#code").hide();
             $("#password").show();
             $("#repassword").show();
             $("#nextBtn").html("提交");
