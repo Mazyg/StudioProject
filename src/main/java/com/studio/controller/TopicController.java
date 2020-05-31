@@ -2,9 +2,11 @@ package com.studio.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.studio.domian.*;
+import com.studio.domian.Dynamic;
+import com.studio.domian.Info;
+import com.studio.domian.Topic;
+import com.studio.domian.User;
 import com.studio.service.*;
-import net.sf.jsqlparser.statement.select.Top;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,6 @@ import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 
 @Controller
 @RequestMapping("/topic")
@@ -143,9 +144,9 @@ public class TopicController {
     @RequestMapping("/deleTopic2")
     public @ResponseBody String deleTopic2(HttpServletRequest request,Model model){
        String tid = request.getParameter("tid");
+        System.out.println("tt"+tid);
         boolean topicDele = topicService.deleTopic(tid);
-        /*model.addAttribute("topicDel", topicDele);
-        return "user/main/personInfoTopic";*/
+        System.out.println("t"+topicDele);
         if(topicDele==true){
             return "success";
         }else {
@@ -194,13 +195,16 @@ public class TopicController {
     @RequestMapping("/updateStatusNot")
     public @ResponseBody String updateStatusNot(HttpServletRequest request){
         String tid = request.getParameter("tid");
+        String t_reason = request.getParameter("t_reason");
         Topic topics = topicService.findTopicById(tid);
+        topics.setT_reason(t_reason);
         if("已审核".equals(topics.getT_tatus())){
             /*boolean topicStatus = false;*/
             /* return "redirect:/topic/findAll.do?topicdel="+topicStatus;*/
             return "false";
         }
-        boolean topicStatus = topicService.updateStatusNot(tid);
+        boolean topicStatus = topicService.updateStatusNot(topics);
+        System.out.println("tid"+topicStatus);
         /* return "redirect:/topic/findAll.do?topicdel="+topicStatus;*/
         if(topicStatus == true){
             return "success";
@@ -217,13 +221,28 @@ public class TopicController {
     @RequestMapping("/updateStatusNot1")
     public @ResponseBody String updateStatusNot1(HttpServletRequest request){
         String tid = request.getParameter("tid");
-        boolean topicStatus = topicService.updateStatusNot(tid);
+        String t_reason = request.getParameter("t_reason");
+        Topic topics = topicService.findTopicById(tid);
+        topics.setT_reason(t_reason);
+        boolean topicStatus = topicService.updateStatusNot(topics);
         /*  return "redirect:/topic/findAllTopicByStatus.do?topicdel="+topicStatus;*/
         if(topicStatus == true){
             return "success";
         }else{
             return "false";
         }
+    }
+
+    /**
+     * 为模态框返回json数据
+     * @param request
+     * @return topic
+     */
+    @RequestMapping("/showResult")
+    public @ResponseBody Topic  showResult(HttpServletRequest request){
+        String tid = request.getParameter("tid");
+        Topic topicResult = topicService.findTopicById(tid);
+        return topicResult;
     }
 
 

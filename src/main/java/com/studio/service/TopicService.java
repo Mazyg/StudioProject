@@ -27,7 +27,7 @@ public interface TopicService {
 
     public boolean updateStatus(String tid);
 
-    public boolean updateStatusNot(String tid);
+    public boolean updateStatusNot(Topic topic);
 
     public Topic findTopicById(String tid);
 

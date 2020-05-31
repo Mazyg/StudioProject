@@ -46,12 +46,13 @@
        });
      })
 
-     $(".status1").click(function () {
-       var $tid = $(this).parent().parent().children('td').eq(0).text();
+     $("#status1").click(function () {
+         var $tid = $(this).parent().parent().parent().parent().parent().parent().children('td').eq(0).text();
+         var $t_reason = $(this).parent().prev().children().eq(0).val();
        $.ajax({
          type:'post',
          url:"../topic/updateStatusNot1.do",
-         data:"tid="+$tid,
+         data:"tid="+$tid+"&t_reason="+$t_reason,
          success:function (msg) {
            if(msg === "success"){
              alert("操作成功！")
@@ -219,22 +220,6 @@
             </ul>
           </div>
         </li>
-        <%--<li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-            <span class="menu-title">General Pages</span>
-            <i class="icon-doc menu-icon"></i>
-          </a>
-          <div class="collapse" id="auth">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/login.jsp"> Login </a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/register.jsp"> Register </a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.jsp"> 404 </a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.jsp"> 500 </a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.jsp"> Blank Page </a></li>
-            </ul>
-          </div>
-        </li>--%>
       </ul>
     </nav>
     <!-- partial -->
@@ -256,9 +241,7 @@
                     <th><h4>时间</h4></th>
                     <th><h4>内容</h4></th>
                     <th><h4>状态</h4></th>
-                    <th><h4>操作1</h4></th>
-                    <th><h4>操作2</h4></th>
-                    <th><h4>操作3</h4></th>
+                    <th><h4>&nbsp;&nbsp;&nbsp;操作</h4></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -269,13 +252,24 @@
                       <td>${topic1.t_title}</td>
                       <td>${topic1.date}</td>
                       <td><a href="../topic/findById.do?tid=${topic1.tid}">查看详情</a> </td>
-                     <%-- <c:if test="${'已审核' eq topic1.t_tatus}">
-                      <td>${topic1.t_tatus}/${topic1.tid}</td>
-                      </c:if>--%>
                       <td>未审核</td>
-                      <td><a href="javascript:void(0)" style="color: #1d6b1f" class="status">通过审核</a></td>
-                      <td><a href="javascript:void(0)" style="color: #c2a957" class="status1">不通过</a> </td>
-                      <td><a href="javascript:void(0)" style="color: #a01a1f" class="del">删除</a></td>
+                      <td><a href="javascript:void(0)" style="color: #1d6b1f" class="status">通过审核</a>/
+                          <a href="javascript:void(0)" style="color: #c2a957" data-toggle="modal" data-target="#myModal">不通过</a>
+                          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-body">
+                                          <textarea class="form-control" rows="3" placeholder="输入审核不通过的原因"></textarea>
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                          <button type="button" class="btn btn-primary" id="status1">发送</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </td>
+                     <%-- <td><a href="javascript:void(0)" style="color: #a01a1f" class="del">删除</a></td>--%>
                       <td><td>
                     </tr>
                   </c:forEach>
