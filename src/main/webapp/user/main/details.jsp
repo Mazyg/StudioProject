@@ -61,8 +61,10 @@
             height: 100px;
             width: 100px;
             cursor: pointer;
-            position: absolute;
-            left:700px;
+            /*position: absolute;*/
+            /*left:700px;*/
+            position: relative;
+            left: 500px;
             background-size:2900%;
         }
         .heart:hover, .heart:focus{
@@ -98,7 +100,7 @@
             animation-timing-function: steps(28);
             background-position: right;
         }
-        .likeCount{font-family: 'Georgia', Times, Times New Roman, serif; margin-top:30px;margin-left: 600px;font-size: 25px;color: #999999}
+        .likeCount{font-family: 'Georgia', Times, Times New Roman, serif;font-size: 25px;color: #999999;position: relative;top: -60px;left: 580px;}
     </style>
 <body>
 <header class="clearfix">
@@ -172,7 +174,7 @@
                     <input name="lw_name" value="${users.uname}" hidden="hidden"/>
                     <input name="lw_date" value="<%=nowDate%>" hidden="hidden"/>
                     <input name="lw_for_article_id" value="${article.info_id}" hidden="hidden"/>
-                    <div class="layui-input-block" style="margin-left: 0;">
+                    <div class="layui-input-block" style="margin-left: 0;margin-top: -50px;">
                         <textarea id="lw_content" name="lw_content" placeholder="请输入你的留言" class="layui-textarea" style="height: 150px;"></textarea>
                     </div>
                     <br/>
