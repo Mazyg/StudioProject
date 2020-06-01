@@ -43,8 +43,8 @@ public interface InfoDao {
             "where title like #{keyword}\n" +
             "or info_type like #{keyword}\n" +
             "or introduce like #{keyword}\n" +
-            "order by date desc\n"+"limit #{start},#{length}")
-    public List<Info> showAll( @Param("keyword") String keyword,@Param("start") int start,@Param("length") int length);
+            "order by date desc\n")
+    public List<Info> showAll( @Param("keyword") String keyword);
 
 
     //查询榜样的力量的信息，并按时间降序排列取前三条
@@ -65,7 +65,9 @@ public interface InfoDao {
     @Insert("insert into info(title,content,info_type,photo,date,introduce,video) values('${title}','${content}','${info_type}','${photo}','${date}','${introduce}','${video}')")
     public boolean addInfo(Info info);
 
-    public List<Info> findAllByType(Info info);
+    @Select("select info_id,title,introduce,date_format(date ,'%Y-%m-%d' ) date,info_type,photo" +
+            " from info where info_type like #{type} order by date desc")
+    public List<Info> findAllByType(String type);
 
     //根据id查询信息
     @Select("select * from info where info_id=#{info_id}")

@@ -43,26 +43,8 @@
         height: 70px;
     }
 
-
-    /*.back2{
-        background-color: white;
-        border-radius: 1%;
-    }*/
-
 </style>
 <script type="text/javascript">
-    /*function message() {
-
-        var mes = <%--${topicDel}--%>;
-        alert(mes)
-        if(mes == true){
-            alert("删除成功！")
-        }else
-            if(mes == false){
-                alert("出错了！")
-            }
-    }*/
-
     $(function () {
         $(".del").click(function () {
             var $tid = $(this).parent().parent().children('td').eq(0).text();
@@ -83,42 +65,57 @@
                 }
             });
         });
+
+
+
     })
+
+    function query(tid) {
+        $.ajax({
+            url : "../topic/showResult.do",
+            async : true,
+            type : "POST",
+            data : {
+                "tid" : tid
+            },
+            // 成功后开启模态框
+            success : showQuery,
+            error : function() {
+                alert("请求失败");
+            },
+            dataType : "json"
+        });
+    }
+
+    // 查询成功后向模态框插入数据并开启模态框。data是返回的JSON对象
+    function showQuery(data) {
+        $("#content").val(data.content);
+        $("#type").val(data.t_type);
+        $("#result").val(data.t_result);
+        $("#reason").val(data.t_reason);
+        $("#title").val(data.t_title);
+        // 显示模态框
+        $('#myModal').modal('show');
+    }
+
 </script>
 <body onload="message()">
 <header class="clearfix">
-    <%--<section class="mainWrap">
-        <div class="topwraper relative clearfix">
-            <div class="search">
-                <form id="searchForm" target="_blank">
-                    <input name="query" type="text" >
-                    <input name="ie" type="hidden" value="utf8">
-                    <input name="cid" type="hidden" value="3">
-                    <a href="javascript:;" onclick="searchSub();"><i>搜索</i></a>
-                </form>
-            </div>
-        </div>
-    </section>--%>
         <nav class="navwrap yahei">
             <section class="mainWrap">
                 <ul id="nav">
-                    <li><a href="../info//epidemic.do?page=1&numberPerPage=3&start=0&length=3">全球战疫</a>
+                    <li><a href="../info/epidemic.do">全球战疫</a>
                     </li>
-                    <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
+                    <li><a href="../info/findEvent.do">热点资讯</a>
                     </li>
                     <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
-                        <%--<ul>
-                            <li><a href="#">最美中国景</a></li>
-                            <li><a href="#">最美中国人</a></li>
-                            <li><a href="#">最美中国事</a></li>
-                        </ul>--%>
                     </li>
-                    <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
+                    <li><a href="../info/findPersonInfo.do" >榜样力量</a>
                     </li>
-                    <li><a href="../topic/showTopic.do" class="">话题</a>
+                    <li><a href="../topic/showTopic.do" >话题</a>
                     </li>
-                    <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3" class="">书籍</a></li>
-                    <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
+                    <li><a href="../info/findBooks.do" >书籍</a></li>
+                    <li><a href="../info/findMovies.do">电影</a></li>
                     <li><a class="">个人中心</a>
                         <ul class="last">
                             <li><a href="main/personInfo.jsp">个人信息</a></li>
@@ -186,6 +183,7 @@
                             <table class="table  table-hover">
                                 <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>话题</th>
                                     <th>发布时间</th>
                                     <th>状态</th>
@@ -196,11 +194,36 @@
                                 <tbody>
                         <c:forEach items="${topicInfo}" var="topicInfo">
                             <tr>
+                                <td>${topicInfo.tid}</td>
                                 <td>${topicInfo.t_title}</td>
                                 <td>${topicInfo.date}</td>
                                 <td>${topicInfo.t_tatus}/${topicInfo.t_result}</td>
-                                <td><a href="../topic/findTopicById.do?tid=${topicInfo.tid}">详情</a> </td>
-                                <td><a href="javascript:void(0)" class="del">删除</a></td>
+                                <c:if test="${topicInfo.t_result.equals('已通过')}">
+                                    <td><a style="color: #1b8dbf"  href="../topic/findTopicById.do?tid=${topicInfo.tid}">详情</a></td>
+                                </c:if>
+                                <c:if test="${topicInfo.t_result.equals('未通过')}">
+                                <td><a style="color: #1b8dbf" href="javascript:void(0)" onclick="query(${topicInfo.tid})" >详情</a>
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel">详情</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                    话题标题：<input  id="title" readonly style="border:0;background:transparent;"><br><br>
+                                                    话题简介：<input id="content" readonly style="border:0;background:transparent;"><br><br>
+                                                    话题类型：<input id="type" readonly style="border:0;background:transparent;"><br><br>
+                                                    话题状态：<input id="result" readonly style="border:0;background:transparent;color: #bf3322"><br><br>
+                                                    状态原因：<input id="reason" readonly style="border:0;background:transparent;color: #bf3322"> <br><br>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></td></c:if>
+                                <td><a style="color: #c21d17" href="javascript:void(0)" class="del">删除</a></td>
                             </tr>
                         </c:forEach>
                                 </tbody>

@@ -76,8 +76,8 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public boolean updateStatusNot(String tid) {
-        return topicDao.updateStatusNot(tid);
+    public boolean updateStatusNot(Topic topic) {
+        return topicDao.updateStatusNot(topic);
     }
 
     @Override

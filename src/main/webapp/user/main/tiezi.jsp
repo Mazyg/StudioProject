@@ -41,15 +41,6 @@
                 </c:choose>
             </ul>
         </div>
-        <!-- 未登入结束-->
-        <!-- 登入开始，未登入时以下隐藏-->
-        <!--<div class="lt_login">-->
-        <!--<ul>-->
-        <!--<li><a href="">花开花落</a></li>-->
-        <!--<li><a href="">退出</a></li>-->
-        <!--</ul>-->
-        <!--</div>-->
-        <!-- 登入结束-->
     </div>
 </header>
 <div class="indexMain">

@@ -88,24 +88,19 @@
     <nav class="navwrap yahei">
         <section class="mainWrap">
             <ul id="nav">
-                <li><a href="../info//epidemic.do?page=1&numberPerPage=3&start=0&length=3">全球战疫</a>
+                <li><a href="../info/epidemic.do">全球战疫</a>
                 </li>
-                <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
+                <li><a href="../info/findEvent.do">热点资讯</a>
                 </li>
-                <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
-                    <%--<ul>
-                        <li><a href="#">最美中国景</a></li>
-                        <li><a href="#">最美中国人</a></li>
-                        <li><a href="#">最美中国事</a></li>
-                    </ul>--%>
+                <li><a href="../info/findChinese.do">爱我中华</a>
                 </li>
-                <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
+                <li><a href="../info/findPersonInfo.do">榜样力量</a>
                 </li>
-                <li><a href="../topic/showTopic.do" class="">话题</a>
+                <li><a href="../topic/showTopic.do">话题</a>
                 </li>
-                <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3" class="">书籍</a></li>
-                <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
-                <li><a href="../info/findPersonalMainInfo.do" class="">个人中心</a>
+                <li><a href="../info/findBooks.do">书籍</a></li>
+                <li><a href="../info/findMovies.do">电影</a></li>
+                <li><a href="../info/findPersonalMainInfo.do">个人中心</a>
                     <ul class="last">
                         <li><a href="main/personInfo.jsp">个人信息</a></li>
                         <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
@@ -126,7 +121,7 @@
     <div class="mainWrap clearfix">
         <section class="colunm1">
             <ul class="picnewslist people">
-                <c:forEach items="${movies}" var="movie">
+                <c:forEach items="${pageInfo.list}" var="movie">
                 <li class="clearfix">
                     <figure>
                         <a class="picwraper"  target="_blank">
@@ -147,10 +142,10 @@
             </ul>
             <br>
             <div class="pager">
-                <!-- 上一页 按钮 -->
+                <!-- 上一页 -->
                 <c:choose>
-                    <c:when test="${page>1}">
-                        <a href="../info/findMovies.do?start=${start-numberPerPage}&length=${numberPerPage}&page=${page-1}&numberPerPage=${numberPerPage}" rel="external nofollow" ><<</a>
+                    <c:when test="${pageInfo.pageNum>1}">
+                        <a href="../info/findMovies.do?pageNum=${pageInfo.prePage}" rel="external nofollow" ><<</a>
                     </c:when>
                     <c:otherwise>
                         <a><<</a>
@@ -158,26 +153,14 @@
                 </c:choose>
 
                 <!-- 页数列表 -->
-                <c:forEach items="${pageList}" var="item">
-                    <c:choose>
-                        <c:when test="${(total-(item-1)*numberPerPage)>=numberPerPage}">
-                            <a href="../info/findMovies.do?start=${(item-1)*numberPerPage}&length=${numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="../info/findMovies.do?start=${(item-1)*numberPerPage}&length=${total-(item-1)*numberPerPage}&page=${item}&numberPerPage=${numberPerPage}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${item}</a>
-                        </c:otherwise>
-                    </c:choose>
+                <c:forEach items="${pageInfo.navigatepageNums}" var="page">
+                    <a href="../info/findMovies.do?pageNum=${page}" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="currentPage">${page}</a>
                 </c:forEach>
 
                 <!-- 下一页 按钮 -->
                 <c:choose>
-                    <c:when test="${page<totalPage && rest>=numberPerPage}">
-                        <a href="../info/findMovies.do?start=${start+numberPerPage}&length=${numberPerPage}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
-                            >>
-                        </a>
-                    </c:when>
-                    <c:when test="${page<totalPage && rest<numberPerPage && rest>0}">
-                        <a href="../info/findMovies.do?start=${start+numberPerPage}&length=${rest}&page=${page+1}&numberPerPage=${numberPerPage}" rel="external nofollow">
+                    <c:when test="${pageInfo.hasNextPage}">
+                        <a href="../info/findMovies.do?pageNum=${pageInfo.nextPage}" rel="external nofollow">
                             >>
                         </a>
                     </c:when>
@@ -186,11 +169,7 @@
                     </c:otherwise>
                 </c:choose>
 
-                <!-- 直接跳转 -->
-                共${totalPage}页&nbsp;&nbsp;向<input type="text" id="jumpTo" />页 <input type="button" style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" value="跳转" onclick="jumpTo(${totalPage},${numberPerPage},${total},'../info/findMovies')" />
-                <!-- 设置每页显示条数 -->
-                &nbsp;&nbsp;每页显示<input type="text" name="numberPerPage" id="numberPerPage" />条 <input style="color: #461B6E;line-height: 32px;width:50px;font-size:15px" type="button" value="设置" onclick="change(${total},'../info/findMovies')" />
-            </div>
+                    </div>
         </section>
         <section class="colunm2">
             <section class="mod withborder">

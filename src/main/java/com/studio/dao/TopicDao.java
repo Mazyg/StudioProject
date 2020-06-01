@@ -14,8 +14,8 @@ public interface TopicDao {
     public boolean saveTopic(Topic topic);
 
     /*保存管理员话题*/
-    @Insert("insert into topic (date,t_title,content,t_tatus,uname,t_type) \n" +
-            "VALUES('${date}','${t_title}','${content}','已审核','${uname}','${t_type}')")
+    @Insert("insert into topic (date,t_title,content,t_tatus,uname,t_type,t_result) \n" +
+            "VALUES('${date}','${t_title}','${content}','已审核','${uname}','${t_type}','已通过')")
     public boolean saveTopicA(Topic topic);
 
     @Delete("delete from topic where tid=#{tid}")
@@ -41,7 +41,7 @@ public interface TopicDao {
     @Select("select * from topic where uid = #{uid}")
     public List<Topic> findAllByUid(Integer uid);
 
-    @Select("select * from topic where t_tatus= '已审核' order by date desc ")
+    @Select("select * from topic where t_result= '已通过' order by date desc ")
     public List<Topic> findCheckTopic();
     /**
      * 通过用户名查询用户发布的话题
@@ -77,18 +77,18 @@ public interface TopicDao {
 
     /**
      * 审核话题，但不通过
-     * @param tid
+     * @param
      * @return
      */
-    @Update("update topic set t_tatus= '已审核' where tid=#{tid}")
-    public boolean updateStatusNot(String tid);
+    @Update("update topic set t_tatus= '已审核',t_reason= '${t_reason}' where tid='${tid}'")
+    public boolean updateStatusNot(Topic topic);
 
     /**
      * 通过id寻找话题
      * @param tid
      * @return
      */
-    @Select("select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname,t_type,view_count from topic where tid=#{tid}")
+    @Select("select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname,t_type,view_count,t_result,t_reason from topic where tid=#{tid}")
     public Topic findTopicById(String tid);
 
     /**
@@ -97,7 +97,7 @@ public interface TopicDao {
      */
     @Select(" select tid,date_format(date ,'%Y-%m-%d' ) date,t_title,content,t_tatus,uname,t_type,view_count\n" +
             " from  topic\n" +
-            " where t_tatus='已审核'\n" +
+            " where t_result='已通过'\n" +
             " order by date desc "
             +"limit #{start},#{length}")
     public List<Topic> findTopic(@Param("start") int start, @Param("length") int length);
