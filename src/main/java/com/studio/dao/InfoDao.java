@@ -209,4 +209,12 @@ public interface InfoDao {
             "where uid=#{uid}" +
             " and info_id=#{infoId}")
     Collect findCollect(@Param("uid") String uid, @Param("infoId") String infoId);
+
+    /***
+     * 根据用户id,查询用户收藏的文章
+     */
+    @Select("SELECT a.*,title,info_type\n" +
+            "FROM  collect a,info b\n" +
+            "WHERE a.info_id=b.info_id and uid=#{uid}")
+    List<InfoCollect> findCollectByUid(Integer uid);
 }

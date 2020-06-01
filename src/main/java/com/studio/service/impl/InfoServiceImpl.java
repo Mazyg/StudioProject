@@ -183,4 +183,9 @@ public class InfoServiceImpl implements InfoService {
     public Collect findCollect(String uid, String infoId) {
         return infoDao.findCollect(uid,infoId);
     }
+
+    @Override
+    public List<InfoCollect> findCollectByUid(Integer uid) {
+        return infoDao.findCollectByUid(uid);
+    }
 }

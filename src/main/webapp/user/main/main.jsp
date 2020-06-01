@@ -58,9 +58,12 @@
                     <li><a href="../info/findPersonalMainInfo.do" >个人中心</a>
 
                         <ul class="last">
+                            <li ><a href="../info/findPersonalMainInfo.do">主页</a></li>
                             <li><a href="main/personInfo.jsp">个人信息</a></li>
                             <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
                             <li><a href="main/feedback.jsp">反馈</a></li>
+                            <li><a href="../dynamic/findAllCommentByName.do?uname=${users.uname}" >我的消息</a></li>
+                            <li class="active"><a href="#rule" data-toggle="tab">系统消息</a></li>
                             <c:if test="${users.u_type eq'admin'}">
                                 <li><a href="../user/backAdmin.do">管理界面</a></li>
                             </c:if>
