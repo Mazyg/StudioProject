@@ -110,9 +110,12 @@
                 <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
                 <li><a href="../info/findPersonalMainInfo.do" class="">个人中心</a>
                     <ul class="last">
+                        <li class="active"><a href="../info/findPersonalMainInfo.do">主页</a></li>
                         <li><a href="main/personInfo.jsp">个人信息</a></li>
                         <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
                         <li><a href="main/feedback.jsp">反馈</a></li>
+                        <li><a href="../dynamic/findAllCommentByName.do?uname=${users.uname}" >我的消息</a></li>
+                        <li ><a href="#rule" data-toggle="tab">系统消息</a></li>
                         <c:if test="${users.u_type eq'admin'}">
                             <li><a href="../user/backAdmin.do">管理界面</a></li>
                         </c:if>
@@ -151,11 +154,13 @@
         <c:if test="${users.uname == null}">
             还未登录，<a href="../manage/pages/samples/login.jsp">登录</a>了解更多
         </c:if>
-
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#main" data-toggle="tab">主页</a></li>
-            <li><a href="main/personInfo.jsp" >个人信息</a></li>
-            <li><a href="../topic/findByUid.do?uid="+${users.uid} >我的话题</a></li>
+            <li class="active"><a href="../info/findPersonalMainInfo.do">主页</a></li>
+            <li ><a href="main/personInfo.jsp" >个人信息</a></li>
+            <li ><a href="../topic/findByUid.do?uid="+${users.uid}>我的话题</a></li>
+            <li ><a href="findCollect.do?uid="+${users.uid}>我的收藏</a></li>
+            <li ><a href="#rule" data-toggle="tab">我的消息</a></li>
+            <li ><a href="../feedback/findUserNotify.do">系统消息</a></li>
         </ul>
         <div id="mytab-content" class="tab-content">
             <div class="tab-pane fade in active" id="main">

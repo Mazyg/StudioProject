@@ -107,4 +107,6 @@ public interface InfoService {
      */
     public Collect findCollect(String uid, String infoId);
 
+    List<InfoCollect> findCollectByUid(Integer uid);
+
 }

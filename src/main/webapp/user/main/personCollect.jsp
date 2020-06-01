@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"+"user/";
@@ -50,56 +51,39 @@
     }*/
 
 </style>
-<body>
+<body onload="message()">
 <header class="clearfix">
-    <%--<section class="mainWrap">
-        <div class="topwraper relative clearfix">
-            <div class="search">
-                <form id="searchForm" target="_blank">
-                    <input name="query" type="text" >
-                    <input name="ie" type="hidden" value="utf8">
-                    <input name="cid" type="hidden" value="3">
-                    <a href="javascript:;" onclick="searchSub();"><i>搜索</i></a>
-                </form>
-            </div>
-        </div>
-    </section>--%>
-    <nav class="navwrap yahei">
-        <section class="mainWrap">
-            <ul id="nav">
-                <li><a href="../info//epidemic.do?page=1&numberPerPage=3&start=0&length=3">全球战疫</a>
-                </li>
-                <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
-                </li>
-                <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
-                    <%--<ul>
-                        <li><a href="#">最美中国景</a></li>
-                        <li><a href="#">最美中国人</a></li>
-                        <li><a href="#">最美中国事</a></li>
-                    </ul>--%>
-                </li>
-                <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
-                </li>
-                <li><a href="../topic/showTopic.do" class="">话题</a>
-                </li>
-                <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3" class="">书籍</a></li>
-                <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
-                <li><a class="">个人中心</a>
-                    <ul class="last">
-                        <li><a href="main/personInfo.jsp">个人信息</a></li>
-                        <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
-                        <li><a href="main/feedback.jsp">反馈</a></li>
-                        <c:if test="${users.u_type eq'admin'}">
-                            <li><a href="../user/backAdmin.do">管理界面</a></li>
-                        </c:if>
-                        <c:if test="${users.uid !=null}">
-                            <li><a href="../user/exitLogin.do">退出登录</a></li>
-                        </c:if>
-                    </ul>
-                </li>
-            </ul>
-        </section>
-    </nav>
+        <nav class="navwrap yahei">
+            <section class="mainWrap">
+                <ul id="nav">
+                    <li><a href="../info//epidemic.do?page=1&numberPerPage=3&start=0&length=3">全球战疫</a>
+                    </li>
+                    <li><a href="../info/findEvent.do?page=1&numberPerPage=3&start=0&length=3">热点资讯</a>
+                    </li>
+                    <li><a href="../info/findChinese.do?page=1&numberPerPage=3&start=0&length=3">爱我中华</a>
+                    </li>
+                    <li><a href="../info/findPersonInfo.do" class="">榜样力量</a>
+                    </li>
+                    <li><a href="../topic/showTopic.do" class="">话题</a>
+                    </li>
+                    <li><a href="../info/findBooks.do?page=1&numberPerPage=3&start=0&length=3" class="">书籍</a></li>
+                    <li><a href="../info/findMovies.do?page=1&numberPerPage=3&start=0&length=3">电影</a></li>
+                    <li><a class="">个人中心</a>
+                        <ul class="last">
+                            <li><a href="main/personInfo.jsp">个人信息</a></li>
+                            <li><a href="../topic/findByUid.do?uid="+${users.uid}">我的话题</a></li>
+                            <li><a href="main/feedback.jsp">反馈</a></li>
+                            <c:if test="${users.u_type eq'admin'}">
+                                <li><a href="../user/backAdmin.do">管理界面</a></li>
+                            </c:if>
+                            <c:if test="${users.uid !=null}">
+                                <li><a href="../user/exitLogin.do">退出登录</a></li>
+                            </c:if>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </nav>
 </header>
 <br><br>
 <div class="col-md-8 col-md-offset-2">
@@ -108,7 +92,7 @@
             <br><br><br><br><br><br><br>
             <table>
                 <tr><td>&nbsp;&nbsp;
-                    <c:if test="${users.uname == null}">
+                   <c:if test="${users.uname == null}">
                     <img class="imgs" src="img/png.png" alt=""></td>
                     <td><h4 style="color: white">&nbsp;&nbsp;&nbsp;xxxx<br><small><br>&nbsp;&nbsp;&nbsp;介绍自己</small></h4></td>
                     </c:if>
@@ -130,9 +114,9 @@
             <li ><a href="../info/findPersonalMainInfo.do">主页</a></li>
             <li ><a href="main/personInfo.jsp" >个人信息</a></li>
             <li ><a href="../topic/findByUid.do?uid="+${users.uid}>我的话题</a></li>
-            <li ><a href="findCollect.do?uid="+${users.uid}>我的收藏</a></li>
+            <li class="active"><a href="findCollect.do">我的收藏</a></li>
             <li ><a href="#rule" data-toggle="tab">我的消息</a></li>
-            <li class="active"><a href="../feedback/findUserNotify.do">系统消息</a></li>
+            <li ><a href="../feedback/findUserNotify.do">系统消息</a></li>
         </ul>
         <div id="mytab-content" class="tab-content">
             <div class="tab-pane fade in active" id="rule">
@@ -142,27 +126,33 @@
                     <br>
                 </c:if>
                 <c:if test="${users.uname != null}">
-                    <c:if test="${notifies.size()== 0}">
-                        无系统消息
+                    <c:if test="${topicInfo.size()== 0}">
+                        还没有发布话题，去<a href="main/write.jsp">发布话题</a>
                         <br>
                     </c:if>
-                    <c:if test="${notifies.size()!= 0}">
+                    <c:if test="${topicInfo.size()!= 0}">
 
-                        <table class="table  table-hover">
-                            <thead>
-                            <tr>
-                                <th>内容</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${notifies}" var="notify">
+                            <table class="table  table-hover">
+                                <thead>
                                 <tr>
-                                    <td>对于您 <span style="color: blue; display: inline">"${notify.feedback.content}"</span> 的反馈，${notify.content}</td>
+                                    <th>文章标题</th>
+                                    <th>文章类型</th>
+                                    <th>收藏时间</th>
+                                    <th>操作1</th>
                                 </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                        <br>
+                                </thead>
+                                <tbody>
+                        <c:forEach items="${infoCollects}" var="collects">
+                            <tr>
+                                <td>${collects.title}</td>
+                                <td>${collects.info_type}</td>
+                                <td><fmt:formatDate value="${collects.creat_time}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                                <td><a href="../info/findByIdInfo.do?infoId=${collects.info_id}">详情</a> </td>
+                            </tr>
+                        </c:forEach>
+                                </tbody>
+                            </table>
+                          <br>
                     </c:if>
                 </c:if>
             </div>

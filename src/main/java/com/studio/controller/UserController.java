@@ -1,5 +1,6 @@
 package com.studio.controller;
 
+import com.studio.domian.InfoCollect;
 import com.studio.domian.User;
 import com.studio.service.InfoService;
 import com.studio.service.TopicService;
@@ -7,7 +8,8 @@ import com.studio.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -291,5 +293,18 @@ public class UserController {
     public String exitLogin(HttpServletRequest request){
        request.getSession().invalidate();
        return "redirect:/info/findInfoBytype.do";
+    }
+    /***
+     * 查看我的收藏
+     */
+    @RequestMapping("/findCollect")
+    public String findCollect(HttpServletRequest request){
+        System.out.println("进入findCollect。。。。。。。。。。。。。");
+        User user = (User) request.getSession().getAttribute("users");
+        Integer uid=user.getUid();
+        List<InfoCollect> infoCollects=infoService.findCollectByUid(uid);
+        System.out.println(infoCollects);
+        request.setAttribute("infoCollects",infoCollects);
+        return "user/main/personCollect";
     }
 }
