@@ -13,6 +13,7 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+
     <!--开启注解扫描-->
     <context:component-scan base-package="com.studio">
         <!--只处理service和dao，controller不进行处理-->
@@ -21,7 +22,7 @@
     <bean class="com.studio.utils.EncryptPropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:jdbc.properties</value>
+                <value>classpath*:*.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="UTF-8"/>
@@ -88,4 +89,7 @@
     </aop:config>
 
     <aop:aspectj-autoproxy/>
+
+    <import resource="classpath:spring-redis.xml" />
+
 </beans>
