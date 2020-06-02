@@ -64,30 +64,8 @@
     }
 </style>
 <body>
-<%--<ul class="breadcrumb back1">
-    <li><a href="../info/findInfoBytype.do">首页</a></li>
-    <li><a href="../info/findEvent.do">热点资讯</a></li>
-    <li><a href="../info/findChinese.do" class="styles">爱我中华</a></li>
-    <li><a href="../info/findPersonInfo.do" class="">榜样力量</a></li>
-    <li><a href="#" class="">话题</a></li>
-    <li><a href="#" class="">书籍</a></li>
-    <li><a href="#">电影</a></li>
-    <li><a href="../info/findPersonalMainInfo.do" class="">个人中心</a></li>
-</ul>--%>
 
 <header class="clearfix">
-    <%--<section class="mainWrap">
-        <div class="topwraper relative clearfix">
-            <div class="search">
-                <form id="searchForm" target="_blank">
-                    <input name="query" type="text" >
-                    <input name="ie" type="hidden" value="utf8">
-                    <input name="cid" type="hidden" value="3">
-                    <a href="javascript:;" onclick="searchSub();"><i>搜索</i></a>
-                </form>
-            </div>
-        </div>
-    </section>--%>
     <nav class="navwrap yahei">
         <section class="mainWrap">
             <ul id="nav">
@@ -150,11 +128,11 @@
             还未登录，<a href="../manage/pages/samples/login.jsp">登录</a>了解更多
         </c:if>
         <ul class="nav nav-tabs">
-            <li class="active"><a href="../info/findPersonalMainInfo.do">主页</a></li>
+            <li class="active"><a href="#" data-toggle="tab">主页</a></li>
             <li ><a href="main/personInfo.jsp" >个人信息</a></li>
             <li ><a href="../topic/findByUid.do?uid="+${users.uid}>我的话题</a></li>
             <li ><a href="findCollect.do?uid="+${users.uid}>我的收藏</a></li>
-            <li ><a href="#rule" data-toggle="tab">我的消息</a></li>
+            <li ><a href="../dynamic/findAllCommentByName.do?uname=${users.uname}" >我的消息</a></li>
             <li ><a href="../feedback/findUserNotify.do">系统消息</a></li>
         </ul>
         <div id="mytab-content" class="tab-content">
