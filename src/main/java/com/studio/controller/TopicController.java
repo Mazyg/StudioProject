@@ -8,6 +8,7 @@ import com.studio.domian.Topic;
 import com.studio.domian.User;
 import com.studio.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/topic")
@@ -41,6 +43,9 @@ public class TopicController {
     private InfoService infoService;
 
     private ModelAndView mv;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @RequestMapping("/saveTopic")
     @ResponseBody
@@ -353,11 +358,21 @@ public class TopicController {
 
     /*通过id进入话题回复评论页面*/
     @RequestMapping("/findTopicById")
-    public String findTopicById(String tid,String type,Model model){
+    public String findTopicById(String tid,String type,Model model,
+                                HttpServletRequest request){
         Topic topic = topicService.findTopicById(tid);
         topic.setUser(userService.findByNameAll(topic.getUname()));
-        topic.setView_count(topic.getView_count()+1);
-        topicService.updateCount(topic);
+        User user = (User) request.getSession().getAttribute("users");
+        if(user != null) {
+            String key = user.getUid()+tid;
+            if(!redisTemplate.hasKey(key)){
+                redisTemplate.opsForValue().set(key,"1");
+                redisTemplate.expire(key,24, TimeUnit.HOURS);
+                topic.setView_count(topic.getView_count() + 1);
+                topicService.updateCount(topic);
+            }
+
+        }
         List<Dynamic> dynamics = dynamicService.findByTid(tid);
         for (Dynamic dynamic: dynamics){
             dynamic.setComments(commentService.findByWid(dynamic.getWid()));
