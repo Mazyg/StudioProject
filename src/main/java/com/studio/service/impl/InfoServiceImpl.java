@@ -3,16 +3,31 @@ package com.studio.service.impl;
 import com.studio.dao.InfoDao;
 import com.studio.domian.*;
 import com.studio.service.InfoService;
+import com.studio.utils.JedisClientSingle;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.util.List;
 
 @Service("infoService")
 public class InfoServiceImpl implements InfoService {
 
+    GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
+    JedisPool jedisPool = new JedisPool(poolConfig, "111.229.25.156", 6379,1000,"mn123456");
+    Jedis jedis = jedisPool.getResource();
     @Autowired
     private InfoDao infoDao;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+
+    private JedisClientSingle jedisClient = new JedisClientSingle();
+
 
     @Override
     public Integer findCountInfo() {
@@ -67,10 +82,18 @@ public class InfoServiceImpl implements InfoService {
     }
 
     @Override
- 
     public List<Info> findInfoBytype(String info_type,int start,int length) {
-        return  infoDao.findInfoBytype(info_type,start,length);
- 
+        String key = info_type+length;
+        List<Info> infoList = null;
+        if(!jedis.exists(key.getBytes())){
+            infoList =  infoDao.findInfoBytype(info_type,start,length);
+            jedisClient.setList(key, infoList);
+            jedis.expire(key,9000);
+        }else{
+            System.out.println("读取缓存====================");
+            infoList = (List<Info>) jedisClient.getList(key);
+        }
+        return  infoList;
     }
 
     @Override

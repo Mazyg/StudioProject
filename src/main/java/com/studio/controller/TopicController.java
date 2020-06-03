@@ -59,9 +59,6 @@ public class TopicController {
         topic.setUname(user.getUname());
         if("admin".equals(user.getU_type())){
             boolean result = topicService.saveTopicA(topic);
-          /*  mv.addObject("top", top);
-            mv.setViewName("manage/pages/ui-features/topicput");
-            return mv;*/
           if(result == true){
               return "success";
           }else{
@@ -69,9 +66,6 @@ public class TopicController {
           }
         }
         boolean top =topicService.saveTopic(topic);
-       /* mv.addObject("top", top);
-        mv.setViewName("manage/pages/ui-features/topicput");
-        return mv;*/
         if(top == true){
             return "success";
         }else{
@@ -95,17 +89,8 @@ public class TopicController {
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("users");
         System.out.println("user"+user);
-       /* if(user == null){
-           *//* System.out.println("false");
-            mv.addObject("top", false);
-            mv.setViewName("user/main/write");*//*
-           return "false";*/
-       /* }else{*/
         topic.setUname(user.getUname());
         boolean top =topicService.saveTopic(topic);
-          /*  System.out.println("top"+top);
-        mv.addObject("top",top);
-        mv.setViewName("user/main/write");*/
           if(top == true){
               return "success";
           }else{
@@ -119,7 +104,6 @@ public class TopicController {
     public @ResponseBody String deleTopic(HttpServletRequest request){
         String tid = request.getParameter("tid");
         boolean topicdel = topicService.deleTopic(tid);
-       /* return "redirect:/topic/findAllTopicByStatus.do?topicdel="+topicdel;*/
         if(topicdel == true){
             return "success";
         }else{
@@ -132,7 +116,6 @@ public class TopicController {
     public @ResponseBody String deleTopic1(HttpServletRequest request){
         String tid = request.getParameter("tid");
         boolean topicdel = topicService.deleTopic(tid);
-       /* return "redirect:/topic/findAll.do?topicdel="+topicdel;*/
         if(topicdel == true){
             return "success";
         }else{
@@ -164,7 +147,6 @@ public class TopicController {
     public @ResponseBody String updateStatus(HttpServletRequest request){
         String tid = request.getParameter("tid");
         boolean topicStatus = topicService.updateStatus(tid);
-      /*  return "redirect:/topic/findAllTopicByStatus.do?topicdel="+topicStatus;*/
         if(topicStatus == true){
             return "success";
         }else{
@@ -178,12 +160,9 @@ public class TopicController {
         String tid = request.getParameter("tid");
         Topic topics = topicService.findTopicById(tid);
         if("已审核".equals(topics.getT_tatus())){
-            /*boolean topicStatus = false;*/
-           /* return "redirect:/topic/findAll.do?topicdel="+topicStatus;*/
             return "false";
         }
         boolean topicStatus = topicService.updateStatus(tid);
-       /* return "redirect:/topic/findAll.do?topicdel="+topicStatus;*/
         if(topicStatus == true){
             return "success";
         }else{
@@ -204,13 +183,10 @@ public class TopicController {
         Topic topics = topicService.findTopicById(tid);
         topics.setT_reason(t_reason);
         if("已审核".equals(topics.getT_tatus())){
-            /*boolean topicStatus = false;*/
-            /* return "redirect:/topic/findAll.do?topicdel="+topicStatus;*/
             return "false";
         }
         boolean topicStatus = topicService.updateStatusNot(topics);
         System.out.println("tid"+topicStatus);
-        /* return "redirect:/topic/findAll.do?topicdel="+topicStatus;*/
         if(topicStatus == true){
             return "success";
         }else{
