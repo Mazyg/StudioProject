@@ -34,7 +34,7 @@ public interface TopicService {
 
     public List<Topic> findAllByUname(String uname);
 
-    public List<Topic> findCheckTopic();
+    public List<Topic> findCheckTopic(String viewType);
 
     //话题查询，按照时间排序，取N条
     public List<Topic> findTopic(int start, int length);
