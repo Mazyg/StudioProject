@@ -27,7 +27,6 @@ public class UserController {
     @Autowired
     private TopicService topicService;
 
-    @Autowired
     private InfoService infoService;
 
     ModelAndView mv;

@@ -5,6 +5,7 @@ import com.studio.domian.Topic;
 import java.util.List;
 
 public interface TopicService {
+
     public boolean saveTopic(Topic topic);
 
     public Integer findCountTopic();

@@ -1,9 +1,11 @@
 package com.studio.service;
 
 import com.studio.domian.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface InfoService {
 
     public Integer findCountInfo();
