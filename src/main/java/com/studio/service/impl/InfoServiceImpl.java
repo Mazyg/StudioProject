@@ -92,7 +92,6 @@ public class InfoServiceImpl implements InfoService {
         }else{
             System.out.println("读取缓存====================");
             infoList = (List<Info>) jedisClient.getList(key);
-            System.out.println("infoList"+infoList);
         }
         return  infoList;
     }
