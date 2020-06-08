@@ -92,8 +92,8 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<Topic> findCheckTopic() {
-        return topicDao.findCheckTopic();
+    public List<Topic> findCheckTopic(String viewType) {
+        return topicDao.findCheckTopic(viewType);
     }
 
     /**

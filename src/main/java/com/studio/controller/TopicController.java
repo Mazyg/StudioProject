@@ -309,7 +309,14 @@ public class TopicController {
     /*跳转到话题页面*/
     @RequestMapping("/showTopic")
     public String showTopic(Model model,HttpServletRequest request,
-                                  @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
+                            @RequestParam(defaultValue = "1" , value = "pageNum") Integer pageNum,
+                            String viewType){
+
+        if (viewType == null || viewType == ""){
+            viewType = (String) request.getSession().getAttribute("viewType");
+        }else {
+             request.getSession().setAttribute("viewType",viewType);
+        }
         User user = (User) request.getSession().getAttribute("users");
         if(user != null){
             int topicCount = topicService.countUserTopic(user.getUname());
@@ -323,7 +330,7 @@ public class TopicController {
         model.addAttribute("topTopics",topTopics);
 
         PageHelper.startPage(pageNum,3);
-        List<Topic> topics = topicService.findCheckTopic();
+        List<Topic> topics = topicService.findCheckTopic(viewType);
         for (Topic topic : topics){
             topic.setUser(userService.findByNameAll(topic.getUname()));
         }
