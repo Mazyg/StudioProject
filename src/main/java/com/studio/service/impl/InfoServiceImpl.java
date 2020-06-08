@@ -83,7 +83,7 @@ public class InfoServiceImpl implements InfoService {
 
     @Override
     public List<Info> findInfoBytype(String info_type,int start,int length) {
-        String key = info_type+length;
+        String key = info_type+start+length;
         List<Info> infoList = null;
         if(!jedis.exists(key.getBytes())){
             infoList =  infoDao.findInfoBytype(info_type,start,length);
@@ -92,6 +92,7 @@ public class InfoServiceImpl implements InfoService {
         }else{
             System.out.println("读取缓存====================");
             infoList = (List<Info>) jedisClient.getList(key);
+            System.out.println("infoList"+infoList);
         }
         return  infoList;
     }
