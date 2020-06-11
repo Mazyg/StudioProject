@@ -90,7 +90,6 @@ public class InfoServiceImpl implements InfoService {
             jedisClient.setList(key, infoList);
             jedis.expire(key,6000);
         }else{
-            System.out.println("读取缓存====================");
             infoList = (List<Info>) jedisClient.getList(key);
         }
         return  infoList;
