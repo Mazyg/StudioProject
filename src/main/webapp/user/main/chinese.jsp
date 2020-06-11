@@ -146,7 +146,7 @@
                     <ul>
                     <c:forEach items="${chineseScenery}" var="chineseScenery">
 <%--                        <li class="active"><a><img src="${chineseScenery.photo}"></a></li>--%>
-                        <li class="active"><a><img data-original="${chineseScenery.photo}" src="img/loading.gif"></a></li>
+                        <li class="active"><a><img src="${chineseScenery.photo}" <%--src="img/loading.gif"--%>></a></li>
                     </c:forEach>
                     </ul>
                 </div>
@@ -180,7 +180,7 @@
             <c:forEach items="${pageInfo.list}" var="chineseAll">
                 <li>
                     <figure>
-                        <a href="../info/findByIdInfo.do?infoId=${chineseAll.info_id}&uid=${users.uid}" target="_blank"><img data-original="${chineseAll.photo}" src="img/loading.gif"></a>
+                        <a href="../info/findByIdInfo.do?infoId=${chineseAll.info_id}&uid=${users.uid}" target="_blank"><img src="${chineseAll.photo}" <%--src="img/loading.gif"--%>></a>
                         <figcaption><a target="_blank" href="../info/findByIdInfo.do?infoId=${chineseAll.info_id}&uid=${users.uid}" class="jiequ">【${chineseAll.title}】</a></figcaption>
                         <div class="thumb"><i class="thunews-clock-o"></i>${chineseAll.date}<i class="thunews-eye"></i> <font id="font_itemlist_total_20191115111315714796419"><span id="itemlist_total_20191115111315714796419"></span></font></div>
                     </figure>
@@ -237,7 +237,7 @@
                 <table class="table newslist clearfix">
                     <c:forEach items="${videoInfo}" var="videoList">
                         <tr>
-                            <td><a href="../info/findByIdInfo.do?infoId=${videoList.info_id}&uid=${users.uid}"><img class="imgs1" data-original="${videoList.photo}" src="img/loading.gif"></a></td>
+                            <td><a href="../info/findByIdInfo.do?infoId=${videoList.info_id}&uid=${users.uid}"><img class="imgs1" src="${videoList.photo}" <%--src="img/loading.gif"--%>></a></td>
                             <td> <a href="../info/findByIdInfo.do?infoId=${videoList.info_id}&uid=${users.uid}"><p style="float: left">${videoList.title}</p></a>
                                 <br><small style="float: right">${videoList.date}</small></td>
                         </tr>
