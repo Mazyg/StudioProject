@@ -7,6 +7,7 @@ import com.studio.domian.Info;
 import com.studio.domian.Topic;
 import com.studio.domian.User;
 import com.studio.service.*;
+import com.studio.utils.RedisTemplateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -45,7 +46,7 @@ public class TopicController {
     private ModelAndView mv;
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplateUtil redisTemplateUtil;
 
     @RequestMapping("/saveTopic")
     @ResponseBody
@@ -348,9 +349,9 @@ public class TopicController {
         User user = (User) request.getSession().getAttribute("users");
         if(user != null) {
             String key = user.getUid()+tid;
-            if(!redisTemplate.hasKey(key)){
-                redisTemplate.opsForValue().set(key,"1");
-                redisTemplate.expire(key,24, TimeUnit.HOURS);
+            if(!redisTemplateUtil.hasKey(key)){
+                redisTemplateUtil.set(key,"1");
+                redisTemplateUtil.expire(key,24,TimeUnit.HOURS);
                 topic.setView_count(topic.getView_count() + 1);
                 topicService.updateCount(topic);
             }

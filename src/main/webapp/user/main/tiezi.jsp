@@ -101,7 +101,7 @@
                                     <p><span>${comment.uname} 回复 ${comment.rname}：${comment.content}
                                         <button class="replayBtn" id="comment">回复</button></span></p>
                                     <div class="pendDetail_action">
-                                        <input type="text" placeholder="回复${comment.uname}:(请不要超过40个字)" maxlength="40"/>
+                                        <input type="text"  placeholder="回复${comment.uname}:(请不要超过40个字)" maxlength="40"/>
                                         <input type="text" style="display: none" value="${comment.uname}" >
                                         <input type="text" style="display: none" value="${dynamic.wid}" >
                                         <button class="replyTopic">回复</button>
@@ -203,12 +203,34 @@
                 var $rname = $(this).parent().children('input').eq(1).val();
                 var $wid = $(this).parent().children('input').eq(2).val();
                 var $t_type = $("#t_type").val();
+
+                var patt1 = /^[\s]*$/;
+                var patt2 = /^[0-9]+$/;
+                var patt3 = /[@#\$%\^&\*]+$/;
+
+                var pvalue1 = patt1.test($content);
+                var pvalue2 = patt2.test($content);
+                var pvalue3 = patt3.test($content);
+
+
                 if ($uname == "") {
                     alert("请先登录!");
                     return ;
                 }
                 if($content == ""){
                     alert("请输入内容!");
+                    return;
+                }
+                if(pvalue1){
+                    alert("请输入有效内容!1");
+                    return;
+                }
+                if(pvalue2){
+                    alert("请输入有效内容!2");
+                    return;
+                }
+                if(pvalue3){
+                    alert("请输入有效内容!3");
                     return;
                 }
                 $.ajax({
@@ -234,6 +256,15 @@
                 var $tid = $("#topicId").val();
                 var $t_type = $("#t_type").val();
                 var username = "<%=session.getAttribute("users")%>"
+
+                var patt1 = /^[\s]*$/;
+                var patt2 = /^[0-9]+$/;
+                var patt3 = /[@#\$%\^&\*]+$/;
+
+                var pvalue1 = patt1.test($content);
+                var pvalue2 = patt2.test($content);
+                var pvalue3 = patt3.test($content);
+
                 if ($user == "") {
                     alert("请先登录!");
                     return ;
@@ -242,6 +273,19 @@
                     alert("请输入内容!");
                     return;
                 }
+                if(pvalue1){
+                    alert("请输入有效内容!1");
+                    return;
+                }
+                if(pvalue2){
+                    alert("请输入有效内容!2");
+                    return;
+                }
+                if(pvalue3){
+                    alert("请输入有效内容!3");
+                    return;
+                }
+
                 $.ajax({
                     url:"../dynamic/saveDynamic.do",
                     contentType:"application/json;charset=UTF-8",
