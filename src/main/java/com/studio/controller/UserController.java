@@ -27,6 +27,7 @@ public class UserController {
     @Autowired
     private TopicService topicService;
 
+    @Autowired
     private InfoService infoService;
 
     ModelAndView mv;
@@ -131,7 +132,9 @@ public class UserController {
         mv = new ModelAndView();
         String uid = request.getParameter("uid");
         String password = request.getParameter("password");
+        System.out.println("dfg=="+uid+password);
         user1 = userService.findById1(uid);
+        System.out.println("user"+user1);
         HttpSession session = request.getSession(true);
         session.setAttribute("users", user1);
         if (user1 != null){
@@ -150,8 +153,9 @@ public class UserController {
                     Integer userNo = userService.findNo();
                     Integer topicCount = topicService.findCountTopic();
                     Integer topicNo = topicService.findCountNo("未审核");
-                    Integer infoCount = infoService.findCountInfo();
                     Integer infoVideo = infoService.findCountInfoByType("视频");
+                    Integer infoCount = infoService.findCountInfo();
+
                     mv.addObject("infoV",infoVideo);
                     mv.addObject("infoCount",infoCount);
                     mv.addObject("topicCount",topicCount);
@@ -159,6 +163,7 @@ public class UserController {
                     mv.addObject("userAdm" ,userAdm);
                     mv.addObject("userNo",userNo);
                     mv.addObject("userCount",userCount);
+
                     mv.setViewName("manage/admin");
                 }else {
                     return new ModelAndView("redirect:/info/findInfoBytype.do");
