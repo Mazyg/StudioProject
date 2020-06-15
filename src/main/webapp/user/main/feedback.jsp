@@ -31,7 +31,16 @@
             var $address = $("#address").val();
             var check1 = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
             var check2 = /^[1][3,4,5,7,8][0-9]{9}$/;
-            
+
+            var patt1 = /^[\s]*$/;
+            var patt2 = /^[0-9]+$/;
+            var patt3 = /[@#\$%\^&\*]+$/;
+
+
+            if (patt1.test($content) || patt2.test($content)  || patt3.test($content) ){
+                alert("反馈内容格式不正确！");
+                return;
+            }
             if (check1.test($address) || check2.test($address)){
             }else {
                 alert("联系方式格式不正确!");
