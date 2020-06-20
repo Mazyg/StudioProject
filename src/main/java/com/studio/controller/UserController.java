@@ -132,9 +132,7 @@ public class UserController {
         mv = new ModelAndView();
         String uid = request.getParameter("uid");
         String password = request.getParameter("password");
-        System.out.println("dfg=="+uid+password);
         user1 = userService.findById1(uid);
-        System.out.println("user"+user1);
         HttpSession session = request.getSession(true);
         session.setAttribute("users", user1);
         if (user1 != null){

@@ -67,9 +67,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByNameAll(String uname) {
-        return userDao.findByNameAll(uname);
-    }
+    public User findByNameAll(String uname) {return userDao.findByNameAll(uname); }
 
     @Override
     public boolean personPhoto(User user) {
