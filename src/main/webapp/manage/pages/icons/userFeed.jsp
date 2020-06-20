@@ -175,33 +175,15 @@
                   <tbody>
 
                   <c:forEach var="feedback" items="${feedbacks}">
+
                     <tr>
                       <td>${feedback.fid}</td>
                       <td><textarea class="form-control" rows="3" READONLY>${feedback.content}</textarea></td>
                       <td>${feedback.uid}</td>
                       <td>${feedback.address}</td>
-                      <td>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                          回复
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-body">
-                                <textarea class="form-control" rows="3"></textarea>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                <button type="button" class="btn btn-primary" id="send-message">发送</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
+                      <td><a href="pages/icons/replyFeedback.jsp?uid=${feedback.uid}&fid=${feedback.fid}" style="color: dodgerblue">回复用户</a></td>
                     </tr>
+
                   </c:forEach>
                   </tbody>
                 </table>
@@ -233,27 +215,5 @@
 <script src="js/off-canvas.js"></script>
 <script src="js/misc.js"></script>
 <script src="js/jquery-1.8.3.js"></script>
-<script>
-  $(function () {
-    $("#send-message").click(function () {
-      var $content = $(this).parent().prev().children().eq(0).val();
-      var $uid = $(this).parent().parent().parent().parent().parent().parent().children('td').eq(2).text();
-      var $fid = $(this).parent().parent().parent().parent().parent().parent().children('td').eq(0).text();
-      $.ajax({
-        url:"../feedback/addNotify.do",
-        data:"&content="+$content+"&receiver="+$uid+"&fid="+$fid,
-        type:"post",
-        success:function (result) {
-          if (result == "success"){
-            alert("发送成功");
-            window.location.href = "../feedback/findAllFeedback.do";
-          }else {
-            alert("发送失败");
-          }
-        }
-      });
-    })
-  })
-</script>
 </body>
 </html>
