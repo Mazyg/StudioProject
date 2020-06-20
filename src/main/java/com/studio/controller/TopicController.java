@@ -347,6 +347,13 @@ public class TopicController {
         Topic topic = topicService.findTopicById(tid);
         topic.setUser(userService.findByNameAll(topic.getUname()));
         User user = (User) request.getSession().getAttribute("users");
+        if(user != null){
+            int topicCount = topicService.countUserTopic(user.getUname());
+            int commentCount = topicService.countUserReply(user.getUname());
+            commentCount = commentCount + commentService.countUserReply(user.getUname());
+            model.addAttribute("topicCount",topicCount);
+            model.addAttribute("commentCount",commentCount);
+        }
         if(user != null) {
             String key = user.getUid()+tid;
             if(!redisTemplateUtil.hasKey(key)){
