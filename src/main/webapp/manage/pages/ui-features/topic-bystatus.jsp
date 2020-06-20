@@ -47,8 +47,8 @@
      })
 
      $("#status1").click(function () {
-         var $tid = $(this).parent().parent().parent().parent().parent().parent().children('td').eq(0).text();
-         var $t_reason = $(this).parent().prev().children().eq(0).val();
+         var $tid =$(this).parent().prev().children().eq(0).val();
+         var $t_reason = $(this).parent().prev().children().eq(1).val();
        $.ajax({
          type:'post',
          url:"../topic/updateStatusNot1.do",
@@ -88,9 +88,13 @@
      })
 
 
-
-
    })
+   function showModel(tid) {
+     $("#tidM").val(tid);
+
+     // 显示模态框
+     $('#myModal').modal('show');
+   }
   </script>
 </head>
 <body onload="status()">
@@ -254,11 +258,12 @@
                       <td><a href="../topic/findById.do?tid=${topic1.tid}">查看详情</a> </td>
                       <td>未审核</td>
                       <td><a href="javascript:void(0)" style="color: #1d6b1f" class="status">通过审核</a>/
-                          <a href="javascript:void(0)" style="color: #c2a957" data-toggle="modal" data-target="#myModal">不通过</a>
+                          <a href="javascript:void(0)" style="color: #c2a957"  onclick="showModel(${topic1.tid})">不通过</a>
                           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                               <div class="modal-dialog" role="document">
                                   <div class="modal-content">
                                       <div class="modal-body">
+                                          <input id="tidM" readonly hidden>
                                           <textarea class="form-control" rows="3" placeholder="输入审核不通过的原因"></textarea>
                                       </div>
                                       <div class="modal-footer">
