@@ -29,6 +29,23 @@
         $("#put").click(function () {
             var $content = $("#content").val();
             var $address = $("#address").val();
+            var check1 = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+            var check2 = /^[1][3,4,5,7,8][0-9]{9}$/;
+
+            var patt1 = /^[\s]*$/;
+            var patt2 = /^[0-9]+$/;
+            var patt3 = /[@#\$%\^&\*]+$/;
+
+
+            if (patt1.test($content) || patt2.test($content)  || patt3.test($content) ){
+                alert("反馈内容格式不正确！");
+                return;
+            }
+            if (check1.test($address) || check2.test($address)){
+            }else {
+                alert("联系方式格式不正确!");
+                return;
+            }
             if(${users.uid == null}){
                 alert("请登录后进行反馈！");
                 return;
@@ -42,10 +59,12 @@
                 url:"../feedback/addFeed.do",
                 data:"&content="+$content+"&address="+$address,
                 success:function (msg) {
-                    if(msg === "success"){
+                    if(msg == "success"){
                         alert("您的反馈已收到！")
-                    }else{
-                        alert("提交失败！")
+                    }else if (msg == "already") {
+                        alert("感谢您的支持！反馈每十二小时只能提交一次哦！")
+                    }else {
+                        alert("提交失败！");
                     }
                     window.location.href="main/feedback.jsp";
                 },
@@ -106,7 +125,7 @@
             <div class="form-group">
                 <label  class="col-sm-2 control-label">联系方式</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" name="address" id="address" placeholder="可以留下您的联系方式">
+                    <input type="text" class="form-control" name="address" id="address" placeholder="可以留下您的联系方式" required="required">
                 </div>
             </div>
             <div class="form-group">

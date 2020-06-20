@@ -41,8 +41,12 @@ public interface TopicDao {
     @Select("select * from topic where uid = #{uid}")
     public List<Topic> findAllByUid(Integer uid);
 
-    @Select("select * from topic where t_result= '已通过' order by date desc ")
-    public List<Topic> findCheckTopic();
+
+    @Select("<script>select * from topic where t_result= '已通过'" +
+            "<if test=\" _parameter == 'new' \">  order by date desc </if>" +
+            "<if test=\" _parameter == 'hot' \">  order by view_count desc </if>"+
+            "</script>")
+    public List<Topic> findCheckTopic(String viewType);
     /**
      * 通过用户名查询用户发布的话题
      * @param uname

@@ -102,7 +102,7 @@
                         <li><a href="javascript:void(0)" onclick="window.location.hash = 'ac'"> 榜样力量</a> </li>
                     </ul>
                 </li>
-                <li><a href="../topic/showTopic.do">话题</a>
+                <li><a href="../topic/showTopic.do?viewType=new">话题</a>
                 </li>
                 <li><a href="../info/findBooks.do" >书籍</a></li>
                 <li><a href="../info/findMovies.do">电影</a></li>

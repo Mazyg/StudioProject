@@ -82,7 +82,8 @@
     <div class="indexMain_left">
         <div class="indexMain_left_btn">
             <ul>
-                <li><a href="javascript:" class="on">最新</a></li>
+                <li><a href="../topic/showTopic.do?viewType=new "  class="on">最新</a></li>
+                <li><a href="../topic/showTopic.do?viewType=hot "  class="on">最热</a></li>
             </ul>
         </div>
         <div class="indexMain_left_con">

@@ -6,6 +6,7 @@ import com.studio.domian.Topic;
 import com.studio.domian.User;
 import com.studio.service.FeedbackService;
 import com.studio.service.NotifyService;
+import com.studio.utils.RedisTemplateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 @Controller
@@ -26,6 +28,9 @@ public class FeedBackController {
     @Autowired
     private NotifyService notifyService;
 
+    @Autowired
+    private RedisTemplateUtil redisTemplateUtil;
+
     /**
      * 新增用户反馈
      * @param feedback
@@ -36,14 +41,23 @@ public class FeedBackController {
     @ResponseBody
     public String saveTopic(Feedback feedback, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("users");
+        System.out.println(feedback);
         feedback.setUid(user.getUid());
-        boolean result = feedbackService.addFeedback(feedback);
-        if(result == true){
-            return "success";
-        }else{
+        String key = user.getUid().toString();
+        if (redisTemplateUtil.hasKey(key)){
+            return "already";
+        }else {
+            redisTemplateUtil.set(key,"1");
+            redisTemplateUtil.expire(key,12, TimeUnit.HOURS);
+            boolean result = feedbackService.addFeedback(feedback);
+            if(result == true){
+                return "success";
+            }else{
                 return "false";
             }
+            }
         }
+
 
 
     /**
